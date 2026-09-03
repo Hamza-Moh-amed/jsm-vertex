@@ -32,12 +32,12 @@ export function SiteHeader({ activeHref, className }: SiteHeaderProps) {
         </Show>
         <Show when="signed-out">
           <SignInButton mode="modal">
-            <Button className="bg-neutral-900 text-white rounded-sm hover:bg-primary-600" size="lg">
+            <Button className="text-primary-500 hover:text-primary-600" size="lg">
               Sign in
             </Button>
           </SignInButton>
           <SignUpButton mode="modal">
-            <Button className="bg-neutral-900 text-white rounded-sm hover:bg-primary-600" size="lg">Sign up</Button>
+            <Button className="bg-primary-500 text-white rounded-sm hover:bg-primary-600" size="lg">Sign up</Button>
           </SignUpButton>
         </Show>
       </div>
