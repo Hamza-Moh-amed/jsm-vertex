@@ -1,4 +1,6 @@
+import CourseContent from "@/components/course/CourseContent";
 import CourseHero from "@/components/course/CourseHero";
+import LearningOutcomes from "@/components/course/LearningOutcomes";
 import { PageFrame } from "@/components/layout/page-frame";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -43,8 +45,10 @@ const CoursePage = async ({params}: PageProps<"/courses/[slug]">) => {
   
   if (!course) notFound();
 
+
   const modules = course.modules ?? [];
-  
+  const outcomes = course.learningOutcomes ?? []
+
   // Progress is not tracked yet, so "continue" means the first lesson.
   const firstLessonSlug = modules.flatMap((module) => module.lessons ?? [])[0]?.slug ?? null;
   const continueHref = firstLessonSlug ? lessonHref(firstLessonSlug) : null;
@@ -61,8 +65,17 @@ const CoursePage = async ({params}: PageProps<"/courses/[slug]">) => {
         />
 
         <div className="mt-10 flex flex-col gap-14">
+
           <CourseHero course={course} continueHref={continueHref}  />
+
+        {outcomes.length > 0 && <LearningOutcomes outcomes={outcomes} />}
+
+        {modules.length > 0 && <CourseContent modules={modules} durationSeconds={course.durationSeconds} />}
+
         </div>
+
+
+
 
       </main>
 

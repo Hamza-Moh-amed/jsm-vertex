@@ -20,7 +20,7 @@ const CourseHeroActions = ({continueHref, courseSlug}: CourseHeroActionsProps) =
         courseSlug={courseSlug}
         location="hero"
         precentComplete={0}
-        className="h-14 px-6 text-base"
+        className="h-14 px-5 text-base"
         />
         )}
         {/* //Todo: Update Button */}
