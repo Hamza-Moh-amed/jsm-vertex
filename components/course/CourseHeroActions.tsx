@@ -24,7 +24,7 @@ const CourseHeroActions = ({continueHref, courseSlug}: CourseHeroActionsProps) =
         />
         )}
         {/* //Todo: Update Button */}
-        <Button className="border border-neutral-200 bg-surface text-neutral-900 shadow-sm h-14 px-6 text-base" type="button">
+        <Button className="border border-neutral-200 bg-surface text-neutral-900 shadow-sm h-14 px-6 text-base cursor-pointer" type="button">
         <Bookmark className="size-5" strokeWidth={1.5} aria-hidden />
         Bookmark
         </Button>

@@ -22,7 +22,7 @@ const CourseResumeLink = ({
   return (
     <Link 
     href={href}
-    className={cn("flex flex-row gap-2 items-center bg-white rounded-lg border border-neutral-200 shadow-sm font-medium",className)}
+    className={cn("flex flex-row gap-2 items-center bg-primary-500 hover:bg-primary-600 text-white rounded-lg border border-neutral-200 shadow-sm font-medium",className)}
     >
         Continue Learning
         <ArrowRight className="size-5" strokeWidth={1.5} aria-hidden />
