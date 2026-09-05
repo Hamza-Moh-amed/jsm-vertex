@@ -19,7 +19,7 @@ const CourseHeroActions = ({continueHref, courseSlug}: CourseHeroActionsProps) =
         href={continueHref}
         courseSlug={courseSlug}
         location="hero"
-        precentComplete={0}
+        percentComplete={0}
         className="h-14 px-5 text-base"
         />
         )}

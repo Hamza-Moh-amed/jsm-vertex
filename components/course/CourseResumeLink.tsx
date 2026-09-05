@@ -7,7 +7,7 @@ interface CourseResumeLinkProps  {
     href: string,
     courseSlug: string,
     location: any //Todo: Update type 
-    precentComplete: number
+    percentComplete: number
     className?: string
 }
 
@@ -15,7 +15,7 @@ const CourseResumeLink = ({
     href,
     courseSlug,
     location,
-    precentComplete,
+    percentComplete,
     className,
     }: CourseResumeLinkProps) => {
     // TODO: udpaet click functionality

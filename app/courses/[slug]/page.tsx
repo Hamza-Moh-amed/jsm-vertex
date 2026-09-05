@@ -1,6 +1,8 @@
 import CourseContent from "@/components/course/CourseContent";
 import CourseHero from "@/components/course/CourseHero";
+import CourseProgressBar from "@/components/course/CourseProgressBar";
 import LearningOutcomes from "@/components/course/LearningOutcomes";
+import { ChartDecoration } from "@/components/home/ChartDecoration";
 import { PageFrame } from "@/components/layout/page-frame";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -74,11 +76,16 @@ const CoursePage = async ({params}: PageProps<"/courses/[slug]">) => {
 
         </div>
 
-
+        <CourseProgressBar
+          percentComplete={0}
+          continueHref={continueHref}
+          courseSlug={slug}
+          className="mt-14"
+        />
 
 
       </main>
-
+      <ChartDecoration />
     </PageFrame>
 
   )
