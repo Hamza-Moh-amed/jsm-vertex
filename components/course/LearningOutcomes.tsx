@@ -1,0 +1,75 @@
+import {
+    Code,
+    Gauge,
+    Layers,
+    type LucideIcon,
+    Puzzle,
+    Rocket,
+    Shield,
+    Sparkles,
+    Workflow,
+  } from "lucide-react";
+import { COURSE_BY_SLUG_QUERY_RESULT, } from "@/sanity.types"
+
+
+
+type Course = NonNullable<COURSE_BY_SLUG_QUERY_RESULT>;
+type Outcome = NonNullable<Course["learningOutcomes"]>[number];
+
+interface LearningOutcomes {
+    outcomes: Outcome[]
+}
+
+
+/** Mirrors the icon list in `studio/schemaTypes/objects/learningOutcome.ts`. */
+const icons: Record<NonNullable<Outcome["icon"]>, LucideIcon> = {
+    sparkles: Sparkles,
+    layers: Layers,
+    code: Code,
+    rocket: Rocket,
+    shield: Shield,
+    gauge: Gauge,
+    puzzle: Puzzle,
+    workflow: Workflow,
+  };
+
+
+const LearningOutcomes = ({outcomes}: LearningOutcomes) => {
+  return (
+    <section className="rounded-lg border border-canvas-line p-6 sm:p-7">
+        <h2
+            id="what-youll-learn"
+            className="font-display text-2xl leading-8 font-bold text-neutral-900"
+        >
+        What you&rsquo;ll learn
+        </h2>
+
+        <ul className="mt-8 grid md:grid-cols-2 gap-6">
+            {outcomes.map((outcome) => {
+                const Icon = icons[outcome.icon ?? "sparkles"] ?? Sparkles
+                return (
+                    <li 
+                    key={outcome._key}
+                    className="flex items-start gap-6 rounded-lg border border-canvas-line p-6 sm:p-7"
+                    >
+                        <Icon className="size-12 shrink-0 text-primary-400 " strokeWidth={1.5} aria-hidden />
+                        <div className="min-w-0">
+                            <h3 className="font-display text-lg leading-6 font-medium text-neutral-900">
+                                {outcome.title}
+                            </h3>
+                            {outcome.description && 
+                                <p className="mt-3 text-base leading-7 text-neutral-500">
+                                    {outcome.description}
+                                </p>
+                            }
+                        </div>
+                    </li>
+                )
+            })}
+        </ul>   
+
+    </section>
+  )
+}
+
+export default LearningOutcomes

@@ -1,14 +1,27 @@
+import { CourseGrid } from "@/components/cards/CourseGrid";
 import { ChartDecoration } from "@/components/home/ChartDecoration";
 import Hero from "@/components/home/Hero";
 import { PageFrame } from "@/components/layout/page-frame";
 import { SiteHeader } from "@/components/SiteHeader";
+import { CACHE_TAGS, sanityFetch } from "@/sanity/lib/fetch";
+import { COURSES_LIST_QUERY } from "@/sanity/lib/queries";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 
 
+/** The section is a preview beside "View all courses", so it shows the first row only. */
+const FEATURED_COURSE_COUNT = 3;
+
+export default async function Home() {
 
 
-export default function Home() {
+  const courses = await sanityFetch({
+    query: COURSES_LIST_QUERY,
+    tags: [CACHE_TAGS.course, CACHE_TAGS.lesson, ]
+  })
+
+  console.log(courses)
+
   return (
     <PageFrame>
       <SiteHeader />
@@ -31,7 +44,7 @@ export default function Home() {
 
 
             <div className="mt-8">
-            {/* <CourseGrid courses={courses} limit={FEATURED_COURSE_COUNT} /> */}
+            <CourseGrid courses={courses} limit={FEATURED_COURSE_COUNT} />
           </div> 
 
           <p className="mt-16 flex items-center gap-5 text-lg text-neutral-700"> 
