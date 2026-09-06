@@ -1,10 +1,12 @@
 import { urlFor } from "@/agent/skills/create-agent-with-sanity-context/references/ecommerce/app/src/sanity/lib/image";
 import { PageFrame } from "@/components/layout/page-frame";
 import { buildCurriculum } from "@/components/lesson/LessonCurriculum";
+import LessonHeader from "@/components/lesson/LessonHeader";
 import LessonSidebar from "@/components/lesson/LessonSidebar";
+import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
-import { firstParagraph, truncate } from "@/lib/portable-text";
-import { coursesHref } from "@/lib/routes";
+import { firstParagraph, splitLeadParagraph, truncate } from "@/lib/portable-text";
+import { courseHref, coursesHref } from "@/lib/routes";
 import { CACHE_TAGS, sanityFetch } from "@/sanity/lib/fetch";
 import { LESSON_BY_SLUG_QUERY, LESSON_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { Metadata } from "next";
@@ -53,10 +55,15 @@ const LessonPage = async ({params}: PageProps<"/lessons/[slug]">) => {
     
     if(!lesson) notFound()
     const course = lesson.course
-    console.log("This is the course", course)
 
     const curriculum = buildCurriculum(course?.modules, lesson._id)
-    console.log("This is the curriculm", curriculum)
+
+
+   // The lesson schema has no summary field, so the notes' lead paragraph fills that role — and is
+  // dropped from the body below so the page does not print it twice.
+  const { lead: summary, rest: body } = splitLeadParagraph(lesson.notes);
+
+
     
     return (
         <PageFrame>
@@ -75,6 +82,42 @@ const LessonPage = async ({params}: PageProps<"/lessons/[slug]">) => {
               className="border-b border-canvas-line lg:w-69.5 lg:shrink-0 lg:border-r lg:border-b-0"
               />
                 }
+
+
+             <main className="flex min-w-0 flex-1 flex-col">
+                <div className="flex flex-col gap-8 px-6 pt-8 pb-10 sm:px-8">
+
+
+                    {/**Breadcrumbs */}
+                    <Breadcrumbs items={[
+                        {label: "All Courses", href: coursesHref},
+                         ...(course?.title
+                             ? [{label: course.title, href: course.slug ? courseHref(course.slug) : undefined}]
+                            : []),
+                        ...(curriculum.currentModule?.title ? [{label: curriculum.currentModule.title}] : []),
+                        {label: lesson.title ?? "Lesson"}
+                    ]} />
+
+
+            <LessonHeader
+              label={curriculum.current?.label ?? null}
+              title={lesson.title}
+              summary={summary}
+              durationSeconds={lesson.duration}
+              level={course?.level ?? null}
+              studentCount={lesson.studentCount}
+              lessonSlug={slug}
+            />
+
+
+
+
+
+                </div>
+
+
+             </main>
+
             </div>
 
         </PageFrame>
