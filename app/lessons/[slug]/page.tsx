@@ -3,10 +3,12 @@ import { PageFrame } from "@/components/layout/page-frame";
 import { buildCurriculum } from "@/components/lesson/LessonCurriculum";
 import LessonHeader from "@/components/lesson/LessonHeader";
 import LessonSidebar from "@/components/lesson/LessonSidebar";
+import LessonVideo from "@/components/lesson/LessonVideo";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
 import { firstParagraph, splitLeadParagraph, truncate } from "@/lib/portable-text";
-import { courseHref, coursesHref } from "@/lib/routes";
+import { courseHref, coursesHref, START_SECONDS_PARAM } from "@/lib/routes";
+import { parseVideoUrl } from "@/lib/video";
 import { CACHE_TAGS, sanityFetch } from "@/sanity/lib/fetch";
 import { LESSON_BY_SLUG_QUERY, LESSON_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { Metadata } from "next";
@@ -44,9 +46,17 @@ export async function generateMetadata ({params}: PageProps<"/lessons/[slug]">):
     }
 }
 
+/** `?t=765` — the matched second a search result deep-links to (AGENTS.md §7). */
+function readStartSeconds(value: string | string[] | undefined, durationSeconds: number | null) {
+    const raw = Array.isArray(value) ? value[0] : value;
+    const parsed = Number.parseInt(raw ?? "", 10);
+  
+    if (!Number.isFinite(parsed) || parsed <= 0) return 0;
+    return durationSeconds ? Math.min(parsed, durationSeconds) : parsed;
+  }
 
 
-const LessonPage = async ({params}: PageProps<"/lessons/[slug]">) => {
+const LessonPage = async ({params, searchParams}: PageProps<"/lessons/[slug]">) => {
     const {slug} = await params
     
     const lesson = await getLesson(slug)
@@ -58,11 +68,13 @@ const LessonPage = async ({params}: PageProps<"/lessons/[slug]">) => {
 
     const curriculum = buildCurriculum(course?.modules, lesson._id)
 
-
-   // The lesson schema has no summary field, so the notes' lead paragraph fills that role — and is
-  // dropped from the body below so the page does not print it twice.
-  const { lead: summary, rest: body } = splitLeadParagraph(lesson.notes);
-
+    
+    
+    // The lesson schema has no summary field, so the notes' lead paragraph fills that role — and is
+    // dropped from the body below so the page does not print it twice.
+    const { lead: summary, rest: body } = splitLeadParagraph(lesson.notes);
+    
+    const startSeconds = readStartSeconds((await searchParams)[START_SECONDS_PARAM], lesson.duration)
 
     
     return (
@@ -109,7 +121,22 @@ const LessonPage = async ({params}: PageProps<"/lessons/[slug]">) => {
               lessonSlug={slug}
             />
 
-
+            
+            <LessonVideo
+              lessonTitle={lesson.title ?? "Lesson"}
+              lessonSlug={slug}
+              lessonLabel={curriculum.current?.label ?? null}
+              video={parseVideoUrl(lesson.videoUrl)}
+              posterUrl={
+                  lesson.thumbnail?.asset
+                  ? urlFor(lesson.thumbnail).width(1280).height(720).fit("crop").url()
+                  : null
+                }
+                posterAlt={lesson.thumbnail?.alt ?? lesson.title ?? ""}
+                startSeconds={startSeconds}
+                durationSeconds={lesson.duration}
+                courseSlug={course?.slug ?? null}
+            />
 
 
 
