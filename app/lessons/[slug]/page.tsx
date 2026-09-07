@@ -1,8 +1,14 @@
 import { urlFor } from "@/agent/skills/create-agent-with-sanity-context/references/ecommerce/app/src/sanity/lib/image";
 import { PageFrame } from "@/components/layout/page-frame";
 import { buildCurriculum } from "@/components/lesson/LessonCurriculum";
+import LessonFooterNav from "@/components/lesson/LessonFooterNav";
 import LessonHeader from "@/components/lesson/LessonHeader";
+import LessonKeyPoints from "@/components/lesson/LessonKeyPoints";
+import LessonNotes from "@/components/lesson/LessonNotes";
+import LessonProTip from "@/components/lesson/LessonProTip";
+import LessonResources from "@/components/lesson/LessonResources";
 import LessonSidebar from "@/components/lesson/LessonSidebar";
+import LessonTabs from "@/components/lesson/LessonTabs";
 import LessonVideo from "@/components/lesson/LessonVideo";
 import Breadcrumbs from "@/components/nav/Breadcrumbs";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -76,6 +82,10 @@ const LessonPage = async ({params, searchParams}: PageProps<"/lessons/[slug]">) 
     
     const startSeconds = readStartSeconds((await searchParams)[START_SECONDS_PARAM], lesson.duration)
 
+
+    const keyPoints= lesson.keyPoints ?? []
+    const resources = lesson.resources ?? []
+
     
     return (
         <PageFrame>
@@ -100,15 +110,15 @@ const LessonPage = async ({params, searchParams}: PageProps<"/lessons/[slug]">) 
                 <div className="flex flex-col gap-8 px-6 pt-8 pb-10 sm:px-8">
 
 
-                    {/**Breadcrumbs */}
-                    <Breadcrumbs items={[
+              {/**Breadcrumbs */}
+              <Breadcrumbs items={[
                         {label: "All Courses", href: coursesHref},
                          ...(course?.title
                              ? [{label: course.title, href: course.slug ? courseHref(course.slug) : undefined}]
                             : []),
                         ...(curriculum.currentModule?.title ? [{label: curriculum.currentModule.title}] : []),
                         {label: lesson.title ?? "Lesson"}
-                    ]} />
+              ]} />
 
 
             <LessonHeader
@@ -139,13 +149,44 @@ const LessonPage = async ({params, searchParams}: PageProps<"/lessons/[slug]">) 
             />
 
 
+               
+            <LessonTabs lessonSlug={slug}>
+             <div className="flex flex-col gap-8">
+                {body && (
+                    <section aria-labelledby="lesson-overview">
+                        <h2 id="lesson-overview" className="font-display text-xl leading-7 font-bold text-neutral-900">Overview</h2>
+                        <div className="mt-4">
+                            <LessonNotes notes={body} />
+                        </div>
+                    </section>
+                )}
+                {keyPoints.length > 0 &&
+                 <>
+                    <hr className="border-canvas-line" />
+                    <LessonKeyPoints points={keyPoints} />
+                </>}
 
+                {lesson.proTip && <LessonProTip proTip={lesson.proTip} />}
+
+                {resources.length > 0 && 
+                
+                <>
+                    <hr className="border-canvas-line" />
+                    <LessonResources resources={resources} lessonSlug={slug} />
+                </>
+                }
+
+             </div>
+            </LessonTabs>
                 </div>
-
-
              </main>
-
             </div>
+
+            <LessonFooterNav
+            previous={curriculum.previous}
+            next={curriculum.next}
+            currentLessonSlug={slug}
+            />
 
         </PageFrame>
     )
