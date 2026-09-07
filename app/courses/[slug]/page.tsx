@@ -42,11 +42,8 @@ const CoursePage = async ({params}: PageProps<"/courses/[slug]">) => {
   
   const {slug} = await params
   
-  const course = await getCourse(slug);
-  console.log(course)
-  
+  const course = await getCourse(slug);  
   if (!course) notFound();
-
 
   const modules = course.modules ?? [];
   const outcomes = course.learningOutcomes ?? []
