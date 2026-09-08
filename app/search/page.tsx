@@ -1,5 +1,6 @@
 import { PageFrame } from "@/components/layout/page-frame"
 import SearchForm from "@/components/search/SearchForm"
+import SearchResults from "@/components/search/SearchResults"
 import { SiteHeader } from "@/components/SiteHeader"
 import { SEARCH_QUERY_PARAM, SEARCH_SORT_PARAM } from "@/lib/routes"
 import { MAX_QUERY_LENGTH, SearchSort, SORTS } from "@/lib/search/types"
@@ -64,7 +65,12 @@ const SearchPage = async ({searchParams}: {searchParams: Promise<Record<string, 
     </div>
 
         {query ? (
-         <></>
+         <SearchResults
+          key={`${query}|${sort}`}
+          query={query}
+          sort={sort}
+          searchField={searchField}
+          />
           
         ) : (
           searchField

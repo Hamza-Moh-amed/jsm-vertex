@@ -16,7 +16,8 @@ interface SearchFormProps {
   className?: string;
 }
 
-const SearchForm = ({id = "search", defaultValue, size = "md", label = "search", placeholder = "Search anything...", className}: SearchFormProps) => {
+const SearchForm = ({id = "search", defaultValue, size = "md", label = "search", placeholder = "Search any topic...", className}: SearchFormProps) => {
+  const router = useRouter()
 
   // ⌘ K is drawn on the field, so it has to do something.
   useEffect(() => {
@@ -33,13 +34,13 @@ const SearchForm = ({id = "search", defaultValue, size = "md", label = "search",
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
 
-    const router = useRouter()
 
     e.preventDefault()
 
     const field = new FormData(e.target).get("q");
     const query = typeof field === "string" ? field.trim() : ""
     if(!query) return
+    console.log(query)
     router.push(searchHref(query))
   }
 
