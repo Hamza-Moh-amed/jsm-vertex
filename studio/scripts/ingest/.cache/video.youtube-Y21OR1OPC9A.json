@@ -1,0 +1,155 @@
+{
+  "_id": "video.youtube-Y21OR1OPC9A",
+  "videoId": "Y21OR1OPC9A",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=Y21OR1OPC9A",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "What Are Virtual Environments?"
+    },
+    {
+      "startSeconds": 47,
+      "label": "Creating a Virtual Environment"
+    },
+    {
+      "startSeconds": 197,
+      "label": "Installing Packages"
+    },
+    {
+      "startSeconds": 269,
+      "label": "Saving Dependencies"
+    },
+    {
+      "startSeconds": 325,
+      "label": "Example Work Flow"
+    },
+    {
+      "startSeconds": 427,
+      "label": "Virtual Environment Tips"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "What is a virtual environment? Well this is simply a self-contained location that enables you to maintain separate and isolated environments for your Python projects This isolation lets you manage dependencies versions and packages without conflicts across different projects When you work on multiple Python projects"
+    },
+    {
+      "startSeconds": 18,
+      "text": "it's likely that some of them depend on different versions of external libraries or even Python itself Without virtual environments if you were to install every dependency globally you might run into issues where one project needs a different version of a library than another project This can lead to compatibility issues Virtual environment solved"
+    },
+    {
+      "startSeconds": 35,
+      "text": "this issue by allowing each project to have its own set of installed packages independent of what's installed globally or in other environments So now let's look at how you create virtual environments So to begin we need to open up a terminal or a command prompt If you're a mac or Linux open up your terminal If you're on Windows open up"
+    },
+    {
+      "startSeconds": 53,
+      "text": "a command prompt or a PowerShell instance From here we're going to navigate into the directory where we want to create a new virtual environment It's worth noting that virtual environments are simply directories on your system so you want to put them in a place that's logical like the location of a Python project that requires this environment"
+    },
+    {
+      "startSeconds": 70,
+      "text": "In my case you can see that I'm in the example directory which is on my desktop So simply go to a directory where you want to create your virtual environment From here we're going to create a new environment using the built in vent v Command or VPN V Now it's worth noting that there are other tools that can do this Like Conda virtual envy"
+    },
+    {
+      "startSeconds": 89,
+      "text": "pip envy and poetry But V envy is built into Python and it's the most common one Now the commands for creating and activating the virtual environment are slightly different for Mac or Windows but I'll run through both sets So if you're on Windows you're going to use this command which is Python hyphen M then V and then envy"
+    },
+    {
+      "startSeconds": 107,
+      "text": "Now the envy part here at the end is the name of the environment You can name this anything that you like but it's convention to name it envy Now if you're on Mac or Linux you'll simply change the command to be Python three So in my case I'm a mac so I'm going to run Python 3-m the envy envy Now at this point it will create a new directory for us"
+    },
+    {
+      "startSeconds": 127,
+      "text": "So if we type LS you'll see that we have the environment envy in this directory Now what we need to do is activate the virtual environment and to do that again the command will be slightly different depending if you're on Mac or Windows If you're on windows you're going to run the following command Now the command"
+    },
+    {
+      "startSeconds": 142,
+      "text": "is this the name of your environment which in this case is envy slash scripts slash activate DOT B8 Now for some reason that doesn't work You can try just slash activates or remove that by extension Now if you are on Mac or Linux the command is a little bit different This is going to be source envy slash bin and then slash activate like that"
+    },
+    {
+      "startSeconds": 164,
+      "text": "And once you've activated the environment you should see that you get a prefix with the name of the environment appearing before the normal line in your terminal So whether you're on Mac Windows or Linux you'll know this is working Once you see the parentheses version of your environment name before your main terminal line Now that we're here"
+    },
+    {
+      "startSeconds": 181,
+      "text": "I'll show you how we deactivate the environment So to go back into our global Python installation To do that you simply type deactivate The command will be the same Whether you're on Mac Windows or Linux Then we can reactivate by using the source command again Or that activate script that I showed you on Windows So now that the environment"
+    },
+    {
+      "startSeconds": 198,
+      "text": "is created and activated we can go ahead and install some packages into it Now to do this we're going to use the PIP command which stands for the preferred installer program or the RECURSIVE acronym which is PIP installs packages Now if we want to view the packages that are in the current environment we can start by typing PIP list"
+    },
+    {
+      "startSeconds": 215,
+      "text": "and it will show us that we can actually upgrade PIP if we'd like to We don't need to do that right now but we can see that we just have two packages PIP and set setup tools The reason we don't see any other ones is because we're in the virtual environment now not in our global version of Python If we were to deactivate this"
+    },
+    {
+      "startSeconds": 230,
+      "text": "and run the command again we'd see any packages in our global environment But here we're in the virtual one Now that we've done that we can install a package So one some of us have probably used before is the request package So let's go PIP install requests When we do that it should install everything And if we type PIP list you'll see"
+    },
+    {
+      "startSeconds": 248,
+      "text": "now that we get all of the dependencies for requests as well as the request package itself You'll notice now if I deactivate the environment and I type PIP list it's actually needs to be Pip three here I'll get a huge long list of a bunch of other packages that are installed globally Whereas if I go back into the environment here"
+    },
+    {
+      "startSeconds": 265,
+      "text": "and I type PIP list we just see the ones that are part of this environment So now at this point let's imagine we've done some intense Python development and we're ready to push this to GitHub or share a project with someone else Now in order for them to run this code they'll likely need the same requirements as us Now rather than exporting"
+    },
+    {
+      "startSeconds": 281,
+      "text": "our entire environment we can simply save a list of all of the dependencies we used into a requirement The text file Now to do that we're going to use the following command which is Pip frees We're going to use the greater than sign and then we're going to type requirements dot text if I spell that correctly And what this will do is"
+    },
+    {
+      "startSeconds": 301,
+      "text": "take the output of PIP frees which gives us all of the different packages and their version and save it in this file So when I do that and I type LS you'll see that now we get a requirement start text file if we have a look at requirements dot text it has the output of PIP list that we looked at before Now let's get out of this here"
+    },
+    {
+      "startSeconds": 319,
+      "text": "and let's see how we could use the requirements of text file to actually install these various packages So let's imagine we're someone else We've now got access to this code We want to start working in it and we have a requirement start text file Well first we'll make sure that we're out of this environment and we'll probably end"
+    },
+    {
+      "startSeconds": 335,
+      "text": "up creating a new one So we'll start again and we'll type the commands In this case Python three hyphen M Then we will just call this my underscore and we will create a new environment We will then activate it So this will be source and then my envy slash bean slash activate again on windows is going to be a different command for activation"
+    },
+    {
+      "startSeconds": 355,
+      "text": "Now we're inside of this environment This is a new environment and you'll notice that now we have envy might envy our requirements Dot text If I pip list inside of here you'll see that we don't have those requirements So the request module that we need but we can install them using this requirements dot text file To do that"
+    },
+    {
+      "startSeconds": 375,
+      "text": "we very simply just type pip install dash ah and then requirements dot text the dash our stands for install from a file So we specify the file name which is requirements start text And now what pip will do is read this file find all of the requirements and install it in this environment So when I hit enter here it's"
+    },
+    {
+      "startSeconds": 395,
+      "text": "going to go ahead and install that And now if we type PIP list you'll see that we get a list of all of the different packages that were from our requirements dot text file So this is very common practice You'll actually download a python project you'll see a requirements dot text file What's expected from that point forward"
+    },
+    {
+      "startSeconds": 413,
+      "text": "is you're going to create a new virtual environment you're going to activate it You're then going to install all of the different packages using the requirements dot text file Again that command was pip install hyphen ah requirements dot text Now at this point you've learned how to create an environment activate it install individual packages"
+    },
+    {
+      "startSeconds": 432,
+      "text": "install packages from a file and save your packages or dependencies into a requirements done text file You pretty much know everything you need to about virtual environments but I'll share with you a few last helpful tips that you'll probably want to know So first of all it's common practice to create a virtual environment"
+    },
+    {
+      "startSeconds": 448,
+      "text": "folder inside of the directory where your Python files exist So for example maybe I'll make a new directory called project and this is where I'm going to have all of my code so CD into project and maybe I have a python file so I can say maybe just touch main dot p y Now what I would do is create my virtual environment inside of this directory"
+    },
+    {
+      "startSeconds": 470,
+      "text": "So it's alongside my python files in all of my source code Now it's common practice that we call this envy or VM envy You can call it whatever you want but typically this is what it will be nicked Now once we create and activate the environment we want to make sure we don't save any of our source code inside of that directory"
+    },
+    {
+      "startSeconds": 488,
+      "text": "So I'm not going to do it right now But let's say that we have this event V folder right? So it may end up high And then V where our virtual environment is we're not going to put any of our custom python code inside of here It's just going to sit inside of the main directory This folder is only used for storing the things related"
+    },
+    {
+      "startSeconds": 504,
+      "text": "to our virtual environment That's about it If you're finished with the virtual environment and for some reason you don't need it anymore you can simply delete this folder and that's all you have to do So if you're on Mac you can type something like Ram Dash r v Envy that's going to delete the directory You also can just simply find it"
+    },
+    {
+      "startSeconds": 520,
+      "text": "and delete it So right click it move it to trash whatever you want Now that's it That's all I have for you If you enjoy my teaching style and you want to become a developer then consider checking out my software development course from the link in the description Leave a like on this video Subscribe to the channel and I will see you in the next one"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:06.352Z"
+}

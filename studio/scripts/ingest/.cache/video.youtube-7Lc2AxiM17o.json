@@ -1,0 +1,507 @@
+{
+  "_id": "video.youtube-7Lc2AxiM17o",
+  "videoId": "7Lc2AxiM17o",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=7Lc2AxiM17o",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "What is Matplotlib?"
+    },
+    {
+      "startSeconds": 110,
+      "label": "Setup/Install"
+    },
+    {
+      "startSeconds": 238,
+      "label": "Imports"
+    },
+    {
+      "startSeconds": 303,
+      "label": "Matplotlib Architecture"
+    },
+    {
+      "startSeconds": 511,
+      "label": "Basic Line Plot"
+    },
+    {
+      "startSeconds": 617,
+      "label": "Customizing Styles"
+    },
+    {
+      "startSeconds": 777,
+      "label": "Scatter Plot"
+    },
+    {
+      "startSeconds": 936,
+      "label": "Bar Chart"
+    },
+    {
+      "startSeconds": 1172,
+      "label": "Histograms"
+    },
+    {
+      "startSeconds": 1249,
+      "label": "Subplots"
+    },
+    {
+      "startSeconds": 1330,
+      "label": "Working with Pandas"
+    },
+    {
+      "startSeconds": 1431,
+      "label": "Advanced Customization"
+    },
+    {
+      "startSeconds": 1600,
+      "label": "Plot Styles"
+    },
+    {
+      "startSeconds": 1638,
+      "label": "Pie Charts"
+    },
+    {
+      "startSeconds": 1701,
+      "label": "Saving Plots"
+    },
+    {
+      "startSeconds": 1740,
+      "label": "Cheat Sheet"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "In this video, you'll learn how to use the matplotlib library in Python. If you're interested at all in data science, AI, machine learning, or scientific computing, then matplotlib is a must learn. And fortunately, in just a short video like this, I can teach you all of the fundamentals that will get you quite far."
+    },
+    {
+      "startSeconds": 18,
+      "text": "So with that said, let's go on to the computer and let me teach you matplotlib in Python. All right. So I'm on the computer. And what I have open here is a Jupyter notebook. It contains all of the code that I'm going to cover in this video. And you can directly run all of the code inside of it to see all of the different plots."
+    },
+    {
+      "startSeconds": 33,
+      "text": "If you want access to this Jupyter notebook, you can sign up for my email list and I will send it to you for free linked in the description. Otherwise, feel free just to watch the video and see all of the code samples that I go through. Now with that in mind, let's start by discussing what matplotlib is. Then I'll show you"
+    },
+    {
+      "startSeconds": 48,
+      "text": "how to make your own Jupyter Notebook, which is the easiest way to play around with it. And we'll start going through various different types of charts graphs, bar charts, pie charts, all of that kind of stuff that you can create with it. So matplotlib is a comprehensive library for creating static and interactive visualizations in Python."
+    },
+    {
+      "startSeconds": 64,
+      "text": "Like it says here, it provides a Matlab like interface for plotting data. And if you do anything with data visualization or data analysis, it is absolutely essential. Now a lot of times you'll see that matplotlib is used in combination with numpy and pandas. And if you'd like to learn either of those topics, I have short videos on them as well,"
+    },
+    {
+      "startSeconds": 82,
+      "text": "so I'll put them on screen right now. However, it is not a prerequisite. Okay, so that's matplotlib. Essentially it's a plotting library. It's very easy to use. And you can see that you can create all kinds of charts. I'm just kind of scrolling through them."
+    },
+    {
+      "startSeconds": 94,
+      "text": "So you get a sense of kind of what you can do here with practically unlimited customization. And this video will not cover absolutely everything, but it will give you a really solid base to be able to start using this library and have a sense of what it's capable of. Okay."
+    },
+    {
+      "startSeconds": 108,
+      "text": "So in order to use this, the first thing that I will recommend that you do is install it. So you need to open up your terminal or command prompt depending if you're on Mac or Linux. And what you'll do is type the command pip install and then matplotlib. And I also recommend you install numpy and pandas while you're at it."
+    },
+    {
+      "startSeconds": 125,
+      "text": "Now, if you're on Mac or Linux, you can use the command pip three. So pip three install. If you're on windows, you can simply use pip and this will install it into your global Python installation. So we're going to go ahead and press enter. And you'll see that it's going to download and install for me."
+    },
+    {
+      "startSeconds": 139,
+      "text": "Now once this is installed you're going to want to do is open up a Jupyter notebook. You don't need to use this inside of a Jupyter notebook, but it's just the easiest way to test it. And it's typically what you'll use if you're working in like a data science type environment where this is used quite frequently."
+    },
+    {
+      "startSeconds": 153,
+      "text": "And in order to open a Jupyter notebook, you can do this in any major IDE. So in my case I'm using cursor right now, which is very similar to something like VSCode or windsurf. You can also do this in PyCharm. It's really up to you. Now if you're working inside of cursor or inside of something like VS code or VS code fork,"
+    },
+    {
+      "startSeconds": 171,
+      "text": "you can hit the keyboard shortcut Ctrl, shift P or Command Shift P depending on the operating system you're on, and you can type the command Jupiter like this. And you'll see a bunch of options. One of them is to create a new Jupyter notebook, and if you do that, it should create a new notebook for you, which is untitled one dot ipynb."
+    },
+    {
+      "startSeconds": 192,
+      "text": "Now I p m B is the extension for a Jupyter notebook, and a Jupyter notebook gives you these different cells, which allows you to execute code directly in line. So I can do something like print hello and then just run the cell. Just pick the kernel right here and you see the output directly in the notebook."
+    },
+    {
+      "startSeconds": 209,
+      "text": "So that's what it's kind of called a notebook where you're like sketching stuff. You can change stuff really quickly. And it's a lot easier to experiment with code rather than just writing it in like a normal Python file. You also can have markdown so you can have like, you know, a title or something. Let's just,"
+    },
+    {
+      "startSeconds": 224,
+      "text": "what is it like, run this and you can see that it shows up kind of nicely formatted, which is how I've created this notebook here, which again, you can get from the link in the description. Okay. So hopefully at this point you understand how to open a Jupyter notebook. Now we're going to start going through the tutorial."
+    },
+    {
+      "startSeconds": 238,
+      "text": "So in order to use matplotlib you do need to import it in whatever Python file or notebook you're going to be using. So you can see the first cell that I've written here imports matplotlib.pyplot as plt. Now this is the standard import. This is what you're almost always going to see."
+    },
+    {
+      "startSeconds": 253,
+      "text": "And by putting this as PLT you're creating what's known as an alias, which makes it a lot faster and easier to type out matplotlib essentially, or just type plt instead to access this module. So you import matplotlib.pyplot as plt. And then I've also imported numpy and pandas because again these are very frequently used with"
+    },
+    {
+      "startSeconds": 271,
+      "text": "this module to graph data from numpy or graph a pandas dataframe, which I'll show you later. Now you also are going to want to run this command, which will make it so that Jupyter notebook automatically displays the graph in line without you having to actually manually trigger it, which I'll show you in one second."
+    },
+    {
+      "startSeconds": 289,
+      "text": "And then you can set the default style that you want to use for your plots. So for the graphs essentially that you're going to be showing. In this case I'll just use default, but you can change it to something like seaborn ggplot. And you get like a better looking style. Okay. So with that in mind, let's get into the matplotlib architecture."
+    },
+    {
+      "startSeconds": 306,
+      "text": "Now there's a few concepts you need to understand. The more you see them, the more clear it will be. But we have a figure now. A figure, as it says, is the top level container. This is like the entire window or the entire page that's going to show up on your screen. Next you have axis or axes."
+    },
+    {
+      "startSeconds": 322,
+      "text": "It's kind of hard for me to pronounce these because they're spelt very similarly and pretty much sound the same, but the one with the E is the actual plot area. So this is where you draw a specific piece of data, and you can have multiple axes on one figure. So I can have multiple graphs or charts on one kind of draw area. And then we have an axis."
+    },
+    {
+      "startSeconds": 342,
+      "text": "Now this would be like an x axis or a y axis like you might be familiar with from math class. So on one of the axes, which is again like one of the plots that we're going to have, you could have multiple axes like a y axis and x axis. And then these axes can be on a figure. So you could have multiple kind of graphs showing up."
+    },
+    {
+      "startSeconds": 360,
+      "text": "So you can think of a figure like a canvas an axis as an individual painting on that canvas. And then the axes as like the data on that canvas, if that makes sense, or on that painting. Okay. So let's have a look at a very simple graph. You can see that I've already just kind of ran the cell. So it's showing right here."
+    },
+    {
+      "startSeconds": 377,
+      "text": "But we have x is equal to 12345Y2468 ten. This data is correlated together where these are like x y kind of value pairs. And we want to do something like a line graph. Well in order to do that we start by writing plt. Remember we imported that from up here dot plot. And we simply plot x against y. So that's kind of the syntax here."
+    },
+    {
+      "startSeconds": 400,
+      "text": "We have the x data and the y data. We plot it like that. We can then set labels for the x and y axis. So x axis y axis. We can set a title for the plot. And then we can run this plt dot show method. And this will show the graph. Now you don't need this when you work inside of the Jupyter notebook because it will automatically display it."
+    },
+    {
+      "startSeconds": 421,
+      "text": "However, if you are working in a standard Python file and you actually want to see the plot, then you need to run this command plt dot show. So you can see this is what we get. Very simple data. We have the kind of legend down below or like all of the ticks. We have the x axis, the y axis and our line."
+    },
+    {
+      "startSeconds": 437,
+      "text": "Now while we're at it, if we wanted to plot another line, we could just simply do this and we could plot, maybe say y against X and then run this. And you can see now that we have two lines showing up and you can see the legend or kind of the Texas change a little bit because of the data that we're showing. Perfect. Let's scroll down."
+    },
+    {
+      "startSeconds": 455,
+      "text": "Let's have a look at a different approach of doing this. So as well as using the global PLT object as we've kind of seen here, you can create what's called a subplot. And this makes it a little bit easier to organize different charts and graphs, because sometimes you have multiple of them that you want to show."
+    },
+    {
+      "startSeconds": 471,
+      "text": "So you can see method two object oriented more control recommended for complex plots. You can say your figure and your axis is equal to plt dot subplots. This will create a new object for you. And then, rather than using the PLT kind of global object, you can directly reference one of these kind of paintings. Right?"
+    },
+    {
+      "startSeconds": 489,
+      "text": "That we were talking about where we can now make a plot and we just reference this object. And then I could make another one of these and have a different graph, different chart, and decide which ones I want to show. So I know it's a little bit weird to see this approach, or I can use it too much,"
+    },
+    {
+      "startSeconds": 503,
+      "text": "but I just wanted to show you that this exists in case you see it. In you know, in the wild, effectively. Okay. Let's continue and let's move on to basic line plots. Okay. So just like we looked at already, kind of line plots or line graphs are the simplest type and the one that you're going to see most frequently inside of matplotlib."
+    },
+    {
+      "startSeconds": 522,
+      "text": "So what I've done here is just created this kind of linear data using numpy. You can see we get 100 points from 0 to 10. We then have used the sine function on all of this data. So we get this kind of sinusoidal graph. Then what I've done down here is I have configured the size of the figure. Now again the figure is like the whole drawable area."
+    },
+    {
+      "startSeconds": 541,
+      "text": "And what you can do is set the height and width in inches as it specifies right here. So I have a width of eight a height of five inches which will correspond to some pixel value that I don't know the exact math for. We can then plot the x and y data, right? This is just how you do a line. We can set the labels, set the title."
+    },
+    {
+      "startSeconds": 560,
+      "text": "We can enable a grid view. So we have kind of these grid lines showing up. And there you go. We get a sine wave now appearing in our line chart or in our whatever line. What did I call this basic line plot. Okay. Now let's have a look at an example of multiple lines as I showed you before. So you can see I have my X data."
+    },
+    {
+      "startSeconds": 577,
+      "text": "And then I used multiple trigonometry functions here. So Y1Y2Y3. You can see that I plotted all of them. And I also added a label field. When I add the label field that's going to give me a nice legend down here, which will show me different colors. It will automatically select the colors for you and set the labels. You know what line is what."
+    },
+    {
+      "startSeconds": 596,
+      "text": "Very cool, very easy to use. And then you can see that I actually had to enable the legend. So sorry, I had to manually add that because if you don't have that, it's not going to show you the legend. And then I set a transparency value on my grid lines so they're not as harsh as the ones up here."
+    },
+    {
+      "startSeconds": 610,
+      "text": "You can maybe see the difference, but probably not from my recording, but these ones are a little bit more faint than the ones above. Okay, so now let's look at a few customizations that you can make. And then we'll look at a bunch of different types of plots like a pie chart for example a histogram, all of the other stuff that you can do."
+    },
+    {
+      "startSeconds": 626,
+      "text": "So as it says here, matplotlib offers extensive customization. So similarly to before, I've just created a bunch of different points. I set the figure size. So this time it's a little bit larger. 12 by six. And I've just plotted a bunch of different lines. So I have my x data against my x data x x plus 1XX plus two."
+    },
+    {
+      "startSeconds": 643,
+      "text": "Just so that we have them set apart a little bit. And what I'm doing here is I'm specifying with this kind of code that you see, which looks a little bit weird, the color as well as the markers and the line type that I want to use for this particular, I guess, what data, right. I then I'm able to set a label,"
+    },
+    {
+      "startSeconds": 661,
+      "text": "and I can also set the line width or kind of like the thickness of the line. So when I do b and then I do a dash, if we look at the formats down here that stands for blue and then solid line. So a dash means solid. Now if I do r and then I do two dashes that stands for red. And then a dashed line."
+    },
+    {
+      "startSeconds": 680,
+      "text": "If I do g and then a dash and a dot, that's the dash dotted line. As you're going to see in a second that is green. M stands for magenta. And then the colon is dotted right. And then we also have different markers that we can set. So I did C0. And then this is a circle. And then this is a solid line."
+    },
+    {
+      "startSeconds": 697,
+      "text": "So if I go down here you can see all of the different examples where we have circles squares triangles dotted lines and the markers are my marking. Sorry. The different points are the data points on this line. There's a few other styles as you can see here, and obviously a lot more that I just haven't included in this notebook."
+    },
+    {
+      "startSeconds": 713,
+      "text": "But point is, you can fully customize pretty much all of the stuff that you're doing here with the plots. Now just having a look at another example of using hexadecimal colors, because that's something else that you're able to do, and also just manually specifying some of the values. So you saw before, let me just scroll up here."
+    },
+    {
+      "startSeconds": 728,
+      "text": "It's a little bit laggy that I was just using this kind of ambiguous, like I don't know, code right, to set what they look like. Now you can do that, but you also can just manually pass all of the different values by using the parameters. So I can use line with line style. Right. And I can just set all of those kind of codes in their own parameter,"
+    },
+    {
+      "startSeconds": 748,
+      "text": "rather than just passing it as that kind of weird looking string. So in this case, what I've done is again, I've created some data, set the figure size, and then I've plotted three different lines and then same thing. I've showed the legend. This time I just added some more customization by changing the font size"
+    },
+    {
+      "startSeconds": 763,
+      "text": "and also for the title, changing the font size and the font weight. And you can see that we get kind of like these bold custom colors. And this looks again a little bit unique and different than the other graph because of the customizations that we added. Okay, let's continue now and have a look at scatter plots."
+    },
+    {
+      "startSeconds": 779,
+      "text": "So you've probably seen these before if you've done math class. But they look something like this where you're just scattering all of the data and it doesn't have like a direct correlation. And in order to create a scatter plot is pretty straightforward. What we can do is create some random data, which we've done here with numpy,"
+    },
+    {
+      "startSeconds": 794,
+      "text": "and then what we've done is we've set the figure and we've now done a scatter. So rather than plotting, because when you do PLT dot plot, that's just going to make a line. When you do scatter this is going to create a scatter plot and just put all of the different values directly on the axis without"
+    },
+    {
+      "startSeconds": 809,
+      "text": "having kind of like double line going through them. So you can see that's all I've done. I've just used scatter. I also set the alpha, which is the transparency. So if I made this one it would be fully solid. But I wanted some transparency. So you can see the dots kind of intersecting with each other."
+    },
+    {
+      "startSeconds": 823,
+      "text": "And you get them showing up right here like that okay. Now let's continue and have a look at how to create something like this, which looks pretty cool in my opinion. Very similar to before we create a bunch of random, data. This time though, we create some random colors as well as some random sizes."
+    },
+    {
+      "startSeconds": 838,
+      "text": "So now when I scatter my data, I'm able to apply a color. So I pass the colors as well as the sizes. And all of these are corresponding, right? So for example, if I have like my x data which is equal to one, two, three and my y data, you know, one two, three and then I have a color. And a color is like red blue, green."
+    },
+    {
+      "startSeconds": 858,
+      "text": "Then the point that's at one one is going to be red. The point at two two is going to be green because they're the same index in the list, same thing with the size. Hopefully that makes sense. Okay. So you can see I have XY color. Size is then an alpha and also a color mapping."
+    },
+    {
+      "startSeconds": 875,
+      "text": "And the way this works is when I've chosen the colors I've just choose chosen random numbers. Or for all of the colors 100 random numbers. Now those numbers can correspond with a color mapping. So in this case the mapping I put was viridis. But if I put like plasma for example. And then let's just run this cell, you see that the color changes."
+    },
+    {
+      "startSeconds": 896,
+      "text": "Right. And I believe if I remember correctly, that this generates a number between 0 and 1. So based on that number it corresponds with this color map which then gives me these different colors. Let's just try another one because I'm curious what it actually looks like. Let's see if set one is a valid one."
+    },
+    {
+      "startSeconds": 912,
+      "text": "And when I run that you can see we get a different set of colors. And then we even have the legend on the other side showing me the intensity. And yeah, as you can see we have from 0 to 1. So gray is the most intense and red is the least intense. And you could have your own custom color mapping there if you want."
+    },
+    {
+      "startSeconds": 927,
+      "text": "Now notice I'm showing the color bar right. So that's why I'm seeing this bar on the right hand side. If I didn't show that, it wouldn't, show up. Okay. Next let's look at bar charts. Very useful again for showing data. So we have some categories. We have some values. And to create a bar chart we simply use bar right."
+    },
+    {
+      "startSeconds": 944,
+      "text": "So everything else pretty much stays exactly the same. The only difference is that we're plotting our bar data. So categories and values. We specify a color for the bars that we are drawing. We also specify the edge color. This case is black and the line width. When I run that you can see that I get a very simple bar chart, very customizable."
+    },
+    {
+      "startSeconds": 963,
+      "text": "And I'm going to show you a much more complex bar chart right now okay. So next we have a horizontal bar chart. So if you want to have the bars going in horizontal direction, the only change you need to make is adding this h here. So rather than just bar you do bar h, everything else stays exactly the same and it just flips the orientation."
+    },
+    {
+      "startSeconds": 981,
+      "text": "As promised though, let's have a look at the next one, which looks something like this, where we have multiple bars combined together. So in order to do something like that, you can see that I have categories, I have three sets of products. And what we want to do is compare the products or compare the quarter, sorry."
+    },
+    {
+      "startSeconds": 998,
+      "text": "And like the product sales or something across each quarter. So what I can do is I can have multiple bars and I can make those bars go beside each other, which is effectively what I'm kind of setting here and why I have this complex comment explaining what's going on. So what I've done is I've created the data."
+    },
+    {
+      "startSeconds": 1015,
+      "text": "I've also created an X value, which is the number of categories that I have, and then how wide I want each bar to be. And then what I've done is I've said, okay, I'm going to set the figure right. So it's ten by six. And then I explain all of the parameters right here. So for my first bar I can specify the x value where I want this bar to appear."
+    },
+    {
+      "startSeconds": 1033,
+      "text": "And then the height width all of that kind of stuff. So what I've done is I've said okay, well the x value that I want for this particular bar is going to be minus the width. Okay. So x position shift left by one bar with to position the first group. So that's what I'm doing right. And then I'm graphing the product a data."
+    },
+    {
+      "startSeconds": 1052,
+      "text": "And then I have the actual width of the bar. And I'm the label and the color. Now for the next bar for the x value. Because again the x values are like kind of Q1, q2, Q3, Q4 down here. What I'm doing is I'm just plotting x, so when I just plot X, that's going to put these bars in the middle for me, and then I'm plotting the X plus width."
+    },
+    {
+      "startSeconds": 1072,
+      "text": "Now I know it looks a little bit confusing because we have kind of arrays of data here. And when I do x minus for example 0.25 when I use numpy, what happens is it subtracts, sorry 0.25 from every single value here. So you have to kind of imagine that I have this x data associated with my product, a, B and C data."
+    },
+    {
+      "startSeconds": 1093,
+      "text": "But I'm slightly adjusting the x values to be either to the left, to the middle, or to the right, so that I can have three bars that go beside each other when I plot them. So what I've done right is I've plotted the left bar by subtracting 0.25 from every x value. So rather than being at one, which is where Q1 is, it's at 0.75."
+    },
+    {
+      "startSeconds": 1113,
+      "text": "Then I plot at one, then I plot at 1.25. Then I have a gap of 0.25, and then I continue. So this whole axis is representing four values. So like Q1 is one, Q2 is two, Q3 is three, Q4 is four. And then I'm shifting the different positions of the bars along that x axis. Then what I do to make this Q1, Q2, Q3, Q4 show up, let me scroll up."
+    },
+    {
+      "startSeconds": 1136,
+      "text": "Here is I change the X ticks so that they align with the category. So I say okay x ticks. And then I'm going to have x associated with categories. So the ticks are at these positions right 1234. But I want to label them as these categories. Then I show the grid the legend all of that stuff. And we have the different labels."
+    },
+    {
+      "startSeconds": 1156,
+      "text": "Hopefully that makes sense. You might have to study this one a little bit to get all of the details there, but that's how I can have these multiple bars beside each other by doing a little bit of clever math with the X axis when I am plotting them. Okay, let's continue now and move to histograms."
+    },
+    {
+      "startSeconds": 1171,
+      "text": "Histograms show the distribution of numerical data by grouping values into bins. So what I've done is I've created a thousand points here. And then I want to do a histogram. So I'm saying okay I mean have a histogram going I have some data I want 30 bins. This is my color edge color whatever."
+    },
+    {
+      "startSeconds": 1187,
+      "text": "The histogram automatically groups the data into the bins, trying to figure out how many things are there and then creates the distribution. Like this. Now let's continue. And you can see that I can do multiple histograms. So something that looks like this so very easy for me to do that I have this histogram and this histogram."
+    },
+    {
+      "startSeconds": 1202,
+      "text": "And then because these histograms overlap with each other I get this kind of one in the middle which is just the combination of the blue and the red being drawn. So it looks like I'm plotting three, but really I'm just plotting two. And again, because of that overlap, we get kind of that different color"
+    },
+    {
+      "startSeconds": 1216,
+      "text": "that's appearing here, which I think is pretty cool because we have the alpha set. Now, if we didn't want to have that, we could just set the alpha as one. And now if we do that, actually let's set the alpha as one on both of them. You can see that this one is going to overlap the blue one because of the way that it was plotted."
+    },
+    {
+      "startSeconds": 1233,
+      "text": "So we plotted it afterwards. So it appeared on top. If we change the order then it would appear behind. And then same thing. If we go back to the transparency you can see that now it's transparent. We get different colors because of how that works okay. So let's continue now and let's talk about subplots."
+    },
+    {
+      "startSeconds": 1250,
+      "text": "So this is creating multiple plots in one figure which is of course useful if you want to analyze different types of data. So what we can do is we can create a two by two subplot. Now in order to do that, I have to say my figure and my axis is equal to PLT dot subplots. You saw that I did this before."
+    },
+    {
+      "startSeconds": 1268,
+      "text": "When I did it, however, I didn't specify the number of plots that I wanted. When I create the subplot, what I'm able to do is paths, the width and the height, or essentially the number of rows and the number of columns of subplots that I want. In this case, when I go two by two, that will create four subplots for me"
+    },
+    {
+      "startSeconds": 1283,
+      "text": "and allow me to access them by using this kind of index system. As you can see here, where zero zero is the top left, zero one is the top right, one zero bottom left and one one bottom right. Okay, just like a standard index in Python. Then what I'm able to do is set up all of the different plots here and do whatever I want on them."
+    },
+    {
+      "startSeconds": 1304,
+      "text": "So I created a line plot, a cosine plot, a scatter plot, and then a bar chart. And now I do plt dot tight layout, which just combines all these together and reduces the spacing between the plots. And then show them. And you can see I now have four plots showing up in one. So extremely useful."
+    },
+    {
+      "startSeconds": 1321,
+      "text": "And you can make as many as you want and have kind of like a big canvas that has, you know, 20 plots on it or whatever dimensions you want by setting it up like this. So let's continue and just have a look at working directly with pandas, so you can see that if we have a pandas dataframe like oftentimes you have inside of Python,"
+    },
+    {
+      "startSeconds": 1338,
+      "text": "we can print it out by using the df head, which I've done right here. And then we can just directly plot data from the dataframe. So I just wanted to show you this that just like I plot data from numpy, I can just directly plot values directly referencing the dataframe. So I'm looking at the date, the sales, the date, and the profit. Right?"
+    },
+    {
+      "startSeconds": 1355,
+      "text": "And then I can set some of the different values here, set up the x ticks, tight layout, etc. and you can see that I get the data and shows me the sales and profit over time. Right? Very cool. Let's continue. Just have a look at an even easier way to do this. So I actually can directly plot data from the dataframe."
+    },
+    {
+      "startSeconds": 1373,
+      "text": "So I can say df dot plot, and then I can have my x values being equal to some column, my y values being equal to some column, and then I can set where I want to plot that. So what I've done is created a subplot and then said, okay, I'm just going to use my data frame directly to plot the data, which is possible."
+    },
+    {
+      "startSeconds": 1393,
+      "text": "This is where I want to plot it, and then I can specify the other values directly on this axis. And then kind of similar thing down here, you can see that I can create a group using pandas. Don't worry if that doesn't mean anything to you. And then I can just directly plot that group by using this bar chart. Right."
+    },
+    {
+      "startSeconds": 1409,
+      "text": "So I'm not going to go through all of the syntax in plotting the pandas data frames, but I just wanted to show you that it is kind of built directly into pandas and combines with matplotlib, where you can just plot the object itself without having to kind of parse through like we were doing up top."
+    },
+    {
+      "startSeconds": 1424,
+      "text": "So let's scroll down and you can see again, we get a very similar thing to plots here, the bar charts and the line chart. Okay. Let's continue and have a look at Advanced Customization. So like it says here annotations text and legends I'm not going to go through every single line. But let me just quickly show you what this looks like."
+    },
+    {
+      "startSeconds": 1441,
+      "text": "You can see that we have this annotated plot where we have like a vertical line going down the middle, we have the sine wave, and we have click an arrow with this maximum value points, which is pretty cool. So in order to create that, let me get the scrolling correct. You would make something like this. So you can"
+    },
+    {
+      "startSeconds": 1459,
+      "text": "see that I set up a subplot, even though I'm only going to have one plot here. I then plot on this my sine curve where I'm saying, okay, I'm going to use blue, and this is going to be a solid line. I then I'm going to add this kind of text annotation. So I look at the maximum index that I have from my y values. And I say, okay, I want to annotate."
+    },
+    {
+      "startSeconds": 1477,
+      "text": "So when I annotate, if we have a look at this, I need to set the following values text x, y, z text and x y coordinates. So x y is going to be the position that I want to annotate. So I'm saying x max index y max index to find where that actual point is I then have x y text. So where do I want the text to appear relative to that position."
+    },
+    {
+      "startSeconds": 1498,
+      "text": "Then I need the arrow props. So I'm setting the arrow style, the color and the line width. Then I set the font size. The color and the font weight. And what this is doing is effectively drawing the arrow. And this is the text that I'm going to show. Okay. Now to add a text box like we saw where this is a sine wave."
+    },
+    {
+      "startSeconds": 1515,
+      "text": "Similar thing I do the x position and the y position. The text that I want to draw any other properties like transforming. So in this case I'm saying I want this trans axis, the font size, vertical alignment, the box style, all of that kind of stuff. Again, I know it's a little bit confusing and you would have to reference"
+    },
+    {
+      "startSeconds": 1533,
+      "text": "the documentation to do this, but I'm just trying to show you what's possible. Then I'm adding a vertical and horizontal line so you can see we have the horizontal line and the vertical line, which is what this does right here specifying where I want to draw these, the line style, all of that kind of stuff."
+    },
+    {
+      "startSeconds": 1549,
+      "text": "And then setting up the X label Y label as we saw before and the title legend Grid. And we are good to go. So it looks a bit complicated, but honestly, fairly easy to do. Just requires a bit of reference to the documentation to figure out what all of the parameters are now, as well as that, I'm not going to go through this too much in depth."
+    },
+    {
+      "startSeconds": 1566,
+      "text": "You can actually customize the legends that appear here as well. So like you saw before, you can directly call this legend function, which will just show you a legend based on the labels that you specify for the plots or what you're plotting. However, you can customize this as well with like the location if you want it to be framed."
+    },
+    {
+      "startSeconds": 1583,
+      "text": "If you want a box, if you want a shadow, right. All of that kind of stuff. And you can see now our legend looks a lot better and it's in the top right hand corner as opposed to, by default, the top left. And you can see some of the values that you could use here. Okay. Let's keep going and look at some plot styles and themes."
+    },
+    {
+      "startSeconds": 1600,
+      "text": "So just so you're aware there's a bunch of different themes. I just printed them all out for you here that you can use for the plots so that they look different by default. And what I have is just a code sample here that runs through some of the examples. So you can see the difference of what they look like."
+    },
+    {
+      "startSeconds": 1614,
+      "text": "So we have the default style, the seaborn style, ggplot style, dark background style. Although this one doesn't seem to really be working very well because it just added the, what do you call it? Different text, which is white, but it didn't actually change the background, but you get the idea."
+    },
+    {
+      "startSeconds": 1628,
+      "text": "Not major in terms of the differences, but one like has a box, one doesn't have a box. The textile is a little bit different, right? All of that kind of stuff. So just worth noting okay. And then let's scroll down and let's now have a look at pie charts. So here's an example of a pie chart. You can create a matplotlib in order to do that."
+    },
+    {
+      "startSeconds": 1646,
+      "text": "Very straightforward. You simply use the Pie method. Now when you do the pie method you need to specify the sizes right, which should add up to 100, although I believe it will handle that if they don't, you can then explode. Explode just means emphasizing one of these regions and kind of like"
+    },
+    {
+      "startSeconds": 1661,
+      "text": "popping it out so you can specify which one you would want to do there. So here I'm saying I want to explode the first value. So I'm putting 0.1, which is how much I want to explode it by if I wanted to explode a different one. So let's go like 0.4 or something and run that you can see. Then it takes that region and explodes it that far out. Right."
+    },
+    {
+      "startSeconds": 1680,
+      "text": "So you can specify how much you want. Then you have the labels. So we have some labels that we specified which are the categories. Right. We have the colors which we can specify as well as the sizes. And then a few other parameters like shadow you know starting angle etc."
+    },
+    {
+      "startSeconds": 1696,
+      "text": "we can set the title and then we can show it and you get a really nice beautiful pie chart. And that is almost it. Pretty much the last thing I wanted to show you. And let's pop open the file menu for this one, is that you can save different figures."
+    },
+    {
+      "startSeconds": 1709,
+      "text": "So there's these two functions right here that allow you to save the figure as something like a PNG file. You can also save it as a PDF, SVG, EPS, etc.. So you can use this in like a presentation PowerPoint, something like that. If I run this cell here, you will see that we actually get some files now in the left hand side."
+    },
+    {
+      "startSeconds": 1727,
+      "text": "So we have the PNG and the PDF, both of which I can view the PDF. Notice is kind of like interactive how it's popping up in here. I can like zoom in, zoom out, etc. because I have saved it. Awesome. And then lastly, I just created a quick cheat sheet down here."
+    },
+    {
+      "startSeconds": 1742,
+      "text": "I'm not going to go through it with you, but it's in case you want to download this, notebook, which you can do for free from the link in the description and just has some of the common methods and functions that you probably want to be aware of when you are working with matplotlib."
+    },
+    {
+      "startSeconds": 1756,
+      "text": "So anyways, guys, that's going to wrap it up after a quick word from today's sponsor. Brilliant is where you learn by doing with thousands of interactive lessons in math, data analysis, programing and AI. They adopt a first principles approach, ensuring you understand the why behind each concept. Every lesson is interactive, engaging."
+    },
+    {
+      "startSeconds": 1775,
+      "text": "You enhance on problem solving, which is proven to be six times more effective than simply watching lectures. The content is developed by top notch educators, researchers and professionals from renowned institutions like MIT, Caltech, and Google. Brilliant emphasizes enhancing your critical thinking abilities"
+    },
+    {
+      "startSeconds": 1793,
+      "text": "through active problem solving rather than memorization. As you learn specific subjects, you're simultaneously training your mind to think more effectively. Consistent daily learning is crucial and brilliant makes it effortless with their bite sized lessons allowing you to acquire meaningful knowledge in just a few minutes each day,"
+    },
+    {
+      "startSeconds": 1810,
+      "text": "which is perfect for replacing idle screen time. Additionally, brilliant offers a comprehensive range of computer science and Python courses, as well as extensive AI workshops guiding you from a complete beginner to an expert through practical, hands on lessons to learn. For free on Brilliant's, go to brilliant.org."
+    },
+    {
+      "startSeconds": 1828,
+      "text": "Slash tech with Tim, scan the QR code on screen or click the link in the description. Brilliant is also giving our viewers 20% off an annual premium subscription, which gives you unlimited daily access to everything on Brilliant's."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:55.934Z"
+}

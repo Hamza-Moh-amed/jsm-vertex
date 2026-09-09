@@ -1,0 +1,247 @@
+{
+  "_id": "video.youtube-Qwb-Za6cBws",
+  "videoId": "Qwb-Za6cBws",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=Qwb-Za6cBws",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 26,
+      "label": "Demo Application"
+    },
+    {
+      "startSeconds": 105,
+      "label": "Basic Profiler Features"
+    },
+    {
+      "startSeconds": 390,
+      "label": "Advanced Profiler Features"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Debugging a slow React application to fix performance problems is incredibly time-consuming and difficult, but if you use the right tools and you know how to use them correctly, it can become incredibly easy. That's why in this video, I'm going to show you how to use these tools and actually understand what all this mess on the screen is saying."
+    },
+    {
+      "startSeconds": 21,
+      "text": "Welcome back to Web Dev Simplified. My name's Kyle, and my job is to simplify the web for you, so you can start building your dream project sooner. And to get started, I have a fairly complex project here that has a lot of stuff going on. For example, we have all this different sorting that we can do. You'll notice when I click on certain things,"
+    },
+    {
+      "startSeconds": 34,
+      "text": "my page is really, really slow. That's what we're going to be fixing in this video, these different performance problems. You'll notice I can do a bunch of different things, but again, when I click on a lot of these buttons, you'll notice there's a huge slow down on this task board page, which is obviously not"
+    },
+    {
+      "startSeconds": 45,
+      "text": "ideal. I have a job listings page, which is blank for now. I can view my own job listings if I'm logged in. I can create listings, and you'll notice some of these pages are quite snappy to go to, while other pages, such as this task board page, are incredibly slow. Now, this project is part of my React Simplified course. It's actually the"
+    },
+    {
+      "startSeconds": 61,
+      "text": "final project in the entire course. So, if you're interested in checking that course out, I'll have a link down in the description for you. I'm currently still finishing up this project, so the course isn't quite ready yet, but it should be ready rather soon. So, I'd recommend just going down, clicking that link in"
+    },
+    {
+      "startSeconds": 73,
+      "text": "the description, and checking to see if it's available. And if not, you can just enter your email, and I'll let you know as soon as the course is ready. Anyway, though, I noticed that this task board page is rather slow, and I really want to fix this task board page. And you'll notice that since all the slow down is"
+    },
+    {
+      "startSeconds": 84,
+      "text": "on this page, and all the other pages seem to be rather quick compared to this one, you'd think, \"Okay, my problem is clearly with this task board page.\" And if you were to look through the code, you could spend forever looking through all the task board related code, but you'd never actually find the bug that's slowing it down, cuz the bug that's"
+    },
+    {
+      "startSeconds": 98,
+      "text": "slowing down my application really doesn't have anything to do with all with this task board page. So, the best way to find performance-related bugs inside of React is to use the profiler, which is part of the React DevTools. So, if you have the React DevTools installed, and you inspect the page, you should be able to see over here, you can"
+    },
+    {
+      "startSeconds": 115,
+      "text": "open up the profiler section, and this gives you of your different profiling related data. Now, if you don't have the React DevTools installed, all you need to do is just go to whatever browser you want. Just search for React DevTools extension, and you can install it. It's available for pretty much every single"
+    },
+    {
+      "startSeconds": 128,
+      "text": "browser out there. Now, if we want to start profiling our site to see what is slow, all we need to do is just click on this blue button that's going to start profiling, or you can click this reload and start profiling, and that'll give you essentially your first page load, and it'll include that as part of your"
+    },
+    {
+      "startSeconds": 141,
+      "text": "profiler. So, depending on if you want to profile an entire page load or just profile like single individual actions, is going to depend on which one of these you choose. For now, I'm just going to click start profiling. You notice this turns red, and now I can do anything I want on my application, and that is going to be saved inside of the"
+    },
+    {
+      "startSeconds": 155,
+      "text": "profiler. So, I noticed when I did sorting, it was really slow. So, let's sort ascending. You'll notice it's really laggy, really slow. Okay, that just finished up. I'm going to go back to my profiler, and I'm going to stop it. So, I can just click this red button, and that's going to stop the profiler. Now, if we go over to either"
+    },
+    {
+      "startSeconds": 168,
+      "text": "of these charts, you'll notice this number in the top right here, this one out of 16. This essentially is telling me how many times my React application rendered. So, pretty much whenever your hooks change, your state change, or whatever your context change, anything that causes a re-render is going to be saved in this section, one out of 16."
+    },
+    {
+      "startSeconds": 184,
+      "text": "So, I have 16 different times my React application rendered, and you'll notice if I go through here, there are all these different bars on the right-hand side, and these bars tell me how long different things took. So, if I hover over one of these small bars, you can see that it rendered in 0.9 milliseconds, my layout effects were 0.1"
+    },
+    {
+      "startSeconds": 198,
+      "text": "millisecond, and my passive effects were 0.1 millisecond. So, I mean, this entire bar took 1 millisecond essentially to render everything. While these larger these taller ones, you notice they took 806 milliseconds to render. So, they were much, much slower than everything else. So, if you want to debug where the"
+    },
+    {
+      "startSeconds": 212,
+      "text": "slowest part of your application is, do the action that is slow while you're profiling, and then look for whatever the tallest bar in this section is. You'll notice there's two specific sections where it was an 800 millisecond render time. So, I know that these are the two places I want to look. I want to click on both of these to figure out,"
+    },
+    {
+      "startSeconds": 227,
+      "text": "okay, what are the things that are slowing down my application? Now, on top of that, there's different things that you can do to look at the information you're getting. For example, there's three different views you can use. You can use the flame graph view. This is really good for seeing like a hierarchical view of how everything's"
+    },
+    {
+      "startSeconds": 241,
+      "text": "going. So, as you can see, it kind of breaks down the very top level of my application, and it breaks down all my different hierarchy into all of my different components, even some of my really small ones. And the ones that are actually changing are going to be highlighted in these colors here, as you can see. So, that's great if you want to"
+    },
+    {
+      "startSeconds": 253,
+      "text": "see like an overall hierarchy, but if you want to just determine what are the things slowing down my application, this ranked chart is going to be the way to go. Because when you click on it, essentially whatever your slowest thing is is going to show up at the very top, and it's going to go down from there. So, for example, if I click over here,"
+    },
+    {
+      "startSeconds": 267,
+      "text": "you notice this drop-down menu content is taking about 40 milliseconds to reload every single time. So, I know that my bug is related to this drop-down menu content, and has nothing to do with my task board. It's entirely to do with my drop-down menu. So, now that we know that, we click this button to clear out of our profiler, and then we can"
+    },
+    {
+      "startSeconds": 283,
+      "text": "actually go to the code to see what is causing that problem and fix that bug. So, this is just the code for the project. If I open up my client, I know that this is in that drop-down menu component. So, I can come over into my component section in the UI, and I have this drop-down menu inside of here. Now, I know it's in the drop-down menu"
+    },
+    {
+      "startSeconds": 298,
+      "text": "content, because that's what it told me the name of the component is, and I can look at the code inside of this section to see, \"Okay, where is my problem?\" And well, here we go. I obviously this is a problem. I have this sleep function being called, which is waiting for 20 milliseconds and doing nothing. Now, obviously this is a very contrived"
+    },
+    {
+      "startSeconds": 312,
+      "text": "example, because it's not actually something that you would run into. You would never have a sleep function in your code. But, just imagine there was something slow in my code, and I didn't realize it. That's essentially what this sleep function is representing, something that is slow and taking time. So, now I can remove this, and hopefully"
+    },
+    {
+      "startSeconds": 326,
+      "text": "just by doing that, I've essentially fixed all of my code problems. Now, I can come back into here, and I can just test around here. I click on my task board. You notice now all my sorting stuff is super snappy. So, it seems like that has fixed the problem. But, in order to truly tell if the problem has been fixed, what we need to do is we"
+    },
+    {
+      "startSeconds": 340,
+      "text": "need to do our profiler. So, let's inspect our page, go back over to our profile, and let's just click the start profile button. I'm going to do the exact same thing. I'm going to navigate around. Let's maybe try sorting a couple different columns here. Maybe we'll change the status of one of these to a medium status. And now I'm going to stop"
+    },
+    {
+      "startSeconds": 354,
+      "text": "my profiler. So, let's go back to that profiler. And we should see that there's really no bars that are taking a super long amount of time. So, we can see that this bar is rather long here. But again, if I look at the actual total time that is taking, 25 milliseconds to render, that's really not that big of a deal, especially with all the data I'm"
+    },
+    {
+      "startSeconds": 370,
+      "text": "rendering on my screen. And if I go through and I look at all these, you notice that really none of them are taking that terribly long. I mean, there's a ton of different re-renders happening cuz I have tons of state changing. You notice as I scan through all of these, there's really nothing taking more than 25 or so milliseconds,"
+    },
+    {
+      "startSeconds": 383,
+      "text": "which is great. That means my application is rather quick. And the huge slow down I had is essentially fixed. So, that's pretty much the easiest and most basic way that you can use this tool. But there's a lot of other more advanced information you can glean from this if you really want to deep dive into debugging your"
+    },
+    {
+      "startSeconds": 396,
+      "text": "application. So, like I mentioned, the flame chart is really nice cuz it gives you a good idea of how everything in your application is re-rendered. So, you can see if there are certain things that are taking a really long time. Like in my case, most of the render time that is happening is this data table being"
+    },
+    {
+      "startSeconds": 410,
+      "text": "rendered. And as you can see, there's a ton of information that's being rendered inside of it, which is why it's taking, you know, 22 milliseconds to render. You also notice that there's two different numbers being prints out here. There's 1.9 milliseconds and then there's this 22.6 milliseconds. What that is essentially saying is that the data"
+    },
+    {
+      "startSeconds": 425,
+      "text": "table and all of the children inside of it took 22.6 milliseconds to render. But the data table itself with none of the children only took 1.9 milliseconds to render. So, this is a really great way for you to figure out, okay, is my actual data table slow or is it the children inside of the data table that are slow? Cuz my data table took a total"
+    },
+    {
+      "startSeconds": 443,
+      "text": "of 22.6 milliseconds to render itself and all of the children, but the data table itself only took 1.9 milliseconds. So, most of the slow down is just in the sheer number of different children that it needs to render, even if all of them only take up, you know, 0.1 millisecond, there's so many of them that it slows it"
+    },
+    {
+      "startSeconds": 458,
+      "text": "down quite a bit. Another The nice thing about this view is you can see highlighted in green here is essentially everything that's changed. Everything that's not gray has changed. As you can see in the gray section, it did not render at all. As we go through here, you'll notice that different things are gray because they didn't have to"
+    },
+    {
+      "startSeconds": 471,
+      "text": "re-render or they didn't render at all. So, that's really helpful that you can kind of see that information while the things that are colored are actually changed and they are being rendered. Also, if I were to click on something, like let's say I want to click on my data table to see how many times that's re-rendered. On the right-hand side"
+    },
+    {
+      "startSeconds": 484,
+      "text": "here, you can see all of the different instances that this component was re-rendered. If I click on it, it's just going to jump to that exact time where that state was changed. So, if you want to have a particular component and you're wondering how many times is it being rendered, when is it being rendered based on different things in my"
+    },
+    {
+      "startSeconds": 497,
+      "text": "application, I can click around just like this to see exactly why it's rendering and when it's rendering. And speaking of why something's rendered, you'll notice I have this section called why did this render right here and it tells me, \"Okay, hook one changed. Hook one Hook three changed here.\" It's the first time the component rendered. It'll"
+    },
+    {
+      "startSeconds": 512,
+      "text": "tell me exactly why it's re-rendered. Here, the props have changed. And this is really useful. And if you see something like hook three changed, all that means is the third hook inside of your component is the one that has the change occurring in it, which is causing the re-render. This is really great to see, \"Is my component re-rendering too"
+    },
+    {
+      "startSeconds": 527,
+      "text": "many times?\" And you can check, \"Why is it actually re-rendering that many times?\" Now, by default, this information is not actually going to be shown to you. If you want to see this information, you need to click on this cog right here. Go to the profile section and then just click record why each component rendered while profiling."
+    },
+    {
+      "startSeconds": 541,
+      "text": "That'll give you this why did this render section right here, which is really useful. Now, if you don't have anything clicked on at all, it'll essentially just give you information about the basic things on why this actual re-render happened, like the duration and then what actually caused that thing to update. In our case, the"
+    },
+    {
+      "startSeconds": 554,
+      "text": "data table changed, which is what caused this re-render. Now, we already talked about this ranked view, which is really great for finding your slow components. And there's also this timeline component here. This one's a little bit more difficult to parse and figure out exactly what's going on. But if I just zoom into a particular section here,"
+    },
+    {
+      "startSeconds": 569,
+      "text": "you'll notice that this kind of gives me a breakdown of exactly what's happening on a timeline. So, I can really see, \"Okay, at a specific time, my drop-down menu state update was scheduled and it ran the React render, and it committed those changes and passive effects happened. Then, as you can see here, another change changed here, my presence"
+    },
+    {
+      "startSeconds": 585,
+      "text": "state updated. So, now it's doing some more rendering. So, all these top sections are essentially like why your React state changed, whatever actually caused your re-render. And this bottom section is just all the different time it took to render every single step of the React render process. This is really great if you can need to get like super"
+    },
+    {
+      "startSeconds": 600,
+      "text": "nitty-gritty and figure out exactly what's going on and why different steps are taking the time that they are. This can be useful, but I find that this timeline view is really not that useful compared to the actual flame chart and the ranked view here. Now, another thing that's really important for your settings is you can actually hide"
+    },
+    {
+      "startSeconds": 615,
+      "text": "commits that take less than a certain amount of time. So, for example, I can say, \"You know what? Any commit that takes less than 5 ms, I don't even want to have show up at all.\" And now you'll notice there's only seven total re-renders that are being shown cuz there's only seven renders on my page that are taking more than 5 ms. This is"
+    },
+    {
+      "startSeconds": 631,
+      "text": "great if you want to hide some of those really small things, which makes it easier to find the things that are actually slowing down your application. For example, you could set this threshold to like 50 ms, and now you'll only see re-renders that cause your application to take more than 50 ms, which is kind of a good cutoff for"
+    },
+    {
+      "startSeconds": 645,
+      "text": "figuring out what is actually slow inside of your application. Otherwise, you can just leave it as zero like I have here if you want to see absolutely everything that's going on. Now, another really important thing about debugging and profiling is that often times the computer you're working on is rather powerful and fast compared to the"
+    },
+    {
+      "startSeconds": 660,
+      "text": "computer or mobile device that your users are actually using. So, in order to emulate a slower device, if you go to this performance tab here, you can actually massively throttle your computer. For example, you can six times slow down your CPU, and you can even if you have a like multi-threaded processor, you can say, \"You know what?"
+    },
+    {
+      "startSeconds": 675,
+      "text": "I only want to use one of those threads at a time limit the power of my computer as much as possible. That way, when I go about and I do my profiling, you'll notice that it's going to be much slower. If I come in here, I'm going to do my profiling. I'm just going to, you know, come in here. You'll notice automatically, just by doing this, I"
+    },
+    {
+      "startSeconds": 689,
+      "text": "feel a little bit of slow down on my application. It's not like massive and destroying things, but it is just a little bit slower. And if we come over back to the profiler and stop this, you notice that the timing for different things is going to be much larger. For example, here, some of these longer renders, these are taking 23"
+    },
+    {
+      "startSeconds": 704,
+      "text": "milliseconds. But like the passive effects here, you can see are taking 50 milliseconds for that and so on. And if I wanted to come in here and I said, you know what, show me everything that's greater than 50. Actually, let's do 100 milliseconds. There we go. Now you can see I had two renders. So generally, if you're trying"
+    },
+    {
+      "startSeconds": 718,
+      "text": "to debug your application and pre-emptively find areas that are slow, like maybe you don't notice things are slow when you're first testing, but you want to test to see if there are any spots that are potentially slow, making sure you throttle your performance as much as possible is a really great area to see what the slowest part of your"
+    },
+    {
+      "startSeconds": 732,
+      "text": "application is, even if it doesn't feel slow on your computer. Now if you want to learn how to build this project in React, you're going to want to take my React Simplified course because it is the final project inside of that course. Now I'm not 100% done with this project or the course. I'm working on the last section right now."
+    },
+    {
+      "startSeconds": 748,
+      "text": "So it's currently not available, but it should be available very soon. So just go to the sales page and you can check to see if it's available. And if it's not, you can enter your email at the bottom and I'll let you know as soon as the course is ready for you to take. Honestly, if you want to master React, this is the best course out there to do"
+    },
+    {
+      "startSeconds": 762,
+      "text": "so because it not only teaches you all the fundamentals you need, but it teaches you all the more advanced concepts you need to understand in order to build full-fledged projects like you just saw. So if you're at all interested in mastering React, I highly recommend checking out the link in the description down below. With that said, thank you"
+    },
+    {
+      "startSeconds": 776,
+      "text": "very much for watching and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:25.279Z"
+}

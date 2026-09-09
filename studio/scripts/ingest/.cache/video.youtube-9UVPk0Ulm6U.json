@@ -1,0 +1,143 @@
+{
+  "_id": "video.youtube-9UVPk0Ulm6U",
+  "videoId": "9UVPk0Ulm6U",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=9UVPk0Ulm6U",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 28,
+      "label": "What Is ZOD?"
+    },
+    {
+      "startSeconds": 312,
+      "label": "ZOD Demo"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Zod is one of the newest and hottest validation libraries out there, but that's for good reason because it's absolutely amazing and I love it. And it's not just a fad. This is going to be sticking around. So, in this video, I'm going to quickly show you exactly what Zod is and talk about it. And if you want me to do a full tutorial covering"
+    },
+    {
+      "startSeconds": 16,
+      "text": "Zod, just let me know down in the comments below. Welcome back to Web Dev Simplified. My name is Kyle and my job is to simplify the web for you so you can start building your dream project sooner. And here I'm just at the Zod documentation to kind of show you exactly what Zod is, talk about what it does, and why it's so"
+    },
+    {
+      "startSeconds": 34,
+      "text": "important. So, like I mentioned, Zod is a validation library and specifically it's a schema validation library. So, you kind of define how you want your code to be like, okay, first name is going to be a string, it has a minimum of three characters, it's required, and so on. So, when people fill out a form, you can really easily validate the data"
+    },
+    {
+      "startSeconds": 50,
+      "text": "in the form. That's like the biggest use case for a validation library, but you can do so much more than that. So, let me just kind of scroll down here to the introduction section where they talk about what Zod is. And the main thing about this that's really important is it's TypeScript first, which means it's going to be really well supported with"
+    },
+    {
+      "startSeconds": 65,
+      "text": "TypeScript and it works really well with TypeScript types. And on top of that, one thing that I don't think they mention anywhere here is that it actually uses required by default. So, a lot of times if you want to create a schema using a validation library like this, everything is optional unless you specify that it's required. In this"
+    },
+    {
+      "startSeconds": 80,
+      "text": "case, everything is required unless you specifically mark it as optional, which in my opinion is the much preferred way to do things, and I like that you have to be explicitly saying that things are going to be optional. Also, it's immutable, which is really nice. It uses a functional programming approach, which"
+    },
+    {
+      "startSeconds": 94,
+      "text": "again is something that I really like. It's super small, no dependencies, and it works all over the place. That's super useful. So, now if we just scroll past the sponsors here, we can talk about the actual integration or installation process. To do it, you probably should be using TypeScript. You can use it with just JavaScript, but"
+    },
+    {
+      "startSeconds": 109,
+      "text": "honestly, most of the benefits come from using this with TypeScript. And you need to be in strict mode, which whatever, that's fine. To install it, you just npm install Zod, super straightforward. And then to use it is really easy. You just import this Z variable from the zod library, and that's how you get started"
+    },
+    {
+      "startSeconds": 123,
+      "text": "with everything. So, inside of zod, you essentially just have a bunch of methods on this Z object for defining things like a string, a number. If we look over on the sidebar here, you can see we have things like strings, numbers, NaN, booleans, objects, and so on. The big thing you're going to be dealing with is"
+    },
+    {
+      "startSeconds": 136,
+      "text": "like objects, and then you're going to have things like strings and numbers and so on. In this case, they're just saying that this schema is just a string. So, when they pass it a string and they say parse on it, you can see it returns just the exact same thing. And when you call parse, all you're doing is saying, is"
+    },
+    {
+      "startSeconds": 149,
+      "text": "this valid? If so, just let things go through. Otherwise, throw an error. As you can see here, when we pass a number, it throws an error. Now, there's also a safe parse method, which is really useful because it returns to you an object that just says true or false as well as the data, and it also gives you an error if there's an error. So, that's"
+    },
+    {
+      "startSeconds": 164,
+      "text": "really useful if you want to just check validation to make sure it's right without actually throwing an error. This is probably what you're going to use the most when like validating a form. Now, if you want to deal with objects, that's where things get really useful. You just say Z.object, and then you pass it an object with all your properties."
+    },
+    {
+      "startSeconds": 178,
+      "text": "For example, your username is going to be a string. And here, when we pass this, we can say, you know what? Is this user right here object? Does it have a username that's a string? It does. Okay, we're good to go. But now, that's pretty normal. That's pretty much what any, you know, validation library is going to do."
+    },
+    {
+      "startSeconds": 192,
+      "text": "The big thing that zod does is right here. I'm just going to zoom in cuz of how important this is. Type user equals Z.infer type of user. This is super useful because now it lets you take this Z.object code, all of this zod code, you know, this is going to be a giant validation thing, and it lets you convert that to a normal TypeScript"
+    },
+    {
+      "startSeconds": 209,
+      "text": "type. By just calling this infer method and passing it the type of your schema, it now creates to you a brand new type. As you can see, this type has a username, which is a string, which is exactly what you've defined up here. So, that is really the coolest, most important thing about zod is how well it integrates with TypeScript, and the fact"
+    },
+    {
+      "startSeconds": 225,
+      "text": "that you don't have to define your types twice, once in the schema and once as your actual type. You just do it once in your schema, and then you can infer the types from that, which is really useful. Now, as I mentioned, when you're doing your validations, you have all your different primitives, you know, like strings, numbers, and so on, your"
+    },
+    {
+      "startSeconds": 238,
+      "text": "different empty types, and things like that. And then, on top of that, you have literals, so if you want to specifically say something is equal to a specific value, you can. And then, you also have all the different validations you can think of, like a maximum value, a minimum value, a length, and so on. And every different primitive you can think"
+    },
+    {
+      "startSeconds": 253,
+      "text": "of has these, so you know, a string has a bunch of different stuff with custom messages you can write. Same thing here with datetimes, you can do a bunch of stuff with that. Same thing with numbers, which is really nice, because you can do all of these different configurations, and all of this different customization for all your"
+    },
+    {
+      "startSeconds": 266,
+      "text": "different primitive types that we have over here. And then, for object, object is where you kind of have, you know, everything. You can bind together all the different things that you want. You can do things like defining a shape, you know, you have like key of, all these different things. This is super important, same thing with like pick dot"
+    },
+    {
+      "startSeconds": 279,
+      "text": "omit, you also have arrays. So, anything that you can think of, essentially, if you can define a TypeScript type for it, you can do it inside of Zod. But then, on top of that, you can add in validation, like maximum size, minimum size, optional, required, you know, having arrays, having not arrays, different things like that. This is"
+    },
+    {
+      "startSeconds": 295,
+      "text": "where I find that Zod is most important, because you can not only get all your cool TypeScript types, but then, on top of that, you get all your validation, which means it's going to work super easily with validating forms. You don't have to write a thousand if else if statements, you just write one if safe parse true, okay, good to go."
+    },
+    {
+      "startSeconds": 312,
+      "text": "So, I want to give a real quick demo of kind of like how this works and why it's so important. First, I'm going to show you the way that this would normally work before Zod and then after Zod. So, here we just have a really simple form with name, email, age. And when I click submit, you can see that it tells me"
+    },
+    {
+      "startSeconds": 325,
+      "text": "things are required, you know, it must be longer than five, must be less than 10, and so on. Same thing with like email, until I put in a valid email, it's not going to actually, you know, submit anything. And now, you can see the error's gone away. So, I have a bunch of different error validations. As you can see, to do those errors, I just"
+    },
+    {
+      "startSeconds": 339,
+      "text": "have a giant if else statement that's like, okay, if this error, put this message, this message, and so on. And And does that for every single section of my different form. This is kind of cumbersome to write, especially as you get more complex validations, and it's just not ideal. With Zod, this is a thing of the past. So, let me just add"
+    },
+    {
+      "startSeconds": 356,
+      "text": "in Zod here. I have the exact same form. If I come over to my Zod file, you'll see that the actual validation section is way simpler, and it could even be simpler than this. I just wrote this super quickly. You'll notice that all the logic here is inside this form schema, and you can see all my validation code takes up five lines of"
+    },
+    {
+      "startSeconds": 371,
+      "text": "code. I mean, really three lines of code, but five lines of code in total to validate every single thing about this form, and it works exactly the same. If I click submit, you can see all my error messages show up. If I make things correct, you can see that the error messages will slowly go away, just like that. And then finally, if I"
+    },
+    {
+      "startSeconds": 387,
+      "text": "put in a valid age, you can see all the error messages disappear. So, this is why I really like Zod, because you can essentially say, \"This is what I want my form to look like based on this information, and then I just want to validate that that's okay.\" And it's going to give you pre-formatted error messages for everything, or you can give"
+    },
+    {
+      "startSeconds": 401,
+      "text": "it your own error message. While in this example, you had to write out all your own logic in this if-else nested statements like this, which is complex and easy to make errors in. While this way, it's super declarative. If you want to change this to 12, you change it to 12, and it's super easy. And in here, you know, you have to find where this is"
+    },
+    {
+      "startSeconds": 416,
+      "text": "written. So, okay, here, change it to 12. Also, make sure to change this to 12. It's a lot more cumbersome. So, if this Zod library is something that you're interested in, I highly recommend you check it out. And if you want me to do a full tutorial on it, just let me know, and I will do that. And if I do, it'll be linked right over"
+    },
+    {
+      "startSeconds": 430,
+      "text": "here. With that said, thank you very much for watching, and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:44:06.900Z"
+}

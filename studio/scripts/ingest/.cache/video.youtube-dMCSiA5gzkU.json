@@ -1,0 +1,111 @@
+{
+  "_id": "video.youtube-dMCSiA5gzkU",
+  "videoId": "dMCSiA5gzkU",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=dMCSiA5gzkU",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction to React Server Components"
+    },
+    {
+      "startSeconds": 15,
+      "label": "Setting Up a Next.js Project"
+    },
+    {
+      "startSeconds": 48,
+      "label": "Creating a Server Component"
+    },
+    {
+      "startSeconds": 93,
+      "label": "Advantages and Limitations of Server Components"
+    },
+    {
+      "startSeconds": 155,
+      "label": "Creating a Client Component"
+    },
+    {
+      "startSeconds": 263,
+      "label": "Client Component Rendering Behavior"
+    },
+    {
+      "startSeconds": 344,
+      "label": "Summary and Next Steps"
+    },
+    {
+      "startSeconds": 371,
+      "label": "Support the Channel"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "previously we explored react server components and learned about its dual component model that distinguishes between server and client components now let's put that knowledge into practice by creating both types of components in an EXs application for this second section of the course on rendering I've created a fresh next year's project"
+    },
+    {
+      "startSeconds": 20,
+      "text": "using the command npx create next app at latest rendering hyphen demo once you run this command you'll have a similar project structure to work with looking at how the RSC architecture integrates with nexs there is a key point to remember every component in a nexas application defaults to being a server component this includes the"
+    },
+    {
+      "startSeconds": 42,
+      "text": "built-in root layout and root page that come with every new next year's project but let's create a new component to verify this we will add an about page to our app by creating a new folder within the app folder about with the page . TSX file here Define a simple react component export default function about page that returns an each one about page"
+    },
+    {
+      "startSeconds": 70,
+      "text": "and just like that we have created a server component to prove this let's add console.log about server component in the browser when we navigate to slab notice how it is locked with a special server tag you can also see the same message in the terminal this confirms our component is a server component running components on the"
+    },
+    {
+      "startSeconds": 95,
+      "text": "server brings several advantages zero bundle Size Direct access to serers side resources improved security and better SEO however server components do have limitations they can't interact with the browser apis or handle user interaction for example if we try to use state in our about page with the use State Hook from react so import use state from"
+    },
+    {
+      "startSeconds": 120,
+      "text": "react and invoke the hook let's call it name and set name we will get an error because you state requires a client component environment currently our about page is a server component server components can't maintain State because they run on the server where browser based State Management doesn't exist this reinforces the fact that Nexia"
+    },
+    {
+      "startSeconds": 143,
+      "text": "treats every component as a server component by default unless explicitly specified otherwise let's leave the about page as a functioning server component by removing the UST State hook and learn how to create a new client component we will create a dashboard SL page. TSX in the app folder that uses state to manage a user's name so export"
+    },
+    {
+      "startSeconds": 169,
+      "text": "default function dashboard page we import and invoke use state name and set name for the jsx we have a div tag within each one D dashboard and input element with value set to the name State variable and on change we call set name which is our seter function we then have a paragraph hello followed by the name State variable to convert This Server"
+    },
+    {
+      "startSeconds": 194,
+      "text": "component into a client component at the top of the file we must include a directive or to put it simply a special instruction within the code use client within quotes this directive acts as our ticket to cross the boundary from server to client side and is what allows us to Define client components it signals to"
+    },
+    {
+      "startSeconds": 216,
+      "text": "next shs that this dashboard component along with any components it Imports is intended for client side execution as a result the component gains full access to browser apis and the ability to handle interactivity to navigate to this route let's add a link in our home page so in the root page. TSX below the image"
+    },
+    {
+      "startSeconds": 238,
+      "text": "link the text is dashboard each ref is equal to/ dashboard and make sure to import the link component at the top import link from next slash link if you return to the browser and navigate to slash dashboard by clicking the link we see the component with its state functioning as expected hello vishwas let's now look at a very"
+    },
+    {
+      "startSeconds": 264,
+      "text": "important point about client components rendering behavior let's add console.log dashboard client component to our dashboard page component back in the browser when we click the dashboard link from the homepage the log appears in the browser console but without the server tag if you take a look at the terminal we don't"
+    },
+    {
+      "startSeconds": 288,
+      "text": "see the message but if we reload the dashboard page the dashboard appears both in the browser and in the terminal let me explain why this happen when we navigate using the link component the dashboard component is only rendered client side and we see the message in the browser console but if we reload the page the dashboard component"
+    },
+    {
+      "startSeconds": 311,
+      "text": "is rendered once on the server to allow the user to immediately see the Page's HTML content rather than a blank screen and then again on the client side during hydration this is why we see the message in the browser console and the terminal the term client component is indeed confusing but you'll get used to this"
+    },
+    {
+      "startSeconds": 331,
+      "text": "Behavior as you work with rsc's on a side note the message in the browser is logged twice in the browser because of the strict mode during development this doesn't happen in production so don't worry about it to summarize in the RSC architecture and by extension in the nexs app router components are server components by default to create client"
+    },
+    {
+      "startSeconds": 353,
+      "text": "components at the use Cent directive at the top of the file server components are rendered EX exclusively on the server while client components are rendered once on the server and then on the client all right up next we will explore the rendering life cycle of server and client components in next year supporting the channel is free"
+    },
+    {
+      "startSeconds": 374,
+      "text": "please like And subscribe it helps a lot"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:02.886Z"
+}

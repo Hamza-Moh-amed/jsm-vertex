@@ -1,0 +1,179 @@
+{
+  "_id": "video.youtube-PZFiThbuTFg",
+  "videoId": "PZFiThbuTFg",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=PZFiThbuTFg",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 30,
+      "label": "Create Table Employee"
+    },
+    {
+      "startSeconds": 70,
+      "label": "Insert Data"
+    },
+    {
+      "startSeconds": 112,
+      "label": "Select Data"
+    },
+    {
+      "startSeconds": 360,
+      "label": "More Features"
+    },
+    {
+      "startSeconds": 510,
+      "label": "Special Query"
+    },
+    {
+      "startSeconds": 663,
+      "label": "Summary"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Hello everyone, welcome to Lime Brew channel. In this session, we are going to learn that how you can query JSON data in your Postgress database. So I have opened my Postgress database on my local. So I've opened the PG admin tool and you can see on the left hand side the table right now I don't have any table. So what we going to do is we are"
+    },
+    {
+      "startSeconds": 18,
+      "text": "going to create that table first which will have the JSON B column and then we will be seeing that how you can query different flavors uh of data fetch in JSON B data type. So this is my first query. Let me unccomment it which says create table employee. So what it will do is it will create a table employee with employee ID and the data is going"
+    },
+    {
+      "startSeconds": 41,
+      "text": "to be JSON B. So for particular employee ID all the data that I'll add it would be in JSON format. So I've defined the type as JSON B. So let me execute this query first. So if I execute this query so it says that query returned success uh successfully. So let me comment this query now and let me refresh this. So if"
+    },
+    {
+      "startSeconds": 60,
+      "text": "I refresh this. So you can see that one table has been created employee table which I just created. It has two columns employee ID and data and data is of type JSON B. So let me insert some values inside this table. So what uh I'm going to insert inside this table is two employees whose ids are one and two and"
+    },
+    {
+      "startSeconds": 79,
+      "text": "then there are data with the uh with the JSON values as name and hobbies. So name is basically string type which is JSON John and Mark and hobbies are basically list type. Uh so there is one list inside the JSON and there is one list uh string inside the JSON. So we will see that how uh this data will look like. So"
+    },
+    {
+      "startSeconds": 100,
+      "text": "let me insert both the values. So let me insert both the values. So if I insert run this query insert into so you see uh it says it returned successfully. Let me comment unc comment this insert statements also. So let's run the select data uh select let me run select star al first select star from employee. So if I"
+    },
+    {
+      "startSeconds": 122,
+      "text": "run select star from employee. So you can see there are two employees employee one and two with the JSON P data as name and hobbies. Um so employee one has hobbies movies football and hiking and employee 2 has the hikings uh hobbies gaming movies and music and there is one common u hobby in employee one and employee 2 which is movies. So movies"
+    },
+    {
+      "startSeconds": 143,
+      "text": "exist in employee ID 1 also and movies is the hobby for the employee ID 2 also. So this is the common hobby for both employees employee one and employee two. So let's try to queries this data. Now let's say I want to get the JSON B data only. Select data from employee which I was just showing. Um so let me run this"
+    },
+    {
+      "startSeconds": 162,
+      "text": "query. Now select data from employee. So if I'll run this so I'll get the whole JSON without employee ID. So you get the whole JSON. So let's see how you can query the individual. Let's say if I if you want to access the name only from this JSON B data. So what you need to do is there is a special operator this"
+    },
+    {
+      "startSeconds": 179,
+      "text": "hyphen and then this sign uh uh then you can access any attribute inside your JSON. So what I'm saying is data is my column name inside data. I want to access name. So you see here name is the attribute of the uh JSON. It's the key of the JSON. So I can access any JSON attribute using this query. If I do select data um name from employee table."
+    },
+    {
+      "startSeconds": 203,
+      "text": "So if I run this query so you can see I have get only the names now from the JSON. So Postgress has successfully parsed the JSON and it has returned me only the value specific to name. So in this way you can query JSON data. Let's see some more examples. Let's say you want to filter some data. Select star from employee where name is equal to"
+    },
+    {
+      "startSeconds": 223,
+      "text": "John uh or name equal to mark. So you want to filter based on um where employee name is in is equal to mark but employee name is not uh the column name the employee name is present inside my JSON column which is data. So the same way I can do where data name is equal to mark. So if I do this if I run this query so you can see that I have I have"
+    },
+    {
+      "startSeconds": 248,
+      "text": "got the employee record its employee ID is two uh where the employee name is marked. So I got I I'm able to query the data, filter the data also based on JSON attributes. The attributes are nested inside the JSON. So and and I'm still able to do the filtering uh using this JSON operator. Now what I'll do is I'll just uh select the hobbies similar"
+    },
+    {
+      "startSeconds": 269,
+      "text": "similar way I the way we have fetched the name similarly we will have fetch the hobbies also which is data uh and then hobby. So hobbies is inside my data column. So let me run this query. So I'll get the hobby um sorry let me run this query. So I'll get hobbies now. So you can see that employee one has hobbies movies, football and hiking and"
+    },
+    {
+      "startSeconds": 292,
+      "text": "employee 2 has gaming, movies and music. So again you can do the um you can do uh this thing also that you want to get hobbies where the employee name is marked. So you can do the filtering also. So if if you do the filtering sorry let me comment this uh now let me run this uh so if I run this statement so what"
+    },
+    {
+      "startSeconds": 317,
+      "text": "what I'm doing is so I'm saying that I want to get hobbies only I want to get hobbies only from my employee table where the employee data column with name attribute is equal to mark so I'm going to get the hobbies for mark only so now I'm selecting the data also from the JSON on attribute also from the JSON and"
+    },
+    {
+      "startSeconds": 341,
+      "text": "my filter condition is also based on the JSON. So basically I'm doing I want to select certain attributes of a JSON based on based on some some filter of the JSON. I'm applying filters also on the JSON and I'm selecting some attributes also from the JSON. So this is what this query is doing and I'm able to get the data uh using this query. Uh"
+    },
+    {
+      "startSeconds": 361,
+      "text": "after that I want to give some flavor of some more features of JSON B. Let's say you want to expand all the hobbies. Let's say you right now you are a you are seeing it in the list that gaming, movies and music are in the list in a one row. But let's say you want to expand it. So what you can do is you can do JSON B array elements text. So it"
+    },
+    {
+      "startSeconds": 384,
+      "text": "will expand your array into different rows. So basically gaming will come in a different row, movie in a different row and music in a different row. And then you are saying that you want to use this function inside for for this particular attribute data hobbies and you're giving it as alias as hobbies and then from the"
+    },
+    {
+      "startSeconds": 402,
+      "text": "employee table. So let's try to run this query now. So let's see what is the output. So if I run this query so I see that for both employee one and employee two um I I'm able to get the hobbies. So in this movies, football, hiking, gaming, movies, music. So all the hobbies of employee one and employee two are printed but these are not distinct."
+    },
+    {
+      "startSeconds": 423,
+      "text": "So employee one has movie as a hobby and employee two also has movies as a hobby. Let's say I want to apply distinct also after uh after expanding it. So what I need to do is so I need to use distinct function and inside that the same thing which we did earlier that I want to expand my array of hobbies and but I"
+    },
+    {
+      "startSeconds": 445,
+      "text": "want to apply distinct function uh from the employee table. So let's try to run this query now. I should not get uh the repeated hobbies now. So you can see now the hobbies has reduced from six to five. Movies is only coming once. It's not coming coming twice. So in this way you can play around with your list data"
+    },
+    {
+      "startSeconds": 465,
+      "text": "also inside uh inside the JSON data. Now let's see one more uh query. Let's say what I want to do is I want to get the employee ID also. So what what uh hobby belong to which employee ID? I have just added employee ID column along with the expanded hobbies. That's it. So if I run this query so you can see that now you"
+    },
+    {
+      "startSeconds": 489,
+      "text": "have seen the employee ID also. So employee one has three hobbies uh and employee two has three hobbies but all are expanded now all are in a different rows now it's it's it's not in the same row uh all the hobbies have been expanded in into different rows. So this is how you can expand uh the things. [snorts] Now let's say uh a special"
+    },
+    {
+      "startSeconds": 512,
+      "text": "query uh let me show the original data first. Select star from employee. So let me run this query again. So what is the data inside my employee table? So this is the data inside my uh employee table. What is saying is it has employee ID and the data is name hobbies. What I want to do is now uh I want to search an"
+    },
+    {
+      "startSeconds": 536,
+      "text": "employee whose particular hobby matches with let's say um gaming. So I just want to search for a one hobby. Instead of all the hobbies fetch I want to filter based on a one hobby that I want to get all the employees whose hobby is gaming. So what I'm doing is first level I'm going inside the JSON and then I want to"
+    },
+    {
+      "startSeconds": 558,
+      "text": "filter the data based on the list. So this is a list. Hobbies is a list and from the list also I want to search a particular item that I want to get all the employees whose hobby is gaming. So how you can do is uh so you can do it using this special operator which is uh this one. So which I've highlighted at the rate and then greater than. So what"
+    },
+    {
+      "startSeconds": 580,
+      "text": "I'm saying is select employee ID and data column from employee where data hobbies um contains a gaming hobby. So this means contains. So this will check for the containment whether in this list this gaming exist or not. uh which is a JSON B type. So let me try to run this query and let's see. So gaming um uh hobby belongs to which"
+    },
+    {
+      "startSeconds": 607,
+      "text": "employee? It belongs to employee two. So my output should be employee 2. Let's say whether we get the output or not. So if I run this query, so you can see only one row is returned which is gaming. Now there was one common hobby which is movies for employee one as well as employee 2. Let's see if I search for a particular hobby which is movie. So"
+    },
+    {
+      "startSeconds": 628,
+      "text": "again you can see my query that what I'm saying is data hobbies contains movies. So let me try to run this. I should get both the employees because both the employees has this hobby of movies. So I you can see I got mo both the rows because movies is a hobby of employee one as well as employee two. So in this way you can query your um uh JSON B"
+    },
+    {
+      "startSeconds": 650,
+      "text": "data. It's very easy to play around with uh JSON data if you have stored it inside postgress SQL. In the last I'll just uh drop this table. Uh if I drop this table. So yeah my table is dropped. So that's what I wanted to cover for this video. It's a basic of uh JSON handling JSON query. You can apply uh if you have defined uh your column data"
+    },
+    {
+      "startSeconds": 674,
+      "text": "type as JSON B. Then you can query the data from the JSON based on any attribute. Uh and it's not for one level of attribute. Let's say if you have a nested JSON where um let's say two level of nesting is there. So you can also do two level of nesting like this data name and let's say name has two two or more attributes first name and last name. So"
+    },
+    {
+      "startSeconds": 694,
+      "text": "you can do first name like this. So you can even go u uh to deep down into you can also deep down into the JSON level depending on your hierarchy of JSON. So it's not limited that you can only get first level of attributes. You can get second level of attributes also. third level of attributes also. So wherever your uh"
+    },
+    {
+      "startSeconds": 715,
+      "text": "hierarchy goes in the JSON structure, you can go till that depth. So this is again a very useful feature within uh Postgress using which you can use Postgress database as a NoSQL database. You can store JSON documents inside Postgress and then query uh apply some filters, play around with list, array. So all those operations are allowed"
+    },
+    {
+      "startSeconds": 737,
+      "text": "within Postgress. So I hope uh you got the uh gist of uh this feature in Postgress. Um that's all about this video. I'll share these queries into the GitHub URL which will be shared in the video description. And thank you for watching."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:22.843Z"
+}

@@ -1,0 +1,183 @@
+{
+  "_id": "video.youtube-7_LTU0LA374",
+  "videoId": "7_LTU0LA374",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=7_LTU0LA374",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 32,
+      "label": "BLEU Explained with Examples"
+    },
+    {
+      "startSeconds": 129,
+      "label": "ROUGE Explained with Examples"
+    },
+    {
+      "startSeconds": 216,
+      "label": "F1 Score Explained with Examples"
+    },
+    {
+      "startSeconds": 310,
+      "label": "RAG Needs New Metrics"
+    },
+    {
+      "startSeconds": 367,
+      "label": "Context Precision with Examples"
+    },
+    {
+      "startSeconds": 413,
+      "label": "Context Recall with Examples"
+    },
+    {
+      "startSeconds": 454,
+      "label": "Answer Relevance with Examples"
+    },
+    {
+      "startSeconds": 487,
+      "label": "Faithfulness with Examples"
+    },
+    {
+      "startSeconds": 520,
+      "label": "Groundedness with Examples"
+    },
+    {
+      "startSeconds": 560,
+      "label": "LLM-as-a-Judge"
+    },
+    {
+      "startSeconds": 617,
+      "label": "What RAGAS Is and Why It Matters"
+    },
+    {
+      "startSeconds": 685,
+      "label": "Recap"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "A rag system produces answers by combining two steps, retrieval and generation. The quality of the final response depends on how relevant the retrieved information is and how accurately the model uses that information. Hello everyone, welcome back to logical lenses. In this video, we are going to look at how rag evaluation works in a clear and"
+    },
+    {
+      "startSeconds": 21,
+      "text": "structured way. We'll go through the key metrics that measure retrieval quality, grounding quality, and the final answer. So, let's get started. Let's start with traditional evaluation matrix. Blue or bilingual evaluation under study measures how many engrams in the generated text also appears in the reference text. A 1 g is a single word."
+    },
+    {
+      "startSeconds": 44,
+      "text": "A 2 g is a pair of words and so on. Blue checks these overlaps and produces a score between zero and one. A higher score means the generated sentence closely follows the reference. For example, take the reference, the sky is blue today. And the output, the sky looks blue today. In the output, four out of the five 1 gs, the sky, blue, and"
+    },
+    {
+      "startSeconds": 70,
+      "text": "today match the reference. So the 1 g precision becomes 4th or 0.8 for the two gs. Two out of the four pairs, the sky and blue today also match the reference. So the 2 g precision becomes almost half. Blue then takes the geometric mean of these precision and gives a combined score of about 0.63. Both sentences have the same length. So"
+    },
+    {
+      "startSeconds": 101,
+      "text": "the brevity penalty equals. Now brevity penalty is always between 0 and one. and it simply reduces the blue score when the generated sentence is shorter than the reference. So the final blue score for this example stays around 0.63. This is why blue became the standard for machine translation where these short word patterns are a strong signal of"
+    },
+    {
+      "startSeconds": 125,
+      "text": "equality. All right. Next let's discuss rouge or recall oriented understudy for gisting evaluation. It measures how much of the reference content appears in the generated output. Instead of focusing on matching phrases exactly, Rouge focuses on recall. That is how much of the important information is captured. This makes rouge especially useful for"
+    },
+    {
+      "startSeconds": 150,
+      "text": "summarization where the phrasing can change but the core ideas must stay intact. For example, consider the reference summary. The company achieved record profits and the generated summary. Record profits were reported this quarter. To calculate rouge one, we look at 1 g overlap. The keywords record and profits appear in both. So the"
+    },
+    {
+      "startSeconds": 174,
+      "text": "generated summary captures two out of the three important content words in the reference. That gives us a rouge one recall of 2x3 which is around 0.66. For rouge two, we look at two gram overlap. The reference has the pair record profits. The generated summary also contains the same pair. So, rouge two recall becomes one out of one, which"
+    },
+    {
+      "startSeconds": 197,
+      "text": "is one. Since the generated summary captures the main idea even with different phrasing, rouge assigns a strong score. This is why rouge became the go-to metric for summarization where meaning matters more than matching sentences word for word. All right. Now, let's look at F1 score. It measures how many important elements"
+    },
+    {
+      "startSeconds": 220,
+      "text": "in the generated answer match the reference. It works using precision and recall and then combines them into a single number. Precision tells us how many of the predicted items are correct. Recalls tells us how many of the correct items were captured. F1 is the harmonic mean of these two giving a balanced score. This makes F1 useful for tasks"
+    },
+    {
+      "startSeconds": 243,
+      "text": "where the correctness of specific pieces of information matters more than full sentence structure like question answering, extraction and classification. For example, take the question who discovered penicellin. Reference answer is Alexander Fleming and the generated answer is Flleaming discovered it in 1928. Here the key element we care about"
+    },
+    {
+      "startSeconds": 266,
+      "text": "is the entity Fleming which refers to the same person as Alexander Fleming. The model predicted one entity Fleming and it is correct. So the precision is one and the reference expected one entity Alexander Fleming which is also present in the output. So the recall is also one. Combining these F1 becomes one. Even though the sentence is phrased"
+    },
+    {
+      "startSeconds": 292,
+      "text": "differently, the correct factual element is present. So the F1 score is perfect. This makes F1 a strong metric for evaluating tasks where capturing the right fact or entity is more important than matching the entire sentences. Okay. So traditional matrix like blue, rouge and F1 work well when there is a fixed reference answer and the goal is"
+    },
+    {
+      "startSeconds": 317,
+      "text": "to match its wording or important elements. They are perfect for translation, summarization and extraction. But a rag system works differently. It retrieves information first and then generates an answer from that information. So the quality of the final answer depends on both the retrieval step and the generation step. Because of this"
+    },
+    {
+      "startSeconds": 341,
+      "text": "similarity based matrix are not enough. A rag system needs matrix that directly evaluate how relevant the retrieved context is, how well the answer uses that context and how accurately the answer responds to the question. This brings us to the matrix that are used specifically for evaluating rag systems. So the first matrix here is context"
+    },
+    {
+      "startSeconds": 368,
+      "text": "precision. Context precision measures how much of the retrieved context is actually relevant to the question. If the system retrieves five chunks and only two out of them are useful, the precision is two out of five. A higher precision means the retriever brought in less noise. Example, if the query is who founded Tesla and the retriever brings"
+    },
+    {
+      "startSeconds": 393,
+      "text": "five chunks but only two talk about Elon Musk and Tesla's founding, then the context precision is 2 out of five which is 0.4. It tells us that the retriever pulled some relevant information but also a lot of unrelated content. Next, let's discuss context recall. It measures how much of the relevant information the retriever managed to"
+    },
+    {
+      "startSeconds": 421,
+      "text": "find. If there are three important chunks in the database and the retriever finds two of them, the recall is two out of three. Example, for the same query, if there are three chunks that contain the founding details of Tesla and the retriever returns two out of them, the recall is 2x3 which is 0.66. It shows the retriever captured most of"
+    },
+    {
+      "startSeconds": 447,
+      "text": "the required information but missed one useful chunk. All right. Now let's discuss answer relevance. Answer relevance measures how directly the generated answer responds to the user's question. This is usually done using embeddings to check how closely the answer aligns with the query's meaning. For example, the"
+    },
+    {
+      "startSeconds": 472,
+      "text": "question, what is a transformer model? We get a answer. A transformer is a neural network architecture based on attention. Both are semantically close. So, relevance will be high. Next one is faithfulness. Faithfulness checks whether the answer is fully supported by the retrieved context. If a statement in the answer does not appear in the"
+    },
+    {
+      "startSeconds": 496,
+      "text": "retrieved text, faithfulness goes down. For example, if the retrieved context mentions Tesla's founders and the answer adds a claim that isn't present in those chunks, faithfulness drops because the answer is no longer grounded in the provided evidence. And the last one which we are going to discuss here is groundedness."
+    },
+    {
+      "startSeconds": 520,
+      "text": "Groundedness measures how well the answer uses the retrieved context instead of relying on the model's internal memory. If the answer copies or closely paraphrases relevant parts of retrieved documents, groundedness is high. For example, if the retrieved chunk says Fleming discovered penicelline in 1928 and the answer says"
+    },
+    {
+      "startSeconds": 547,
+      "text": "penicelline was discovered by Fleming in 1928. The grounding score is high because the answer is clearly based on the given evidence. These rag evaluation matrix like context precision, context recall, answer relevance, faithfulness and groundedness give a good understanding of how well the system retrieved information and how"
+    },
+    {
+      "startSeconds": 570,
+      "text": "accurately it used that information. But in practice, calculating these scores consistently is not always simple. Some of them can be computed with embeddings, but others need deeper reasoning. For example, to check faithfulness, an evaluator has to read the question. the retrieved context and the answer together and decide whether the answer"
+    },
+    {
+      "startSeconds": 592,
+      "text": "is fully supported. This is where LLM as a judge becomes useful. A large language model can act like an evaluator. It reads everything, the query, the retrieved chunks and the final answer and then gives a score for grounding or relevance. Very similar to how a human would judge equality. To make all of this easier and standardize, the"
+    },
+    {
+      "startSeconds": 615,
+      "text": "community built Ragas, a dedicated open-source framework for evaluating rag systems. Ragas provide a structured way to compute rag evaluation matrix without manually building evaluators for each one. It uses embeddings for semantic comparisons and it uses LLM as a judge for evaluations that require deeper understanding."
+    },
+    {
+      "startSeconds": 641,
+      "text": "This helps capture meaning, grounding and factual alignment even when the wording varies. Raas provides four main scores. Faithfulness which is whether the answer is fully supported by the retrieved context. Answer relevance which checks how well the answer addresses the question. context precision which checks how much of the"
+    },
+    {
+      "startSeconds": 667,
+      "text": "retrieved context is actually relevant and context recall which tells how much of the relevant information was successfully retrieved. These four matrix together give a clear and consistent picture of rag system quality. Rag system needs evaluation methods that look beyond surface level text similarity. Traditional matrix like"
+    },
+    {
+      "startSeconds": 693,
+      "text": "blue, rouge and f1 helps us understand wording, coverage and factual elements. But rag adds another layer through retrieval and grounding. Matrix such as context precision, context recall, answer relevance and faithfulness help evaluate these two steps clearly and frameworks like Ragas bring these evaluation together into a simple"
+    },
+    {
+      "startSeconds": 716,
+      "text": "consistent workflow supported by techniques like embeddings and LLM as a judge. With these tools, it becomes straightforward to identify where a rag system is strong and where it needs improvement. So that's all on rag evaluation. Thanks for watching. This is Logical Lenses. See you in the next one."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:42.810Z"
+}

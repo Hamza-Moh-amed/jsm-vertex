@@ -1,0 +1,91 @@
+{
+  "_id": "video.youtube-chyZRNT7eEo",
+  "videoId": "chyZRNT7eEo",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=chyZRNT7eEo",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Why do we need load balancers?"
+    },
+    {
+      "startSeconds": 66,
+      "label": "How do load balancers work?"
+    },
+    {
+      "startSeconds": 141,
+      "label": "When should you use a load balancer?"
+    },
+    {
+      "startSeconds": 206,
+      "label": "Advantages"
+    },
+    {
+      "startSeconds": 231,
+      "label": "Considerations"
+    },
+    {
+      "startSeconds": 275,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "why do we need load balancers to understand how and why load balancers are used it's important to remember a few Concepts about distributed computing first web applications are deployed and hosted on servers these applications live on Hardware machines with finite resources such as memory processing power and network connections as the"
+    },
+    {
+      "startSeconds": 21,
+      "text": "traffic to an application increases these resources can become limiting factors and prevent the machine from serving requests this limit is known as the system's capacity at first some of these scaling problems can be solved by simply increasing the memory or CPU of the server or by using the available resources more efficiently as is the"
+    },
+    {
+      "startSeconds": 40,
+      "text": "case for something like multi-threading at a certain point though increased traffic will cause any application to exceed the capacity that a single server can provide the only solution to this problem is to add more servers to the system also known as horizontal scaling when more than one server can be used to"
+    },
+    {
+      "startSeconds": 58,
+      "text": "serve a request it becomes necessary to decide which server to send the request to that's where load balancers come in how do load balancers work a good load balancer will efficiently distribute incoming traffic to maximize the system's capacity and minimize the time it takes to fulfill the request load balancers can distribute traffic"
+    },
+    {
+      "startSeconds": 78,
+      "text": "using several different strategies round robin servers are assigned in a repeating sequence so the next server assigned is guaranteed to be the least recently used lease connections this assigns the server currently handling the fewest number of requests consistent hashing similar to database sharding the server"
+    },
+    {
+      "startSeconds": 98,
+      "text": "can be assigned consistently based on IP address or URL since load balancers must handle the traffic for the entire server pool they need to be efficient and highly available depending on the chosen strategy and performance requirements load balancers can operate at higher or lower Network layers such as HTTP or TCP"
+    },
+    {
+      "startSeconds": 118,
+      "text": "they can even be implemented in Hardware engineering teams typically don't Implement their own load balancers instead they use an industry standard reverse proxy like AJ proxy or nginx to perform load balancing and other functions such as SSL termination and health checks most Cloud providers also offer out-of-the-box load balancers such"
+    },
+    {
+      "startSeconds": 138,
+      "text": "as Amazon's elastic load balancer so when should you use a load balancer you should use a load balancer whenever you think the system you're designing would benefit from increased capacity or redundancy often load balancers sit right between external traffic and the application servers in a microservice architecture it's important to use load"
+    },
+    {
+      "startSeconds": 160,
+      "text": "balancers in front of each internal service so that every part of the system can be scaled independently be aware though that load balancing cannot solve many scaling problems in system design for example an application can also succumb to database performance algorithmic complexity and other types of resource contention adding more web"
+    },
+    {
+      "startSeconds": 181,
+      "text": "servers won't compensate for inefficient calculations slow database queries or unreliable third-party apis in these cases designing a system that can process tasks asynchronously such as a job queue may be necessary keep in mind that load balancing is distinct from rate limiting when traffic is intentionally throttled or dropped to"
+    },
+    {
+      "startSeconds": 203,
+      "text": "prevent abuse by a particular user or organization so what are some advantages of load balancers scalability load balancers make it easier to scale up and down with Demand by adding or removing back-end servers reliability load balancers provide redundancy and can minimize downtime by automatically detecting and replacing unhealthy"
+    },
+    {
+      "startSeconds": 223,
+      "text": "servers performance by Distributing the workload evenly across servers load balancers can improve the average response time what are some considerations when using a load balancer as scale increases load balancers can themselves become a bottleneck or single point of failure so multiple load balancers must be used to"
+    },
+    {
+      "startSeconds": 243,
+      "text": "guarantee availability DNS round robin can be used to balance traffic across different load balancers additionally the same user's requests can be served from different back ends unless the load balancer is configured otherwise this could be problematic for applications that rely on session data that isn't shared across servers finally deploying"
+    },
+    {
+      "startSeconds": 265,
+      "text": "new server versions can take longer and require more machines this is because the load balancer needs to roll over traffic to the new servers and drain requests from the old machines and there you have it an overview of load balancers and how to build more scalable web applications"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:25.635Z"
+}

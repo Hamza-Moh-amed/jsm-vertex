@@ -1,0 +1,110 @@
+{
+  "_id": "video.youtube-rIcB4zMYMas",
+  "videoId": "rIcB4zMYMas",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=rIcB4zMYMas",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "the number one question I get from SQL students is what are window functions in this video I'm going to break down each part of a window function step by step let's start by taking a look at our table the baby names table you can see that there are 10 rows of data here and the way to read this first row is that"
+    },
+    {
+      "startSeconds": 17,
+      "text": "there were 95 baby girls given the name Ava now let's order this data by popularity so you can see here that Noah was the most popular boy name with 120 baby boys given that name now let's order this column here this total column now to do that I'm going to take this code here and paste it down here now I'm just going to add in an order by clause"
+    },
+    {
+      "startSeconds": 38,
+      "text": "and I'm going to say order by total descending now if I run that you can see now that this column is ordered from most popular name to least popular name now from here let's add a popularity column and in this column I want to say that this is the first most popular name the second most popular name and so on so I want this column to contain the"
+    },
+    {
+      "startSeconds": 59,
+      "text": "values one 1 all the way to 10 now the way that I can do that is by taking this query here and pasting it down here and now I'm going to select each column on its own so I'm going to select the gender column the name column and the total column so that's what I have so far and now I'm going to add one more column here and I'm going to call it"
+    },
+    {
+      "startSeconds": 77,
+      "text": "popularity now to define the popularity column I'm going to use a window function and what it's going to do is fill in the values 1 2 3 and so on within this popularity column so to do this I'm going to first say that I want to fill in the row numbers and then if I do that then this will output a row number of one for the first row of row"
+    },
+    {
+      "startSeconds": 98,
+      "text": "number of two for the second row and so on now the thing with the row number function is that I can't just list it on its own here it always has to be coupled with this Over clause and the way the Over clause works is basically what do I want to be looking at in my table when I'm labeling all the row numbers so in"
+    },
+    {
+      "startSeconds": 115,
+      "text": "this case I want my table to look like this when I'm putting in the row numbers now this table here isn't our original baby names table it's the original baby names table but the total column is ordered descending so that's what we're going to have to input into this over Clause right here so I'm going to take this order bu and I'm going to cut it"
+    },
+    {
+      "startSeconds": 134,
+      "text": "and paste it into this over section now if I run this you can see here what I've done with this query is I've added this popularity column so this tells me that Noah is the most popular name and then down here Logan is the least popular name and I was able to do that using this line of code here and this line of"
+    },
+    {
+      "startSeconds": 153,
+      "text": "code is your window function now I want to pause here and just break down this window function so a window function always has two components this second part here defines your window and this first part here is called your function so the way to think about it is that your window here is how you want to be viewing your data when you're applying"
+    },
+    {
+      "startSeconds": 172,
+      "text": "your function so in this case what we've done is we've taken our original baby names table and then we've ordered that total column descending right here now all these rows here this is our window this is how we want to be viewing our data as we're applying our function which in this case is row number so what"
+    },
+    {
+      "startSeconds": 190,
+      "text": "it's going to do is look at each row in this window or this View and it's going to label it 1 2 3 4 and so on now let's vary things up a bit we're going to change up these functions and we're also going to change up this window part here so that you can see how the outputs change as you modify them so going down"
+    },
+    {
+      "startSeconds": 208,
+      "text": "here the first thing we're going to do is try a few different functions so I'm going to copy this code here and paste it down here and instead of just the row number function I'm going to add a few more functions so first I'm going to put rank here and then in this next line I'm going to put dense rank here so these"
+    },
+    {
+      "startSeconds": 225,
+      "text": "are all different functions that we can use as our window function now if I run this code here you can see what I've done is I've created three columns of data this one has my row number calculation then my rank calculation and my dense rank calculation and in this case you can see that there are slight differences between the three functions"
+    },
+    {
+      "startSeconds": 244,
+      "text": "or the three calculations in the ordering for rank you can see that there's a tie here between Isabella and Olivia and they both show that five and then for D rink it goes from 1 to 9 and it also includes that tie but then it goes right to six instead of skipping over it so this was an example of three different functions that you can use"
+    },
+    {
+      "startSeconds": 263,
+      "text": "with window functions and you can see that all that's happening here is that these are three different calculations you can use to label each row of your data and these are just some of the many functions that are out there some other ones include first value and nth value which return the first or nth value of each window there's also lead and lag"
+    },
+    {
+      "startSeconds": 281,
+      "text": "that will return the next or previous rows values within each window and many others as well but just remember that the whole goal of this function is just to make some calculation for each row of your data so that is the function piece of a window function let's try modifying our window as well so I'm going to copy"
+    },
+    {
+      "startSeconds": 298,
+      "text": "our original code up here and paste it down here and if we run this code then you can see that this was our original output for our first window function we have the values one all the way down to 10 here now with this let's modify this window section so let's say that instead of looking at the overall popularity of all the baby names we wanted the"
+    },
+    {
+      "startSeconds": 318,
+      "text": "popularity of the boy names and the girl names separately so what we need to do now is group this gender column into a boy group and a girl group now the way to do this split within window functions is is to use a partition by and in this case we want to Partition by gender So within this gender column we want to"
+    },
+    {
+      "startSeconds": 336,
+      "text": "split the rows into a boy group and a girl group now if I run this you can see that now I have the popularity values of 1 to five for all the boy names and also that same one to five ranking for all the girl names and I was able to do that by modifying my window so just to recap what we covered here this Over clause"
+    },
+    {
+      "startSeconds": 355,
+      "text": "specifies the window portion of my window function and that window is essentially the view of the table that I want when I'm applying my row number function so in this case when I partitioned by gender the first thing I did was I split my data into a boy group and then a girl group and then within the Over clause I also did an order by"
+    },
+    {
+      "startSeconds": 373,
+      "text": "total descending so for all those boy names I then had the descending totals and then I added that row number function and then for all the girl names I again had the descending total values and then I added on those row numbers so again if you want to change the window that you're looking at when you apply your function you can change what's in"
+    },
+    {
+      "startSeconds": 393,
+      "text": "this Over clause you can either partition your data in different ways or order your data in different ways and then for each window or split of your data whatever function you specify will be applied to that window now the last thing I'd like to do to wrap up this video is just show you how you can use this output to answer a question so the"
+    },
+    {
+      "startSeconds": 411,
+      "text": "question here is what are the top three most popular names for each gender and to do that we can use this window function that we just wrote so I'm going to paste that down here so now what I can do is take this table turn it into a subquery and I'm going to only return the cases where the popularity is 1 2 or"
+    },
+    {
+      "startSeconds": 428,
+      "text": "three so I'm going to take this here and save it as popularity and now I can treat everything within the parentheses as its own table and I can do a select all from and I'm only going to look at the cases where the popularity is less than or equal to three and now if I run that now I have both the most popular boy names and the most popular girl"
+    },
+    {
+      "startSeconds": 448,
+      "text": "names if you you'd like to learn more check out our award-winning self-paced courses and guided projects for analysts and data scientists at Maven analytics thanks for watching and as always make sure to like And subscribe for more data content just like this I'll see you in the next one [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:20.583Z"
+}

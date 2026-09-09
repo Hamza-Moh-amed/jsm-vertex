@@ -1,0 +1,203 @@
+{
+  "_id": "video.youtube-pD6C1-zSxIM",
+  "videoId": "pD6C1-zSxIM",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=pD6C1-zSxIM",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 160,
+      "label": "XSS Stored Attacks"
+    },
+    {
+      "startSeconds": 290,
+      "label": "Reflected XSS Attacks"
+    },
+    {
+      "startSeconds": 480,
+      "label": "Source Code Explained"
+    },
+    {
+      "startSeconds": 590,
+      "label": "Prevent XSS Attacks with CSP"
+    },
+    {
+      "startSeconds": 960,
+      "label": "Prevent all scripts with CSP"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "what is going on guys my name is Hussein and this video I want to discuss XSS or cross-site scripting attacks in this video I want to describe two of three known cross-site scripting attack one is called the stored attack accesses stored attack and the second was called that reflected XSS attacks and then there's a"
+    },
+    {
+      "startSeconds": 22,
+      "text": "third one that I'm not gonna go through this video because it's most obvious one was called the dom-based xss attack where you manipulate the dom so and finally at the end of the video I'm gonna show you how you can mitigate this attack by adding some headers at the server side to prevent executing off scripts so about a minute so might as"
+    },
+    {
+      "startSeconds": 43,
+      "text": "well going to define what exercises cross-site scripting is the ability for you have a legitimate website which is in my case this is my product catalog website and to legitimate site but with legitimate entries like a door input or function search attackers can inject scripts that aren't supposed to execute but they gotta execute on your own your"
+    },
+    {
+      "startSeconds": 71,
+      "text": "clients all right which will essentially cause havoc right they can't JavaScript executing on the client-side that is not your code as a bad idea it can sniff your cookies and send them to the server it can cause a repeating attack right it can take down the server it can take down your API rates it's a mess right so we want to prevent this"
+    },
+    {
+      "startSeconds": 96,
+      "text": "attack as much as well but how about we just describe this kind of attack but let's go through with my beautiful server here I have a node.js server I'm gonna share with the code with you guys but what it does essentially it's a very simple thing it shows this HTML page and if I can add some products peach and just like that I added it to the back"
+    },
+    {
+      "startSeconds": 117,
+      "text": "end right and then afresh it shows yeah you added a peach let's add some beta right I don't know why I call it product might as well just grocery alright so legit website right there's another search function that I did where you can do Q you do like that search q equal R now pineapple right and says hey I cannot"
+    },
+    {
+      "startSeconds": 145,
+      "text": "find product pineapple that's what it does right so it it just basically tells you what it couldn't find right this seems innocent right alright so that was that seems innocent so let's talk about the first guy above attack which is XSS stored attack right when I add this puppy I'll be prompted to enter the name of the product"
+    },
+    {
+      "startSeconds": 172,
+      "text": "and if the users typed this script right an actual script tag let's say I'm gonna just say alert for simplicity here XSS babes right and I said this this is the product right but this also is a script right when you do that and I send it the server stored that entry in the database right that's why don't have a database"
+    },
+    {
+      "startSeconds": 201,
+      "text": "but you can't idea its story now if i refresh the page oh mama look at this the script has been executed just by refreshing now you Karen rec anyone who views this page immediately get this script executes and that's what happened to Twitter someone actually injected an XSS tweet and that anyone who viewed this tweet will execute a script and"
+    },
+    {
+      "startSeconds": 233,
+      "text": "that script essentially retweeted the same tweet by the user because it's just it's it's basically JavaScript right you can click the button and you can do everything you want with JavaScript and so yeah so that's the first kind of attack XSS toward attack why is it called store because the that attack their access as a store at the server"
+    },
+    {
+      "startSeconds": 254,
+      "text": "the script is started the server and any card who consumes that actually will execute the script so how do you mitigate that obviously you need to sanitize your your but as much as possible right if I send something to the server the server should clean it up or get rid of any unwanted scripts even that doesn't"
+    },
+    {
+      "startSeconds": 274,
+      "text": "sometimes work because people are clever they they ops if what's the word obsess get up suffocate of suffocation yeah we do application to the JavaScript to change it to include like these weird hexadecimal stuff right yeah like that right so yeah so that's the first attack the second is a is called reflected XSS attack and that's a little bit more"
+    },
+    {
+      "startSeconds": 299,
+      "text": "dangerous in my opinion you know how we made this search right Q equal test right if the attacker took this URL and let's go to example.com right I'm just going to another side assume this is the bad side right and I'm just gonna edit this stuff right and I'm gonna edit the HTML here and then to say at ref right"
+    },
+    {
+      "startSeconds": 336,
+      "text": "that says hey click here to download a CPU booster because that's what ads do right click here to speed up your computer right and and and the attacker will what he or she will do is it will say okay instead of test do this layer let's do this test semicolon it's correct and now boom let's copy this just in case and just like that I have"
+    },
+    {
+      "startSeconds": 373,
+      "text": "now this assume this is the bad website right and poor Joe here says okay oh god this ad and there's flashy and he's just so click here oh that seems legit let's click and you when you click it will direct you to the website which is your legit website and and you know it's a legit website but this might be your bank of M"
+    },
+    {
+      "startSeconds": 399,
+      "text": "Erica upside this might be or your Twitter might be anything as legit and now he injected a script or she injected a script in that legitimate website running as you if you're authenticated that's good to have access to your cookies know that none of they are HTTP cookies right there's TB only they cannot read it but"
+    },
+    {
+      "startSeconds": 423,
+      "text": "if if you have like local storage stuff they have access to that stuff they can read it they can send it to to Belize right I can send it to anywhere so yeah that's called the reflected and I don't know why it's called reflected because like it's it's like a like a mirror you have like a link and it reflects the"
+    },
+    {
+      "startSeconds": 444,
+      "text": "website all right so that's the other attack so reflected is a URL that points to the site which injects scan and that's that's the fault of both actually right that's the fault maybe of the server and the fault of the client because the server actually took this input and didn't sanitize it and just really reflect it back to the client and"
+    },
+    {
+      "startSeconds": 465,
+      "text": "and and we printed it right here right cuz that's what we do we just print whatever here and when you do that that one is X queued the attack what is that skirt all right how do I prevent these kind of attacks let's go to the code guys I'll show you the code so here's Michael this is the HTML page right and Margera page have basically it's a html5"
+    },
+    {
+      "startSeconds": 490,
+      "text": "page this is the header this is the button the ad and this is then order lists which I show this and there is where I load my JavaScript slash Jas will go to my source right will go to my index to J's which will load this file source the J's which is this puppy that's the source code right I'm gonna tell you why I didn't do it in line in a"
+    },
+    {
+      "startSeconds": 515,
+      "text": "minute but that's always the best idea is to always reload scripts from URLs don't load don't write this I know I am guilty of this but don't do this right because I'm gonna tell you why always loaded from well on URLs so that the client can verify the identity of the skirt if you do it this way then you allow pretty much"
+    },
+    {
+      "startSeconds": 542,
+      "text": "anybody excluded you to exclude execute execute any script that then you can execute right so now here is what you can do there is wouldn't you let's go through the rest of the script first there is the slash which reads the index.html and basically loop through all the product and then reduce it and replace this says this is server-side"
+    },
+    {
+      "startSeconds": 573,
+      "text": "rendering and in a in a very primitive way okay and then run sending back the results right and when we do that that's the product that's just the API and that's the Search API which I cannot find a product that's exactly what we did right when we send back the HTML page whether here or in the search page we should assign a header and that"
+    },
+    {
+      "startSeconds": 604,
+      "text": "header is called content security policy or CSP so that content security policy so content security policy and what that header says it has I'm gonna go through there that details of this header this header was introduced to prevent some of the exes and attack a basic theory was like ok for a script execution please don't execute anything there is"
+    },
+    {
+      "startSeconds": 642,
+      "text": "something called none literally says hey my website don't have any JavaScript I know that as a server I know that what I'm gonna send you doesn't have any scripts so don't attempt to execute any script that's very good some website don't have that you just have cssm HTML right and and they don't have script so"
+    },
+    {
+      "startSeconds": 665,
+      "text": "you might want to do that it's actually like this script their source and then you say none right this is the correct method of doing it right so that's means hey my I don't have any scripts on my website don't attempt to see if you're a few if we did that none of the website our oh that will not work obviously but there"
+    },
+    {
+      "startSeconds": 686,
+      "text": "is another thing you can do where you say okay my script source should only come from this source and this can kiss this case it's localhost right 8080 right this is the only place you go to execute script don't execute any inline scripts that means if someone injected a skirt or even like if you did that right it will"
+    },
+    {
+      "startSeconds": 713,
+      "text": "not work it will immediately fail that schedule will fail it will only attempt to execute scripts from this URL and that's at right and you can be fancy here like where you can put your website in your script in a completely different domain right some people do that for for caching reasons for or for security reasons for monitoring reasons really"
+    },
+    {
+      "startSeconds": 739,
+      "text": "after I set this header what will happen is only scripts coming from my local host from the server from the JavaScript side will be executed any I think else in line when I say online means injected or or even you if you wrote HTML code that is here script alert that is legit you you wrote it that will fail and I'm gonna show that"
+    },
+    {
+      "startSeconds": 766,
+      "text": "so although we actually execute that code and show you what will happen refresh this puppy go back awesome so now let's add Hussein that's not really a problem but let's add a script alert but but I don't want to add it like that I want I want to open this so I can you guys can see the errors that happens here because we want to see"
+    },
+    {
+      "startSeconds": 806,
+      "text": "this error so I'm gonna add a script alert test script when I do that and i refresh the page look at this beautiful refuse to execute inline script because it violates the following content security policy directive this is my directive script source only execute from localhost which we saw alright it did eschewed scripts from us the prompt"
+    },
+    {
+      "startSeconds": 834,
+      "text": "the adding the fetch command all of that stuff actually worked right so if you want to execute this use unsafe and line right but bad idea do not use that okay you can use a hash of the script itself by the way right if you want to execute it you can just use a hash of the script or hash the script and put it in the"
+    },
+    {
+      "startSeconds": 860,
+      "text": "server so that only that script get executed right it's okay that particular script is okay right so you can do so many things I'm gonna go through them but let's finish this up so I can also do this right boom doesn't work doesn't work same error same error right and if we look at the network and now let's just search we look at the response"
+    },
+    {
+      "startSeconds": 889,
+      "text": "header that's that beautiful new puppy that we just added content security policy browsers have this code to respect that has nothing to do with the sort of the server just is a just tells the browser to respect it but browsers that's what I have building browsers is hard man this is like you have to know all that stuff right so yeah content"
+    },
+    {
+      "startSeconds": 914,
+      "text": "security policy that's essentially one example let's go through the other examples here I'm gonna show you look at that stuff this is the page content security policy you can do just script - source and you can add multiple sources like yeah let's say hey we're saying my script has actually lived in multiple places it lives here"
+    },
+    {
+      "startSeconds": 935,
+      "text": "lives here and lives here right on one of these domains sorry no problem you can just add multiple domains I think he can use a wild-card but only in certain subdomains right ports all that stuff you can yourself that means they only stuff from me as our domain prevent unsafe evals hashes in line none like if you if you don't"
+    },
+    {
+      "startSeconds": 962,
+      "text": "have scrap just did say group no if we replace this to none our website will break right how about actually show them we're just a little bit adventurous so I'm gonna come in this out code for you guys so you can see it you can uncomment it back but what I'm gonna do here is do this none right and then we go to the this"
+    },
+    {
+      "startSeconds": 991,
+      "text": "puppy let's Rin no yes let's do this now the XSS will not work and our code would look at this nothing works that is awesome you can add products you cannot search you cannot do anything this is a completely blocked site is he refused to load script even our decent script was refused to come load right because the"
+    },
+    {
+      "startSeconds": 1033,
+      "text": "security says like no it says no you didn't set any of that stuff right all right guys that's it for me XSS cross-site scripting attacks and how to prevent them right I'm gonna see you on the next one should I talk about next coming below in the comment section check out the other content of this channel most of my"
+    },
+    {
+      "startSeconds": 1055,
+      "text": "videos are actually back in engineering this is kind of back indie but it's also front indie but it's back MV because we are here right and we need to know how our web servers behave right that's what I prefer to to play with like low level frameworks like like Express right that allows you to kind of tweak these things"
+    },
+    {
+      "startSeconds": 1079,
+      "text": "right with I is you have to go through that Internet Information Services the Microsoft one that's the first web server that's the second web server I work to it right after Apache right it's just it's just hidden this these options are hidden in a UI which I don't like alright so that's let's sit this back so we can push the code and the code will"
+    },
+    {
+      "startSeconds": 1102,
+      "text": "be available below guys for you and gonna see you in the next one you guys stay awesome good bye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:52.219Z"
+}

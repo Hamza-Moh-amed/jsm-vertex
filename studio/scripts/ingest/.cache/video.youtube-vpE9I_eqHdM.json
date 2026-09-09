@@ -1,0 +1,206 @@
+{
+  "_id": "video.youtube-vpE9I_eqHdM",
+  "videoId": "vpE9I_eqHdM",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=vpE9I_eqHdM",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Welcome to the last useMemo tutorial you're probably ever going to have to watch. This one, honestly, is a tricky one. You really have to understand useMemo and how it works and when to use it, because if you don't use it when you should, you're going to have performance problems."
+    },
+    {
+      "startSeconds": 15,
+      "text": "And if you use it when you shouldn't, you might have some bugs, some unexpected behavior, and you might have some other performance problems. So it's really important to understand this hook, how it works, and when to use it. So stick around until the end of the video,"
+    },
+    {
+      "startSeconds": 29,
+      "text": "because we're going to cover everything there is to know about useMemo. And by the end of it, you'll be able to use this in any application that you work on. Sound good? Cool. Let's jump on my computer screen and learn about useMemo. All right, cool. So we're now on my computer,"
+    },
+    {
+      "startSeconds": 44,
+      "text": "and I have here a very simple application that I'm going to use to show you the kinds of performance problems that you can run into, into your own applications, if you don't memoize your values, and if you don't use useMemo properly. So this application, as you can see, it's a"
+    },
+    {
+      "startSeconds": 60,
+      "text": "very simple application, it has a count has a function to set the count, which we use in this button here. And it has a list of items, an array of items, and a selected item that we show here, you can see it on the screen here we have count number of items zero. Actually, this should be"
+    },
+    {
+      "startSeconds": 78,
+      "text": "just count. This should just be the count because we don't really need the number of items right now. And then we have the selected item, which is a very, very large number. Let's look at initial items. So we can see what we're working with right here. So initial items is a variable that holds an"
+    },
+    {
+      "startSeconds": 96,
+      "text": "array of about 29 million entries. And each one of those has an object and has an ID property, which is the index of that to keep it simple. And then a isSelected property, which is going to be true or false, and is only going to be true. In this case, for the last element in our array,"
+    },
+    {
+      "startSeconds": 118,
+      "text": "this is going to be important because this is going to show you how you can run into performance problems because the selected item is the last one in the array. So keep this in mind. So we have our application, right? Nothing seems out of the ordinary. Nothing seems like there's a problem,"
+    },
+    {
+      "startSeconds": 133,
+      "text": "right? There isn't a problem here. If I click here, let's test it out. If I click increment, right, we get count one. If I click increment again, we get count two, click it again, count three, right? What is the problem? Nothing works. Well, it may not be so obvious right now,"
+    },
+    {
+      "startSeconds": 149,
+      "text": "because I'm doing it very slowly. But there is some performance issues when I increment the count. And you can see this, I'm going to now spam the increment button to really try to increment it very quickly. And you're going to see that the count is going to lag behind in the updates."
+    },
+    {
+      "startSeconds": 165,
+      "text": "So let's do it. I'm pressing, I'm spamming, I'm spamming. And you see, it's skipping some numbers, right? I'm still pressing it, I'm still pressing it, it's skipping numbers. And if I let go, it just now updated to 58, right? This is wrong. This is not how a performance application should"
+    },
+    {
+      "startSeconds": 182,
+      "text": "look like. So what is the problem, right? Because something obviously must be going on. But it's not so obvious, because all that we're really doing is we're updating the count, we're not doing anything else. So like, where's the performance problems coming from? Well,"
+    },
+    {
+      "startSeconds": 195,
+      "text": "for this, we have to look at our component. And we have to understand how React works under the hood, and how React treats state updates and how it renders the component, because our performance problems come from there. So in our component, we have the count, right, and then we have items,"
+    },
+    {
+      "startSeconds": 212,
+      "text": "and then we have selectedItem. When we're clicking this button to increment the count, all we're really doing is we are calling this function right here, this onClick function, which is going to set the count to whatever the count currently is plus one. This is very simple,"
+    },
+    {
+      "startSeconds": 227,
+      "text": "there's not that much more to it, all it does is it updates the count. The important thing to understand is that in React to update something to update state means you have to trigger a rerender of the entire component. And this is very important. It's very important,"
+    },
+    {
+      "startSeconds": 243,
+      "text": "because if we look at all of the things that are happening in our component, which is all of the things that are going to happen on every render of the component, we have here our count, which is not expensive, right? There's no performance issues with our account, we have your items,"
+    },
+    {
+      "startSeconds": 258,
+      "text": "which yes, uses this initial items, but because we gave it to state, this will only ever be called once and that is on initial render when this state is initialized. And then this initial items will not run again and again. So there's no performance there. But if you look here at the selectedItem,"
+    },
+    {
+      "startSeconds": 275,
+      "text": "this is where we have the performance issues because this selectedItem, if you look at what it does, it takes the items, and then it goes into the array of items to find the item that isSelected. And if you remember, if we go into our initial items, which is what this item still is,"
+    },
+    {
+      "startSeconds": 292,
+      "text": "this is a very large array of objects and the one which isSelected is the last one. So this by itself is going to be a very expensive operation because it has to go through 29 million items to find the one that isSelected. That is how find works. It goes through all of the array until it"
+    },
+    {
+      "startSeconds": 313,
+      "text": "finds one item. And then once it found the item, it will then return that item. So this is a very expensive operation by itself, but then add onto it the fact that when we're changing the count, we are causing this component to re-render. So we're causing this selectedItem to be recalculated every"
+    },
+    {
+      "startSeconds": 333,
+      "text": "time the count changes. That is what we're seeing here. I press increment, the count is changing, and this code is going to loop over the entire array and go until the 29th millionth item to find the one that isSelected. Every time I press this button, it is doing that. And so we have"
+    },
+    {
+      "startSeconds": 352,
+      "text": "these huge performance problems because we're doing unnecessary computations on every render. And this is the performance problems that you are going to run into if you don't think about this properly. And this is what useMemo is here to fix. So then how do we fix this with useMemo? Well,"
+    },
+    {
+      "startSeconds": 369,
+      "text": "let's first think about what we're actually doing here. We have a selectedItem that is going through the items to find every single item and return to us the one that isSelected. This is great. But let's not think about this in terms of when do we actually need to run this? When do"
+    },
+    {
+      "startSeconds": 384,
+      "text": "we actually need to compute this? So that maybe we don't have to compute this every time, right? Maybe we can only set a certain point at which this is computed, and only do it then, right? So the first time that we're going to have to compute this is the first time that this component renders"
+    },
+    {
+      "startSeconds": 400,
+      "text": "because there's no way around it. This is how our code is set up. We have 29 million entries, and we have to find the one that isSelected. There's no way around this. So we have to run this at least once. But then if you think about it, if items is the same, let's say count changes,"
+    },
+    {
+      "startSeconds": 418,
+      "text": "but items is the same, item doesn't change, then do we really need to recompute this when items is the same? No, because if items is the same, then this will be the same and the selectedItem will be the same one. So there's no need to recompute this again, unless items is different,"
+    },
+    {
+      "startSeconds": 435,
+      "text": "right? And that is our only condition. We only need to run this once. And then if items is the same in the next render, we can just return the previous value, right? It's more efficient this way. There's no need to recompute it. But then when items is different, then we need to"
+    },
+    {
+      "startSeconds": 451,
+      "text": "recompute this and return a new value. And that is what useMemo is used for. useMemo is a hook that memoizes a value and returns the same value until any of the dependencies in the dependency array changes, until then it will recompute a new value. So let's now apply useMemo here,"
+    },
+    {
+      "startSeconds": 473,
+      "text": "see how it works, and see how it fixes our problem of performance. What I'm going to do is I'm going to import useMemo from React. And then I'm going to wrap this items because this is our value, I'm going to wrap this in useMemo, and then give it a dependency array of items. And I'll explain what"
+    },
+    {
+      "startSeconds": 491,
+      "text": "I'm actually doing. So we're going to do useMemo, open a parenthesis, open another parenthesis, because this is how the syntax for it is. And then go to the end, add a parenthesis here, and comma and then an empty array. I'm going to save this so that you can actually see what it"
+    },
+    {
+      "startSeconds": 510,
+      "text": "is. This is the syntax for useMemo. So you have useMemo, which is a hook from React, you give it an inline function with something that it should return a value that it should return, which in our case is items.find, right, it is the selectedItem. And then you give it"
+    },
+    {
+      "startSeconds": 525,
+      "text": "a dependency array, which controls when this should be recomputed. So the way this works is it will calculate this, it will run this code once, right, we've established that we need to at least run it once. And then as long as nothing in the dependency array changes, it will simply return the value that it computed that first time. And so it will"
+    },
+    {
+      "startSeconds": 546,
+      "text": "not spend the resources to recompute the value on every render. And since we have items here, right, our VS code is now warning us that this hook useMemo has a missing dependency: items. We need to give items to the dependency array to tell this that, hey, this depends on items. And when"
+    },
+    {
+      "startSeconds": 562,
+      "text": "items is different, you should then recompute the value. So let's add items to the dependency array. And then if I save this, and now I go back to our application, and I'm going to spam the increment button, once again, you're going to see that now our button is super, super fast. So let's spam it."
+    },
+    {
+      "startSeconds": 581,
+      "text": "You see, I'm spamming it, and it updates instantly, there's no lag, there's nothing, there's no number skipped, right? It is super, super efficient. And that is how a performance application should be. That is how your application should be. And if you run into"
+    },
+    {
+      "startSeconds": 595,
+      "text": "performance problems, it is very important to stop and think about what your code is actually doing. And with this, we have now solved our problems of performance with useMemo. Now, before we end the video, there's one last thing that I want to show you and that is something that you might"
+    },
+    {
+      "startSeconds": 613,
+      "text": "run into if you're not careful. Let's instead of item.isSelected, let's put it if item.id is equal to the count, right? And if I save this, okay? And now you can see that our count is zero and the selectedItem is zero. This makes a lot of sense, right? The selectedItem is the item that"
+    },
+    {
+      "startSeconds": 633,
+      "text": "the count is equal to the ID of that item. But let's now look at what happens if I increment the count. I'm going to increment and oh, our count is one, but selectedItem is still zero. Count is two, selectedItem is still zero. Why is this? Well, you see, this is a common mistake that people make"
+    },
+    {
+      "startSeconds": 651,
+      "text": "with useMemo and they forget to give the proper dependencies in the dependency array. The way we have it currently set up, it is only going to return a different value if items is different. We didn't say anything about count, even though count is now inside of the body of our useMemo function."
+    },
+    {
+      "startSeconds": 669,
+      "text": "So the selectedItem, it doesn't care that count is different. It will always return the value that it has saved until anything in its dependency array changes. And again, VS code is being helpful. It's telling us that useMemo has a missing dependency: count, either include it or remove the dependency"
+    },
+    {
+      "startSeconds": 687,
+      "text": "array. So what we have to do is we have to add count to the dependency array. And then our error is gone. And then you can see here that it updated properly. And then if I just do a refresh, so we can start fresh again, give it a few seconds because it is still computing the 29 million"
+    },
+    {
+      "startSeconds": 704,
+      "text": "entries. Again, like I said, there's no way around not doing it at least once. So that is the slowness that you've seen. But now press increment and the count is one and the selectedItem is one. Count is two, selectedItem is two, count is three, selectedItem is three, and so on. We have given"
+    },
+    {
+      "startSeconds": 723,
+      "text": "it the proper dependencies. So now this hook behaves as we want it to. So you should always be careful about using this, about giving it the proper dependencies because it is very important and can lead to some unexpected bugs if you do this wrong. And also you should really"
+    },
+    {
+      "startSeconds": 739,
+      "text": "be careful when you use useMemo. Like in this case, it made perfect sense that we use useMemo because we had performance problems and we were doing something unnecessarily. But you can also have the case where you might want to use useMemo, but it's not necessary, right? useMemo has a cost"
+    },
+    {
+      "startSeconds": 756,
+      "text": "because it is behind the scenes comparing things right, the way that it knows when to return the previous value or compute the new value, it's running some code to compare this and that can have some performance implications if you use this too much when you shouldn't. So you should"
+    },
+    {
+      "startSeconds": 772,
+      "text": "really be careful when you use it and only use it when it's absolutely necessary, like in this case. And there you go. That was useMemo simply explained. I really hope that by now you're able to understand this hook and understand its complexities when to use it, when not to use it,"
+    },
+    {
+      "startSeconds": 787,
+      "text": "and the implications of not using it and using it when you shouldn't. So now go out and use this in your own applications, play around with it, because that is the best way to really get a feel for how this works. Remember, this is a tricky one. If you've enjoyed the video,"
+    },
+    {
+      "startSeconds": 801,
+      "text": "make sure to leave a like and subscribe because it really, really does help me out a lot. I plan to make a lot more of these tutorials coming forward. React tutorials in all shapes and sizes, they are coming. My name has been Darius Cosden. This is Cosden Solutions. Thank"
+    },
+    {
+      "startSeconds": 815,
+      "text": "you so much for watching. And I will see you all in the next video. Ciao, ciao."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:34.232Z"
+}

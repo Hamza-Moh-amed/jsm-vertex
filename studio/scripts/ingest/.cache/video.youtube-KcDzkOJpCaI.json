@@ -1,0 +1,211 @@
+{
+  "_id": "video.youtube-KcDzkOJpCaI",
+  "videoId": "KcDzkOJpCaI",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=KcDzkOJpCaI",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "What problem conditional types solve"
+    },
+    {
+      "startSeconds": 45,
+      "label": "The basic extends syntax"
+    },
+    {
+      "startSeconds": 100,
+      "label": "Reading the resolved result"
+    },
+    {
+      "startSeconds": 150,
+      "label": "A practical first example"
+    },
+    {
+      "startSeconds": 205,
+      "label": "Nesting conditional types"
+    },
+    {
+      "startSeconds": 265,
+      "label": "Distributive conditional types"
+    },
+    {
+      "startSeconds": 330,
+      "label": "Stopping distribution"
+    },
+    {
+      "startSeconds": 385,
+      "label": "The never edge case"
+    },
+    {
+      "startSeconds": 440,
+      "label": "Introducing the infer keyword"
+    },
+    {
+      "startSeconds": 500,
+      "label": "How infer pattern matching works"
+    },
+    {
+      "startSeconds": 555,
+      "label": "Inferring function return types"
+    },
+    {
+      "startSeconds": 615,
+      "label": "Inferring function parameters"
+    },
+    {
+      "startSeconds": 665,
+      "label": "Unwrapping Promises with infer"
+    },
+    {
+      "startSeconds": 725,
+      "label": "Inferring from tuples — head and tail"
+    },
+    {
+      "startSeconds": 785,
+      "label": "Multiple infer in one pattern"
+    },
+    {
+      "startSeconds": 840,
+      "label": "Rebuilding NonNullable"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 4,
+      "text": "TypeScript has a hidden if statement. And it doesn't run over at run time. It runs entirely on your types while you code before anything executes. This is how libraries magically know that this function returns a string and that one returns a promise without you ever annotating it. The feature behind this magic is called conditional types."
+    },
+    {
+      "startSeconds": 29,
+      "text": "And its most powerful partner is a keyword called infer. Master these two and you stop fighting the type system. You start programming it. Let's start with why these exist. Normally, a type is fixed. A user is a user. A string is a string. But sometimes you want a type that changes depending on another type. Think of a function that returns an"
+    },
+    {
+      "startSeconds": 57,
+      "text": "array if you pass it an array and a single value if you pass it a single value. To express logic like that, you need a type that can make a decision. That decision-making type is a conditional type. Here's the core syntax and it reads almost like an English sentence. T extends U question mark X colon Y. It means if the type T is assignable to"
+    },
+    {
+      "startSeconds": 83,
+      "text": "U, then the result is X. Otherwise, the result is Y. It's a ternary operator but for types instead of values. Notice the keyword extends here doesn't mean inheritance like in a class. It means is assignable to or fits into. That distinction trips up a lot of people, so keep it in mind. Let's see this actually resolve."
+    },
+    {
+      "startSeconds": 108,
+      "text": "When you hover over type A in your editor, TypeScript shows true. That's not a value. It's the literal type true. The compiler checked whether the string literal hello is assignable to string, decided yes, and gave back the true branch. For type B, the number 42 is not a string, so it falls into the false branch. This all happens at compile time,"
+    },
+    {
+      "startSeconds": 133,
+      "text": "completely erased before your code ever runs. Now, let's make it useful. Imagine you have a function that returns different shapes based on a flag. We can write a conditional type that picks the right return type. Here, if the generic T is the literal true, we return a success response, otherwise, an error response. This is the first taste of how"
+    },
+    {
+      "startSeconds": 159,
+      "text": "conditional types let your function signatures be smart. The return type follows the input automatically with no manual overloads. One condition is rarely enough. Just like nested ternaries in regular JavaScript, you can chain conditional types to handle multiple cases. Here, we build a type that names the category of a value."
+    },
+    {
+      "startSeconds": 184,
+      "text": "If T extends string, we return string. Else, if it extends number, we return number. Else if boolean, else other. Each colon leads into the next condition. It can get hard to read, so format it with one branch per line. Your future self will thank you. Here's where it gets surprising. When the type you check is a naked"
+    },
+    {
+      "startSeconds": 210,
+      "text": "generic type parameter, and you pass it a union, the conditional distributes over each member of that union separately. Watch this. We pass a union of string and number to to array. Instead of treating the whole union at once, TypeScript runs the conditional on string, then on number, and combines results. So, you get a string array or a number"
+    },
+    {
+      "startSeconds": 236,
+      "text": "array, a union of arrays, not an array of the union. This is called distribution, and it's one of the most important behaviors to understand. Sometimes distribution is exactly what you want, and sometimes it breaks things. To turn it off, wrap both sides in square brackets, making them tuples. Now, T is no longer a naked type"
+    },
+    {
+      "startSeconds": 262,
+      "text": "parameter, so the whole union is checked at once. Compare the two results. Without brackets, you get a union of arrays. With brackets, the full union string or number is treated as one unit. This trick is essential when writing utility types that must not split unions apart. There's a sneaky edge case with distribution and the never type,"
+    },
+    {
+      "startSeconds": 287,
+      "text": "because never is treated as an empty union. A distributive conditional over never distributes over zero members and returns never without ever running your branches. This catches almost everyone the first time. If you actually want to test whether a type is never, you must disable distribution with the tuple bracket trick."
+    },
+    {
+      "startSeconds": 311,
+      "text": "Here's the correct way to write an is never check. Now for the real magic, the infer keyword. Infer lets you capture a piece of a type and give it a name right inside the extends clause of a conditional type. Think of it like pattern matching. You describe the shape you expect, and you put infer where you want TypeScript to fill in the blank."
+    },
+    {
+      "startSeconds": 335,
+      "text": "Here we say, \"If T looks like an array of some element type, capture that element type as U and return it.\" So, passing a number array gives us back number. Let's slow this down because it's the key idea. The pattern infer you inside parentheses square brackets means an array of something. And I'm naming that something you."
+    },
+    {
+      "startSeconds": 360,
+      "text": "TypeScript tries to match the incoming type T against this shape. If it matches, you is bound to whatever filled the slot, and you can use you in the true branch. If it doesn't match the array shape at all, the conditional falls to the false branch. It's exactly like destructuring, but for types. Here's one of the most useful"
+    },
+    {
+      "startSeconds": 383,
+      "text": "applications. Extracting a function's return type. We match T against the shape of any function taking any arguments, and we put infer R in the return position. If T is a function, R becomes whatever it returns. This is exactly how the built-in return type utility works under the hood. You just rebuilt a standard library type"
+    },
+    {
+      "startSeconds": 409,
+      "text": "in two lines. That's the power infer gives you. We can flip it around and infer the parameters instead. Put infer P in the argument position, and P captures the entire tuple of parameter types. This is the built-in parameters utility. Notice P comes back as a tuple, string then number, which you can then index into or spread."
+    },
+    {
+      "startSeconds": 434,
+      "text": "Inferring the input side is incredibly handy when you're wrapping or proxying existing functions. Async code is everywhere, and infer shines here, too. To get the value inside a promise, we match T against promise of infer you, and pull out you. But what if the value is itself a promise of a promise? We handle nesting by recursing."
+    },
+    {
+      "startSeconds": 458,
+      "text": "If you is is a promise, unwrap again. This recursive version is essentially the built-in awaited type added in TypeScript 4.5. It keeps peeling layers until it hits a plain value. Infer also works beautifully with tuples, which unlocks recursive list processing at the type level. Here, we grab the first element of a tuple by matching the head"
+    },
+    {
+      "startSeconds": 486,
+      "text": "and ignoring the rest with a spread. Then we do the opposite. Capture the tail. Everything except the first. With head and tail, you can recursively walk a tuple, which is how advanced libraries build typed routers and carried functions. Indian developers prepping for product company interviews. This pattern shows up in real code"
+    },
+    {
+      "startSeconds": 512,
+      "text": "bases. You can use more than one infer in a single conditional. Here, we match a two-element tuple and capture both elements as A and B at once, then swap them. This shows that infer is just pattern binding. You can name as many slots as the shape allows. The compiler fills each named slot with the matching part of the input type."
+    },
+    {
+      "startSeconds": 538,
+      "text": "Clean, declarative, and no runtime cost whatsoever. Let's rebuild another standard utility to cement the distribution concept. Non-nullable strips null and undefined out of a type. Because the conditional distributes over the union, each member is tested individually. Null and undefined fall into the never branch and vanish, while everything else"
+    },
+    {
+      "startSeconds": 565,
+      "text": "survives. Never inside a union simply disappears. That's why this two-line type cleanly removes the nullable parts. Two more built-ins fall right out of distribution, exclude and extract. Exclude removes from a union any members assignable to U. Each member that matches U becomes never and drops out. Extract is the mirror image, keeping"
+    },
+    {
+      "startSeconds": 594,
+      "text": "only the matching members. These power countless real-world types, like filtering event names or narrowing a discriminated union. Once you see distribution, these feel almost obvious. Let's tie it all together with something you'd actually ship. Say you have an API client and you want a helper that, given an endpoint key,"
+    },
+    {
+      "startSeconds": 619,
+      "text": "gives you back the unwrapped response type. No promise wrapper, no manual annotation. We combine infer to extract the function return type style logic and awaited to peel the promise. The result is a fully typed lookup that updates automatically when your API changes. This is the kind of inference that makes tRPC and modern SDKs feel like magic."
+    },
+    {
+      "startSeconds": 645,
+      "text": "Infer even works with template literal types, which is wildly powerful for parsing strings at the type level. Here, we extract the parameter name from a route string, like {slash} users {slash} {colon} ID. We match the prefix, then infer the part after the colon. Combine this with recursion and you can type check entire route patterns."
+    },
+    {
+      "startSeconds": 670,
+      "text": "This is exactly how modern frameworks validate URL params without you writing a single runtime check. Type-level code deserves tests, too. Let's run the TypeScript compiler in no emit mode to make sure all our conditional types resolve as expected. We use a tiny expect helper that errors at compile time if two types don't match."
+    },
+    {
+      "startSeconds": 695,
+      "text": "Run TSC and a clean exit means every assertion passed. No green test runner needed. The compiler itself is your test suite. A word of caution. Conditional types are powerful, but they're also where TypeScript gets slow and error messages get cryptic. If a simple function overload or a plain union does the job, prefer that."
+    },
+    {
+      "startSeconds": 722,
+      "text": "Deeply recursive conditional types can blow up compile times and even hit the recursion limit. Reach for conditional types when the type genuinely depends on another type, not just to look clever. Readability beats wizardry in a shared code base. Let's lock in the mental model. A conditional type is an if statement for types. T extends U,"
+    },
+    {
+      "startSeconds": 747,
+      "text": "then this, else that. Distribution means it automatically loops over each member of a union. And infer is pattern matching that captures a piece of a type into a named variable you can reuse. Three ideas, endless combinations. Almost every advanced TypeScript utility you'll ever read is built from exactly these primitives. Before you go, here's"
+    },
+    {
+      "startSeconds": 775,
+      "text": "a challenge to make this stick. Try recreating the built-in flatten type. Given a nested array, produce the deeply flattened element type using recursive infer. The skeleton is on screen. Pause, attempt it, and check your answer against the comment. If you can write this without help, you genuinely understand conditional types and infer."
+    },
+    {
+      "startSeconds": 800,
+      "text": "Drop your solution in the comments and we'll review the best ones. So, here are the three things you now own. One, conditional types are if statements for the type system using extends, question mark, colon. Two, distribution automatically applies your condition to every member of a union. And the bracket trick or never edge case"
+    },
+    {
+      "startSeconds": 825,
+      "text": "can trip you if you forget it. Three, the infer keyword is pattern matching that pulls types out of other types. Powering return type, awaited, and root passes alike. Next up in the TypeScript track, we go even deeper into recursive types and template literal type parsing. The foundation of fully typed APIs. If this finally made the type system"
+    },
+    {
+      "startSeconds": 854,
+      "text": "click, smash subscribe, and comment the trickiest type you've ever had to write. We read every single one."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:44.636Z"
+}

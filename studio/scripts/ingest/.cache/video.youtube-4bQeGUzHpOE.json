@@ -1,0 +1,131 @@
+{
+  "_id": "video.youtube-4bQeGUzHpOE",
+  "videoId": "4bQeGUzHpOE",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=4bQeGUzHpOE",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Why Headers Matter for Web App Security"
+    },
+    {
+      "startSeconds": 47,
+      "label": "What Are HTTP Secure Headers?"
+    },
+    {
+      "startSeconds": 80,
+      "label": "Content-Security-Policy (CSP)"
+    },
+    {
+      "startSeconds": 130,
+      "label": "HSTS (Strict-Transport-Security)"
+    },
+    {
+      "startSeconds": 191,
+      "label": "X-Content-Type-Options"
+    },
+    {
+      "startSeconds": 253,
+      "label": "Referrer-Policy"
+    },
+    {
+      "startSeconds": 317,
+      "label": "CORS (Cross-Origin Resource Sharing)"
+    },
+    {
+      "startSeconds": 412,
+      "label": "Permissions-Policy"
+    },
+    {
+      "startSeconds": 476,
+      "label": "Wrap-up: Secure Your App by Default"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Most developers lock down their back end but miss a simple trick on the front end. HTTP secure headers. For example, CSP helps stops things like cross-ite scripting. HSTS make sure your site always loads over HTTPS. And then there is course or COS, referral policy, permissions policy and more. Each closing a different security loophole."
+    },
+    {
+      "startSeconds": 27,
+      "text": "These headers are built into the browser. You just have to use them right. In this video, you'll learn exactly what secure headers are, why they are critical, and how to quickly implement them, making your apps dramatically safer. Let's dive in. [Music] Secure headers are tiny rule books your server sends to the browser, telling it"
+    },
+    {
+      "startSeconds": 53,
+      "text": "how to treat your content securely. They don't touch your app logic, but they quietly enforce critical rules in the browser like only load scripts from trusted resources, always use HTTPS or don't leak sensitive referral data. And just like that, you have shut down entire classes of attacks without changing a single line of JavaScript."
+    },
+    {
+      "startSeconds": 77,
+      "text": "Let's start with one of the most powerful content security policy or CSP. CSP is like a white list for your front end. It tells your browser only load scripts, styles, and assets from these trusted places. For example, this says load everything from your own domain by default. Scripts can also come from your trusted CDN and block object tags"
+    },
+    {
+      "startSeconds": 101,
+      "text": "entirely. No flash, no surprises. So without CSP, malicious scripts can run via XSS. Attackers can load code from any domain and plugins like Flash may execute. With CSP, only trusted scripts are allowed. Browsers block unknown sources and risky elements are blocked. One pro tip, start with content security policy report only. It logs violations"
+    },
+    {
+      "startSeconds": 125,
+      "text": "without blocking anything, so you can test it safely. Now, let's talk about HSTS. Some websites still load over plain HTTP if the browser doesn't start with HTTPS. And that's a problem because in that initial moment, the connection is still unencrypted. That tiny window where the browser first reaches out over HTTP is all an attacker"
+    },
+    {
+      "startSeconds": 149,
+      "text": "needs. On a public Wi-Fi network, someone could intercept the request, redirect you, or inject malicious content before the site even switches to HTTPS. HSTS fixes this. Once the browser sees the HSTS header, it knows always use HTTPS for this domain. No exceptions. And here is what it looks like. This tells the browser, enforce HTTPS for one"
+    },
+    {
+      "startSeconds": 175,
+      "text": "full year, include all subdomains. And preload this rule into browsers so even firsttime visitors connect securely. It's a small header with a big impact, shutting down a common attack vector most people don't even realize exists. Next up is a small header that blocks a surprisingly sneaky attack, MIME sniffing. Let's say your server sends a"
+    },
+    {
+      "startSeconds": 198,
+      "text": "file with a .txt extension, but inside that file is actually some malicious JavaScript. Some older or lenient browsers might try to guess what kind of file it is and decide, hm, this looks like a script. Let me run it. That's called mimen sniffing and it can lead to unexpected script execution. even if the content type says otherwise. To prevent"
+    },
+    {
+      "startSeconds": 221,
+      "text": "this, we use Xc content type options no sniff. This tells the browser, trust what I said the file is. Don't try to guess. It's simple and it blocks a whole class of attacks where the browser gets a little too smart for its own good. Without this header, browser may sniff file types and misinterpret them or a txt file with script content might get"
+    },
+    {
+      "startSeconds": 243,
+      "text": "executed. So this header makes browsers strictly follow declared content type and malicious files are treated as plain text not scripts. Now when a user clicks a link from your site to another the browser sends a referral header. Basically saying hey this is where the user came from. But here's the catch. That header might include full URLs"
+    },
+    {
+      "startSeconds": 266,
+      "text": "including query parameters, tokens or even user ids. And that's risky. You might be leaking sensitive info to third party websites without even realizing it. To control this, we use referral policy strict origin when cross origin. This means if the next page is on your own domain, send the full URL. If it's going to another domain, just"
+    },
+    {
+      "startSeconds": 290,
+      "text": "send the origin, say bitemong.io, and nothing more. It's a simple tweak that protects your users's privacy and keeps your internal data from leaking to the outside. Without this policy, full URLs including your query params can leak to other sites and sensitive data like tokens or ids may be exposed. With this policy in place, only the domain is"
+    },
+    {
+      "startSeconds": 312,
+      "text": "shared on cross- site requests and user privacy is protected by limiting referral info. Let's talk about course or cross origin resource sharing. Course is all about control. Who is allowed to talk to your back end and who is not? By default, browsers block JavaScript running on one domain from making requests to another. And that's a good"
+    },
+    {
+      "startSeconds": 332,
+      "text": "security feature, but your front end and back end might live on different domains. Say your React app is on app.bitemunk.io and your API is on api.bitemunk.com. To make that work securely, you need to explicitly allow that connection. And that's where course headers come in. And here's an example. This tells the browser only allow requests from"
+    },
+    {
+      "startSeconds": 355,
+      "text": "bitemunk.io and only accept safe methods like get or post. Only allow specific headers like content type and authorization. And again guys here avoid using star or wild card unless you are absolutely sure there is no sensitive data involved. Think of course as a gate. You decide who gets in. By the way I have done a full deep dive on how"
+    },
+    {
+      "startSeconds": 377,
+      "text": "course works, why it exist, common pitfalls and how to fix course errors. Check it out in the security playlist on this channel if you want the complete picture. So basically without proper course legit cross origin request may fail. APIs may unintentionally expose data to any site. Course make sure that only trusted domains can access your API"
+    },
+    {
+      "startSeconds": 399,
+      "text": "and the access is tightly controlled by origin and method. But headers don't just control what comes in and out. They can also control what your site is allowed to do inside the browser itself. And that's where permissions policy come in. Modern browsers give websites access to features like geoloccation, camera, microphone, full screen, and even"
+    },
+    {
+      "startSeconds": 421,
+      "text": "vibration. But here's the thing, not every script on your site should have that power. Imagine emitting a third party widget and it quietly asks for a mic access. Yeah, not great. Permissions policy let you take that control. You define who gets access to what right from the response header. Only your own site can access your location. Mic and"
+    },
+    {
+      "startSeconds": 444,
+      "text": "camera blocked completely even by accident. It's clean, declarative, and gives you a security budget you control. So now you have got a toolkit of powerful HTTP secure headers. Each one closing a specific security gap. And here's the best part. They work silently. No UI changes, no user friction. the smart defaults that make"
+    },
+    {
+      "startSeconds": 466,
+      "text": "your app safer. If this helped you, share it with your team. And if you want more, hit like, subscribe, and check out my security and system design playlist for more deep dives like this. See you in the next one. Stay secure. [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:58.845Z"
+}

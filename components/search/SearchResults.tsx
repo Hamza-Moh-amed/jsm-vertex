@@ -46,12 +46,12 @@ const SearchResults = ({
 
                 const response = await fetch("/api/search", {
                     method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({query, sort}),
-                    signal: controller.signal
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ query, sort }),
+                    signal: controller.signal,
                 })
 
-                if(!response.ok) throw new Error(`search failed with ${response.status}`)
+                if (!response.ok) throw new Error(`Search failed with ${response.status}`);
 
                 setState({status: "ready", response: (await response.json() as SearchResponse)})
                 

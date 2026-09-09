@@ -1,0 +1,67 @@
+{
+  "_id": "video.youtube-zfLpzpH1t6Q",
+  "videoId": "zfLpzpH1t6Q",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=zfLpzpH1t6Q",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Extending generic types"
+    },
+    {
+      "startSeconds": 102,
+      "label": "Type Argument Inference"
+    },
+    {
+      "startSeconds": 133,
+      "label": "Use different type arguments"
+    },
+    {
+      "startSeconds": 209,
+      "label": "Generic type parameter defaults"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "let's talk about extending generics here is a function called print name and there is the argument of someone of type t and now i want to access the name property of someone but since someone is of type t typescript doesn't know if type t comes with a name property we can solve this by extending t so t can inherit properties using the"
+    },
+    {
+      "startSeconds": 25,
+      "text": "extends keyword and now we say ok it should inherit from an object that has a name property of type string now typescript knows that t must have a name because it extends here that object that comes with the name property let me zoom out a bit to make some more space for new code i'm writing now an interface called user"
+    },
+    {
+      "startSeconds": 50,
+      "text": "and i will give that user interface a name property so also here name of type string and now i can replace the object next to my extends keyword with the newly created user interface let's test our code so i will create a new constant called benny benny will be a user and that user then must get a name so i will call benny benny"
+    },
+    {
+      "startSeconds": 77,
+      "text": "and then i can use the print name function and i can insert benny here as the parameter what we can see now is that benny is of type user and the return value from that function call will also be of type user so that is because the sum one is of type t and the return value is also of type t so the value the type that we put in is"
+    },
+    {
+      "startSeconds": 105,
+      "text": "also the type that we get out and this is what we see here in the type argument inference yeah typescript inferred the t by itself because it knows that the input is of type user so it knows that our t is also then of type user and that's called type argument inference we can also explicitly define what is rt but in this"
+    },
+    {
+      "startSeconds": 126,
+      "text": "case typescript is smart enough to figure it out itself i will show you now why i'm using a t-rex to show generic inheritance because t extends user but this just means that it extends the properties from the user interface so i don't have to necessarily give it a user interface i just have to provide something that also has these properties"
+    },
+    {
+      "startSeconds": 156,
+      "text": "so for example if i have a t-rex interface and this t-rex interface then also has a name of type string then the condition is fulfilled yeah because t inherits all the properties from user which are names so i can use my function also with for example a dino i will have a dyno that is a t-rex and that t-rex i will just call rexy"
+    },
+    {
+      "startSeconds": 180,
+      "text": "and rexy will be also okay to be used with this print name function if i pass in now rexy then the t will be inferred to be of type t-rex and what i then also get back is a t-rex and my generic function is then proven to work with generic types and in this case i used for example user and the t-rex but i can use any other types generic as long as"
+    },
+    {
+      "startSeconds": 205,
+      "text": "that type has a name property there is another feature that i want to show you which is using a default type variable so we have the t at print name and we can say that by default this t is of type string and then when we use the print name function we will get some autocompletion so intellisense will tell us that the"
+    },
+    {
+      "startSeconds": 231,
+      "text": "name is expected to be a string when we then put a string so for example i will put my name here the function will work and the t is a string now of course i can also change it to any other type so i can put a number here explicitly and then i have to supply a number"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:48.943Z"
+}

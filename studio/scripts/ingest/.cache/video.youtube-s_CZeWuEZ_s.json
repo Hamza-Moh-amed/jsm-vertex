@@ -1,0 +1,74 @@
+{
+  "_id": "video.youtube-s_CZeWuEZ_s",
+  "videoId": "s_CZeWuEZ_s",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=s_CZeWuEZ_s",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "good morning today i'm going to tell what are those files with d.t.s extension and how to use them you probably already know that typescript allows you to define types for your variables and also it allows you to define your own types for example i've defined the type some args here so in javascript we can define"
+    },
+    {
+      "startSeconds": 18,
+      "text": "variables and functions like i did here we also can do it in typescript here i defined a function and here is a variable and in typescript you can also define types both in typescript and in javascript you can export your variables and functions using the export keyword export let some string there and now we will be able to"
+    },
+    {
+      "startSeconds": 41,
+      "text": "import it in another file or we can export our function export function sum and now again we can import it in another file and use it there but in typescript you can also export types from your files for example export type some args and now we can import it in another file just like we did it with variables and functions in javascript"
+    },
+    {
+      "startSeconds": 66,
+      "text": "sometimes it makes sense to have a file that will contain only the type definitions for example it will be types that should be available across the whole application in this case you can create a new file with dts extension new file you can pick any name for it for example i will call it types dts we can go to example.ts"
+    },
+    {
+      "startSeconds": 86,
+      "text": "copy this type definition and paste it into typesdts so typesdts is just a file that contains only the type definitions for your project we're exporting the type some rx from it and now inside of the example.ts we can import this file because as you can see right now we're having an error we cannot find the name sumarx how do we fix it"
+    },
+    {
+      "startSeconds": 111,
+      "text": "we say import sum args from types exactly how we would do it with regular constants variables and functions in javascript modules as i said before files with dts extension can only contain the type definitions so for example it can have this type definition for some arcs but if we try to create a constant here const 4 equals bar"
+    },
+    {
+      "startSeconds": 140,
+      "text": "we will get an error because we can only contain that type definitions we cannot have values there interesting thing is that you can start writing export function multiply numbers and so far so good but if you add the function body touchpit will complain that you cannot define the function implementation in your type dts file"
+    },
+    {
+      "startSeconds": 164,
+      "text": "what you can do you can create a type for the function which means you can define the function name what arguments should it accept and what will be the return value in our case our function can accept two numbers x number and y number and we can say that it also returns a number this is valid but if we add an action actual body"
+    },
+    {
+      "startSeconds": 188,
+      "text": "and try to return x multiplied by y we will have an error so remember dts files are only four type definitions if you remove the body and leave only the type definition part we will be fine usually though you will still write your type definitions in regular.ts files not d.ts files and in most cases the dot ts files are either used to provide the"
+    },
+    {
+      "startSeconds": 213,
+      "text": "types for the libraries that don't have typescript support or are automatically generated and shipped with the library to provide that typescript support to it for example let's undo our changes remove the types dts file delete go back to example.ts and return it to original state where we had the type definition for the same"
+    },
+    {
+      "startSeconds": 232,
+      "text": "some rx type right in this file now we'll run tsc init and it will automatically generate the tsconfig.json file with the recommended options let me know in the comments if you would like to know more about configuring typescript for your project so i will go through this file and explain what each option does now we can run tsc to compile our"
+    },
+    {
+      "startSeconds": 252,
+      "text": "typescript file to javascript with the declaration option tsc example.ts dash declaration as a result we get two files example.js that you can use just like regular javascript module but we also have an example dts file in case if we want to use this module as an external library in some other project that uses typescript"
+    },
+    {
+      "startSeconds": 276,
+      "text": "also there is a whole group of different packages that add typescript support to different javascript libraries it is called definitely typed if you go to types folder and open any package you will see an index.ts file and this file will contain the type definitions for this library let's see another example if you"
+    },
+    {
+      "startSeconds": 293,
+      "text": "open the project that uses typescript and it has some types libraries installed for example here in node modules i have the types folder inside of it i have react so this package types react contains the type definitions for react and inside the width i have index.ts containing the type definitions for react and also in package.json it"
+    },
+    {
+      "startSeconds": 315,
+      "text": "specifies the types to be in index.ts file this way when using react in your project your typescript compiler will know what type definitions should it use for their react library some libraries contain the index.ts along with the javascript code and some of them provide the typing separately in the types package okay i hope it's"
+    },
+    {
+      "startSeconds": 336,
+      "text": "clear for you now what do dts files do why do you need them thank you for watching let me know in the comments what else would you like to know about typescript subscribe to my channel and join my discord server to pick the topics for the next videos see you next time"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:46.797Z"
+}

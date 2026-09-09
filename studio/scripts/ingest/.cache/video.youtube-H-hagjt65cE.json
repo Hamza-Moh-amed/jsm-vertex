@@ -1,0 +1,103 @@
+{
+  "_id": "video.youtube-H-hagjt65cE",
+  "videoId": "H-hagjt65cE",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=H-hagjt65cE",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 18,
+      "label": "What is a CSV file?"
+    },
+    {
+      "startSeconds": 66,
+      "label": "Read in Python using csv.reader"
+    },
+    {
+      "startSeconds": 144,
+      "label": "Skipping the CSV header"
+    },
+    {
+      "startSeconds": 213,
+      "label": "Read in Python using DictReader"
+    },
+    {
+      "startSeconds": 254,
+      "label": "Change Separator or Delimiter"
+    },
+    {
+      "startSeconds": 312,
+      "label": "Read CSV in Python by column using Pandas"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hey in this video I'm going to show you how to read a CSV file using python it's pretty easy I'll show you how to deal with row offsets how to deal with the header how to do it using pandas and if you stay to the end of the video I'll show you how to deal with different types of delimiters so here I'm in vs code I have a CSV file"
+    },
+    {
+      "startSeconds": 22,
+      "text": "bwq dot CSV that is the beach water quality data from Chicago based on some sensors I don't think it matters what the data is but it gives you a good idea of what a CSV file looks like CSV is for comma separated values and here's the values right we have a value then a comma then a value then a comma and so on and so forth and the the types of"
+    },
+    {
+      "startSeconds": 47,
+      "text": "values vary right we have dates we have numbers we have strings in the top row specifies what each column is so this is a CSV value and they can be quite large this one is wow I know it's a lot it's a lot of data so we're going to read this in Python which is going to be pretty easy so uh first thing we're just going to import the CSV package"
+    },
+    {
+      "startSeconds": 73,
+      "text": "then we're going to do with open our file is called Beach water quality dot CSV we're gonna call that file actually let's make sure let's just open it for read only then we're going to have our CSV reader and the way we get that is we just do CSV dot read and we're going to read our file that we've already opened the the width makes"
+    },
+    {
+      "startSeconds": 109,
+      "text": "sure that when we step out of the context of the width the file will be closed it closes our resources so now we have our file open and we can just look through it right so for row and CSV reader let's just print let's just print a row I'm always hitting the wrong bracket here and let's see what we got there so this is read a pie"
+    },
+    {
+      "startSeconds": 138,
+      "text": "right and we can see all the data printing out there is quite a lot of it so it takes a while to print I actually have a smaller version of the file for just this purpose so let's just switch to that there we go a little bit smaller data one of the first things we can see now that we're reading the data is that our"
+    },
+    {
+      "startSeconds": 158,
+      "text": "first row is actually our column names it's probably not what we want like imagine we're trying to do something with this data aggregate it or something right we don't want to use the top level column especially if we're adding up numbers and then our Top Value is water temperature so the way we're doing things now"
+    },
+    {
+      "startSeconds": 177,
+      "text": "it's just looping through we can just skip the first row that should make it easy uh to move past that column right so now we're starting with our actual first row let's just verify uh yeah you know once we're reading in the data we might want to look at specific columns so the way we can do that is just use an offset so that gives"
+    },
+    {
+      "startSeconds": 199,
+      "text": "us the first value or the second value or so on and so forth right you can do how many are there there we go but I mean that can be a little bit awkward at times so there is a a preferred way at least my preferred way to access this is to use the dictionary reader so dictionary reader will actually read it in as a dictionary"
+    },
+    {
+      "startSeconds": 223,
+      "text": "and then we can access it by column name since it's using that first row as the column values we don't need to skip it and then also here we can specify things by name which is just a lot nicer a beach name what else do we have turbidity I don't know what turbidity is turbulence those are like the level of waves"
+    },
+    {
+      "startSeconds": 251,
+      "text": "let's see there's our turbidity values yeah so that way to access things I think is a lot nicer another problem you can have with CSV files they're called comma separated values but actually sometimes the type of values people use varies as the separator so we can actually specify here that we have a is it separator"
+    },
+    {
+      "startSeconds": 275,
+      "text": "delimiter right so we can specify a different delimiter by default it's going to be comma so this should fail right we can see that doesn't work but I actually have a tab separated value here so it's the same data it's just you can see my tabs here I think it's just tsv and then there we go we're getting the same value so this is how you specify a"
+    },
+    {
+      "startSeconds": 302,
+      "text": "delimiter delimiters can can vary so we've covered accessing it by row different delimiters oh another thing is accessing it by column so if I want to look at the data and said this way by column slices pandas is actually pretty good for that so I can do import pandas syntax is a little bit different so I'm just going to do data"
+    },
+    {
+      "startSeconds": 330,
+      "text": "pandas I think it has yeah read CSV uh So it's b w b w q p w q that's CSV we can just actually print out the thing in totality to take an initial look let's try that out and so um my head's a little bit in the way but but I like the way pandas presents this data it tells you it's 10 columns wide how many rows"
+    },
+    {
+      "startSeconds": 356,
+      "text": "there are a selection from each and then if we want to Loop through columns we can say you know for a column data Grant column that should work as well yeah so now we're we're looking at things the other way Beach name measurement data turbidity there we go so that was reading CSV values from python we did it a couple"
+    },
+    {
+      "startSeconds": 380,
+      "text": "ways we use the default CSV reader we use the dictionary CSV reader use the pandas reader and yeah tried some different separators let me know if this is useful and we'll tackle something else next time"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:38.543Z"
+}

@@ -1,0 +1,78 @@
+{
+  "_id": "video.youtube-k48WMdl2eUc",
+  "videoId": "k48WMdl2eUc",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=k48WMdl2eUc",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "in my previous xjs video we discussed the idea of layouts and how you can use layouts in xjs a specific layout file to share parts of your user interface across several different route segments so you could create a layout in this dashboard folder and then this layout here is going to be shared across all the different routes and all the"
+    },
+    {
+      "startSeconds": 26,
+      "text": "different pages within your dashboard folder and how you also have this root layout to where this root layout is going to be some UI here that is shared throughout all of your different pages throughout your application that's great at all but nextjs also has this idea of templates so straight from the nextjs docs here"
+    },
+    {
+      "startSeconds": 46,
+      "text": "templates are very similar to layouts basically the same as layouts to where they wrap child layouts or pages but unlike layouts that persist across routes and maintained State templates create new instance for each of their children on navigation meaning when a user navigates between routes that share a template a new instance of the child"
+    },
+    {
+      "startSeconds": 69,
+      "text": "that's mounted Domin elements created and state is not preserved in client components you might specifically want to use a template instead of a layout when you want to resynchronize the use effect on navigation or to reset the state of child client components on navigation and those are really the kind of core differences there"
+    },
+    {
+      "startSeconds": 90,
+      "text": "now a template can be defined the same way that you kind of would do a layout you just create a template. JS or TSX file or jsx file instead of a layout. file so if we look at our application here let's show you an example of kind of the actual practical differences of this in our dashboard layout we render this nav links component and this is a"
+    },
+    {
+      "startSeconds": 115,
+      "text": "client component where you can see use client here at the top we use this use path name Hook from react to set different kind of background colors for these links then also on Mount here we console log mounting and then we also set the active link right here to whatever the link title is from the path name so we have this link title State on"
+    },
+    {
+      "startSeconds": 140,
+      "text": "Mount we set this little title name here just for this example to whatever the end of the path name is so if we come look at this in our running application I'm going to open my console like so and I'm going to clear my console and I'm going to do a hard refresh of my page of command shift R and we see it mounted"
+    },
+    {
+      "startSeconds": 160,
+      "text": "once and then if I go back and forth between about and settings here you see that it's it's not actually recount logging mounting because it's not going to remount and render this naving component with within my dashboard layout here because it's just a layout. TSX file so since this nav links is a child client component"
+    },
+    {
+      "startSeconds": 190,
+      "text": "it's not going to remount it on navigation here but if I change this to a template. TSX file what you're going to immediately see here if I come back to my app I'm going to clear my console and I'm going to do a hard refresh from my page you're going to see that I get the mounting I also see it sets my active link here to settings"
+    },
+    {
+      "startSeconds": 213,
+      "text": "because it's actually remounting this component and if I shift to about here it switches my active link to about and you see it counil log mounting again settings counil logs mounting again active link settings about settings about you can see that it's remounting this component and it's recalling the use effect hook here on"
+    },
+    {
+      "startSeconds": 238,
+      "text": "Mount so that is one of the kind of core differences there between a layout and a template it is going to effectively remount its children client components on those navigation events and if I just go back to switching this from a template back to a layout here so we can just see those changes one more time and then we come back let me clear the"
+    },
+    {
+      "startSeconds": 261,
+      "text": "console and now let me start switching back you see that it just stays at the active link of about here because it's not remounting and it's not updating or calling that use effect hook on Mount because it's just staying mounted the state is remaining preserved and it's not Council logging the the mounting because it's not running this use effect"
+    },
+    {
+      "startSeconds": 285,
+      "text": "hook because this component is just staying mounted when it's rendered within a layout instead of being rendered within a template so hopefully that gives you a good kind of more practical example of just the little subtle differences between lout and templates in xjs and just to kind of recap them templates are effectively"
+    },
+    {
+      "startSeconds": 304,
+      "text": "layouts in xjs you can use them for really the same things however for a template it is going to create a new instance for each of their children on navigation which is why are we were just seeing the behavior that we're just seeing so for its children it is going to remount those components recreate those Dom elements in state is not going"
+    },
+    {
+      "startSeconds": 329,
+      "text": "to be preserved and effects are going to be resynchronized so if you have children client components where on navigation you really want them to resynchronize their effects use a template also if you want to reset the state of those client components on navigation use a template else I'm probably going to just default to using"
+    },
+    {
+      "startSeconds": 350,
+      "text": "a layout but if it's not giving you the behavior you want and you want to do out of one of these two things then using a template might be the solution you go for so hopefully this video kind of helps clear up the difference between templates and layouts next youz it is pretty subtle but it can be kind of the solution that you need once you uh are"
+    },
+    {
+      "startSeconds": 371,
+      "text": "experiencing an undesirable behavior when using layouts so thanks for tuning into this I'll see you in that next one"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:48.737Z"
+}

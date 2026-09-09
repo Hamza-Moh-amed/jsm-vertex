@@ -1,0 +1,191 @@
+{
+  "_id": "video.youtube-Qdkg_mrniLk",
+  "videoId": "Qdkg_mrniLk",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=Qdkg_mrniLk",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Blunder #1"
+    },
+    {
+      "startSeconds": 90,
+      "label": "Client vs Server Components"
+    },
+    {
+      "startSeconds": 298,
+      "label": "When to refactor?"
+    },
+    {
+      "startSeconds": 363,
+      "label": "Blunder #2"
+    },
+    {
+      "startSeconds": 499,
+      "label": "Boundary"
+    },
+    {
+      "startSeconds": 546,
+      "label": "Import twice"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "I see a lot of people make this mistake it has to do with client and server components let's say we have some page here just as an H1 and a button component very simple now this button component right now doesn't really do anything and typically if you click a button you want to do something let's add an on click Handler here not just a"
+    },
+    {
+      "startSeconds": 14,
+      "text": "function that will log hello world when we click it if I save here we're going to get an error because this client-side interactivity is only possible in client components and by default everything here in the app directory in next year as is a server component right so page and button right now are server components and we're trying to add this"
+    },
+    {
+      "startSeconds": 31,
+      "text": "interactivity well that's only possible in client components and if you don't pay attention you may think oh just turn this component into a client's component so actually the whole page so if you do the whole page like this the error is indeed gone and this will work but we lose all the benefits that come from"
+    },
+    {
+      "startSeconds": 46,
+      "text": "server components because what's going to happen now is not only the button will become a client component right because if you import something into a client's component this button now will also become a client component and that means if you imp support something else let's say a post component because let's say we also have some post components"
+    },
+    {
+      "startSeconds": 65,
+      "text": "here which is just a server component doesn't need any client-side interactivity which is perfectly fine staying a server component but because we're now importing that here in this page which is a client component this post will now also become a client's component and that's not what we want ideally components can stay server"
+    },
+    {
+      "startSeconds": 82,
+      "text": "components there's a reason that next year s made everything here a server component by default and that's because server components come with a lot of benefits and they actually show this on their website so let's quickly go through it so they have server components versus client components so here Dimension if you want to fetch data"
+    },
+    {
+      "startSeconds": 97,
+      "text": "well they're basically saying you can do it on a server component you can't do it in a client component it's not entirely true you can still you know fetch data in a client component what they mean here is in many cases it's it's optimal to do it from a server component because server component can be closer to the"
+    },
+    {
+      "startSeconds": 111,
+      "text": "source of data you can also access back-end resources for example you can update your database directly from a server component you can keep sensitive information like token API Keys now a big one is actually this one keep large dependencies on the server so for example in our example here let's say this post component is actually using"
+    },
+    {
+      "startSeconds": 129,
+      "text": "some third-party Library like sanitize HTML this is a big import as you can see ideally we can keep this on the server we don't want to ship this to the client but now we are importing this post component here into a client component therefore this post component will actually become a client component and this will be shipped to the client all"
+    },
+    {
+      "startSeconds": 148,
+      "text": "because we just wanted to add some interactivity to this button right so we don't we didn't even need to do this so we don't want to do this we want to remove this here and we want to add the use client to the button instead right so if we do this the button component will become a client component we are still importing the button here and now"
+    },
+    {
+      "startSeconds": 165,
+      "text": "if we go back to our page here you can see the error is still gone this still works but the page is still a server component the post is still a server component so this big third-party library is still only on the server and the button is now client component and so we can add client side interactivity right so this this these third parties"
+    },
+    {
+      "startSeconds": 182,
+      "text": "can take up a lot of space imagine you're working with like 3D assets or maybe video or audio assets and you're doing some analytics on them or these big data charts there's lots of third-party libraries that you're going to use in in those contexts and if you can try keeping that a server components not always possible sometimes you know"
+    },
+    {
+      "startSeconds": 200,
+      "text": "there's no way around you really need that client-side interactivity but there's already people they're coming up with hacks right now but there's going to be more standards in the future around this that will allow you to keep it a server component right so really try to see if you can keep it a server component right so it's really important"
+    },
+    {
+      "startSeconds": 213,
+      "text": "that you understand as a react developer that your react app is basically a tree of components so you have your root component this is where it all starts so next year s that's actually this layout compound layout file and then there's the root layout component this wraps all of your pages in next to us right so then you can have these Pages below"
+    },
+    {
+      "startSeconds": 231,
+      "text": "there so maybe a home page about page post page right so these are pages right page P page and this is the root that's basically it 3. now these Pages can import many different components maybe you have a button component like we has in this example or a post component or some date component right data when it was posted and you're going to import"
+    },
+    {
+      "startSeconds": 250,
+      "text": "these components all in this page and a naive react developer when you want to add some interactivity only to this component may decide to mark this whole page component as a client component with use client and when you do that all of these components now become client components so this becomes a client component this becomes a client"
+    },
+    {
+      "startSeconds": 267,
+      "text": "component and this becomes a client component even though these two may not even need any you know client-side interactivity and you're losing all the benefits from server components so the reactor and xjs teams they recommend that you mark the components as a client component only on the outer edges of the tree so the leaves of the tree so you"
+    },
+    {
+      "startSeconds": 284,
+      "text": "don't want to add it here you want to add it to the button right so then this can be gone and only the button is a client component now and these can all stay server components right so try to use use client directive at the edge the outer edges of your tree at the leaves of the tree right and sometimes this will require some refactoring let's say"
+    },
+    {
+      "startSeconds": 301,
+      "text": "we have some kind of form components and in there we have a form and maybe other elements as well and then eventually you want to have a button as well so now if we want to do some interactivity on this button we can say on click console log hello world so if you would do this you would get an error now because this is a"
+    },
+    {
+      "startSeconds": 316,
+      "text": "server component and we're trying to add interactivity here right so now something here needs to become a client component now if we would make this a client component use clients all of this is affected by it right so the form and other elements that don't even need any interactivity now they also become client components and maybe you're using"
+    },
+    {
+      "startSeconds": 333,
+      "text": "some big third-party library in the form or some other elements here now that will also get shipped to the client all because we're making this a client component just for this button here and so it's better to basically remove this put it into its own component like here mark this as the client component and"
+    },
+    {
+      "startSeconds": 349,
+      "text": "then just import it here and use it like this right so now we can remove this used clients here and this this can stay a server component with all the benefits benefits that we get from it and still import this client component here and just use it like this you get the same result with all the benefits from server components alright so a big"
+    },
+    {
+      "startSeconds": 364,
+      "text": "misconception a big mistake that people are making as well is with these provider components so let's say you're using the context API are you using some third-party library that has some kind of Provider component so basically this happens when a lot of your components in your react app need access to data so with the context API for example you"
+    },
+    {
+      "startSeconds": 381,
+      "text": "have this theme context provider I'm just leaving out the context details here and it takes in children and it also passes through the children that's very typical here and then you want to wrap parts of your app that need access to the data with this provider component so typically a third typical pattern here is if we go into this root layout"
+    },
+    {
+      "startSeconds": 400,
+      "text": "file if you're going to wrap basically the entire app in that provider component right this is a very typical pattern here where all the pages essentially now get access to the value that you are passing through with the provider component now these provider components are typically client components and now the question is since"
+    },
+    {
+      "startSeconds": 417,
+      "text": "this is a client component and we are wrapping basically our entire app with this do all of these other components now also become client components and the answer is no so something becomes a client component if you add use clients in the file or you import it in another client component right so you need to pay attention to basically the the"
+    },
+    {
+      "startSeconds": 437,
+      "text": "import tree not the render tree so these children here all these components in here can still be server components and this can be a client's component because here it's just taking the children and passing through the children right so if you want to have server components inside a client component you have to use this children pattern to pass"
+    },
+    {
+      "startSeconds": 454,
+      "text": "through the server components like this right so that was a common misconception that if this is a client's component and everything in here automatically becomes a client component that's not true if you're using that children pattern right so this can all stay server components would also be kind of strange because"
+    },
+    {
+      "startSeconds": 468,
+      "text": "this is such a typical pattern in react and would be kind of strange if this would undo all those benefits from server components that doesn't really make sense so that's not how it works right so the way to think about it is it's not about the structure of how we're rendering it here it's about the structure of the import right so here if"
+    },
+    {
+      "startSeconds": 482,
+      "text": "I import button into this client component the button becomes a client component but here just because we are rendering server components within a client component as long as we're using the children pattern that doesn't change anything right so it's really about the Imports and not really about this rendering tree but another way of"
+    },
+    {
+      "startSeconds": 500,
+      "text": "looking at it is that's basically this use client is basically the boundary for server and client components so as soon as you add a used clients here everything that gets imported will also become client component so this is basically a boundary we don't even right so this button right now I don't even need to add use client here the fact"
+    },
+    {
+      "startSeconds": 516,
+      "text": "that I'm importing is here in this page here will mean that it becomes a client component so it's basically like a boundary and then if I if I import something else here like an icon an icon component that would also become a client component even though this file itself does not have used clients if I would import another components in here"
+    },
+    {
+      "startSeconds": 533,
+      "text": "that also becomes a client component right so here we're basically defining a boundary in the reactory like from now on everything that gets importers here will also become client component right and those components in turn when they import something they also become client components all right now very tricky"
+    },
+    {
+      "startSeconds": 547,
+      "text": "what if you have a button and let's say we're importing that here in a form and let's make this form use client so this is going to be a client component this button itself does not have used clients so this is not inherently a client component this is a client component we're importing the button here now as you know you can import components in"
+    },
+    {
+      "startSeconds": 565,
+      "text": "multiple other components so this post could also import button right so here we could add button here and this post is a server component so now I'm importing the same component in a server component as well as in a client component so what's going to happen here well it actually works as expected so basically this component here is"
+    },
+    {
+      "startSeconds": 583,
+      "text": "instantiated twice and in the in relation to this form here in the context of the form it's going to be a client's component but in relation to the poster in the context of the post components here it will stay a server component and so all of this is very confusing at first and my react next to S course is almost finished I highly"
+    },
+    {
+      "startSeconds": 600,
+      "text": "recommend you get on the list and if you do that you get a discount code when I release it now I do want to mention I see a lot of people they're jumping into react and next.js with a lot of enthusiasm but you do need to make sure that you have mastered the underlying fundamentals those are both JavaScript as well as CSS I have courses on them"
+    },
+    {
+      "startSeconds": 613,
+      "text": "highly recommend you go through them the links are in the description right so it's very easy to pick up reacts and xjs once you have mastered JavaScript and also very easy to pick up something like deal with when you've mastered CSS right so I highly recommend you check it out and if you like the video I would really"
+    },
+    {
+      "startSeconds": 626,
+      "text": "appreciate it if you like if you could leave a like as well as subscribe with the notifications on then I recommend you check out the next video and I hope to see you there"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:11.843Z"
+}

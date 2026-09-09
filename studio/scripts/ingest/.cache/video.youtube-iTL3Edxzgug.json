@@ -1,0 +1,75 @@
+{
+  "_id": "video.youtube-iTL3Edxzgug",
+  "videoId": "iTL3Edxzgug",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=iTL3Edxzgug",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Running Multi-Container Apps"
+    },
+    {
+      "startSeconds": 12,
+      "label": "What is Docker Compose?"
+    },
+    {
+      "startSeconds": 29,
+      "label": "Docker Compose File Structure"
+    },
+    {
+      "startSeconds": 55,
+      "label": "Basic docker-compose up Command"
+    },
+    {
+      "startSeconds": 68,
+      "label": "Command Variations"
+    },
+    {
+      "startSeconds": 93,
+      "label": "Multi-Container Example"
+    },
+    {
+      "startSeconds": 123,
+      "label": "What Happens When You Run docker-compose up"
+    },
+    {
+      "startSeconds": 150,
+      "label": "Key Benefits"
+    },
+    {
+      "startSeconds": 178,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Let's explore how to run multicontainer applications. Docker compose in action. Orchestrating multiple Docker containers with a single command using Docker Compose. Docker Compose is a YAML based tool for defining and running multicontainer Docker applications with simplified orchestration. It uses a single configuration file. It"
+    },
+    {
+      "startSeconds": 24,
+      "text": "can deploy with one command and handles service dependencies. Here is the structure of docker compose file. The file name is dockerympose.yiml. This yaml configuration file defines services networks and volumes for your application. Below is the example code. Version 3.8 services web image jinx ports 80 database image postgress."
+    },
+    {
+      "startSeconds": 56,
+      "text": "The basic docker compose up command. dollar docker hyphen compose up starts all services defined in dockery compose.iml with a single command. Here are some common command variations. Docker hyphen compose up hyphen d run containers in detached mode that is background. Docker hyphen compose up double hyphen build images before starting containers."
+    },
+    {
+      "startSeconds": 86,
+      "text": "docker hyphen compose up service underscore name start only specific service and dependencies here is an example of a multicontainer application a web app stack it has a front-end service a database service a cache service all connected and orchestrated together services web image jinx alpine ports 8080 col 80 API image node col ports 3000 col 3000"
+    },
+    {
+      "startSeconds": 118,
+      "text": "database image postgress 13. This is what happens when you run dockery compose up. Number one, it reads dockerympose.yiml configuration. Number two, it creates a default network for services. Number three, it pulls required docker images if not present. Number four, it creates and starts containers for each service."
+    },
+    {
+      "startSeconds": 145,
+      "text": "Number five, it attaches to containers and streams logs. Here are some key benefits of using Docker Compose. Simplified deployment. Start entire application stack with single command. Service coordination. Automatic dependency management between containers. Environment consistency. Identical setup across development and"
+    },
+    {
+      "startSeconds": 171,
+      "text": "production. Easy configuration declarative YAML based infrastructure as code. If you like this video, hit that like button and don't forget to subscribe. Visit codelucky.com for more such useful content. [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:16.519Z"
+}

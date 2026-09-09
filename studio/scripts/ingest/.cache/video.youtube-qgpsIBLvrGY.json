@@ -1,0 +1,183 @@
+{
+  "_id": "video.youtube-qgpsIBLvrGY",
+  "videoId": "qgpsIBLvrGY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=qgpsIBLvrGY",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 26,
+      "label": "F Tier: Plaintext"
+    },
+    {
+      "startSeconds": 55,
+      "label": "D Tier: Encryption"
+    },
+    {
+      "startSeconds": 110,
+      "label": "C Tier: Hashing"
+    },
+    {
+      "startSeconds": 322,
+      "label": "B Tier: Hashing + Salting"
+    },
+    {
+      "startSeconds": 415,
+      "label": "A Tier: Slow Hashing"
+    },
+    {
+      "startSeconds": 525,
+      "label": "S Tier: Don't Store Passwords"
+    },
+    {
+      "startSeconds": 558,
+      "label": "Recap"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "if you're building a product that requires logging in you probably have to deal with storing passwords but storing passwords opens you up to security risks like someone breaking into your database stealing all your passwords and dealing immense reputational damage to your product so how do you store passwords in a secure fashion"
+    },
+    {
+      "startSeconds": 16,
+      "text": "let's start from the worst way and steadily work our way up to something a little more secure i'm going to assume you have a little bit of software engineering knowledge let's go the ftr way to store your passwords is like normal data in a normal column perhaps with the rest of your user data sometimes this is called storing passwords in plain text"
+    },
+    {
+      "startSeconds": 34,
+      "text": "this is pretty bad because if a hacker gains access to your database they can steal all the passwords effortlessly security is all about multiple lines of defense and storing passwords in plain text is not a defense if your database is breached you're done and database breaches happen quite often that's why this is f-tier"
+    },
+    {
+      "startSeconds": 53,
+      "text": "but how can we do better if you watched my encryption video you might think that we should encrypt these passwords that's definitely an improvement because if they break into your database they get gibberish instead of useful information however if they do get access to the key then they can decrypt all the passwords"
+    },
+    {
+      "startSeconds": 68,
+      "text": "and you're unfortunately right back to ftr it's definitely nicer that the passwords aren't just sitting out there in the open but if a hacker has access to your database already it may not be much more effort for them to steal the decryption key too from an adjacent server or config file also storing passwords in a way that"
+    },
+    {
+      "startSeconds": 83,
+      "text": "makes it possible to retrieve the password increases the risk of an inside job where an employee with privileged access to the key decrypts people's passwords for nefarious purposes the expert protection certainly helps but this is the tier how do we get to see the key insight is that we only need to know when the user types in the same password"
+    },
+    {
+      "startSeconds": 102,
+      "text": "as when they signed up we don't actually need to know the password itself you might think the two are one of the same but they actually aren't it's possible to take a password and generate a fingerprint from it which will let us know if we encounter the same password in the future but still be unable to recover the"
+    },
+    {
+      "startSeconds": 118,
+      "text": "password directly from the fingerprint this is a technique known as hashing how do we use hashing when the user signs up we take the password they provide generate a small fingerprint or hash and store it instead of the actual password in the future when the user tries to log in we take the password they typed in"
+    },
+    {
+      "startSeconds": 136,
+      "text": "run the same hashing process and see if the output hashes compare if the hashes are the same it's overwhelmingly likely that they typed in the correct password thanks to the power of hashing we're able to verify someone's password without storing the actual password hashing might sound a little magical at the moment how does hashing prevent"
+    },
+    {
+      "startSeconds": 156,
+      "text": "someone from recovering their original password from the output hash and how does it prevent two strings from hashing to the same thing and allowing someone to log in with the wrong password for the first one how to prevent someone from recovering the original password the process of hashing involves a lot of aggressive mixing of the data in the"
+    },
+    {
+      "startSeconds": 172,
+      "text": "original input to produce the output it's like taking three paints of different colors and mixing them together which probably results in some weird shade of brown with just the brown you'll probably be unable to guess the original three colors that made the brown in the same way you can't figure out the original password from the hash because"
+    },
+    {
+      "startSeconds": 188,
+      "text": "the bits in the data have all been thoroughly mixed and scrambled this property is known as being a one-way function like a one-way street once you hash you can't unhash for the second which is how hashing makes it hard for two strings to hash to the same value known as a hash collision the answer is similar to what i just said"
+    },
+    {
+      "startSeconds": 206,
+      "text": "the hash function mixes the data in such a way that even small tweaks in the input result in totally different hashes as a result for good hash functions there is no publicly known way to generate two strings whose hashes collide without just trying many many many strings no luck with these ten this property is called collision resistance"
+    },
+    {
+      "startSeconds": 225,
+      "text": "picking the right hash function is important we used to think that older hash functions that you may have heard about like md5 and sha-1 had collision resistance but cryptographic progress marches on and they've been proved insecure for example about a decade ago researchers published a method for generating a collision"
+    },
+    {
+      "startSeconds": 243,
+      "text": "two strings that have the same md5 hash that you can run in about a second on your laptop so we've moved on to stronger hash functions like sha2 which is the one i've been using in this video with our new hashing technique under our belt let's hash all the passwords in our database instead of encrypting them to arrive at cd or password storage now"
+    },
+    {
+      "startSeconds": 262,
+      "text": "we don't have a key that effortlessly unlocks the password table like before which is definitely an improvement however we need to talk about dictionary attacks as it turns out many people use extremely weak passwords like password or one two three four five six if a hacker has access to your database they can just run your hash function"
+    },
+    {
+      "startSeconds": 279,
+      "text": "on password or one two three four five six to get the hash and then find all the hashes that match in your database voila they've broken those people's passwords this is called a dictionary attack because you could run through the dictionary hashing words as you go and seeing if any of them match the hash remember that it's not possible to"
+    },
+    {
+      "startSeconds": 295,
+      "text": "directly turn a hash back into a password in general however because the hacker knows the hash came from a password they can use their knowledge of human nature to narrow down the possible guesses which makes guessing feasible furthermore they can use lists of the most common passwords to pre-generate a huge database of hashes"
+    },
+    {
+      "startSeconds": 314,
+      "text": "so all they need to do is to compare their huge database to your database to find matches these databases are known as rainbow tables how can we defend against this let's go to b-tier for a technique that protects against rainbow tables but not against dictionary attacks it's a technique called salting when the user signs up"
+    },
+    {
+      "startSeconds": 332,
+      "text": "rather than directly hashing each password we can first generate a short random string called the salt then we prepend it to the string before running the hash we then store the salt next to the hashed password when the user logs in we can prepend the remembered salt to the password they entered and hash to see if it matches the stored password"
+    },
+    {
+      "startSeconds": 351,
+      "text": "it's important to use the same salt at login that was generated during signup which is why we want to store it in the database otherwise the user wouldn't be able to log in even with the right password because the hashes wouldn't match this makes rainbow tables useless because their databases only contain non-salted hashes for example these"
+    },
+    {
+      "startSeconds": 369,
+      "text": "users have the password qwerty but the table doesn't match anymore this has the added benefit of decorating users who have the same password previously if two users use the same password their hashes would be the same which is not ideal because you can see that they have the same password even if you don't know what the password actually is"
+    },
+    {
+      "startSeconds": 387,
+      "text": "now even though their passwords are the same their salts are different so the hashes are different but why is this still beat here remember the other issue we talked about which is dictionary attacks an attacker with a list of common passwords can still try all of them against the hash using the salt they don't get the benefit of"
+    },
+    {
+      "startSeconds": 404,
+      "text": "precomputation but they can still start from scratch furthermore specialized hardware like gpus have made it possible for people to compute billions of hashes per second which translates into billions of guests per second how on earth do we stop this one let's see what a tier has to say an a tier is using a specialized"
+    },
+    {
+      "startSeconds": 422,
+      "text": "password hashing function that is deliberately slow the previous hash functions we discussed are designed to be fast because they're used for other applications besides passwords password hashing functions like bcrypt script and argon 2 come with salting for free and more importantly are designed to be really really really slow"
+    },
+    {
+      "startSeconds": 440,
+      "text": "to consume lots of power and to take lots of memory it sounds weird but this is actually on purpose to defend against the overwhelming power of hardware the billions of hashes per second we saw a moment ago can be slowed down to mere thousands per second if not even slower because you can actually choose the level of slowness you want"
+    },
+    {
+      "startSeconds": 458,
+      "text": "this is known as the work factor with only thousands of guesses per second that's still enough to easily go through the most common passwords but it's not enough to break tougher or more obscure passwords with the high enough work factor hackers might be able to break some of the passwords in your system but not all of them"
+    },
+    {
+      "startSeconds": 475,
+      "text": "after all the goal of security is not to be immune to attacks which is impossible but to hinder attackers enough that they turn their attention to other places as a concrete example let's look at bcrypt the output of b crypt looks like this it has a prefix that identifies the output as a decrypted thing a work factor a 22 character salt and a"
+    },
+    {
+      "startSeconds": 494,
+      "text": "31 character hash the most interesting thing about this is that the work factor is exponential when you increase the work factor by 1 the function becomes twice as slow here's a graph of decrypt hash time by work factor on my laptop the exponential increase is quite clear most folks recommend setting it to around 15 for real use cases which takes"
+    },
+    {
+      "startSeconds": 514,
+      "text": "1.3 seconds on my laptop fun fact when it was first published the recommended work factor was just six which would take just two milliseconds on my modern laptop so is that it are we done is there an even higher tier s tier it's kind of a trick answer but there is s tier is not storing passwords at all as we've learned in this video storing"
+    },
+    {
+      "startSeconds": 536,
+      "text": "passwords is quite tricky so consider ways to avoid doing it at all for example you can use other authentication services like sign in with google or sign in with facebook and others so that users can log into your product using an established authentication platform not only is it more convenient for users you get to sleep better at night knowing"
+    },
+    {
+      "startSeconds": 554,
+      "text": "that your system doesn't have any passwords at all in it that's all i have for today let's recap first we looked at storing passwords in plain text which means anyone can easily access them so we considered encrypting them which is not ideal because their original form can still be recovered we introduced hashing to make that"
+    },
+    {
+      "startSeconds": 571,
+      "text": "impossible but we saw that people can pre-compute huge rainbow tables to quickly break passwords to counteract that we introduce salting which individualizes each password with a random string called the salt so that precomputed databases don't work anymore unfortunately hardware is so fast that even without precomputed"
+    },
+    {
+      "startSeconds": 588,
+      "text": "databases attackers can still try billions of guesses per second so we need to switch to deliberately slow password hashing functions that greatly decrease the rate of guesses finally we bypass the whole problem by considering how to not store passwords at all i hope this was helpful if you enjoyed this video please consider sharing it"
+    },
+    {
+      "startSeconds": 606,
+      "text": "with somebody else who might also enjoy it thanks again"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:05.588Z"
+}

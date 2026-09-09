@@ -1,0 +1,179 @@
+{
+  "_id": "video.youtube-cRz0BWkuwHg",
+  "videoId": "cRz0BWkuwHg",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=cRz0BWkuwHg",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 23,
+      "label": "What is Rag"
+    },
+    {
+      "startSeconds": 55,
+      "label": "Why is evaluating RAG important"
+    },
+    {
+      "startSeconds": 112,
+      "label": "Retrieval Matrix"
+    },
+    {
+      "startSeconds": 262,
+      "label": "Generation Metrics"
+    },
+    {
+      "startSeconds": 312,
+      "label": "Evaluation Data Set"
+    },
+    {
+      "startSeconds": 416,
+      "label": "Chain of Thought"
+    },
+    {
+      "startSeconds": 451,
+      "label": "Length"
+    },
+    {
+      "startSeconds": 479,
+      "label": "User Queries"
+    },
+    {
+      "startSeconds": 521,
+      "label": "Topic Clustering"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "you are probably implementing rag systems missing out on easy improvements most don't even have an evaluation pipeline how can you know if it's optimal or if the system is improving with any changes this is only through real evaluation which is different from evaluating llms them cells let's dive into the key evaluation metrics and"
+    },
+    {
+      "startSeconds": 19,
+      "text": "methods we found useful while developing rag systems at to rag combines retrieval mechanisms as in Google search with generative models like GP 4 to improve response quality and relevance as a quick reminder on what rag is rag is simply the process of adding knowledge to an existing llm into the input prompt it's most useful for private data or"
+    },
+    {
+      "startSeconds": 42,
+      "text": "Advanced topics the llm might not have seen during its training in rag the most basic setup is to inject additional information along with your prompt so that it can be used to formulate a better answer so why is evaluating rag systems important effectively evaluating and optimizing llm based systems like rag can be the difference between a nice"
+    },
+    {
+      "startSeconds": 64,
+      "text": "demo and a highly useful trustworthy llm tool or product whether you are developing a customer service butt or a research tool good evaluation will help you create more reliable and effective AI solutions that can actually be shipped to production for example if you're building a legal research tool with rag it will need to be contextually"
+    },
+    {
+      "startSeconds": 84,
+      "text": "appropriate and up to date you can't just assume it will work fine you need proper evaluation to ensure a good interpretation of legal jargon and relevant information now you might think I tested the app and the answers look fine while testing the application yourself is very important yes you need to play with it yourself which we call"
+    },
+    {
+      "startSeconds": 103,
+      "text": "Vibe checking it doesn't tell you the whole story we need more rigorous methods and metrics to ensure the llm applications are performing optimally as we've said rag systems have two distinct components that need evaluation the retrieval component and the the answer generation component let's discuss how to evaluate both starting with the most"
+    },
+    {
+      "startSeconds": 125,
+      "text": "relevant metrics we'll discuss the overall pipeline including the data set needed for that in a few minutes retrieval Matrix focus on how well the system retrieves relevant information from its knowledge base so you have your data set and you want to find if the system is able to find the most valuable information to answer a user question"
+    },
+    {
+      "startSeconds": 144,
+      "text": "here you could use four metrics to do that the first is Precision Precision measures the proportion of relevant documents among the retrieved documents it's particularly useful when you want to ensure that the information your system retries is highly relevant such as in medical diagnosis tool where false positives could be dangerous then you"
+    },
+    {
+      "startSeconds": 166,
+      "text": "have the recall recall measures the proportion of relevant documents that were successfully retrieved it's crucial in scenarios where missing important information could be costly like in legal research where overlooking a Rel relevant precedent could affect the outcome of a case we then have the hit rate the hit rate measures the"
+    },
+    {
+      "startSeconds": 185,
+      "text": "proportion of queries for which at least one relevant document is retrieved within the top few results and you decide of how many results reflecting the retrieval system's ability to find relevant documents at all one of the most used metric is the main reciprocal rank or Mr it evaluates how high the first relevant document appears in the"
+    },
+    {
+      "startSeconds": 207,
+      "text": "search results it's valuable for system where users typically focus on the top few results like in a web search engine finally we can use the normalized discounted cumulative gain or ndcg this takes into account both the relevance and the ranking of retrieved documents it's particularly useful for recommendation systems or any"
+    },
+    {
+      "startSeconds": 226,
+      "text": "application where the order of results matters here Mr is useful for evaluating systems where the rank of the first relevant document is most important such as search engines like top one to three Google results ndcg provides a more holistic measure of ranking quality considering the relevance and Order of all documents making it ideal for"
+    },
+    {
+      "startSeconds": 247,
+      "text": "applications like recommendation systems where the entire list is important like a top 10 list for example you can then use these five metrics to measure how well your rag system can find relevant information to send along with the prompt to the LM now the second step is to evaluate the llm answer with the generation metrics we have three main"
+    },
+    {
+      "startSeconds": 267,
+      "text": "metrics to do that the first is is faithfulness faithfulness measures the Integrity of the answer concerning the retrieved context it ensures that the generated response accurately reflects the information in the retrieved documents without producing false or unrelated information the second is answer relevancy it evaluates the"
+    },
+    {
+      "startSeconds": 287,
+      "text": "relevance of the generated answer to the original query it helps ensure that the system is not just retrieving a relevant documents but also using the information to generate pertinent responses lastly we have n answer correctness the correctness assesses whether the generated answer aligns with a given queries reference answer it's"
+    },
+    {
+      "startSeconds": 306,
+      "text": "particularly useful when you have a set of ground truth answers to compare against okay so that's cool and all we have metrics to evaluate our llm but then we need a data set to Run demon an evaluation data set can be done by leveraging expertise from domain experts using your own knowledge if you have domain expertise or even using a"
+    },
+    {
+      "startSeconds": 327,
+      "text": "powerful llm to generate complex and contextually Rich questions from your indexed data remember to review and refine these questions yourself to ensure they reflect real word usage you basically want to generate artificial or ideally real questions where the answers is in your data set you can then see if the answer provided leverages the right"
+    },
+    {
+      "startSeconds": 348,
+      "text": "data and gives the expected answer using the metrics we've just discussed now what about the answers assuming we've got the right information to answer the question how can we judge if the the generation is good one of the cool new approaches for evaluating the generation is using another llm as a judge Guided"
+    },
+    {
+      "startSeconds": 367,
+      "text": "by generation metrics this approach can be highly effective but it's important to follow some best practices first when using an llm to evaluate outputs it's often more effective to have it compare two responses rather than evaluate a single response in isolation it gives it some sort of Baseline to then see if the"
+    },
+    {
+      "startSeconds": 385,
+      "text": "second response is better or not this is called pairwise comparison and usually provides a clearer Benchmark for quality but then when presenting pairs of responses to the llm judge you need to randomize the order you give them llms tend to have a bias with order like always fing the first option for example similarly you need to allow for ties"
+    },
+    {
+      "startSeconds": 406,
+      "text": "it's possible that two answers are just as good give the llm judge the option to declare responses are just equally good this can provide more nuanced evaluations and the best tip is to use a Chain of Thought approach when evaluating asking the llm to explain its reasoning before making a final decision this can lead to more reliable and"
+    },
+    {
+      "startSeconds": 426,
+      "text": "interpretable evaluations since llms only generate one token at a time or one word at a time they don't think like us they don't have some sort of mental map of what they want to say and how they will say it they do this on the Fly asking it to go step by step or even write a plan of action first allows them to have this plan in their context"
+    },
+    {
+      "startSeconds": 446,
+      "text": "acting as some sort of artificial thinking before generating The Final Answer improving the results and evaluation a lot our last tip is to try to ensure that responses are similar in length When comparing them this helps create a fairer comparison as length can sometimes unfairly influence perceived quality by incorporating these llm based"
+    },
+    {
+      "startSeconds": 468,
+      "text": "evaluations alongside traditional retrieval metrics we can get a more comprehensive view of our rag systems performance addressing both the retrieval and generation aspects then any tweak feature or prompt can be linked to a quantitative change along with a necessary qualitative check you must always do to check the systems Vibe"
+    },
+    {
+      "startSeconds": 488,
+      "text": "however these metrics and Vibe checking yourself aren't enough we must consider the broader context of how our rag system is used this brings us to a critical point that's often overlooked the importance of understanding your users's actual needs one of the most effective ways to do this is by logging and analyzing user queries by"
+    },
+    {
+      "startSeconds": 508,
+      "text": "implementing logging system you can capture every question asked to your rag system then using techniques like topic clustering you can analyze these questions to identify common themes and patterns for example we've built an llm application for a client after analyzing user queries they finally discovered that around 80% of the questions were"
+    },
+    {
+      "startSeconds": 529,
+      "text": "about a very specific subset of topics this Insight allowed them to focus optimization efforts where they'll have the most impact you can tailor your evaluation data sets to these highfrequency topics ensuring that your systems performs exceptionally well on the queries your users care most about it's also then much easier to Vibe check"
+    },
+    {
+      "startSeconds": 549,
+      "text": "than trying to check the whole set of possible questions you now have your reason for evaluating your metrics and ways to do it automatically so what's left the next step is to implement it we suggest using libraries like ragas to automate and scale your evaluation process don't code everything yourself these tools can help you measure various"
+    },
+    {
+      "startSeconds": 569,
+      "text": "aspects of your rag systems performance including both retrieval and generation quality including all the metrix we've mentioned in the video of course last but not least don't forget human evaluation while automated Matrix and llm based evaluations are valuable and more scalable human judgment is still the gold standard especially for"
+    },
+    {
+      "startSeconds": 590,
+      "text": "assessing factors like fluency naturalness of responses and overall usefulness in real world scenarios and as we've said your users are best place to evaluate this which can be done for example through some AB testing or paying people to do that you now have the tools to go beyond basic metrics and really understand how well your rag"
+    },
+    {
+      "startSeconds": 609,
+      "text": "system is performing in real world scenarios focusing on the topics that matters most to your users if you see this video from YouTube I invite you to check out our course on Advanced rag architectures in it we discuss techniques like re ranking quer expansion and lots more to build a state-of-the-art rag system from basic"
+    },
+    {
+      "startSeconds": 628,
+      "text": "implement mentation of to Advanced optimization techniques"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:40.660Z"
+}

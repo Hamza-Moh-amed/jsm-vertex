@@ -1,0 +1,86 @@
+{
+  "_id": "video.youtube-yGsGQBGzy6Y",
+  "videoId": "yGsGQBGzy6Y",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=yGsGQBGzy6Y",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "in this video i will take a look at euclidean distance versus cosine similarity distance measurement and also the logic or cases of using the using one versus the other so we can see from this image here that cosine similarity looks at the angle between two vectors whereas euclidean similarity looks at the distance between"
+    },
+    {
+      "startSeconds": 24,
+      "text": "two points so euclidean distance has no idea or no concern about the correlation or the angle between two vectors because euclidean distance is only about the pure distance measurement now let's say you are in an e-commerce settings and you want to compare users for product recommendation so let's say i have these three user user"
+    },
+    {
+      "startSeconds": 53,
+      "text": "one user two and three and we can see the differences between them user one bought one x eggs one x flower and one egg sugar use a two bought 100 x eggs 100x flour and 100x sugar and use a three baht 1x eggs 1x vodka and onyx redbull now by cosign similarity metric user 1 and user 2 are more similar because both bore the"
+    },
+    {
+      "startSeconds": 81,
+      "text": "same items eggs flour and sugar it does not consider that the user to bought 100x and user 1.1x but by euclidean similarity user 3 is more similar to user 1. that's because user 3 and user 1 both bought one x quantity of each item but then uh user one bought flour instead of that user two bought sorry use a three"
+    },
+    {
+      "startSeconds": 109,
+      "text": "board vodka and also user one bought sugar whereas user 3 bought red bull so the items are different for user 3 but because they bought the same quantity so by euclidean distance metric user 1 and user 3 are more similar now let's discuss about the situation where dimension increases because that's where uh the choice between a cosine distance and"
+    },
+    {
+      "startSeconds": 135,
+      "text": "euclidean distance metric becomes uh most argumentative and most confusing so generally when i have more dimensions that it was mathematically proven that the more dimensions i have the closer the average distance and the maximum distance between randomly placed points become which means that euclidean distance matrix suffers when dealing with high"
+    },
+    {
+      "startSeconds": 162,
+      "text": "dimension similarly the average angle between uniformly randomly placed points become 90 degree at high dimension that is in high dimension even cosine distance metric also suffers now think of an example of a 200 dimensional space which is very very common in uh most uh machine learning projects or whether nlp projects so a"
+    },
+    {
+      "startSeconds": 189,
+      "text": "200 dimensional space is so so empty that everything is far from everything else that's why many argue that using cosine similarity in high dimensional space because everything is far from everything else so if two vectors are pointing in the same direction that is under the cosine similarity metric then that's already pretty good because"
+    },
+    {
+      "startSeconds": 213,
+      "text": "in that case we are getting some sense of the relation between two two vectors in high dimension but then there's argument for using euclidean distance as well in the high dimensional space first of all cosine distance is not impervious to the curse of dimensionality uh which is what we just talked about that in high dimension two"
+    },
+    {
+      "startSeconds": 234,
+      "text": "randomly picked vectors will be almost orthogonal that is the angle between them will be 90 degree with high probability which will make the cosine distance matrix less relevant in the high dimension it is easy to see that cosine is essentially the same as euclidean on normalized data the normalization takes away one degree of freedom thus"
+    },
+    {
+      "startSeconds": 260,
+      "text": "cosine on 1000 dimensional space is about as cars as euclidean on a 999 dimensional space now consider the case that i want to compute the semantic similarity of two words using their vector representation and the vector representation may be word to vague or globe the popular word vectors so now the key question is"
+    },
+    {
+      "startSeconds": 286,
+      "text": "shall i use the euclidean distance or the cosine similarity now i will present to you the logical case for both cosine and euclidean there are cases for both side first of all if globe vectors gives you normalized unit vectors then just as we discussed the two calculation that is euclidean or cosine becomes kind of equivalent so"
+    },
+    {
+      "startSeconds": 313,
+      "text": "given that they are equivalent then some argue that in this case rather use cosine similarity since it removes effect of document length and what do i mean by that for example a postcard and a full length book may be about the same topic but will likely be quite far apart in pure term frequency space using the euclidean"
+    },
+    {
+      "startSeconds": 338,
+      "text": "distance because under the down frequency or tf idea frequency metric the full length books measurement of frequencies may be much much higher than the postcard so that means in that case the high values of each vector term due to high frequency of some terms will put a similar meaning word far away but with cosine similarity metric they will be"
+    },
+    {
+      "startSeconds": 365,
+      "text": "right on top of each other so rather use cosine similarity but now we consider the logic for using euclidean distance measure for this situation now the reason for using cosine similarity was completely based on term frequency metric but if we are using word vectors using word to vector globe then the vector terms are basically random weights"
+    },
+    {
+      "startSeconds": 393,
+      "text": "of the neural network that they were trained on it does not represent the term frequency count anymore so given that's the case shouldn't we be taking euclidean distance instead of cosine like what if a words word vector occurs very far from another word but in the same line then cosine similarity would be high since the angle between"
+    },
+    {
+      "startSeconds": 416,
+      "text": "these two vectors is almost zero but euclidean distance would be high since these two vectors are far off in a sense if these two words happen to be different words indeed as their weight vectors are derived by word to fake or glove then we do want them to be different which will be captured by euclidean distance and missed by cosine similarity"
+    },
+    {
+      "startSeconds": 443,
+      "text": "in that case cosine similarity would give wrong result and euclidean distance makes more sense so question is cosine distance makes sense if the vector used is created out of term frequency or tf idf measurement but if the vectors created is word embeddings as a result of a of training a neural network does it still make"
+    },
+    {
+      "startSeconds": 468,
+      "text": "sense to use cosine in high dimensional space"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:57.846Z"
+}

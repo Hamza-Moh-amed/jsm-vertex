@@ -1,0 +1,139 @@
+{
+  "_id": "video.youtube-gkg-FAEXIkY",
+  "videoId": "gkg-FAEXIkY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=gkg-FAEXIkY",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 31,
+      "label": "C, A, and P"
+    },
+    {
+      "startSeconds": 48,
+      "label": "Consistency"
+    },
+    {
+      "startSeconds": 111,
+      "label": "Availability"
+    },
+    {
+      "startSeconds": 137,
+      "label": "Partition Tolerance"
+    },
+    {
+      "startSeconds": 174,
+      "label": "C, A, and P Recap"
+    },
+    {
+      "startSeconds": 193,
+      "label": "The CAP Theorem"
+    },
+    {
+      "startSeconds": 220,
+      "label": "C & A"
+    },
+    {
+      "startSeconds": 248,
+      "label": "One Must Choose Between C and A"
+    },
+    {
+      "startSeconds": 282,
+      "label": "Why Must One Choose?"
+    },
+    {
+      "startSeconds": 338,
+      "label": "Recap"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "the cap theorem is a useful principle in distributed systems that illustrate some of the difficult trade-offs that distributed systems have to make however it has somehow solidified itself as the e equals m c squared of the software engineering world a cool piece of jargon that many people know and rattle off during interviews to sound smart and"
+    },
+    {
+      "startSeconds": 17,
+      "text": "knowledgeable even when it's not really relevant as it turns out the cap theorem is not an incredibly advanced concept that only the best engineers can comprehend it's actually fairly intuitive and i'll explain why in this video let's go the cap theorem revolves around three concepts which form the cap acronym consistency availability and partition"
+    },
+    {
+      "startSeconds": 36,
+      "text": "tolerance i've covered two of these in my software engineering dictionary series but they have slightly different meanings here so i'm going to cover them again after that we'll get to the theorem itself consistency in the cap theorem context means that when someone queries the system for information the most up-to-date information is always"
+    },
+    {
+      "startSeconds": 55,
+      "text": "returned in a distributed system multiple servers or nodes are reading and writing information and have to take extra care to maintain consistency for example we might ask a distributed system to write some info like one the node receiving the request might broadcast the information to other nodes so that they get the most up-to-date"
+    },
+    {
+      "startSeconds": 75,
+      "text": "information too then we might ask the system to write too this system has consistency if after the system says i'm done query again always returns too on the other hand in a system without consistency after the system says i'm done i could query a node and it could return stale information for example if i write 3 then query a different node"
+    },
+    {
+      "startSeconds": 98,
+      "text": "before the information propagates to it it might return two which is stale we can sum consistency up as when the system returns information it is always the latest information the next term is availability this one is easier it means that all incoming requests receive a useful response for example if we query a distributed"
+    },
+    {
+      "startSeconds": 119,
+      "text": "system it is available if it returns useful data even if it's stale as long as they return something it's considered available on the other hand if it isn't able to handle my request then it's not available we can sum this one up as the system always returns info and never stops functioning the last one is partition tolerance"
+    },
+    {
+      "startSeconds": 138,
+      "text": "which is about reacting to a network partition a network partition is when some of the nodes in a distributed system are unable to contact each other it's like the scene in a horror movie when a wall comes down and separates the protagonists into two parties and each party has to fend for itself when a network partition happens any"
+    },
+    {
+      "startSeconds": 156,
+      "text": "communication between any set of nodes might be cut off like this or like this so the network is partitioned into pieces partition tolerance means that during a partition the system can continue to operate a system without partition tolerance simply goes down if there's a network partition those are the three pieces of the cap"
+    },
+    {
+      "startSeconds": 175,
+      "text": "theorem here's a quick recap consistency is when the system returns info it's always the latest info availability is the system always returns some information even if it's stale and partition tolerance is when the system can continue operating during a network partition now back to the cap theorem the cap theorem states that you could have only"
+    },
+    {
+      "startSeconds": 196,
+      "text": "two of the three properties in a distributed system but not all three for example if you design a system with consistency and availability it can't also be partition tolerant if you design a system with consistency and partition tolerance it can have availability so there are three possible choices cna cnp and a and p we can cover what this"
+    },
+    {
+      "startSeconds": 217,
+      "text": "means case by case the first one is cna this means that our system can have consistency and availability but can't be partition tolerant in other words if there is no network partition we can guarantee consistency and availability this generally makes sense because when a network partition isn't happening the system is running normally and thus can"
+    },
+    {
+      "startSeconds": 239,
+      "text": "have both consistency and availability because there's no need to make trade-offs that means it can always respond to every request with the latest information now if there's a partition what should we do well if we want to keep operating during a partition we need either c and p or a and p in other words if there is a partition"
+    },
+    {
+      "startSeconds": 258,
+      "text": "we must choose between consistency and availability this is the crux of the theorem in fact the cap theorem could be rewarded like this to be much clearer during a network partition a distributed system must choose between consistency and availability in my opinion the pic2 terminology is confusing and hard to understand which"
+    },
+    {
+      "startSeconds": 279,
+      "text": "could be why people like to quote it because it sounds cool so why during our partition do we need to choose between consistency and availability well during a partition the network is cut into pieces so the different pieces of the system have to independently make a decision should they keep accepting traffic or should they stop because there is a"
+    },
+    {
+      "startSeconds": 298,
+      "text": "partition if they keep accepting traffic which means they keep availability they run the risk of creating inconsistency because each piece might claim to be the authoritative system remember that during a partition the pieces can't talk to each other so they don't know if the other pieces are still operating or have died"
+    },
+    {
+      "startSeconds": 315,
+      "text": "a client could write data to one of the pieces then write some data to a different piece then if the network partition heals there's a conflict between the two pieces that needs to be resolved which can get pretty messy on the other hand if the system stops accepting traffic while there is a partition then it loses availability but"
+    },
+    {
+      "startSeconds": 333,
+      "text": "preserves consistency that's why a partition forces a system to choose to recap the cap theorem is about how a system must pick two properties between consistency availability and partition tolerance and can't pick all three however it's more clearly stated as during normal operation a distributed system can have consistency and"
+    },
+    {
+      "startSeconds": 354,
+      "text": "availability but during a network partition it must choose between consistency and availability and why because it has to decide between accepting traffic which preserves availability but could lose consistency by potentially creating diverging data sets or stop accepting traffic which preserves consistency but loses availability"
+    },
+    {
+      "startSeconds": 377,
+      "text": "the last thing i'll mention is that people are always working on better algorithms which allow hybrids of consistency and availability during partition however there is no solution that provides 100 consistency and availability during a partition i hope that was helpful and that now the cap theorem doesn't seem all that"
+    },
+    {
+      "startSeconds": 394,
+      "text": "intimidating if you like this video please consider sharing it with someone who'd enjoy it too thanks [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:08.827Z"
+}

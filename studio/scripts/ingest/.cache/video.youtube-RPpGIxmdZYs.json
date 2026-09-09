@@ -1,0 +1,163 @@
+{
+  "_id": "video.youtube-RPpGIxmdZYs",
+  "videoId": "RPpGIxmdZYs",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=RPpGIxmdZYs",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Metadata problem with RAG"
+    },
+    {
+      "startSeconds": 45,
+      "label": "Using Lang Extract for Metadata Extraction"
+    },
+    {
+      "startSeconds": 106,
+      "label": "Building the Retrieval Augmented Generation System"
+    },
+    {
+      "startSeconds": 142,
+      "label": "Setting Up the Environment and Sample Data"
+    },
+    {
+      "startSeconds": 207,
+      "label": "Creating the Metadata Extraction Pipeline"
+    },
+    {
+      "startSeconds": 416,
+      "label": "Implementing Metadata Filters in Vector Store"
+    },
+    {
+      "startSeconds": 531,
+      "label": "Running the Example and Viewing Results"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "You probably have seen this issue with retrieval augmented generation systems. Let's say you have a document with different versions. You create text chunks and store them in a vector store. But at query or retrieval time, you get chunks from all of these documents based on your query. That will confuse your LLM because it has no way of"
+    },
+    {
+      "startSeconds": 24,
+      "text": "differentiating between different documents. A simple solution is to add reliable metadata to each chunk. But the question is how do you get that metadata? There are multiple different approaches. But one of the simpler one is to extract metadata directly from the unstructured data that is present in your text documents. And"
+    },
+    {
+      "startSeconds": 46,
+      "text": "for that you can use something like lang extract which will convert unstructured data into structured data using the power of large language models. I personally like lang extract because you can define a custom schema which is extremely helpful if you want to control the quality of your metadata. I created a detailed video on this, but in this"
+    },
+    {
+      "startSeconds": 69,
+      "text": "video I'm going to show you how you can add metadata to your retrieval augmented generation system and improve its retrieval accuracy. So this is an opensource project from Google. It's not an official Google product, but it uses powerful LLMs like Gemini series for extraction of structured data from unstructured"
+    },
+    {
+      "startSeconds": 94,
+      "text": "documents. And it also has this very neat visualization tool. They just added support for other API providers including local models that you can run through Olama. Okay, so in this video we're going to build a retrieval augmented generation system that is going to be using lang extract to enhance both the metadata and hence"
+    },
+    {
+      "startSeconds": 116,
+      "text": "filtering the documents that are going to be used by the LLM to process the user query. In the rest of the video, we're going to look at a concrete example of how you can use lang extract to convert unstructured text files into structured metadata. and then how do you use this metadata to filter out results for your retrieval"
+    },
+    {
+      "startSeconds": 141,
+      "text": "augmented generation system. Okay, so we needed to import certain packages. Details are going to be in the video description. This code is going to be available to you through a GitHub link. But right now, we're going to load our API keys. Specifically, I'm going to be using Gemini 2.5 Flash. So you will need to get your Gemini API key for this to"
+    },
+    {
+      "startSeconds": 164,
+      "text": "work. Next, we need sample data. So in this case, I created the sample data. There are a couple of different examples. So this is the API reference documentation version 2.0. There is also a legacy documentation. So this is going to be an example of a document having multiple different version. And then there are a couple of other files. So"
+    },
+    {
+      "startSeconds": 188,
+      "text": "this is storage services guide. and troubleshooting guide for authentication errors. [snorts] Each of this unstructured file has ID, title, and then raw unstructured text. So think of these as your chunks or your documents. Okay. Next, we're going to create our main processing pipeline. So for this, I created this class called fixed lang"
+    },
+    {
+      "startSeconds": 215,
+      "text": "extract processor. This is going to be our basis for creating the lang extract pipeline that is going to convert our raw text into structured data based on the userdefined schema. Now this is the most important part because the quality of your metadata is going to be dependent on how good the extraction pipeline is. Make"
+    },
+    {
+      "startSeconds": 242,
+      "text": "sure to watch my previous video on lang extract to get a better sense of how it works. But essentially, you need three pieces of information. One is your raw text. Second is an LLM call with a schema that is going to extract information from this raw text. And the third piece of information that you need to provide is really good few short"
+    },
+    {
+      "startSeconds": 268,
+      "text": "examples of how that structured data actually looks like. So here's the example prompt that we're going to be using for this example. So extract these specific fields and technical documentation. We need service name, version number, document category, rate limits of any duplicated items. Right? And now this is highly dependent on your"
+    },
+    {
+      "startSeconds": 292,
+      "text": "specific use case. And to help the LLM extract better metadata, we're going to provide few short examples as well. So this is an example text or example document that is going to go in to the LLM and from here we want to extract multiple different things. So service class or this is the service name extraction text what is going to be"
+    },
+    {
+      "startSeconds": 317,
+      "text": "extracted for this specific field and these corresponds to the items or keys that you want to extract from your data. So for example version name I think we have the payment API version 3.0. So all the information that we need is going to be provided in this example uh text or example document. So next we're going to"
+    },
+    {
+      "startSeconds": 340,
+      "text": "pass on our documents through this lang extract object that we're going to create. We provide our prompt the examples that we have here. Then the LLM that we want to use. So right now by default I want to use Gemini 2.5 flash. But you can also use other proprietary APIs or local models as well. You can also set the extraction passes. By"
+    },
+    {
+      "startSeconds": 365,
+      "text": "default, I would either set it to one or two. Make sure to also consider the cost associated with the number of passes. If you increase the number of passes, that means you're going to be making more API calls, but the results are going to be much more accurate. Okay. So, we are going to pass on our document that is"
+    },
+    {
+      "startSeconds": 385,
+      "text": "going to come from an external source along with the prompt and then we are going to extract the metadata. I have a couple of other functions which is making sure that we normalize the data. So if there are any missing fields, we have proper default values for those. Also there is a regular expressionbased extraction if everything fails. Now in"
+    },
+    {
+      "startSeconds": 407,
+      "text": "general you want to run this metadata extraction at document level and then enhance your chunks using this metadata. Once we have the metadata extraction mechanism, the next step is going to be to add this metadata to your existing chunks that you're creating and storing them in a vector store. So this is the"
+    },
+    {
+      "startSeconds": 429,
+      "text": "class that takes care of creation of the vector store plus addition of the documents along with the metadata that we are creating. So for every document we add the corresponding metadata filters. Now in this function just extracts metadata filters from the query. In this example setup, we're not doing any embedding based semantic"
+    },
+    {
+      "startSeconds": 453,
+      "text": "search. But I want to show you how you can use this in a hierarchical approach where you do initial retrieval based on specific metadata filters and then you can use a dense embedding based search on the filtered documents. So that will reduce your search space. Now at the end we're going to add the main comparison"
+    },
+    {
+      "startSeconds": 476,
+      "text": "loop. So let me walk you through how this is going to work. So first we're going to load all our sample documents. Then we're going to create an extractor that is going to extract all the metadata from the documents that we've provide. We are going to normalize everything. So if there are any missing pieces or missing metadata, we're going"
+    },
+    {
+      "startSeconds": 496,
+      "text": "to populate that. Then we create our vector store. Add our document to the vector store. We have four example queries that we're going to run through both using filtering through metadata and without that. In this case, I am just showing you how to do the retrieval part. You can just pass these documents to an LLM for subsequent generation. So"
+    },
+    {
+      "startSeconds": 522,
+      "text": "in each case we're going to look at the filters that it creates plus the documents that are being returned both with and without metadata extract. Okay. So I'm going to run python lang extract rag.py that's the example python file that we created and let's look at the whole process. So initially loading the documents right now it's running the"
+    },
+    {
+      "startSeconds": 548,
+      "text": "metadata extraction using lang extract. Since these are much smaller documents so for each one of them you're going to see a single chunk. For the first document it extracted five different entities. For the second we again extracted five entities. For third there are three entities. And for the last one again three entities. Okay. And if you"
+    },
+    {
+      "startSeconds": 570,
+      "text": "look at what these looks like. So here's the service version type for the second document. This is the type is reference version is 1.0. This is the third document. And then we have the fourth document. And since we did the normalization for version that is missing in the troubleshooting guide, we assign it the default version. But let's"
+    },
+    {
+      "startSeconds": 596,
+      "text": "look at the results. So the first question was how do I authenticate with oath in version 2.0? 0 with small filters. The first thing that it generated was version 2.0 and the second filter is services. Then there is a document with version 2.0 plus the services with authentication API. So here are the metadata actually created."
+    },
+    {
+      "startSeconds": 622,
+      "text": "So it's going to use these to filter the documents and as a result this is the only document that is going to be passed on to the LLM for final response generation. Now if you don't use this metadata based filtering you end up with four documents. Here's the second question. What are the rate limits for authentication? Again with smart filters"
+    },
+    {
+      "startSeconds": 648,
+      "text": "we figured out that we're talking about authentication service. Now in this case the API version is missing right? So it picks up both of the versions but since we have the service type we are able to reduce the search space to three documents rather than four without filter. We're going to be again using all of the documents. Now how do I"
+    },
+    {
+      "startSeconds": 674,
+      "text": "troubleshoot 401 errors? So this document type is troubleshooting where the model is able to create proper filters. Again, we're going to reduce the search space. Similarly, for the fourth one, this one is storage services. So you can see that for this example, the model is able to create proper filters using lang extract. Now"
+    },
+    {
+      "startSeconds": 699,
+      "text": "for example like this where it's able to reduce the search space to three documents you will still need a secondary dense embedding space or maybe multi vector representation based retrieval system but using proper metadata filters will help you and you're reducing the amount of data you're processing. So this was a quick"
+    },
+    {
+      "startSeconds": 724,
+      "text": "example of how you would use a system like lang extract for meta data generation and then subsequent filtering. The code is going to be available in the description. If you like the video, make sure you subscribe to the channel. Anyways, I hope you found this video useful. Thanks for watching and as always, see you in the next one."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:53.698Z"
+}

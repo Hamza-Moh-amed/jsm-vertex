@@ -1,0 +1,303 @@
+{
+  "_id": "video.youtube-YuWZNV4BkkY",
+  "videoId": "YuWZNV4BkkY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=YuWZNV4BkkY",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction & video overview"
+    },
+    {
+      "startSeconds": 25,
+      "label": "Shoutout to this video’s sponsor, Brilliant.org!"
+    },
+    {
+      "startSeconds": 131,
+      "label": "1. Running terminal commands such as “pip” directly in a notebook"
+    },
+    {
+      "startSeconds": 317,
+      "label": "Magic lines in Jupyter"
+    },
+    {
+      "startSeconds": 371,
+      "label": "2. Shortcuts that you need to know for Jupyter!"
+    },
+    {
+      "startSeconds": 565,
+      "label": "3. Changing default Pandas options to improve results display"
+    },
+    {
+      "startSeconds": 840,
+      "label": "4. Setting up notifications for when a cell finishes execution"
+    },
+    {
+      "startSeconds": 1088,
+      "label": "5. Creating slideshows from a IPython notebook!"
+    },
+    {
+      "startSeconds": 1380,
+      "label": "Conclusion (and link to bonus tip!)"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hey how's it going everyone and welcome back to another video this video is going to be a little bit different than a lot of my normal tutorials in it we're going to kind of take a step back and look at some tips tricks shortcuts hacks all sorts of things that will make your experience working with jupiter notebooks better i use jupyter notebooks"
+    },
+    {
+      "startSeconds": 17,
+      "text": "for like 95 of my data science work so having these kind of in your back pocket it's definitely helpful and definitely you know good to know before i dive into tip number one though i want to say thank you to our brilliant sponsor today and that is brilliant.org brilliant.org is a platform that allows you to learn"
+    },
+    {
+      "startSeconds": 36,
+      "text": "math physics computer science and other subjects interactively specifically when i was playing around with their platform some of the courses that caught my eye immediately was a python class but even better than that i thought was a lot of the classes that they have on algorithms and kind of computer science logic i"
+    },
+    {
+      "startSeconds": 56,
+      "text": "think the reason i like a lot of these interactive courses so much is that they allow you to kind of think about these computer science these very technical things in a much friendlier much easier to approach manner so you can like dive in in that way and so that when you do get into the weeds and do get into really challenging tough stuff it is"
+    },
+    {
+      "startSeconds": 75,
+      "text": "much easier so a lot of great courses some that immediately come to mind are algorithms and implementations the one that i liked was thinking with graphs there's also applied computer science concepts like search engines cryptocurrency quantum computing so i definitely think it's worth checking out the platform it's free to get started"
+    },
+    {
+      "startSeconds": 95,
+      "text": "and then if you do want to subscribe and get kind of that full membership right now i'm offering 20 off to the first 200 people that sign up using that link that is brilliant.org keith galley thanks a lot to brilliant for sponsoring this video but let's dive into some awesome jupiter notebook data science tips tricks and shortcuts"
+    },
+    {
+      "startSeconds": 117,
+      "text": "all right to get started open up a new jupiter notebook and for the sake of this video i'm going to assume that you've already set up jupiter notebooks but if enough people request it in the comments i can make a video on how to set up a jupiter notebook environment but open up a new notebook and the first thing that we're going to touch on the"
+    },
+    {
+      "startSeconds": 132,
+      "text": "first trick and this is one you might know but you might not know all the caveats is running commands in jupyter notebooks so when i say running commands i mean like any linux command any bash command whatever you run in your terminal you can run in jupyter notebooks so to do that to specify something as a bash command you"
+    },
+    {
+      "startSeconds": 151,
+      "text": "can start with an explanation point and just for the sake of cleanliness i'm gonna first make a markdown cell tip number one is running run terminal commands in jupiter okay so to do this you're going to want to specify in a code cell with a exclamation point that's basically telling jupiter notebooks hey this is a bash command"
+    },
+    {
+      "startSeconds": 178,
+      "text": "and so the thing that you've probably seen before is you can run commands like pip install let's say seaborn any sort of library that you need in python you can do it right there in your jupyter notebook and you can see that i already have seaborne so it's not actually doing anything here but any package that you"
+    },
+    {
+      "startSeconds": 196,
+      "text": "might need that you don't have i find it annoying switching back and forth between my terminal window and jupiter so i sometimes like doing this but one thing you might not know is that you can run all sorts of other commands within jupiter notebooks i can run exclamation point ls so i'm listing the directory contents"
+    },
+    {
+      "startSeconds": 213,
+      "text": "and we see in this folder we have a readme we have the trips tips and tricks ipython notebook that we're working off of and then we have a couple data files it looks like and even cooler than this is we can like string multiple commands together so i could do bang cd social data so i want to get into that folder and then i want to look at"
+    },
+    {
+      "startSeconds": 234,
+      "text": "everything that's in that folder and we can see that we have a bunch of csv files and why this is useful is because i often find i need to like load a csv load a file but i might not remember the exact name of it so instead of opening up like a file explorer and like finding it there i can just do this all in my jupyter notebook and everything's a"
+    },
+    {
+      "startSeconds": 253,
+      "text": "little bit neater and you know if things change i can still see those updates and just for the sake of if you're curious about where this data is coming from along with this video i have a github repo data that's in this repo is just some social data social media data for my channels that i collected off of a"
+    },
+    {
+      "startSeconds": 271,
+      "text": "site called socialblade i'm going to use this for a future video so it's a little bit of a you know future preview you can clone this repo if you want to there if you want data to work off of but it's not necessary to clone this repo but that is linked in the description okay so now what do we what else can we do with this"
+    },
+    {
+      "startSeconds": 288,
+      "text": "well you can run all sorts of fun commands so one of my favorite bash commands is a command called cowsei so i could do cow say keith is really cool run that and we see we get a nice little cow in our jupiter notebook and i think one last thing i want to mention about these terminal commands in jupiter this is all using like whatever"
+    },
+    {
+      "startSeconds": 314,
+      "text": "linux system that we're running our jupiter notebook from let's say you're having issues with pip and you can't run this command jupiter also has what it's called magic lines built into its system what i recommend is trying to do something like this so percentage sign specifies a magic line a magic command within pip so you could try something"
+    },
+    {
+      "startSeconds": 335,
+      "text": "like pip install seaborn if the exclamation doesn't work behind the scenes it's probably doing pretty much the same thing but there are special jupiter specific magic commands that are available you'll see one later in the video so i'll link in the description of the visit this video or in the github repo some more"
+    },
+    {
+      "startSeconds": 357,
+      "text": "details about these magic commands with the percentage signs specifically moving onward and i'm going to give you a sneak preview you see me making all these cells and then i could delete these cells if i want to the next thing we're going to walk through is some very useful shortcuts all right so what are some useful shortcuts you should know"
+    },
+    {
+      "startSeconds": 379,
+      "text": "well one of the ones i've been doing a lot is dd so if you tap d twice it's going to delete a cell and then if we want to create some more cells we can press b to create cells below the way i remember it is if you type in b it will create a cell below and if you type in a it will create a cell above so a above b"
+    },
+    {
+      "startSeconds": 401,
+      "text": "below you might notice that if you're like typing in the cell like i can type a aaa it's not doing anything so to get these shortcuts to work the first thing you're going to have to do is escape so hit the escape can command on your keyboard and then you can do a and b and delete cells with dd cool so sometimes i like to make extra cells"
+    },
+    {
+      "startSeconds": 421,
+      "text": "down below so that i can work higher up on the screen some other useful shortcuts or just things that you might want to do is like i could toggle the header here to make it a little bit more filling the screen i could toggle the toolbar here depending on how much room i want and how much distractions i want let's write out some of those shortcuts"
+    },
+    {
+      "startSeconds": 439,
+      "text": "i just mentioned so one is escape and then m m for markdown that's going to be how we switch to markdown m switch to markdown a create cells above b create cells below d plus d that's going to be delete a cell and let me think if there's other ones another useful one is if we're switching to markdown we want to be able to switch"
+    },
+    {
+      "startSeconds": 467,
+      "text": "back to code so that's going to be y y is switch to code so i've hit escape and then y we see that it changes kind of the format of the cell but because this is text we will want it to be markdown other useful shortcuts that you'll want to know i'll want to be able to run this ctrl enter runs it in place and then"
+    },
+    {
+      "startSeconds": 489,
+      "text": "shift enter will run the cell and then jump to the next one just to make this deeter too i'm going to add breaks between each of these lines all right and then control plus enter is run cell and stay on cell shift plus enter so you're going to be holding shift pressing enter is run cell and go to next so this is just nicer"
+    },
+    {
+      "startSeconds": 516,
+      "text": "like when you don't have to take your hands off the keyboard it's nice and then happen to go up here and clicking run but you can always do this so shift enter and again i'm going to just want to create some breaks another thing i recommend i always love using markdown within my jupyter notebooks just makes things neater so getting a hang of"
+    },
+    {
+      "startSeconds": 534,
+      "text": "markdown is definitely worthwhile i think one other thing to keep in mind is that if you go into edit one thing that i find pretty useful is find and replace so let's say you had a data frame called df you could change it to maybe a more descriptive name like social df or something like that and you could replace all batches you can use regexes"
+    },
+    {
+      "startSeconds": 555,
+      "text": "within this so find and replace often is useful too it's not really a shortcut a useful command so i'll just add that i think that covers the shortcuts that i want to cover so the third tip we're going to cover is pandas i'll say changing pandas display options make some cells below alrighty so what do i mean by changing panna's display"
+    },
+    {
+      "startSeconds": 582,
+      "text": "options if we go back to one of our previous tips if i look at ls we see we have this so this csv called social media data all so i'm going to load that into a data frame real quick so import pandas pd and i'll do df equals pd dot read csv social media data all dot csv run that df.head this is telling me all sorts of stats"
+    },
+    {
+      "startSeconds": 611,
+      "text": "based on the date of how many subs i have how many views i have has everything got instagram followers on twitter one thing we should know is by doing df head it's just gonna list the first five rows but let's say we wanted to see the first 100 rows and i did df head 100 well we see that it cuts off and only lists 10 total rolls here and"
+    },
+    {
+      "startSeconds": 635,
+      "text": "the reason before that is panda's baked in has a set max rose count so if you exceed how many rows that is its maxrose count it's not going to display it and we can see what that is by doing the following we do pd dot options dot display and i don't remember this type of thing off the top of my head i was just reviewing these"
+    },
+    {
+      "startSeconds": 655,
+      "text": "before i made the video so max rose what is that going to be equal we see it's 60. so if i did df head of let's say 50 everything's going to show up here because it's below that max rose count but if i do 75 you know it's going to do what we just saw with 100. one thing that's useful here is we can switch this within our jupiter"
+    },
+    {
+      "startSeconds": 676,
+      "text": "notebook and sometimes this makes sense sometimes it's better for jupiter notebooks to cut this off for us we could say something like pd options display max rows equals so we can see it by not having equals but if we add the equals i can do something like 200 run this and now if we run df head 100 again we're going to be able to see every"
+    },
+    {
+      "startSeconds": 697,
+      "text": "single thing in those first top 100 rows it's not going to cut them off we're going to see everything sometimes very very useful especially if you're like working with a data frame that only has 100 rows it's nice to be able to see everything same thing with columns actually so we can do pd.options.display columns"
+    },
+    {
+      "startSeconds": 719,
+      "text": "if i run that we see that 20 is the max number of columns that we can have so scroll all the way to the top the max number of columns we can have is 20. in this situation we don't actually have 20 so we see all the columns but just like before let's say you had 50 columns and you when you were exploring your data"
+    },
+    {
+      "startSeconds": 738,
+      "text": "you wanted to be able to see them all you could set something like max columns equals 50 and get everything contained in that display just kind of for proof if i did max columns equals three and i run this rerun head we see get the index you get the date and you get uploads other useful display options that you"
+    },
+    {
+      "startSeconds": 757,
+      "text": "have within your fingertips pd.options dot display max column width and i looked at a medium article to help me kind of find some of these so i'll link that in the description as well if we just run this we see that the max column width is 50. and so one thing to note let's say you notice like some really text rich columns that you have"
+    },
+    {
+      "startSeconds": 783,
+      "text": "are getting cut off well you could change this parameter to something like 200 and now it's gonna be four times as wide at the max case i'm not going to bother with this for now because i don't need to change the column width this is mostly numerical information good thing to have in your back pocket another useful one is going"
+    },
+    {
+      "startSeconds": 801,
+      "text": "to be pd.options.display.precision so that is set to six in this case we don't actually use precision much i guess average likes instagram is kind of a useful thing that we do see some further precision but what this is is how many floating points that something will go to in this case we're saying six is the max if i set"
+    },
+    {
+      "startSeconds": 825,
+      "text": "that to let's say two and then re-run the head here we see that in situations like average likes instagram now we're only seeing two decimal points instead of the three that we saw before next tip is going to be setting up alerts in when cells finish i'll say and so what do i mean by setting up alerts when cells finish when we're"
+    },
+    {
+      "startSeconds": 853,
+      "text": "doing a lot of like complex process intensive jobs especially like machine learning training jobs within our jupiter notebooks they often take a while to run so let's say we're building some sort of natural language processing model and it needs to train on a ton of data and it might take two hours to run we don't"
+    },
+    {
+      "startSeconds": 871,
+      "text": "really like we'll run the cell and then kind of like hope that it finishes quickly enough but we'll probably go off and do something else and won't really be paying attention to that specific cell maybe we come back six hours and it's finally done but one thing that we can do is we can set up alerts within our operating system to send a kind of"
+    },
+    {
+      "startSeconds": 888,
+      "text": "pop-up when the job is done which definitely can be pretty useful if you want to work on other things while your jupyter notebook sales are running all right so to start this one what we're going to need to do is we're going to need to install pip install jupiter notify as you can see that i already have this next once we have jupyter notify we're"
+    },
+    {
+      "startSeconds": 911,
+      "text": "going to load it into our jupiter notebook so we can do that by using the magic line load extension so this is kind of a built-in special command jupyter notebooks offer to us so we're going to load in what we just installed which is jupyter notify and then to actually use it there's a couple lines to keep in mind and you"
+    },
+    {
+      "startSeconds": 930,
+      "text": "know i always have to kind of remind myself how to do this but if you start using it enough it'll become kind of more natural so we run percentage percentage notify and this is basically telling the cell hey when this cell finishes let me know run something on my system and tell my system to let me know i'm done for the sake of an example i'm"
+    },
+    {
+      "startSeconds": 949,
+      "text": "going to import the time library of python and i'm going to import the random library and so we're just going to run a random length job and kind of just let us have a system notification when it is done so i'm going to say r equals random dot rand int and let's say we wanted this job to take anywhere from 30 seconds to"
+    },
+    {
+      "startSeconds": 972,
+      "text": "60 seconds you could imagine in the cases of training models this might be three hours to six hours we don't know exactly but for the of sake of an example i'm going to do r equals random random 30 to 60 and then i'm going to do time dot sleep of whatever that random number is and then i don't have to do this but i'm just going to run like cell"
+    },
+    {
+      "startSeconds": 992,
+      "text": "finished executing at the the bottom i'm going to print that out so we can run this line and kind of in the background i could let's say pop up you know like the github for this you know i could play around with things so i just realized that when i my screen recorder automatically turns on what's called focus assist so the"
+    },
+    {
+      "startSeconds": 1016,
+      "text": "notifications don't pop up properly so i'm going to go over here and i'm going to click on focus assist settings and i'm going to say off i want to get all notifications from your apps and contacts and i can exit out of this and now i'm going to run these two lines again and in the meantime so you can see kind"
+    },
+    {
+      "startSeconds": 1036,
+      "text": "of what's going on i'll shamelessly plug my website keithgalley.com it's kind of cool i made it with what's called web flow um yeah all sorts of fun stuff here look at that [Music] cell execution has finished so what's useful about this is i mean there's a couple things i can click on this and it will take me immediately back to my tab"
+    },
+    {
+      "startSeconds": 1067,
+      "text": "that has this open which is nice but just imagine that this isn't 30 to 60 seconds this is two hours like we're doing something else like and just note that like this code right here would be kind of replaced by ml like model training or something like it could be whatever the biggest thing is that you put this percent percent"
+    },
+    {
+      "startSeconds": 1085,
+      "text": "notify at the top when you want it finished all right what else should we do in this video create a slideshow out of your notebook there's a few different things here so slides subside fragments skip and notes these are the five like options we have creating a slideshow with our jupiter notebook and so when i say create a"
+    },
+    {
+      "startSeconds": 1104,
+      "text": "slideshow like what the heck do i mean built into jupiter notebooks there's some useful options to access this we're going to want to go to view and then we're going to go to cell toolbar and then we're going to want to do slideshow and so if we do that we see cell toolbar slideshow we see we get like different"
+    },
+    {
+      "startSeconds": 1126,
+      "text": "options for slide types on all of these if we start specifying what we want each of these slide types to be it's like for example headers it makes sense to have as a slide but i'll make this a fragment so my typical strategy is to make the header a slide and make these slide types of the other stuff fragments and you'll see why in a second fragment"
+    },
+    {
+      "startSeconds": 1154,
+      "text": "fragment slide slide or i guess not slide that's a fragment slide fragment fragment there might be even shortcuts to do this but you only have to do this one so it's not the worst case fragment fragment fragment another slide fragment fragment and i'll make this a sub slide just so you can see what i mean when we create a sub slide slide fragment"
+    },
+    {
+      "startSeconds": 1194,
+      "text": "fragment okay so everything's specified now let's see what happens when we make a slideshow out of this so download as and so this is file download as and then reveal.js slides so this should work in any browser click that boy okay this is what i was expecting maybe we had to rerun it but i click on this if i hit down it pops"
+    },
+    {
+      "startSeconds": 1224,
+      "text": "up those fragments into the picture so we see now we have the pip install seaborn command if i hit up it removes it if i zoom out a little bit it's adding that fragment below so it's a little bit fidgety the slideshow but then if we hit right we get to a new slide hit down we see the fragments hit right again we're"
+    },
+    {
+      "startSeconds": 1253,
+      "text": "on our new slide hit down we start seeing fragments keep going keep going the one thing is i've been having trouble like it's not really resizing the screen so the reason i use sub slide versus fragment is when i start going off the screen i'll probably just change the parameter so that everything can fit so like a big"
+    },
+    {
+      "startSeconds": 1275,
+      "text": "parameter like df.head that shows a lot of information i might make that a sub slide instead of a fragment and i'll show you how those changes affect things in just a second sitting with alerts and commands like pip install jupyter notify we might want to just skip this or comment it out or delete the output just so it doesn't take up the entire"
+    },
+    {
+      "startSeconds": 1296,
+      "text": "space and then create a slideshow notebook cool so that is the slideshow in its core you can play around with things a bit so you can imagine like if you were let's say in a meeting like with your company this is a good quick way to have something like nicely prepared from just your jupiter notebook without having to"
+    },
+    {
+      "startSeconds": 1316,
+      "text": "set up you know a completely separate uh powerpoint presentation and like the nice thing about this is it evolves with your you know the code that you change you can keep playing around things and then like it does kind of annoy me having this view always here so you can save all this information but then do none oh"
+    },
+    {
+      "startSeconds": 1342,
+      "text": "do none here and it's back to normal but the way that the powerpoint saved is still there so that's powerpoint in jupyter notebooks all right i think that's all we're going to cover in this video hopefully these tips were helpful for you if you did enjoy this video and mean a lot to me if you threw it a big thumbs up and"
+    },
+    {
+      "startSeconds": 1359,
+      "text": "subscribe if you haven't already thanks again to our sponsor brilliant.org definitely check them out link in the description and first 200 people to sign up using that link can get 20 off an annual subscription as always check me out on the other socials as well instagram twitter tick talk till next time everyone this was fun but peace out [Music]"
+    },
+    {
+      "startSeconds": 1395,
+      "text": "you"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:53.401Z"
+}

@@ -1,0 +1,203 @@
+{
+  "_id": "video.youtube-FQE_gyEwu0Q",
+  "videoId": "FQE_gyEwu0Q",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=FQE_gyEwu0Q",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction to Terraform Secrets"
+    },
+    {
+      "startSeconds": 48,
+      "label": "Method 1: Using Variables and TFvars (Good)"
+    },
+    {
+      "startSeconds": 284,
+      "label": "Method 2: Using Environment Variables (Better)"
+    },
+    {
+      "startSeconds": 475,
+      "label": "Method 3: HashiCorp Vault Integration (Best)"
+    },
+    {
+      "startSeconds": 1052,
+      "label": "Benefits of HashiCorp Vault & Essential Security Practice"
+    },
+    {
+      "startSeconds": 1086,
+      "label": "Conclusion"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hello Cloud Engineers I'm Jeremy Morgan from code cloud and today we're focusing on a key part of infrastructure's code managing secrets and terraform whether you're a beginner or an expert managing secrets well is vital for secure deployments today we're going to look at three ways to store secrets and terraform there's good with variables"
+    },
+    {
+      "startSeconds": 19,
+      "text": "and TF bars there's better with environment variables and then best with Hashi cor Vault integration now before we start let me show you what to avoid and I often see this in GitHub repositories Secrets stored in plain text in config files we don't ever want to do this now if you've done this before don't worry by the end of this"
+    },
+    {
+      "startSeconds": 38,
+      "text": "video you'll learn three secure ways to manage secrets and terraform let's begin now approach number one is going to be variables and TF bars and I consider that good it's not the safest but it's good to learn for our foundation so first we'll create a variables. TF file okay and in variables. TF we're telling terraform we have these two"
+    },
+    {
+      "startSeconds": 73,
+      "text": "variables we don't know where the data is coming from to populate them but we want to make my SQL username and MySQL password available to terraform and we can see here we have a description the type is string and insensitive equals true now notice this line it's crucial it tells terraform to mask this value in"
+    },
+    {
+      "startSeconds": 93,
+      "text": "logs and output so this basic protection helps accidental exposure now let's create our main.tf okay now what we're doing here is actually a big breach of security however we're doing this for demonstration purposes so I'm creating a resource named local file and that is named credentials file what it's going to do is it's going to create a file"
+    },
+    {
+      "startSeconds": 119,
+      "text": "called MySQL _ credentials. text and it's going to write out these values to that text file something we would never ever want to do right but we're doing that so that we can prove that these values are being taken from the different sources and being written to this file so it's just good for demonstration purposes so I should be able to run this"
+    },
+    {
+      "startSeconds": 139,
+      "text": "and it should be able to grab the username and password and write it to a text file right let's see if what happens when we run right now we'll do a terraform a knit and then terraform plan now you see here it's asking us for a MySQL password right so we need to type in a username and password for this and we'll just type in"
+    },
+    {
+      "startSeconds": 168,
+      "text": "password here's a MySQL username we'll type in user Etc right so variables TF is telling terraform hey you've got these variables you need to get them terraform is isn't seeing any source for it so it's asking us when we run terraform plan so what we're going to do is store the secrets in a TF bars file that way"
+    },
+    {
+      "startSeconds": 189,
+      "text": "we don't have to remember it and type it in every time now in terraform TF bars we have data for those two variables that we've created we have Jeremy and then password 123 because we're being super secure here right so let's try this now we'll do a terraform apply and you'll notice here that it's asking us if we want to perform these actions"
+    },
+    {
+      "startSeconds": 214,
+      "text": "but it's not asking us for the MySQL username or MySQL password anymore because it found it in tfrs so I'm going to type in yes to write this and here's our file with our MySQL username of Jeremy and the password of 123 so it's taking these variables from this TF bars file and using them so if we we were actually connecting to a"
+    },
+    {
+      "startSeconds": 238,
+      "text": "MySQL server here it would be using this username and password to connect to it which is great so this is one method of storing Secrets now you're still storing secrets in a plain text file so it's not that great and you'll want to add this terraform dotf bars or whatever you name it you'll want to add that to your get"
+    },
+    {
+      "startSeconds": 258,
+      "text": "ignore so that it's not stored in your repository so this approach is better than hardcoding secrets into your config files but there are risks the secrets are still stored and plain text on your file system and that's why I said you should always add the TF bars to your G ignore file now let's level up our security"
+    },
+    {
+      "startSeconds": 279,
+      "text": "game instead of storing secrets in files we can use environment variables so I'm going to delete this terraform TFS [Music] file so terraform is still going to have to go out and look for my SQL username and my SQL password what we're going to do is store them as environment variables on our system here's how we'll do"
+    },
+    {
+      "startSeconds": 308,
+      "text": "that so notice here I'm typing in export TF barcor MySQL username equals Jeremy 2 and I'm changing that so that we can see the change when it writes it to the text file so notice this Capital TF uncore Capital Vore prefix that I have here so any of your environment variables that are prefixed with this terraform will"
+    },
+    {
+      "startSeconds": 333,
+      "text": "pick those up read them and use them and when terraform uses it it just removes this tfv part of it and only the MySQL username so as far as terraform is concerned this TF barcor MySQL uncore username is actually MySQL username anytime it goes to use it so we will store this environment variable here and then I'm going to do the same thing for"
+    },
+    {
+      "startSeconds": 369,
+      "text": "password and for the password I'm going to say we're going to get more secure than last time and say password 1 2 3 4 now we have both of these variables here so we should be able to run terraform again and it will look for different sources for these two variables and variables. TS and it's going to find these two environment variables that I just"
+    },
+    {
+      "startSeconds": 394,
+      "text": "created so we're going to do a terraform plan and we don't see any big errors there so we're going to say terraform apply now you'll notice here we go with a prompt and this is the basic prompt that we always get when we run terraform apply right the yes but it's not prompting us for a MySQL username or a MySQL password if it did then we'd know"
+    },
+    {
+      "startSeconds": 426,
+      "text": "that it doesn't have these two variables populated since it didn't prompt us then it obviously knew where to find it and here we go we've got our new values written into that MySQL credentials. text so this is a step forward right so this way is better than the previous one right because the secrets aren't stored in any files"
+    },
+    {
+      "startSeconds": 450,
+      "text": "the environment variables only exist on your current session on your current machine so there's no risk of accidentally committing them to Version Control or anything like that so terraform is now extracting these values from our environment variables and this is a better way of handling Secrets but what if we need to"
+    },
+    {
+      "startSeconds": 471,
+      "text": "share these secrets across the team well this brings us to our best practice so I've show you good and better now we're going to best which is going to be hashy core Vault so I'm going to install hashy core Vault on my machine according to the instructions on the website and then we're going to jump in this is where things get really"
+    },
+    {
+      "startSeconds": 491,
+      "text": "interesting Hashi cor vault is a dedicated Secrets management solution that integrates beautifully with terraform we've downloaded and installed Vault on this machine so I'll create another terminal here and we'll start up the server okay so now I've got Vault installed I can talk Vault version and it shows the version of hashy core Vault that I'm"
+    },
+    {
+      "startSeconds": 513,
+      "text": "using great now what we need to do is we need to change a few things so I will need to create another terminal to start and this is the terminal that we're going to run hashy cor vault in and I'm going to run it in a Dev mode the reason I'm running this in Dev mode is because in production mode there's a little bit of difference with"
+    },
+    {
+      "startSeconds": 540,
+      "text": "uh the secrets and keys and how things are set up but I just want to show this for demonstration how you can access Vault so I'll say Vault server Dev there we go now we have an application running here and we can see that it says you may need to set the following environment variables which we do need to set this and I will copy"
+    },
+    {
+      "startSeconds": 574,
+      "text": "that now you can see here we have an unseal key and a root token we're going to need this root token in order to connect to the Vault okay and we'll go back to our other terminal here and we will add that Vault address to our environment variables and now we need to type in Vault Secrets enable Das path equals secret KV Now secret might already be"
+    },
+    {
+      "startSeconds": 599,
+      "text": "created as it is in this case says path is already in use at secret so we can start storing things there so I'm going to type in following command Vault KV put secret my app database and I only have to do this one time my SQL username this time we're we're going to be Bob 2 3 my SQL password we're going to put in super"
+    },
+    {
+      "startSeconds": 645,
+      "text": "secret and there we go now they're stored in our vault and we can verify that by typing in Vault KV get secret my app database we can see here we have a SQL username and password stored now in the production version you won't be able to do this Vault KV git unless you have the proper permissions so that's one thing"
+    },
+    {
+      "startSeconds": 672,
+      "text": "that you might be thinking right now is oh well can any of our developers just type in Vault KV get secret no in a production environment you wouldn't be able to do that but right now we're set as [Music] rout so we know we've got the secrets stored in our vault right so this is off on a server somewhere else so any"
+    },
+    {
+      "startSeconds": 692,
+      "text": "developer that's building a terraform plan on their machine can get the access to those values so in our main TF we need to set up a vault provider and here's what our provider looks like the provider's name is Vault our address is going to be Local Host 8200 and then token is going to be VAR Vault token but where does that come"
+    },
+    {
+      "startSeconds": 717,
+      "text": "from well we're going to have to set another environment variable but we'll save this for now now here's the magic part instead of storing secrets in terraform will fetch them from hashy cord Vault and what that means is we no longer need these two variables because they are going to be retrieved from [Music] Vault however we do need that Vault"
+    },
+    {
+      "startSeconds": 748,
+      "text": "token so here in our main TF we have that bar Vault token so we need to create a variable space for that and that's going to look like this and notice we're marking this one as sensitive equals true also and this is going to be the Vault token that's just used for authentication now we need to set that Vault [Music]"
+    },
+    {
+      "startSeconds": 777,
+      "text": "token here's how we can do that we'll type in export TF bars again because this is going to be a terraform uh data field that we can read Vault unor token which is what we've named it here and then this is going to be that root token that we saw in our other screen we scroll up here here's the root token this this is going to be the value"
+    },
+    {
+      "startSeconds": 810,
+      "text": "that we store as an environment variable there now terraform will be able to look at variables TF and say hey I need this Vault token I'll get the Vault token from our environment variables and then it's going to use it so the last thing we need to do is in order to fetch them from vault is we need to add this here so we've we've created The"
+    },
+    {
+      "startSeconds": 856,
+      "text": "Vault provider now we need to tell uh terraform where in Vault this stuff is stored and it's stored in secret my app database which we created earlier so now if we run this it won't quite work right because it's still looking for those old variables so let's change [Music] this now instead of looking for terraform variables you can see here"
+    },
+    {
+      "startSeconds": 884,
+      "text": "it's going into data which we've specified up here Vault generic secret. database data and it's looking for my SQL username and MySQL password so if we were using this in our terraform plan to connect to a mySQL database this this is how we would grab these values but instead we're writing it to the file for demonstration purposes so now I'm going"
+    },
+    {
+      "startSeconds": 905,
+      "text": "to type in terraform AIT again and we can see here that we have a problem I made a typo I'm leaving it in the video we'll run terraform a knit everything looks good we'll do a terraform plan and it says Vault token for authentication what that means is we've done something wrong here because here in variables it's saying we need a vault"
+    },
+    {
+      "startSeconds": 941,
+      "text": "token right we've we've declared it in variables. TF however terraform is not able to find that data in here so we will click out of here and we are once again going to establish that Vault token and maybe I put it in wrong so we have it in here under TF uncore Vore Vault uncore token and then I'm going to grab that token from here we go back"
+    },
+    {
+      "startSeconds": 987,
+      "text": "here and we'll do Terra for form plan again okay and this time it doesn't ask for it so there probably was a typo or something in how I set that up just remember you need to put in uppercase TF underscore uppercase V underscore before that for it to be recognized by terraform now it looks like we are ready to go terraform plan"
+    },
+    {
+      "startSeconds": 1017,
+      "text": "goes so we'll do ter form apply and now the only thing it's prompting us for is the actions we'll put yes and it says complete and here we are we've got the values from Hashi cor Vault we've got Bob 123 password super secret and we're ready to go so it's now pulling our values from the Vault and we can verify that by"
+    },
+    {
+      "startSeconds": 1049,
+      "text": "looking at this file that we're writing to let's break down why this is so powerful you have centralized Secrets management F grained Access Control you can configure automatic secret rotation audit logging and much much more before we wrap up let's cover some essential security practices always encrypt your terraform State files"
+    },
+    {
+      "startSeconds": 1072,
+      "text": "always use Version Control but never commit secrets into that version control and Implement least privilege access when possible regularly rotate your secrets and enable audit logging and there you have it you now have three solid approaches to managing secrets in terraform from basic variable files to full-fledged Vault integration now if"
+    },
+    {
+      "startSeconds": 1094,
+      "text": "you found this helpful don't forget to hit that like button and subscribe for more infrastructures code content from code Cloud drop a comment below with your favorite Secrets management approach now if you found this helpful don't forget to hit that like button and subscribe for more structures code content from code Cloud drop a comment"
+    },
+    {
+      "startSeconds": 1112,
+      "text": "below with your favorite Secrets management approach [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:07.770Z"
+}

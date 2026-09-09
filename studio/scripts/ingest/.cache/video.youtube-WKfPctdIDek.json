@@ -1,0 +1,83 @@
+{
+  "_id": "video.youtube-WKfPctdIDek",
+  "videoId": "WKfPctdIDek",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=WKfPctdIDek",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction to Server-Side Data Fetching"
+    },
+    {
+      "startSeconds": 37,
+      "label": "Setting Up the Project"
+    },
+    {
+      "startSeconds": 57,
+      "label": "Defining Types and Creating Components"
+    },
+    {
+      "startSeconds": 93,
+      "label": "Fetching and Displaying Data"
+    },
+    {
+      "startSeconds": 180,
+      "label": "Handling Multiple Fetch Requests Efficiently"
+    },
+    {
+      "startSeconds": 243,
+      "label": "Conclusion and Next Steps"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "previously we learned how to fetch data in client components now let's learn how to fetch data in server components one of the coolest things about the RSC architecture is that it supports esync and a keywords in server components this means we can write our data fetching code just like regular JavaScript using"
+    },
+    {
+      "startSeconds": 18,
+      "text": "Asing functions coupled with the await keyword let me show you how this works with an example we will once again use the slash users in point from Json placeholder for our mock API we're going to fetch this users data and display each user's name username email and phone number in our next shs server component let's jump into vs code and"
+    },
+    {
+      "startSeconds": 39,
+      "text": "get started inside your app folder create a new folder called users hyphen server and add a page. TSX file inside it I chose the name users hyphen server since we're handling user data in a server component but feel free to name it as you see Fed first let's define our typescript type for the users we will keep it simple and just include the"
+    },
+    {
+      "startSeconds": 63,
+      "text": "fields we care about ID name username email and phone similar to data fetching in client components so I'm going to Copy Type user and paste it in the new page. TSX file for our component we will call it users server so export default function users server make this component async since server components support async"
+    },
+    {
+      "startSeconds": 91,
+      "text": "operations now here is where it gets really simple to fetch our users data we just need to make a get request to the user's endpoint using the fetch API so const response is equal to await Fetch and the URL is Jason pleas holder. typy code.com users in the next line const users of type user array is equal to await"
+    },
+    {
+      "startSeconds": 117,
+      "text": "response. Json and let's console log the value users when you save this and check out/ users server in the browser users hyphen server take a look at the console you'll see the user list consisting of 10 users our data fetching is working all there is left to do is display the users on the screen simply copy the return return statement from"
+    },
+    {
+      "startSeconds": 144,
+      "text": "the client component we previously created and paste it in the server component delete the console lock statement we map over the list of users where each user is defined by the user type we render the users's name username email and phone number the classes are primarily for styling so don't stress too much about achieving this exact layout and UI"
+    },
+    {
+      "startSeconds": 169,
+      "text": "save the file and you should see all 10 users being displayed the route is/ users hyen server we have successfully fetched data in server components now here is something really cool you should know about when building Nexus applications you'll often end up fetching the same data in multiple places like how request B appears across"
+    },
+    {
+      "startSeconds": 190,
+      "text": "six different components in our tree to load a single route you might think this would trigger multiple Network requests for the same data but react cleverly handles this through a feature called request memorization react will duplicate fetch requests with the same URL and options this means you can fetch data wherever"
+    },
+    {
+      "startSeconds": 209,
+      "text": "you need in your component tree without worrying about duplicate Network requests react will only make the actual fetch once and reuse the result for subsequent calls during the same render pass it's a react feature and thereby included in XS letting you write data fetching code exactly where you need it rather than having to centralize fetches"
+    },
+    {
+      "startSeconds": 229,
+      "text": "and pass data down through props notice how simple data fetching is with server components just eing await with the fetch API no use State no use effect none of such State Management complexity we usually deal with speaking of State though you might be wondering about handling loading and error States in server components well that is exactly"
+    },
+    {
+      "startSeconds": 251,
+      "text": "what we will explore next supporting the channel is free please like And subscribe it helps a lot"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:41.910Z"
+}

@@ -1,0 +1,170 @@
+{
+  "_id": "video.youtube-9IcyoLxRAYY",
+  "videoId": "9IcyoLxRAYY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=9IcyoLxRAYY",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 5,
+      "text": "hi everyone in this video tutorial I will show you how we can do backup and restore for PostGIS services and then also we'll go through object level and database level so there are different types of backups that we know like logical backup or physical backup so logical backup is doing we do check it down and physical backup when you are"
+    },
+    {
+      "startSeconds": 37,
+      "text": "just copying from or taking a backup of a physical file location or physical files so here we are going to use PG dumb and pity dump all and PD base backup options so what are the differences you know all these three times mainly these three types I will go through so PD dump is the utility for backing up Postgres a single process"
+    },
+    {
+      "startSeconds": 67,
+      "text": "database and when we are talking about PD dump all the dumb polity utility for all the Postgres databases of a cluster that I will take it back up and put into a skip file and third one is PG base backup which is the way I want to take a full file system level backup for Postgres services so let's go through that one to get the option to see all"
+    },
+    {
+      "startSeconds": 100,
+      "text": "the options we can type VD down help so here you can see all the different options are available to pass in the parameters or options that I can say so let's start with that one so forth that fast we connect to the database they're saying and let's um let's go create a dummy database for this purpose so create database just KP"
+    },
+    {
+      "startSeconds": 145,
+      "text": "soap cater that I will let's connect to the database now inside this Here I am going to create two tables first level is employee get some values see that one will now"
+    },
+    {
+      "startSeconds": 193,
+      "text": "create another travel if we see that you can see those two tables are present now so let's start"
+    },
+    {
+      "startSeconds": 241,
+      "text": "with taking it back out for a single double what we can do we can first create a directory tree so let's create a directory where I will install all the dumb pods so now now let's take a backup"
+    },
+    {
+      "startSeconds": 309,
+      "text": "so here we're going to run a backup of particular table that employ devil so what I'm going to do I am passing very well ser you you is the user then - W - W option to prompt me he put ID password for the Postgres user - tt4 table table option and I'm giving a name that backup name and it will e stood there as a SQL"
+    },
+    {
+      "startSeconds": 342,
+      "text": "formant so let's run that one I'm going to execute that so now let's see the contents of that file that it has been created so if you go there inside there you see that all are basically SQL files so it has all the necessary SQL commands to create all those objects so object means here is my"
+    },
+    {
+      "startSeconds": 390,
+      "text": "employee table so now let's test this one so connect to there I'm going to drop this table so we have completed backup for a particular table now we are going to restore test restore so drop table table dropped you see so employee table no longer there so now let's restore"
+    },
+    {
+      "startSeconds": 456,
+      "text": "so to raise to that one because we already used passwords so we prompt that one this is for password and we give the path where we raise to that file so this prompt means it has been successfully let's check that one so here you see"
+    },
+    {
+      "startSeconds": 503,
+      "text": "that table has been restored select from the travel so data has been restored so we have tested here for a single table so now let's do with multiple tables let's do for multiple tables now so hearing we are doing the same test but we are easy two tables here I use devil employee and table course other thing I"
+    },
+    {
+      "startSeconds": 550,
+      "text": "did not use W option just to ask me password so I am ignoring that option here so let's run this command great care the fall so I'm getting a message that file is not done let me see that one what is wrong here I came the thing is I"
+    },
+    {
+      "startSeconds": 596,
+      "text": "have rain that back up inside test Wikipedia should not be there for that is the issue so I'm exit from there I'm a super user for pros go start a business now let's turn that back up no if I go there see the contents so this time it did not ask me pass out because I did not use the minus W option that you see that last time I used that one"
+    },
+    {
+      "startSeconds": 623,
+      "text": "here so I did not use that option this time so it did not prompt me for password so see the content here see if we go through again it has got all dumb sql's relate to these two tables and insert the daughter's well there so let's connect to the database et and they drop the stables"
+    },
+    {
+      "startSeconds": 678,
+      "text": "so temples are gone because there is no relation you see so this time we are going to do restore multiple Devils sir Easter has been completed"
+    },
+    {
+      "startSeconds": 731,
+      "text": "now if I type here is it that those two tables are restored if I see the data [Music] so both the tables has been restored so so far we have checked that object level now let's see how we can do with them database level so let's take it back up"
+    },
+    {
+      "startSeconds": 790,
+      "text": "of this database level now so good so as I discussed brought you four user deed for the the database and while it will keep those backup some backup has been done so all the contents there just to verify that my backup contents looks good to the database so drop from super"
+    },
+    {
+      "startSeconds": 841,
+      "text": "easy so now drop the database database this backup database has been dropped if you see there so database no not abyss just underscore BKP no longer exists because we dropped that one so now we are going to restore this particular database"
+    },
+    {
+      "startSeconds": 900,
+      "text": "okay okay let us before go without prompt C option so that there is AC option you see here Y X coming so if we try to restore run this restore command could not connect to that database does not exist because that database should be there as an empty database but if I put minus C option capital C"
+    },
+    {
+      "startSeconds": 956,
+      "text": "let me check that should not be pista kill you wastrel I'm trying to see the document error okay are you squared to make any difference"
+    },
+    {
+      "startSeconds": 1010,
+      "text": "Oh what I'm doing I'm here I'm just I type PS scale that should be pitied um vision is good"
+    },
+    {
+      "startSeconds": 1067,
+      "text": "my backup part is this one like application I got that because I only took that dump"
+    },
+    {
+      "startSeconds": 1114,
+      "text": "I did not use that create option so that it could create that create database come on okay database command is not there inside that file so let's create that data is now just complaining that database does not exist create database the database has been created and let's run this back up barrister so now it's good go you see there we can see this"
+    },
+    {
+      "startSeconds": 1161,
+      "text": "all good here so what I was pointing let's check that one so take it back up here we can use as part the document we can use this create does this create or - see"
+    },
+    {
+      "startSeconds": 1207,
+      "text": "so now if we see the content so that this is the one kid out of this just not there before so now if we do drop database so database has been dropped that if it is not there it's from the register command now run that one"
+    },
+    {
+      "startSeconds": 1265,
+      "text": "so again it's complaining that database does not exist so it should clear the database automatically this is wrong here because I didn't need to did find this so now coming here and so database has been created that's correct there are they start of it we see two tuples and if we go there strikes from course that"
+    },
+    {
+      "startSeconds": 1317,
+      "text": "is good select all from second database so that also good so so far what we have done we have take it back up for a particular table and then we talked the - Valerie's to the trouble then we did the same thing for multiple tables now we have done for a single database and so we start with job chips so now let's do for all the database like all the"
+    },
+    {
+      "startSeconds": 1360,
+      "text": "databases here so let's get it out of its creating database BKP - so we just get out the database for our test purpose so you're going to do that for all the databases so here we are going to use PG tamp all because PG dump only creates the backup for one part one database at a time and it does not store all the information on inside you know"
+    },
+    {
+      "startSeconds": 1405,
+      "text": "and like relate to database rules or cluster white configuration but when we use PD dump all it gets all the informations so let's do that one so here just drop multiple databases that you created for our test purpose"
+    },
+    {
+      "startSeconds": 1468,
+      "text": "and let's run the wrister command so this is drawing don't know if we go there so those doesn't like dot abyss just be KP and test Wikipedia has been registered successfully so now we'll do with the file system level backup so for"
+    },
+    {
+      "startSeconds": 1514,
+      "text": "system level backup means here I'm telling about all the Postal Service's orders so what it does if we see this so when you take a PD based backup it's ultimately take a backup of this directory and we can use this backup to create a replication database or to like schedule job we can run a backup and if something happened we can use that"
+    },
+    {
+      "startSeconds": 1552,
+      "text": "there'll be we can use that backup to restore this database let's go through that one so here I put X option to get the you know that when transactions are happening so that it can get all the information are included with that backup because this is your testing moment but real scenario when you have a"
+    },
+    {
+      "startSeconds": 1598,
+      "text": "large strategies and you know your during that time window there can be transition locks happening to get that one we can use that option or it looks for them empty directory let's create a different directory so now if you check there so if I"
+    },
+    {
+      "startSeconds": 1648,
+      "text": "compare with the data directory here you'll see they're ultimately copying whole directory edge of data directory so to reach to that one what we need to do just think a case that server has been crashed"
+    },
+    {
+      "startSeconds": 1693,
+      "text": "so now we are going to remove data from this data directory so now if I try to start it will not disturb because nothing is there I have already closed so it's not getting the part nothing because that has been dropped my move everything's from the directory so now what I need to do that the back out this"
+    },
+    {
+      "startSeconds": 1741,
+      "text": "one this I need to put into my actual data directory so which is this one now if I try to start and see their status so this has been completed so without this there is other options that we can use like for point in time recovery so how that works point in time recovery"
+    },
+    {
+      "startSeconds": 1786,
+      "text": "relates to with the base backup they need to also take a backup of the wall files what the change is transaction changes are happening it is turns into the wall falls and it also roll forward on the wall files to do a point in time recovery that is little bit intermediate or high skills you need it so for this"
+    },
+    {
+      "startSeconds": 1813,
+      "text": "video I am NOT going to discuss that one so to get like more information with all this you can go to post Grayson document website and go through there so so far in this video I have discussed different levels of database backup and then we did restore using PG Tom PG Tom Paul and PG based backup hope you enjoyed or get a very good idea how backup"
+    },
+    {
+      "startSeconds": 1858,
+      "text": "mr. walks into post Gustavus thank you"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:16.165Z"
+}

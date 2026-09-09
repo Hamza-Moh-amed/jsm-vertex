@@ -1,0 +1,231 @@
+{
+  "_id": "video.youtube-nskIP1iyrAo",
+  "videoId": "nskIP1iyrAo",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=nskIP1iyrAo",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 85,
+      "label": "String literals refresher"
+    },
+    {
+      "startSeconds": 286,
+      "label": "Template Literal Types"
+    },
+    {
+      "startSeconds": 328,
+      "label": "Expanding Unions"
+    },
+    {
+      "startSeconds": 398,
+      "label": "Operating on objects"
+    },
+    {
+      "startSeconds": 753,
+      "label": "String manipulation types"
+    },
+    {
+      "startSeconds": 800,
+      "label": "Awesome advanced examples"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hello everybody welcome back to my channel my name is harry wolf and i like to talk about coding today's coding segment we're going to delve into the world of typescript and one of its newest most exciting newest feature i said newest twice right yeah in typescript 4.1 a under sung new feature was added called template literal types"
+    },
+    {
+      "startSeconds": 30,
+      "text": "and the world of creativity and possibility that this new feature added to typescript is actually astonishing so i figured i'd take a little of your time today to tell you what is a template literal type and to give you a high level overview about how they work on a basic level and then we're going to kind of delve into some examples"
+    },
+    {
+      "startSeconds": 56,
+      "text": "online of people pushing this feature to its limit uh the literal limit of this feature with things and typing things that i didn't even know were possible so kind of seating you with an idea like what you can do if you spend all month playing with template literal types enough gap enough chatter let's get to the chowder"
+    },
+    {
+      "startSeconds": 81,
+      "text": "chowder what uh and let's start talking about template literal types okay here we are on the documentation page for template literal types there's also the blog post from typescript 4.1 that talks about template literal types but for today's video we're going to stay in the documentation page i was thinking about making my own examples and kind of"
+    },
+    {
+      "startSeconds": 106,
+      "text": "showing you what you can do with this and i read this documentation page and i was so thoroughly impressed by it that i figured i wouldn't really try to do better than it because this documentation page is great so after you're done watching this video you can refer to this page i'll have the same information"
+    },
+    {
+      "startSeconds": 123,
+      "text": "they've done a great job explaining this feature you're not going to get it in video form um a template literal type is similar to it has the same syntax this is the thing this is where it gets its name from as a template literal string in javascript if you're not aware about a template little string that's a"
+    },
+    {
+      "startSeconds": 143,
+      "text": "es 2020 feature of some sort essentially it's a string written with backticks and one of the exciting features of it is it makes the ability to interpolate variables inside that string easy essentially what you would normally use templating languages like mustache or handleballs for handle bars for you can now pretty much do"
+    },
+    {
+      "startSeconds": 166,
+      "text": "easily built into javascript where if you have some variable i'm sure there's gonna be an example here um right so here is the old way where you just concatenate strings and here with a string with a template literally you can just put it in line so that's kind of where the idea comes from and another thing to be aware of is"
+    },
+    {
+      "startSeconds": 187,
+      "text": "before you delve into template little types is you have to understand string literal types bit of a yak shape here because template literal types are a very advanced feature in typescript if i'm being honest and i am being honest i think with you but not with myself who a literal type in typescript is the literal value"
+    },
+    {
+      "startSeconds": 210,
+      "text": "that you're typing so in touchscript you have the types of string and number where let me try this move this new tab um where if you have let foo string equals harry so this is saying that the type of foo is a string which means that i can reassign foo to equal um barry my evil evil twin so this is just a plain string"
+    },
+    {
+      "startSeconds": 238,
+      "text": "type it's not really exciting you've probably dealt with it if you've used typescript in the past super common instead what we could do is make a literal type we can say bar has the literal type of harry which is saying that bar the type of bar is the string of harry such that if i were to try to do bar equals my equal twin barry"
+    },
+    {
+      "startSeconds": 265,
+      "text": "typescript says oh no no no evil twin i know you you can't assign the type barry either this is going to be a string or a literal type of berry to one that already says harry has to be harry to make things happy and that's how i don't get my credit card stolen anymore with typescript so that's the two kind of building blocks for temple little"
+    },
+    {
+      "startSeconds": 288,
+      "text": "types is the temperate template literal string from javascript and string literal types so you can kind of combine those two things together where you can make a type which in typescript to type is just an alias to something so the type of world is the literal the string literal of world and then using template syntax you can interpolate that value"
+    },
+    {
+      "startSeconds": 311,
+      "text": "into here and get the new type of hello world uh it's kind of adding the functionality that you have in javascript with template literal strings right into the type systems you can essentially operate with template types and what's really cool about template literal strings is that it will expand unions so the better example i have here is so"
+    },
+    {
+      "startSeconds": 338,
+      "text": "here we have email ids so the email can be a welcome email or an email heading and the footer can be footer title or twitter send off and if you want to actually make if you're making you know a email library you want to see what all the local ids can be you can make a union of email and footer and suffix on that interpolation"
+    },
+    {
+      "startSeconds": 362,
+      "text": "the id value such that when typescript evaluates this it'll expand it to welcome email id email heading id all those things for you you kind of get an idea of what you can do here you kind of just dynamically which is very strange to stay with typescript which is static typing but you can dynamically create new static types which is"
+    },
+    {
+      "startSeconds": 387,
+      "text": "why it's so crazy to me this is a similar idea idea here where you have a union of values of languages the locale ids and it'll expand this to all that for you what's even more advanced to me is how and probably more practical is when you're kind of taking an object and making operations on top of it so before this"
+    },
+    {
+      "startSeconds": 412,
+      "text": "was impossible to do but not possible with template literal types so if you want to have let's say you're making you're trying to make an event emitter on an object this function that will make an event emitter on the person object such that you can say when first name change the property here call my callback before"
+    },
+    {
+      "startSeconds": 431,
+      "text": "string literals template literals there was no way to actually uh that's fine there was no way to actually type check this first argument there is really no way to do it you could just put whatever you want in here and text would have no way of knowing if it was valid or not our event mirror function here is saying it needs to have the"
+    },
+    {
+      "startSeconds": 454,
+      "text": "first name as the key plus changed and no more so instead what you can do with typescript and this is some fancy work over here is when you're declaring this function it takes in a generic which is just a variable for a type if you've seen my previous videos that's the easiest way to think about it takes an argument where the first"
+    },
+    {
+      "startSeconds": 478,
+      "text": "argument has the shape of whatever the type is so one let's actually combine this together let's bring this back over here okay so let's see this section complains yes cool so this is going to be a working example some live coding it's always scary um where was i oh yeah so this is the watch object the argument is any"
+    },
+    {
+      "startSeconds": 506,
+      "text": "arbitrary object which is why it's an object a shape of type we don't really care about typing it it's just saying that this is a type variable that's being put here and the return value this cone says the return value from this function is one that is the shape of type right because it's still going to be this person will still let you actually"
+    },
+    {
+      "startSeconds": 528,
+      "text": "access the properties it's still going to be an object that just has more functionality added on top and then also it's going to be having the properties of prop event source such that this on operator which is here is being typed as the event name this first argument is so here's some interpolation right a template literal it's a string"
+    },
+    {
+      "startSeconds": 551,
+      "text": "so it has to be a string because that's the common denominator and all the keys of type now remember type is a being passed into here this object just being assigned to type so you get all the keys of type it's taking all the keys of this object here so first name last name age so this is actually being expanded to first name last name age and then"
+    },
+    {
+      "startSeconds": 574,
+      "text": "because of how unions are expanded it's going to have first name change concatenated last name changed age concatenated such that here this is all happy but if i were to just remove change from it typescript will yell because argument of type first name is not assignable to parameter of type first name change last name changed age changed"
+    },
+    {
+      "startSeconds": 596,
+      "text": "so let that sink in for a moment because the ability to dynamically change string literal values with the template literal opens up a whole world of possibility dare i say a whole new world don't watch this video disney i don't have enough money to be sued by you now what's even cooler is you can do inference now this is where"
+    },
+    {
+      "startSeconds": 623,
+      "text": "my mind starts to melt because this is some real fancy typescript let's open up this example so this is the same thing that we had before right if you remember before the value of new value is being typed as any because in this callback we're just saying any like we're not really being that fancy with ourselves"
+    },
+    {
+      "startSeconds": 643,
+      "text": "but we can be here you can kind of see the difference things changing a little bit this callback is saying devout the new value because this is the argument the first argument being given to the to the callback so this type remember is here so the type is the object itself and then the key is being defined on here it's a new"
+    },
+    {
+      "startSeconds": 666,
+      "text": "generic on the on function so this is doing some informant this is this is if you would if you were to ask me how to write this i wouldn't know how but i can read it so hopefully that helps you kind of get half the battle here you i always have to look it up for and from it it's a very fancy feature for me so i don't really know exactly how to do"
+    },
+    {
+      "startSeconds": 688,
+      "text": "it but this is a new generic variable key that has to be a string and all the keys of type so the keys of type remember again are all of these all the keys is first and last name so key is a string and all these keys which means that when you actually do this interpolated value here you're saying take those values first name last name age"
+    },
+    {
+      "startSeconds": 715,
+      "text": "and get the value from the object here so it's saying type key so let's say this is going to be first name so first name is the key on type on this object so first name on this object is going to be cersei which is going to be a string so here this is being typed as string age is going to be typed as a number so it's inferring based"
+    },
+    {
+      "startSeconds": 742,
+      "text": "on the argument to the the first value to the first argument it'll infer what type the second one will be which is wild really cool uh what else is on this page then there's also some fun built-in string manipulation types which these actually made me laugh i mean these are helpful there's uppercase so you can convert"
+    },
+    {
+      "startSeconds": 764,
+      "text": "each character in the string to uppercase so great hello world lowercase all lowercase when i actually looked up in the code base how these are implemented um i saw that they were typed with this intrinsic value value value which is a little bit of magic when you actually go down here in the documentation you can say that uh"
+    },
+    {
+      "startSeconds": 785,
+      "text": "these types are built into the compiler for performance and can't be found in the files included with typescript you actually go to the bottom and you can see the technical details on how these are being implemented and it's just some nice simple switch statements with some string manipulation so that's just what these are kind of"
+    },
+    {
+      "startSeconds": 803,
+      "text": "helpful for you to dynamically create new string literal values in your typescript applications now let's get advanced now this part is where your dreams can come reality this is a curated list of awesome template literal type examples some more useful than others but some super useful and some that i wish i had 10 years ago before"
+    },
+    {
+      "startSeconds": 832,
+      "text": "typescript even existed weird the first one is dot notation string type save so if you've ever used underscore low dash and use their get operator where you can dynamically construct the path like if you have some object here that's deeply nested you can dynamically reference values inside of it so you do uh project"
+    },
+    {
+      "startSeconds": 860,
+      "text": "i know where to do object we do first name yeah first name so this is going to say that on this object get me the value for the property on first name and what becomes really valuable is when you actually want to delve deeply in this is useful if you have some ui that you're dynamically showing values from a deeply nested json object"
+    },
+    {
+      "startSeconds": 882,
+      "text": "and before you couldn't really type this it was just going to be a string and that's all you could do but now due to the powers of template literals it can actually read the object being passed in and dynamically construct the entire paths that are valid so here i can actually be helped by intellisense because it"
+    },
+    {
+      "startSeconds": 903,
+      "text": "understands the object to actually pull in projects the first one in the array the name value i can't say foo because it typescript knows that doesn't exist when you look at the actual implementation here uh it's this and i'm not even going to pretend to try to read that with you because that's going to be a very long video of itself but"
+    },
+    {
+      "startSeconds": 924,
+      "text": "as soon that's possible with this feature another thing very cool is document typing document query selector if you're unfamiliar this is kind of like the jquery um lookup but this will actually tell you the type of the object that you're fetching based upon the strings so here because it knows this is an anchor this"
+    },
+    {
+      "startSeconds": 946,
+      "text": "knows that this is going to be an anchor element this is a input or a div it knows this could be an input element or dim you'll get the code to do that and somebody knows typescript much better than me um this is also super useful router param parsing such that i was looking at the examples because they're live if you have some param"
+    },
+    {
+      "startSeconds": 970,
+      "text": "like this where is this um where is the example ah so handle get is parsing this the path this params object knows that there's one param of post id which is string and this has post id and comment and it knows both of those things are valid and before template literals not possible to type this one could actually probably be"
+    },
+    {
+      "startSeconds": 996,
+      "text": "red there's some inferment going on with extends and infer some conditionals depending upon what the type is but it's parsing the actual string path and extracting the parameters for you to make it type safe so there's never an issue of you doing post ld by mistake and it knows that it doesn't exist very cool expression parser to actually"
+    },
+    {
+      "startSeconds": 1023,
+      "text": "parse javascript expressions which is cool but not helpful json parsers similarly this thing is rediculous this is a sql database implemented purely in typescript type annotations where you have some js object that's implementing a type and you have the type of that object and you can actually query types from there and get the values back"
+    },
+    {
+      "startSeconds": 1053,
+      "text": "like who even thinks that you can do these things css parser so here's some css string it'll know that the body needs to have max width because that's what was defined up here uh what else is in here i think that was the most ones that were most cool yeah so that's kind of like to seed those examples into your mind"
+    },
+    {
+      "startSeconds": 1076,
+      "text": "okay that was kind of a intermediate tour of typescript template literal types a feature that i myself have not used in my day-to-day coding but one that is useful to be aware about in case you see yourself having a need that is only fit by this feature there are some things that you can only do with typescript"
+    },
+    {
+      "startSeconds": 1099,
+      "text": "template literal types and the fact that this feature now exists open those doors to you so i'm curious if you have used it in your day job let me know in the comments i'd be very curious to hear what pragmatic concrete examples you've had rather than just writing a json parser for the fun of it which is definitely fun"
+    },
+    {
+      "startSeconds": 1121,
+      "text": "uh if you enjoyed this video leave a like and a subscribe and tell all your friends and plant friends because i don't have enough plant subscribers on this channel i need to get those numbers back up so subscribe if you aren't already and i'll catch you again next video stay happy stay coded you"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:44:02.375Z"
+}

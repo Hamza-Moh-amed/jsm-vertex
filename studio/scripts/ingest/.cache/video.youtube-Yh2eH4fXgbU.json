@@ -1,0 +1,170 @@
+{
+  "_id": "video.youtube-Yh2eH4fXgbU",
+  "videoId": "Yh2eH4fXgbU",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=Yh2eH4fXgbU",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "react is slow well kind of there's a lot of nuance to this conversation that I find gets missed pretty often and react has a lot of pieces baked in to help it perform better one of those pieces is react memo which allows you to prevent a component or component tree from updating when it doesn't need to however react. memo is one of the most"
+    },
+    {
+      "startSeconds": 18,
+      "text": "misunderstood pieces of react and I've honestly seen people use it incorrectly more than correctly our good friend TK dodo mostly known for his contributions to react query as well as his incredible blog post series about react query titled practical react query he wrote an article all about how people use react"
+    },
+    {
+      "startSeconds": 34,
+      "text": "noo incorrectly and how to think about it a little bit better and I was really excited when I saw this existed and wanted to read it with y'all today so let's take a look Dominic TK Doo absolute goat if you're not already following him on Twitter you should fix that before you even continue watching this video because he's a legend he's"
+    },
+    {
+      "startSeconds": 48,
+      "text": "making some of the most useful open source contributions in react as well as some of the best resources we can rely on as react developers so definitely check him out if you haven't already his whole blog's incredible in this post is no exception so nice simple quick uphill battle of memoization there's lots of good content out there already about"
+    },
+    {
+      "startSeconds": 63,
+      "text": "what you should do before you reach for react. memo Dan's post before you Memo from Dan abramof if you're not already familiar on overreacted as well as Kent's simple tricked optimize renders article both these are incredible I've read both of these but this is a very different angle the idea is to let components composition solve the problem"
+    },
+    {
+      "startSeconds": 80,
+      "text": "for you either by moving a state down or lifting content up this is brilliant because component composition is react's natural mental model as Dan points out this will also work well with server components which are now reality what's missing for most of the Articles I've read is the why yes composition is great"
+    },
+    {
+      "startSeconds": 93,
+      "text": "but what's the problem with using react. memo why isn't it as good as a first choice so here's my take on it memo is too easy to break to recap when react renders a component tree it will do so top down for all children once a render has started there is no way for us to stop it mostly that's a good thing because renders make sure that we see a"
+    },
+    {
+      "startSeconds": 110,
+      "text": "correct reflection of our state on the screen also renders are usually fast then of course there are those edge cases where they aren't we all have some components that don't render as fast as we wish wish they could for some reason we can't easily change luckily react can still abort renders and it will do so if"
+    },
+    {
+      "startSeconds": 124,
+      "text": "it sees the same thing that's what makes techniques like lifting content up work in the first place so in this case we moved the hello world and the expensive tree render to be past as children here and if children is always the exact same reference react can Short Circuit the render even if color changes the expensive tree will not render the"
+    },
+    {
+      "startSeconds": 143,
+      "text": "benefit here since this is mounted above is when this state changes let's say this changes constantly like every frame or so this div and this input will have to render but the children that are being passed in don't which is really important because with stuff like react server components the children could be serialized HTML and that just being"
+    },
+    {
+      "startSeconds": 160,
+      "text": "passed through and guaranteed to not be touched is really really nice so moving things that don't change a lot outside of the things that change a lot ideally passing them through tends to be the best solution a lot of the time the alternative solution would be to keep rendering everything from within the same component but slap a react memo"
+    },
+    {
+      "startSeconds": 175,
+      "text": "around the expensive tree so we put it in here we have this expensive component which isn't that expensive but for the sake of argument pretend it is and then expensive tree which is react. memo around this if we wrap a component with react. memo react will skip rendering that component and its children if its"
+    },
+    {
+      "startSeconds": 189,
+      "text": "props are unchanged this will certainly achieve the same result as changing the component composition but it's a lot easier to break in the future when a component is memorized react will compare each prop with object.is if they haven't changed rendering can be skipped this works fine in our current example because our component has no props and"
+    },
+    {
+      "startSeconds": 205,
+      "text": "it will also work if the props are primitive values like numbers and strings but as soon as get into functions objects and arrays being passed it can get rough like this example where we're passing a style to the expensive component and now we memorized it this is pretty common where you have a component and then you add"
+    },
+    {
+      "startSeconds": 220,
+      "text": "additional props later on but the thing consuming expensive tree doesn't actually necessarily know that it's memorized so now when we pass expensive tree style equals background color blue this object is effectively getting recreated on each render check so the comparison is going to fail and now it's going to reender this every time because"
+    },
+    {
+      "startSeconds": 238,
+      "text": "it's generated new props and it's possible that this new object would result in different content being rendered but if we wrap the memoized style in a react you memo call this fixes it so to speak but you still have no guarantees from above or below that these things aren't going to change in other ways especially once you have more"
+    },
+    {
+      "startSeconds": 257,
+      "text": "and more props that are being consumed here it gets increasingly difficult yeah once style becomes a prop being passed in you do something innocent like this well you don't actually know if the style coming in is used memoed and properly memorized or not and as soon as there is a value that isn't properly memorized coming into the memorized"
+    },
+    {
+      "startSeconds": 274,
+      "text": "component no matter how far away it comes from you're going to start running into problems and the these types of innocent changes where you move the style from in the component to being a prop that you pass through might cause a massive performance issue for your app you didn't predict because it abstracts the slow part away from the thing that"
+    },
+    {
+      "startSeconds": 292,
+      "text": "can trigger it being slow I think that's the biggest issue that we'll see in a lot of react code it's very very easy to separate the place where the slow thing is from the place that makes it slow and when you use memo you have Now hidden the slow part in a way where it doesn't seem slow but any subtle change that doesn't seem like it should affect"
+    },
+    {
+      "startSeconds": 310,
+      "text": "anything will suddenly make that code slow again and that's the fear that react memo instills in developers like myself oh boy here's another fun one if the memoized component accepts children yeah you didn't know this would break memoization why would it I'm just passing the same stable P tag well jsx is just syntact sugar for react up"
+    },
+    {
+      "startSeconds": 329,
+      "text": "create element which creates a new object on every render if you want to pass children to a memoized component you need to use memo that jsx render and then pass that memoized element as the child instead God we can surely wrap the children we're passing with a used memo but I hope you're realizing by now that"
+    },
+    {
+      "startSeconds": 347,
+      "text": "we're fighting an uphill battle that is hardly winnable Yep this is the issue the next person might just come by and pass an empty object or raise a fallback value to a prop on a memoized component and we're back to square one yeah you you make one small mistake like this and it's all over again so using r. memo is"
+    },
+    {
+      "startSeconds": 363,
+      "text": "a bit of a mindfield and choosing one of the proposed Alternatives seems way better to me but sometimes we seemingly can't avoid a memorization of a component let's take a look at the example I've seen on Twitter that sparked the idea for this blog post I really need to do react performance optimizations but we have a"
+    },
+    {
+      "startSeconds": 377,
+      "text": "page with five big tables and a summary box when one big table changes everything renders it's slow solution one I wrapped each table in a memo two I wrap the functions passed down and use callback much faster looks to me more like state is too high up if every table had their own State changing one wouldn't reender the others problem with"
+    },
+    {
+      "startSeconds": 392,
+      "text": "M when use callback is that it only takes one prop to screw it all up yeah if you accidentally pass an empty arrays a default there goes all your perf WIS so let's see what he said about this here here I expect the component tree to look something like this I'm using two tables instead of five for brevity so table one table two both of these are in"
+    },
+    {
+      "startSeconds": 407,
+      "text": "state together and they're both being passed here State holds the data of both tables and the summary Bar Needs access to all of it we can't move State down into the tables and we also can't compose the components in a different way it seems that memorization is our only only option so yeah in this particular case memoizing probably makes"
+    },
+    {
+      "startSeconds": 422,
+      "text": "a lot of sense if the state has to live here don't start rendering remember when I said that once a render started we have no way of stopping it that's still true but what if we'd stop the render from starting in the first place if State wouldn't live at the top of the app we wouldn't need to reender the whole tree whenever it changes where"
+    },
+    {
+      "startSeconds": 436,
+      "text": "could it live instead we've already established we can't move it down so let's put it to the side outside of react this is precisely what most state Management Solutions do they store the state outside of react and surgically trigger reenders of the parts of the component tree that need to know about what changes you use react query before"
+    },
+    {
+      "startSeconds": 451,
+      "text": "this is exactly what happens there as well without the technique you'd see way more re-renders than you'd like to so yes my proposed alternative solution is to bring in an effective State manager I'm going to use zustand because it's the one I'm most familiar with it's a really nice example we create a store it has these two values in it and it has"
+    },
+    {
+      "startSeconds": 464,
+      "text": "actions which are things that operate on the store these would be things like add to table or remove from table or in the things you put in here which again this is just a random key he chose but it's very easy within created zustand store to call the set function in functions you define so now the store has these"
+    },
+    {
+      "startSeconds": 479,
+      "text": "behaviors that will trigger updates externally which if hooked into with react hooks will trigger those internally in react so here we have exported custom hooks for use table one data and use table 2 Data as well as a use summary data and my assumption is that all of these hooks are going to be placed in different places and ideally"
+    },
+    {
+      "startSeconds": 495,
+      "text": "the ones that are the most expensive aren't going to be too close to the top and all of these will be called near the leaves so the renders only affect those elements now every component can subscribe internally to the state it is interested in avoiding any top- down renders if table two dat updates table one won't render this is as effective as"
+    },
+    {
+      "startSeconds": 511,
+      "text": "memorizing the tables but won't suffer from the pitfalls when adding new props that can negatively impact performance a way out granted all solutions we have here are not great memorizing in general makes our code harder to read and it's easy to get wrong which makes it the worst option for me using external State"
+    },
+    {
+      "startSeconds": 525,
+      "text": "managers is a bit better you might have that dependency in your app anyway adapting the way you compose components is still the best option but it's not always possible what would really be a way out is if we change the rules of the game records in tupal in ecma script proposal it's in stage two for quite some time would would help us with"
+    },
+    {
+      "startSeconds": 539,
+      "text": "arrays and objects but not for functions Sebastian lber has a great read on that I haven't actually read this one records and tupal for react interesting I'll be sure to read that in the future the react team has also hinted that they are working on a compiler called react forget which will supposedly memorize everything for us automatically with"
+    },
+    {
+      "startSeconds": 553,
+      "text": "that in place we can get the perf optimizations of react. memo without the error surface make sure you're following TK because he more so than almost anybody on Twitter exclusively provides value like I'm just going to scroll through and look at some random tweets every single one of these are going to be useful API design avoid optional"
+    },
+    {
+      "startSeconds": 567,
+      "text": "prams if they are mutually exclusive that's very useful point and I'm sure he broke it down great shorter to write is one of my favorite Arguments for anything really it's the reason I stopped programming in cobal here like one of the highest signal to noise ratios of anybody on the platform please follow him if you haven't already great"
+    },
+    {
+      "startSeconds": 581,
+      "text": "content great dude great blog posts thank you all as always I know react performance is a scary topic I hope this shows you some strategies to mitigate it generally speaking the simpler you make things in terms of how State lives and the closer you attach the things rendering to the data that it's rendering with the better things will"
+    },
+    {
+      "startSeconds": 596,
+      "text": "perform and it's really cool seeing authors like K Doo going out of their way to write useful quality resources explaining why these trade-offs matter so much appreciate all of you as always I'll pin a video in the corner here with all sorts of other fun things you can do with react if you weren't familiar performance matters more than ever in"
+    },
+    {
+      "startSeconds": 611,
+      "text": "some of those examples appreciate you all a ton see you guys next time peace NS"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:27.585Z"
+}

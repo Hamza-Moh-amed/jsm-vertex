@@ -1,0 +1,259 @@
+{
+  "_id": "video.youtube-wUaeKEl1RCw",
+  "videoId": "wUaeKEl1RCw",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=wUaeKEl1RCw",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 64,
+      "label": "Top 10 Web Application Security Risks"
+    },
+    {
+      "startSeconds": 111,
+      "label": "Injection"
+    },
+    {
+      "startSeconds": 244,
+      "label": "User"
+    },
+    {
+      "startSeconds": 375,
+      "label": "Sensitive Data"
+    },
+    {
+      "startSeconds": 442,
+      "label": "XML External Entities"
+    },
+    {
+      "startSeconds": 520,
+      "label": "Broken Access Control"
+    },
+    {
+      "startSeconds": 558,
+      "label": "Roles"
+    },
+    {
+      "startSeconds": 589,
+      "label": "Configuration"
+    },
+    {
+      "startSeconds": 632,
+      "label": "Crosssite scripting"
+    },
+    {
+      "startSeconds": 704,
+      "label": "Insecured digitalization"
+    },
+    {
+      "startSeconds": 802,
+      "label": "Using components with known vulnerabilities"
+    },
+    {
+      "startSeconds": 844,
+      "label": "Insufficient logging and auditing"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "welcome back aliens my name is davin reddy in the last video we have talked about secure code right and then we understood whenever you can make an application don't just focus on the performance don't just focus on the stability of the application but security the problem is as a developer we focus more on the application right we just want to"
+    },
+    {
+      "startSeconds": 17,
+      "text": "complete the work and we feel that security is not our concern of course it's important but not our concern but then if you want to provide security from start to end you have to make sure that your code is also secure or basically you're writing secure code okay uh now if you want to understand how do we write secure code first you have to"
+    },
+    {
+      "startSeconds": 35,
+      "text": "understand what are the risks we have to solve so if you mitigate those risk of course you are writing a secure code right but how will you get this list so thanks to owasp who provides your list in every few years uh so they do a lot of research they understand the uh security risk by looking at the application and they"
+    },
+    {
+      "startSeconds": 53,
+      "text": "find out top ten security risks which you can mitigate of course it's not just 10 there are hundreds of secured risk but this is top 10 at least try to solve this first and to get that you have just have to go to google and search for oh wasp top 10 and this is a website you will get at the first one and if you go there you will"
+    },
+    {
+      "startSeconds": 73,
+      "text": "find a top 10 list so this is not the only thing they do there are other things as well you can just explore the entire website but if you want to find what owasp stands for so it is open web application security project that's good and we have to understand this top 10 security risk now the thing is each risk here"
+    },
+    {
+      "startSeconds": 94,
+      "text": "you can see we have top 10 each risk here will take another six hours of content so even injection itself if i want to talk about that we can talk about it for six hours right but so let's get the overview of all this risk in this video so the first one is injection see the thing is when you make an application of course you provide"
+    },
+    {
+      "startSeconds": 114,
+      "text": "external security to the application but hackers or the attackers somehow wants to get hold on the application how will they do it so one of the ways they can use injection attacks now what are injection attacks so injection has multiple attacks basically we have sql injection we have ldap injection uh and many more so let's talk about sql"
+    },
+    {
+      "startSeconds": 133,
+      "text": "injection here just to understand what it means so let's say a user want to log into an application of course to log in the application you need to have something you need to have a face id you need to have a fingerprint or a username password in most of the web application we still go for username passwords and the way you do that is by entering"
+    },
+    {
+      "startSeconds": 150,
+      "text": "username and password on the back inside if your developer what you will do how will you verify if the user and password is actually correct so of course you have to verify that with the help of database right so there will be a database and you will send this data to the database by saying hey i want to check if this data is available in the"
+    },
+    {
+      "startSeconds": 166,
+      "text": "database if the data is available of course you can say it is the user is valid or authenticated what if the data is not available for a legit user of course the data will be there what about attackers they don't have their username password saved right but then how you verify with the database so we have a very"
+    },
+    {
+      "startSeconds": 184,
+      "text": "special language right so specifically we're talking about rdbms database here uh so the language which we use is sql and the query we say is select star from a table where username is this and password is this but the thing is if you think in any programming language terms maybe java or php because you have to write some"
+    },
+    {
+      "startSeconds": 204,
+      "text": "programming language for the backend right so we normally put a statement and then you use double quote single quote because this value is actually coming from the user right but what if a user says the username is naveen or one is equal to one because ultimately the query is verifying right a query has to return true that's"
+    },
+    {
+      "startSeconds": 222,
+      "text": "it okay that's how we do programming right so you even if the query is if you say one equal to one which is true a user will get the access that is injection okay so just you're injecting uh something in the code uh so it can be a simple query it can also be a command right which you're injecting in the code the second one is"
+    },
+    {
+      "startSeconds": 242,
+      "text": "broken authentication now what does it mean see we as a user okay so let's not focus on developers let's say as a user as a user whenever you make an account on any website we have this tendency of using the same username and passwords right i used to do that not anymore but uh one username and one password on all the websites"
+    },
+    {
+      "startSeconds": 262,
+      "text": "the good thing is you don't have to buy heart multiple username passwords the drawback is if one of the application is getting hacked if a attacker is able to get a hold on your username password not just one account you will be losing all your accounts and most of the user does that okay so they have this tendency of"
+    },
+    {
+      "startSeconds": 280,
+      "text": "using the same username password that's one of the issue we have the second one is default passwords most of us are still using default passwords now you might be thinking hey as a developer how can you make sure that user is not entering the different username password or difficult password you can actually you know if"
+    },
+    {
+      "startSeconds": 296,
+      "text": "you go to most of the websites now they force you to use a complex password right another thing you can do here of course we will talk about best practices there should be a separate video on best practice of secure coding but just to give you a hint how can we solve that is by using a complex password you can recommend user to do that"
+    },
+    {
+      "startSeconds": 314,
+      "text": "and second one is you can provide uh what if you can change the username for the back end so even if a user says naveenready as a username uh while you are storing that username in the database you will say 9123. so you're making sure that in your database the username is different that's something you can do the second one it can also be"
+    },
+    {
+      "startSeconds": 332,
+      "text": "what if a user is using a system let's say i've logged into facebook now after using facebook i just closed the tab and then i just went away now some attacker just using the same machine was able to open that tab and was able to access the account one of the way you can do that is by the moment you close a tab it should be logged out this"
+    },
+    {
+      "startSeconds": 352,
+      "text": "happens most of the time when you use banking applications right so they don't allow you to access the account if you reopen the tab they will ask you to log in again that's the second one in fact for the first one that we have a solution which is instead of using statement so specific to java in java we have statement and prepared"
+    },
+    {
+      "startSeconds": 368,
+      "text": "statement so instead of using statement let's use prepare statement to solve injection issues specifically sql injection the third one is sensitive data exposure the thing is on the internet you know there are millions of bytes of data is getting transferred every milliseconds right now this data is not just normal data"
+    },
+    {
+      "startSeconds": 386,
+      "text": "it can be a sensitive data your whatsapp message you might be feeling your whatsapp messages into an encryption ah they're not okay so you are basically sending all the sensitive information it can be great card details it can be maybe credit card details so if you go to our website and if you let's say on amazon if you buy something we have this"
+    },
+    {
+      "startSeconds": 404,
+      "text": "tendency of uh storing the credit card information on amazon so that next time you just have to enter this cvv code and you're done you don't have to enter all the details so that means the data is available on the amazon website right if it is not encrypted and attacker was able to hold that credit card you can't right i don't what"
+    },
+    {
+      "startSeconds": 422,
+      "text": "you can still block the card there but then uh you have to make sure that whatever communication is happening on the server between client and server or maybe two different servers it has to be encrypted because most of the applications don't do encryption for other type of data yes they focus more on username password but not all the information"
+    },
+    {
+      "startSeconds": 438,
+      "text": "even the personal information is important and you have to secure it the next one is xml external entities which in short is called xxe that's weird i know but then what it means is you know in the earlier days now we are using a json a lot but earlier time for the configuration for data transfer we used to use"
+    },
+    {
+      "startSeconds": 455,
+      "text": "xml but the problem with xml is it's a good thing actually the good thing was in xml was this there was a concept of dtd which is document type definition in that you can actually mention the entities okay now what is entity so let's say in one xml you want to transfer multiple data user data maybe you have five users and"
+    },
+    {
+      "startSeconds": 473,
+      "text": "then you want to send it about five users now maybe some name and some information might be repeated so what you can do is you can take it common and you can save in the entities good thing right but the problem is this entity can also hold external entities external files external commands now the problem with external command is"
+    },
+    {
+      "startSeconds": 491,
+      "text": "as an attacker if attacker is playing with the xml file because see on the server side you will be having xml password right xml password simply try to open the xml and read all the information what if attacker is embedding a file which will have some commands as an external entity which will be executed by the xml parser on the server side"
+    },
+    {
+      "startSeconds": 511,
+      "text": "basically you are running a command on the server side it can be any command so that one issue one thing you can do is you can block external entities in the xml the fourth one is broken access control now this is where so you know in every website you have different controls maybe for users we have admins we have auditors"
+    },
+    {
+      "startSeconds": 532,
+      "text": "then we have guest users so what we do is every user will have a different permission every user will have a different control on the application like admin can do anything a user can do anything right but only with that particular account so if i have an account on facebook i can do anything with my account but not with others account but"
+    },
+    {
+      "startSeconds": 550,
+      "text": "what if you messed up as a developer you are not able to assign proper access to each account or each role right so whenever you learn about security rules those roles are very important right every time you provide a feature you should know who will be able to use this feature who will be able to edit this feature and also if i say as a user i can"
+    },
+    {
+      "startSeconds": 569,
+      "text": "actually control the user accounts or get the information about the user account but that should be only my account not someone's else account example most of the time we fire the query on the url uh the username and the user id what if my id is one two three and i'm able to access someone's sales id by saying one two three four so you have to"
+    },
+    {
+      "startSeconds": 588,
+      "text": "control that the next one is security miss configuration now example let's say if you have a web server and of course in the web server you will be having multiple softwares right a web server itself you will be having database servers or maybe you are using some external servers as well now the thing is every time you use some server"
+    },
+    {
+      "startSeconds": 606,
+      "text": "they'll be having some default configuration and sometime you forgot to change the configuration sometimes we misconfigure it and if attacker was able to get the hold on one of the server they might attack the other server so maybe they're able to get hold on db server they might get a hold on uh web server as well so best thing is whenever you"
+    },
+    {
+      "startSeconds": 627,
+      "text": "use any external web server try to change the configuration uh the next one is cross site scripting okay so this word is cross site scripting is simply you are sending a script okay so you might be saying hey that's very normal right on the server side you have some script which a server will send on the client side to run that makes sense right"
+    },
+    {
+      "startSeconds": 647,
+      "text": "because whatever you use on the application nowadays it's happening because of javascript on the browser because your browser will read the javascript it will show you the content it will fill the html elements with the help of javascript right see that makes sense when the server is sending the javascript but what if a attacker is sending a"
+    },
+    {
+      "startSeconds": 666,
+      "text": "javascript into a victim's machine example let's say i want to attack your machine so what i will do is i will maybe you are using facebook so there is a photo uploaded on a facebook on your profile and most of your friends are commenting on it so even i will comment but i will not be commenting a normal text what if i comment a script"
+    },
+    {
+      "startSeconds": 687,
+      "text": "so next time when you open that photo you will be saying some comments there right in one of the comments there will be a script which will be done by your browser okay that is the script which i have sent to you through the server of course or maybe i can directly send you or through the server that's my choice uh"
+    },
+    {
+      "startSeconds": 702,
+      "text": "that is cross-site scripting the next one is insecured decentralization let's see what happens is so let's talk about json here so json is a commonly used format to send data from a client to server home server to client or maybe to store it on the machine itself so let's say you have an object now in the real world"
+    },
+    {
+      "startSeconds": 718,
+      "text": "when you talk about an object let's say let's say about this phone this is an object right now this object will have some information so this is a real object but if you want to store this object in machine what you will do is you will fetch the properties of it right this is a black color phone uh it has a height of let's say seven"
+    },
+    {
+      "startSeconds": 735,
+      "text": "inch it has three cameras it has a screen and company samsung so let's see all the details you are storing on in a format right adjacent format but then if you actually want to store this in a machine in a hard drive you have to use a concept of serialization which you convert the json data into a byte code or the byte format"
+    },
+    {
+      "startSeconds": 755,
+      "text": "basically once and zeros that is realization so let's say now you are sending this file to the server of serial data which is zeros and once on the server side server will try to convert that so we'll try to get the json format which is decilization and then with the json server can get the phone of course that makes sense right but then how it"
+    },
+    {
+      "startSeconds": 776,
+      "text": "can be insecure okay what if i'm sending you so let's say i'm a malicious attacker and i'm sending a byte string let's say ones and zeroes to the server and servo is decelising it after doing decilization what if a json format has a command which will get executed right so that is insecure decilization yeah it sounds like"
+    },
+    {
+      "startSeconds": 797,
+      "text": "injection but this is different because here we are doing digitalization on the server the next one is using components with known vulnerabilities the thing is whatever server we are using on the server it can be a purchase server it can be database server it can be any any other server most of it have some issues some bugs right and if you"
+    },
+    {
+      "startSeconds": 817,
+      "text": "are still using a server with no vulnerabilities the attackers will know that hey you're using this particular server this particular version i'm going to attack it if you're thinking how they will know the version sometimes you know in the application you will face some errors and then in the error page if you are not handling it properly it"
+    },
+    {
+      "startSeconds": 835,
+      "text": "reveals everything whatsoever we are using what version it is so make sure that you hide all the information and that also comes in a sensitive information right and the last one is insufficient logging and auditing so the problem is most of the servers are getting attacked every second google server is getting attacked every"
+    },
+    {
+      "startSeconds": 853,
+      "text": "second facebook server even my my website might be getting attacked one attack per day i'm not sure but the thing is how would we know that there's a data breach how do we know it is because with the help of log files so in the log files you have to make sure that you do all the entries is there any attacker trying to attack"
+    },
+    {
+      "startSeconds": 869,
+      "text": "the website of course if there's a attack going on you have to make sure that you check the logs but if you want to check the logs you have to make sure that you first provide the logs so make sure that you provide proper logs and for everything for attacks for logins for incorrect logins everything yeah so that's about"
+    },
+    {
+      "startSeconds": 885,
+      "text": "the top ten how do we solve this issue so i will try to make a video for the best practices that should make sense right so that's it from this video i hope you enjoyed let me in the comment section and do subscribe for the videos bye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:03.330Z"
+}

@@ -1,0 +1,103 @@
+{
+  "_id": "video.youtube-JLw_pHLCN4Y",
+  "videoId": "JLw_pHLCN4Y",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=JLw_pHLCN4Y",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "OOMKilled: Understanding Memory Limit Issues"
+    },
+    {
+      "startSeconds": 26,
+      "label": "What is OOMKilled?"
+    },
+    {
+      "startSeconds": 63,
+      "label": "Common Causes"
+    },
+    {
+      "startSeconds": 97,
+      "label": "Detecting OOMKilled"
+    },
+    {
+      "startSeconds": 128,
+      "label": "Memory: Requests vs Limits"
+    },
+    {
+      "startSeconds": 165,
+      "label": "Setting Memory Limits"
+    },
+    {
+      "startSeconds": 201,
+      "label": "Troubleshooting Steps"
+    },
+    {
+      "startSeconds": 243,
+      "label": "Prevention Best Practices"
+    },
+    {
+      "startSeconds": 292,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Welcome to this Kubernetes troubleshooting tutorial. Today we're diving into one of the most common issues you'll encounter when running containers. OOM killed. This stands for out of memory killed and it happens when containers exceed their memory limits. Understanding this error is crucial for maintaining stable applications in"
+    },
+    {
+      "startSeconds": 20,
+      "text": "Kubernetes. Let's explore what causes this issue and how to handle it effectively. OOM killed occurs when a container is forcibly terminated because it tried to use more memory than it was allowed. When this happens, the Linux kernel's out of memory killer mechanism steps in and terminates the container to protect"
+    },
+    {
+      "startSeconds": 40,
+      "text": "the system. You'll recognize this error by its distinctive exit code 137. This exit code is a combination of 128, which is the base code for fatal signals, plus 9, which represents the SI GKILL signal. So whenever you see exit code 137, you know a container was killed due to memory issues. There are four main reasons why OOM"
+    },
+    {
+      "startSeconds": 66,
+      "text": "killed errors occur. First, the memory limit might simply be set too low for your application's actual needs. Second, your application could have a memory leak, meaning it's not releasing memory properly after use. Third, a sudden traffic spike can cause memory consumption to jump unexpectedly. And fourth, there might be a bug in your"
+    },
+    {
+      "startSeconds": 87,
+      "text": "application code that's causing excessive memory usage. Identifying which of these is affecting your application is the first step toward fixing the problem. To detect if your pod was killed due to out of memory, you can use the cubectal describe pod command followed by your pod name. This will show you detailed"
+    },
+    {
+      "startSeconds": 107,
+      "text": "information about the pod status. Look specifically for the last state section in the output. If you see the reason listed as OOM killed and exit code 137, you've confirmed that your container was terminated due to exceeding its memory limit. This information is essential for troubleshooting and determining your next steps."
+    },
+    {
+      "startSeconds": 129,
+      "text": "Kubernetes uses two different settings to manage container memory requests and limits. Memory requests specify the minimum amount of memory guaranteed to your container for scheduling purposes. The Kubernetesuler uses this value to decide which node has enough resources to run your pod. Memory limits, on the other hand, set the maximum amount of"
+    },
+    {
+      "startSeconds": 150,
+      "text": "memory your container is allowed to use. If your container tries to exceed this limit, it will be terminated with an OOM killed error. Understanding the difference between these two settings is fundamental to proper resource management. Here's how you configure memory settings in your pod specification. Under the resources section, you define both"
+    },
+    {
+      "startSeconds": 173,
+      "text": "requests and limits. In this example, we're requesting 256 megabytes of memory and setting a limit of 512 megabytes. The request ensures that the pod will only be scheduled on nodes with at least 256 megabytes available. The limit prevents the container from using more than 512 megabytes, protecting the node from memory exhaustion."
+    },
+    {
+      "startSeconds": 195,
+      "text": "These values should be based on your application's actual memory usage patterns. When facing an OOM killed error, follow these four troubleshooting steps. First, check your current memory usage using the cubectal top command to see how much memory your containers are actually consuming. Second, review your application logs to identify memory"
+    },
+    {
+      "startSeconds": 218,
+      "text": "usage patterns and potential spikes. Third, analyze whether your memory limits align with your actual usage or if they're too restrictive. Finally, based on your findings, either adjust the memory limits to accommodate your workload or investigate your application code for memory leaks or inefficiencies. Systematic troubleshooting will help you"
+    },
+    {
+      "startSeconds": 240,
+      "text": "identify the root cause quickly. Preventing OOM killed errors requires following several best practices. First, set realistic memory limits based on actual usage patterns rather than guessing. Monitor your applications in development and staging to understand their memory requirements. Second, implement continuous monitoring of"
+    },
+    {
+      "startSeconds": 263,
+      "text": "memory metrics in production so you can detect issues before they cause outages. Third, use horizontal pod autoscaling to distribute load across multiple pods when demand increases. And fourth, always load test your applications before deploying to production to understand their behavior under stress. By following these practices, you'll"
+    },
+    {
+      "startSeconds": 284,
+      "text": "keep your containers healthy and your applications running efficiently. Thanks for watching and happy troubleshooting. If you like this video, hit that like button and don't forget to subscribe. Visit codelucky.com for more such useful content. [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:31.104Z"
+}

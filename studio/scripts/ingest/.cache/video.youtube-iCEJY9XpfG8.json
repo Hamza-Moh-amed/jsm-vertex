@@ -1,0 +1,99 @@
+{
+  "_id": "video.youtube-iCEJY9XpfG8",
+  "videoId": "iCEJY9XpfG8",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=iCEJY9XpfG8",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 12,
+      "label": "Mapped Types"
+    },
+    {
+      "startSeconds": 387,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "map types are a really powerful tool every typescript developer should know so let's figure out how to use them and let's add them to our tool belt so let's dive straight into the code and let's figure out how we can use the map types to make our code much more robust let's say we have a type events here and this has an add property and a"
+    },
+    {
+      "startSeconds": 23,
+      "text": "remove property now what we want to do is we want to say we have a user actions object here and this of type on events and what is this on events what kind of type we have an on ADD property here which is a function and on remove property which is also a function so basically this on events should have an on function for each of the events now"
+    },
+    {
+      "startSeconds": 45,
+      "text": "we could create an on events type like this and could then say on ADD and on remove like this now this works perfectly fine but as soon as we change something in our events we can see what the problems are with this approach so if I say move here we can see that everything still compiles and we don't want that because you want for each of"
+    },
+    {
+      "startSeconds": 66,
+      "text": "the events an on event function and on ADD and on remove and on move function in this case this of course cannot be achieved if we create them manually that this will automatically create a new on type but we can only achieve this by using map types let's think about how the shape of this onevent type should look like we want it to have all the"
+    },
+    {
+      "startSeconds": 89,
+      "text": "property keys of our events but prefixed with an on and an uppercased first letter of our events key so what we can say here is we say type event keys and we say key of events this is like a helper type which we will use and this event Keys here now says that if we have a key here of type event Keys we are only allowed to use add remove or move"
+    },
+    {
+      "startSeconds": 113,
+      "text": "as a string here because this is only allowed to be the key of our events so what we now can do with this is we can create our map type we remove these fixed types here and we say okay the key has to be in event Keys you can see we have used our brackets here and as a value we can say we just want to have any function like this and now we can"
+    },
+    {
+      "startSeconds": 137,
+      "text": "see line 12 does no longer compile because now we of course have to change this to add and remove because now only the property keys of our events type are allowed now what we also have to do now to make it compile is and that is one one step in the right direction is we have to add our move function here because otherwise this will not compile"
+    },
+    {
+      "startSeconds": 159,
+      "text": "of course now we have the problem that we don't have the on prefix but we can change that we can use template lals and use this key here because this key is just a variable you can call this anything you like but I like to call this key what we now say is s and then use spec ticks and we will use template literals I already did videos about"
+    },
+    {
+      "startSeconds": 179,
+      "text": "template L rules you can find it in the info box but also in the description below and we can use this template L rules to tell typescript hey we want an on prefix and then we use our curly braces with our dollar sign and then access this key here and now we can see our code does no longer compile because what we now need to do is we need to"
+    },
+    {
+      "startSeconds": 199,
+      "text": "prefix all our properties with an on because we tell typescript hey we want our property keys to have an on prefix and then the key now the last thing we have to do is we have to capitalize the first letter how can we do this we say capitalize like this this is a so-called intrinsic utility type from typescript"
+    },
+    {
+      "startSeconds": 219,
+      "text": "we pass it our key here and we can see now the code does no longer compile because now we have to uppercase the first letter of our events keys and now we can see we have already achieved what we wanted we have our events type which is like our base type and we have our on events which is a map type which deres from this event"
+    },
+    {
+      "startSeconds": 240,
+      "text": "now if I change something from remove for example to delete we can see here this does no longer compile because this is not found and now I can change this and we can see here I get autoc completion I I can change this to on delete and we can see now the C compiles fine so we have our events which is like the base and our on events which is"
+    },
+    {
+      "startSeconds": 259,
+      "text": "completely dependent on it so we don't have to change it manually now this is already really nice but let's make this a little bit more generic so what we can say here is we can say okay in instead of this being an dependent on the event and on the event Keys we can say here we make this generic we say on T extends"
+    },
+    {
+      "startSeconds": 279,
+      "text": "object because we want only to be able to use it with an with an object type like the events type is and then we say key has to be in key of T because here we don't want this event Keys anymore we want to be P be using just the keys of this type we pass in and now we get an error because we can see here this key is not valid to be passed to the"
+    },
+    {
+      "startSeconds": 301,
+      "text": "capitalize why is this well this key can be something else than just a string because keys of prop of objects can also be like numbers or symbols so we have to restrict this so we can say in case of this key extending string so basically if this key is a string in this case we say okay we want to have this template"
+    },
+    {
+      "startSeconds": 324,
+      "text": "literal this key otherwise we say never and what this never does basically is it filters all the properties all the property Keys which are not a string so the never type is really something interesting and really powerful type and I will make a video which I will go more in depth about it I already did one you"
+    },
+    {
+      "startSeconds": 343,
+      "text": "can check it out in the info box or in the description where I will show you how you can use the never type with the satisfies keyword to make exhaustive switches or exhaustive if else cases but let's go back here and fix this we say instead of on events we say on event events like this and we can see it's now perfectly fine again and is working as"
+    },
+    {
+      "startSeconds": 363,
+      "text": "before but now in a much more generic way where it can pass in any type you like so to recapitulate what we did we created a basic type an events type then used a map type with a generic to create a new type from it which changes immediately when we change the base type if we change one type then the other ones will automatically also change their"
+    },
+    {
+      "startSeconds": 386,
+      "text": "shape so thank you for watching the video I I hope you learned something useful today if you did maybe leave a like And subscribe to the channel if you want to stay updated for the newest typescript stuff and let me know in the comments if you have certain topics you want to get covered in future videos see you soon bye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:57.937Z"
+}

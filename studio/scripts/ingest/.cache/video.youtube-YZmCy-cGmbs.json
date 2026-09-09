@@ -1,0 +1,86 @@
+{
+  "_id": "video.youtube-YZmCy-cGmbs",
+  "videoId": "YZmCy-cGmbs",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=YZmCy-cGmbs",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 2,
+      "text": "If your model makes up details even with retrieval, grounding is missing. We'll force source only answers with citations so you can audit every claim and [music] reduce hallucinations. You might be seeing confident responses that [music] cannot be traced back to any real text that breaks trust and costs time chasing"
+    },
+    {
+      "startSeconds": 23,
+      "text": "imaginary facts. By the end of this video, you will understand a simple auditable pattern in [music] Python that answers only from sources and flags when the sources do not cover the question. You will be able to build a tiny auditable retrieval and citation layer that prevents unsupported claims. [music] I'm Professor Pi teaching AI"
+    },
+    {
+      "startSeconds": 46,
+      "text": "engineering and LLM systems from basics to advanced [music] with simple concepts spruce Python that helps you solve bigger realworld problems. Most teams try to patch hallucinations [music] by prompting larger models harder. That helps a little, but it does not give you provable evidence. Citation grounding flips the script. [music] It treats the"
+    },
+    {
+      "startSeconds": 67,
+      "text": "model as a renderer and the documents as the only source of truth. Success looks like answers [music] that quote exact sentences and include stable citation identifiers you can inspect in logs. The core [music] idea is straightforward. Break documents into small traceable [music] pieces. Build a tiny lookup that"
+    },
+    {
+      "startSeconds": 89,
+      "text": "maps words to those pieces. Retrieve the pieces that match a question. Compose an answer only from quoted [music] pieces and attach the source IDs. This traits bold creativity for verifiable accuracy. The trade-off reduces hallucination and makes audits fast. We will build a toy pipeline that demonstrates those steps"
+    },
+    {
+      "startSeconds": 112,
+      "text": "with a threeline corpus and a handful of functions. The code is intentionally minimal so you can map each piece to a production step. chunking, inverted index, candidate ranking, quote only composition and a coverage audit. Now we start with the chunking and stable ids. This snippet splits tiny docs into sentence chunks with stable source ids."
+    },
+    {
+      "startSeconds": 138,
+      "text": "We start with [music] three pipe delimited lines that hold an ID, a source tag, and the text. The list comprehension splits [music] each text into sentences and assigns a chunk ID like D21 [music] while preserving the source label. The variable chunks [music] becomes our auditable unit storing the sentence text"
+    },
+    {
+      "startSeconds": 160,
+      "text": "and where it came from. Having sentence level atoms means later answers can quote exact lines and cite their source IDs without ambiguity. [music] The printed count confirms we have granular traceable evidence units to build on. [music] Next, we make the lookup that turns words into chunk pointers. This snippet builds a minimal"
+    },
+    {
+      "startSeconds": 183,
+      "text": "inverted index from chunks for fast lookups. We create index [music] as a dictionary mapping each lowercase token to the chunk IDs that contain it. The set [music] call ensures we add each chunk ID at most once per token which keeps [music] postings concise. This index is enough to power quick retrieval without loading heavy libraries helping"
+    },
+    {
+      "startSeconds": 207,
+      "text": "latency and cost. With this structure, we can later [music] compute scores by counting how many query terms hit each chunk. The printed term count shows the vocabulary size we can search over. Now we need a simple ranker that picks the best chunk candidates for a query. This snippet ranks chunks for a query and"
+    },
+    {
+      "startSeconds": 228,
+      "text": "returns the top candidates. The function talk lowercases and tokenizes the query. Then we tally how often those terms hit each chunk using the index. We sort by descending count and break ties by the chunk ID for deterministic results. The variable top contains the best matching chunk IDs. we should consider quoting."
+    },
+    {
+      "startSeconds": 251,
+      "text": "Increasing the slice size returns more candidates which can raise recall while adding some latency. The printed IDs confirm [music] which exact sentences the system would site first. Next, we show how to build an answer that contains only quoted evidence and stable [music] citations. This snippet composes an answer using"
+    },
+    {
+      "startSeconds": 273,
+      "text": "only verbatim quotes with inline citations. [music] We build SID for 01 lookup from a chunk ID to [music] its text and source. The list parts grabs the top K chunk IDs and formats each as a quoted sentence followed by its source and stable ID. The variable ants is a source answer [music] with no model generated claims"
+    },
+    {
+      "startSeconds": 297,
+      "text": "which slashes hallucinations and [music] makes auditing trivial. Increasing K expands the answer with more evidence at the cost of length and [music] latency. The printed count shows how many citations the answer includes. Finally, we check whether the quoted evidence actually [music] covers the query terms. This snippet audits support coverage to"
+    },
+    {
+      "startSeconds": 321,
+      "text": "prevent unsupported [music] answers. We form QW as the set of meaningful query [music] words by removing basic stop words. then SSW as the tokens present in the [music] quoted answer. The variable CV measures how many query terms are actually [music] evidenced by citations. If CV is below threshold T, we flag the"
+    },
+    {
+      "startSeconds": 345,
+      "text": "answer as risk, signaling fallback or more retrieval. Raising Tightens safety and may increase retrieval rounds. Lowering T speeds responses but risks gaps. The printed status indicates whether the cited answer sufficiently covers the query. This toy pipeline maps directly to a small production flow. In a real system, you would replace the"
+    },
+    {
+      "startSeconds": 369,
+      "text": "in-memory index with an ANN or diskbacked [music] inverted index and you might store chunk metadata in your database. The same audit logic applies. Measure the percentage of [music] query tokens that have direct quoted support and treat low coverage as a hard signal to avoid a free form model answer. Recap what it is. A pipeline that answers only"
+    },
+    {
+      "startSeconds": 394,
+      "text": "from quoted source chunks with stable IDs. When [music] to use it when you need auditable non-h hallucinating answers or when compliance requires traceable evidence. One caveat, strict source only answers can reduce [music] recall and may require more retrieval rounds or larger corpora to cover complex queries. Next step, tune the"
+    },
+    {
+      "startSeconds": 420,
+      "text": "coverage threshold T in the audit step to balance safety and recall for your corpus size and query complexity. If short practical AI engineering helps, subscribe and watch the AI engineering"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:45.019Z"
+}

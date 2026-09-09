@@ -1,0 +1,167 @@
+{
+  "_id": "video.youtube-M3mGY0pgFk0",
+  "videoId": "M3mGY0pgFk0",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=M3mGY0pgFk0",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 34,
+      "label": "What are optimistic updates"
+    },
+    {
+      "startSeconds": 73,
+      "label": "Why optimistic updates are hard"
+    },
+    {
+      "startSeconds": 125,
+      "label": "useOptimistic hook basics"
+    },
+    {
+      "startSeconds": 398,
+      "label": "useOptimistic hook advanced"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "If you've ever wondered why an application you're using is so fast, it's almost always because they're using optimistic updates. And normally implementing these optimistic updates is incredibly time-consuming and annoying, but with the brand new use optimistic react hook, it is incredibly easy. In this video, I'm going to show you not"
+    },
+    {
+      "startSeconds": 16,
+      "text": "only what optimistic updates are, but how to use this hook in your react application to make it blazing fast. Welcome back to WebDev Simplified. My name is Kyle, and my job is to simplify the web so you can start building your dream project sooner. And today we're talking all about optimistic updates. Now, in this application right now,"
+    },
+    {
+      "startSeconds": 35,
+      "text": "there's a lot of problems with it. But first of all, we're not doing optimistic updates, which means when I type and I click create, you can see that there's a long pause before this item shows up. The idea behind optimistic updates is even if your API takes a minute or 10 minutes or 20 seconds, it doesn't matter. No matter how long your API"
+    },
+    {
+      "startSeconds": 49,
+      "text": "takes, you make it so that whatever the user does shows up immediately for them, and then it'll rectify itself if, for example, there's an error on your API or something like that. It'll change and fix itself based on that. But it'll feel super responsive because everything you do will immediately update on your"
+    },
+    {
+      "startSeconds": 64,
+      "text": "screen. This is how pretty much every social media app works. We have a like counter, it'll instantly increment, and then if for some reason there's a failure, it'll decrement you back down. That's what we're trying to implement here. And keeping track of that is incredibly difficult in a normal react application. That's because first of"
+    },
+    {
+      "startSeconds": 78,
+      "text": "all, I have, for example, my to-do's here. So anytime my to-do's change, I need to make sure I update my list. That's super straightforward and what I'm currently doing. But if I wanted to track optimistic updates, I would need essentially another thing of state to determine my optimistic to-do's. And those optimistic to-do's I'd probably"
+    },
+    {
+      "startSeconds": 93,
+      "text": "put in state somewhere. And then I would need to make sure I updated my optimistic to-do before I create a to-do. Then after I create a to-do, I would need to remove that optimistic update cuz it's currently in my to-do's. And then whatever my to-do's get updated from some other source, I need to make sure I update my optimistic to-do's."
+    },
+    {
+      "startSeconds": 108,
+      "text": "There's just so many different dependencies and things that could cause it to update that is a nightmare to try to manage and maintain this on your own, and it's honestly really difficult to write custom hooks for. But react has implemented their own custom hook for you to use in this and it's called use optimistic and it takes care of pretty"
+    },
+    {
+      "startSeconds": 122,
+      "text": "much all of the difficult parts of optimistic updates. Now, if you want to start using this hook inside your React application, it is experimental, so you're going to be needed to use an experimental version of React and React DOM, as well as this ESLint plugin React hooks if you're using that. And then if you're using TypeScript, you're going to"
+    },
+    {
+      "startSeconds": 136,
+      "text": "want to make sure you add these reference lines in your code somewhere just so you can actually get the TypeScript definitions, but this is only important if you care about the TypeScript definitions. So, what you can do, is up here, we can just type in use optimistic and this is labeled as experimental cuz it like I said, an"
+    },
+    {
+      "startSeconds": 151,
+      "text": "experimental hook. So, we're going to rename it as use optimistic. And this just imports directly from React. Now, the way that this use optimistic hook works is very similar to how the use state hook works. So, I'm going to create a new array called optimistic to-dos and then I'm going to say set optimistic to-dos. There we go. And I'm"
+    },
+    {
+      "startSeconds": 169,
+      "text": "going to change that to this use optimistic hook. Let me make sure I paste that down there. And by default, I'm going to set that to my to-dos. So, the way that this works is when you use the optimistic hook, whatever you pass here is not just the default value, but it's also like the source of truth. So, when this thing"
+    },
+    {
+      "startSeconds": 185,
+      "text": "gets updated, it's going to use that as your source of truth. And these optimistic to-dos are just going to be the other things you add in as like, \"Hey, currently I'm waiting for my to-dos to update, so here's my optimistic to-dos.\" So, right now if I just do that, I can replace everywhere I used to-dos, for example, down here with"
+    },
+    {
+      "startSeconds": 199,
+      "text": "my optimistic to-dos and everything's going to work exactly the same. But the main difference is see, even if I type, you can see it's working the same. And then once my to-dos update, it's still updating my optimistic to-dos. So, all those weird dependencies are all taken care of automatically for you by this,"
+    },
+    {
+      "startSeconds": 213,
+      "text": "which is really nice. The key difference comes though in that I can add optimistic to-dos by calling this a set function. And again, it works just like state. So, I can say I want to add a new optimistic to-do. I'm going to get my previous ones and essentially I'm just going to add in a brand new to-do like this. But this new to-do"
+    },
+    {
+      "startSeconds": 228,
+      "text": "is just going to have an ID, which is just going to be a random number. I'll just use crypto.randomUUID. And then it's going to take my title. So, this is kind of what I expect my API to look like. And I want to make sure actually this is inputRef.current .value. And I'll set that to my title. There we go. So, essentially this is what I'm"
+    },
+    {
+      "startSeconds": 247,
+      "text": "expecting my API to output. And I can make this even more apparent by just coming in here and I can say that this is going to be our optimistic to do. I'm going to set it equal to this object. So, it's a little bit more clear exactly what's going on. And then I'll just put this right into there. So, there we go. So, I'm essentially saying,"
+    },
+    {
+      "startSeconds": 263,
+      "text": "\"Okay, I expect the result of my API to be an ID and a title. And this title, I expect it to be whatever I type in.\" So, I'm going to set that as my optimistic to do. Then I'm going to wait for my actual to do to be created. And then when it is, I'll use the actual to do value to set my to do's. Now, let's see what that actually looks like when I"
+    },
+    {
+      "startSeconds": 280,
+      "text": "implement it. What I can do is I can type in new and I click create. And you notice that to do immediately shows up right here, which is really great. So, immediately I'm getting that feedback, but the real important thing is is whatever my set to do's returns is actually overriding this. And I can show you what I mean by that. For example, I"
+    },
+    {
+      "startSeconds": 296,
+      "text": "can go down here and instead of just returning my title, I'm going to take my title and I'm just going to add something to it. So, I can say title and then I'll just add something to it that says like it came from the server. So, this is the result from the server and this is my expected result. Now, let's refresh and I'll type in new and I'll"
+    },
+    {
+      "startSeconds": 311,
+      "text": "click create. And you notice it says new and then as soon as I get the value back from my server, it's taking that old optimistic value, removing it and replacing it with the brand new value. So, all of that difficult code of keeping things in sync, it's automatically taken care of for you by this use optimistic hook. It's really"
+    },
+    {
+      "startSeconds": 326,
+      "text": "that simple to use. So, this is pretty much the most basic way to use this, but the really nice thing about this, I'll bring my code back to where it was so that the title is actually the correct title. There we go. The really nice thing about this is you can actually add extra properties to this optimistic to"
+    },
+    {
+      "startSeconds": 338,
+      "text": "do as well. For example, I can add in a status that says pending. And I'll set pending to true. And that means that this This one of my optimistic to do's and I'm waiting for it to finish loading. So now down here in my code, I can actually change around what my style looks like based on that pending. So I can say that, you know what, my opacity"
+    },
+    {
+      "startSeconds": 354,
+      "text": "here is going to be determined based on my to do dot pending. And if it's pending, I'll set this to like 0.5, otherwise I won't set it at all. And in order to get the correct typing, all I need to do is inside of here, I have a type for my to do's. Let's create a type for my optimistic to do. There we go. And this is going to"
+    },
+    {
+      "startSeconds": 373,
+      "text": "essentially just be my to do type, but I'm going to add on pending, which is a boolean that is going to sometimes be there and sometimes not. So I'm going to say to do and that type. So now I can say that this is an optimistic to do array. That just cleaned up any TypeScript errors. And now you can see, let's refresh, type in new, and when I click"
+    },
+    {
+      "startSeconds": 392,
+      "text": "create, you notice that this has 50% opacity until it comes back from the server with the correct value. Now that's the most basic version of this optimistic update. There's also a more advanced version of this optimistic update that works exactly the same as use reducer. So either it can work like use state, or if you pass it two"
+    },
+    {
+      "startSeconds": 407,
+      "text": "properties, an initial value and a reducer function, it'll work just like use reducer. This reducer function could be whatever you want. And then this setter right here would just be equivalent to dispatch inside of your reducer. So literally works exactly the same as use reducer. To prove how that works, I'm just going to copy over"
+    },
+    {
+      "startSeconds": 423,
+      "text": "really quickly a reducer. This is the simplest reducer you could possibly ever make. It only has one state, which is add, and it's adding that pending flag just like we mentioned. And the payload here is just a to do. And we can even make the payload here just a string if we want. And then we can say that the title"
+    },
+    {
+      "startSeconds": 439,
+      "text": "is equal to our action payload. And our ID is going to be a random ID. So there we go, we have that. There is our reducer, which looks great. And now we don't even need this typing here because essentially it's automatically getting the typing from this. So now we have this dispatch function, which we can use in place of this set here. And we can"
+    },
+    {
+      "startSeconds": 456,
+      "text": "pass it along our action, which has a type of add, and it's going to have a payload, which is our title. There we go. We don't need this optimistic to do up here at all. And we just want to make sure we get this title from our input ref.current.value. There we go. So now let's test this out. Create a brand new one, click create."
+    },
+    {
+      "startSeconds": 474,
+      "text": "You notice that it has that 50% opacity and then it comes in with the correct color once it loads from the server. So again, you can use it either way, whether it's going to be with a reducer or not, both of them are going to work. Now the final thing I want to mention about this hook is that this is mostly meant for being used inside of Next.js."
+    },
+    {
+      "startSeconds": 487,
+      "text": "I mean, obviously you can use it in normal React like this, but it's kind of coming out first in Next.js for like server action stuff. So if you're using server actions, which is already experimental, you can use this hook inside of there as well and it should work really well inside of there. Now if you want to make sure you're"
+    },
+    {
+      "startSeconds": 500,
+      "text": "learning the latest and greatest of React and Next.js, I highly recommend checking out my React Simplified course, linked in the description below. It covers everything you need to know about React and Next.js from an absolute beginner all the way to incredibly advanced features. And the best part is it's brand new. I just finished updating"
+    },
+    {
+      "startSeconds": 516,
+      "text": "the entire course. It's got so much content. I just highly recommend you check it out if you want to learn React or Next.js at all. I'll have a link down in the description below for you."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:50.797Z"
+}

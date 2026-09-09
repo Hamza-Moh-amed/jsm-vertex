@@ -1,0 +1,215 @@
+{
+  "_id": "video.youtube-njm1nZlrR68",
+  "videoId": "njm1nZlrR68",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=njm1nZlrR68",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction: What is SCA?"
+    },
+    {
+      "startSeconds": 36,
+      "label": "How Software Composition Analysis Works"
+    },
+    {
+      "startSeconds": 165,
+      "label": "Real-World Example: Log4j Vulnerability"
+    },
+    {
+      "startSeconds": 240,
+      "label": "Understanding SBOMs (Software Bill of Materials)"
+    },
+    {
+      "startSeconds": 345,
+      "label": "How Vulnerabilities Are Tracked (CVEs Explained)"
+    },
+    {
+      "startSeconds": 405,
+      "label": "Demo: Scanning with Trivy"
+    },
+    {
+      "startSeconds": 570,
+      "label": "False Positives and Reachability"
+    },
+    {
+      "startSeconds": 630,
+      "label": "Aikido Security Demo & Fixing Vulnerabilities"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "So, what is software composition analysis or SCA? Well, in security, this is a tool that helps keep your supply chain safe. In this video, we're going to dive into exactly what it is. We're going to look at the different types of tooling that is available and where it fits into your development life cycle. My name is McKenzie and you are watching"
+    },
+    {
+      "startSeconds": 20,
+      "text": "Tool Time by Aikido Security. SCA or software composition analysis can go by a couple of names. Open source dependency scanning, dependency scanning, supply chain security scanning, all these different types of areas, but essentially they're all the same thing. What an SCA tool does is it looks at your application and all of the"
+    },
+    {
+      "startSeconds": 52,
+      "text": "dependencies, the open source dependencies that make your application tick and scans them for vulnerabilities. Now, you may or may not know this, but around about 70 to 90% of all of the code that makes your application run comes from open-source dependencies. So, if you're watching this on YouTube, presumably around about 70 to 90% of"
+    },
+    {
+      "startSeconds": 74,
+      "text": "what makes YouTube YouTube comes from open-source packages. Now, this is great for a number of reasons. It's great because we can move quickly. It's why we're able to keep pushing the boundaries of what we can do in applications. We don't need to reinvent the wheel every time we do it. But it does come at a risk. And that is that"
+    },
+    {
+      "startSeconds": 94,
+      "text": "that big chunk of our application that we don't control can also have security vulnerabilities. And because we don't control it, we have limited ability to be able to resolve them. Now, at first, thinking about open source dependencies feels easy because there's a whole bunch of dependencies that you know about"
+    },
+    {
+      "startSeconds": 112,
+      "text": "because you introduced them. But there's a challenge. Just like your application runs on open source software, so does open source software run on open source software. So we end up with this Russian nesting doll situation. Well, we may introduce one packet, but that might introduce several other packages that live inside it, which may introduce"
+    },
+    {
+      "startSeconds": 130,
+      "text": "other packages, so on and so forth. So if we think about it back to YouTube, if we wanted to create a video streaming service, then we would probably take some open source packages to help us play videos on our website. But inside those, there may be packages that enable audio streaming and video streaming. And"
+    },
+    {
+      "startSeconds": 148,
+      "text": "then inside those there may be a whole bunch of different packages that do various different jobs of that like data streaming or dealing with loads. Now why this all matters is if one of these dependencies ends up having a vulnerability within it, it can have a flow on effect. I'll give you a concrete example. There's a package called log"
+    },
+    {
+      "startSeconds": 168,
+      "text": "4j. It's a logging application for Java. In 2021, it was discovered that there was a critical remote code execution vulnerability inside log forj. Well, log forj is something that we would call a foundational project. What that means is it's pretty much in everything because it was in everything. Once this vulnerability became public, then nearly"
+    },
+    {
+      "startSeconds": 190,
+      "text": "the entire internet was vulnerable to remote code execution through this. Now, you may have the question of why is it the entire internet and not just Java applications? Well, that's because we layer things on top of each other. Even if we have an application in Python or JavaScript, it probably sits on foundations of cloud architecture, of"
+    },
+    {
+      "startSeconds": 210,
+      "text": "infrastructure that uses various different languages. So, the whole supply chain can be very complicated and very convoluted. To help us make sense of all of this, SCA tools will first identify all of the packages that we have in our application and then check to see if there's any known issues or vulnerabilities within it. A good SEA"
+    },
+    {
+      "startSeconds": 231,
+      "text": "tool will look at frontier dependencies, but also transitive dependencies as well. I'm going to take just a very quick side quest here because there's something else called an esbomb. Now, ESBOMs are very closely related to SEA, so I don't want to do an entire video about it, but an ESBOM stands for software bill of materials. And"
+    },
+    {
+      "startSeconds": 248,
+      "text": "essentially what this is is a document that you can share with people that looks at all of the open source packages inside your application and the versions that they have. This is important because sometimes for compliance, you need to provide this to certain parties when they're choosing to use your your your application. And I'm specifically"
+    },
+    {
+      "startSeconds": 268,
+      "text": "looking at legislation that involves government contracts. So while we sometimes have different tools for sbombs, generally speaking, an SCA tool will come with a component that can generate this software bill of material. All right, side quest done. Back to back to understanding SCA. Let's first start by exploring how we can see what"
+    },
+    {
+      "startSeconds": 286,
+      "text": "dependencies we have in our application. Well, there's a couple of files. If you're dealing in JavaScript or Node, you're going to have a package.json file. This is what we have our frontier dependencies, direct dependencies. And then we also have a package-lock.json file. And this will have kind of transitive dependencies in them. If you"
+    },
+    {
+      "startSeconds": 302,
+      "text": "look at the difference, the package.json file may only be kind of several lines long. Whereas the package lock.json file may be thousands of lines of long because it has thousands of packages. This is built automatically. We don't create these like with all the dependencies we have in them. Now depending on what language you use,"
+    },
+    {
+      "startSeconds": 320,
+      "text": "these files will be different. In Python, it's requirements.ext. You also might have a pip lock file. we're dealing in Ruby, you have a gems file and a gems lock file and there's various different types of files that we deal with. You can kind of dive into what it is that you're programming in and what files you have for you there. But"
+    },
+    {
+      "startSeconds": 338,
+      "text": "essentially, this is can be the first way that we can have a look inside of our applications. Now, to understand the security part, I'm sorry, we have to do another side quest. We're doing a side quest. It calls something called CVE Commer vulnerabilities and exposure. And what happens in security is when we discover that there is a vulnerability"
+    },
+    {
+      "startSeconds": 355,
+      "text": "inside an open- source package or a popular software version, we create a CVE number. So I talked about log forj already. This is the CVE number for log forj. And what this saying is in specific versions of log forj, we have this critical vulnerability. Now, what is useful about this is that we can check databases with all of these CVE"
+    },
+    {
+      "startSeconds": 379,
+      "text": "numbers in there and we can check does our project contain a dependency that matches this CVE number or match the the the version in the CVE number. So, there's a couple of big databases. There's the NVD, the National Vulnerability Database. There's the MIT CVE database and there's the GitHub advisory database. And there's a few"
+    },
+    {
+      "startSeconds": 400,
+      "text": "more as well. Does this application contain a vulnerable version? So, let's have a look at that. I want to start by using a great open-source SCA tool called Trivy. And what we're going to do is we have this dummy project here, and we're just going to run Trivy, run a scan of Trivy. And Trivy is going to look at our our dependencies. It's going"
+    },
+    {
+      "startSeconds": 419,
+      "text": "to look at the databases, and it's going to tell us if we have a match. And obviously, as you can see here, we have lots and lots of matches. Now, we can export this in a JSON file if we want. we can put it in some kind of viewer. Maybe we can sort it between what are the most critical vulnerabilities and we can start going through it. So now that"
+    },
+    {
+      "startSeconds": 438,
+      "text": "we have our results from Trivia, what do we actually do? How do we solve these? Well, solving them is also simple. At least so it seems on the surface. All we do is we upgrade from a vulnerable version to a nonvulnerable version. Where this becomes not so simple is that when upgrading breaks our application. Now, as you can see in this case, we"
+    },
+    {
+      "startSeconds": 460,
+      "text": "have hundreds of these vulnerabilities. If we upgrade all of these, we're going to spend months quite literally trying to resolve all the issues that this creates because it may break the functionality and it also could break the functionality of the dependencies that it relies on. So, there can be very very complicated to actually try and fix"
+    },
+    {
+      "startSeconds": 480,
+      "text": "them. Now, that's not always true. Sometimes you can just upgrade and it works and it's perfect. In that case, it's what we say that there's no breaking changes. In all other cases, we say that there's breaking changes, which means we can't easily upgrade them. So, what do we do in that situation? Well, we're going to come back to that side"
+    },
+    {
+      "startSeconds": 495,
+      "text": "quest later, but for now, let's just talk about the results that we have. Most of these are actually false positives. How on earth are these false positives? Well, it comes back to what we call reachability. The first example that I want to give you is what we call a dev dependency. And a dev dependency is basically a dependency that's not"
+    },
+    {
+      "startSeconds": 515,
+      "text": "being used in the production of our application, but usually being used in the build process and not in the runtime process. But that means there's nothing there for an attacker to exploit. The other reason why we get false positives are because the packages aren't what we call reachable. And usually this relates"
+    },
+    {
+      "startSeconds": 531,
+      "text": "to how the package is introduced into our application. So usually there's something called a package tree or a called tree. And what we can do is we can see that this dependency has introduced this dependency blah blah blah and we get all the way down to here throughout that tree. It may be that this ends dependency that is vulnerable"
+    },
+    {
+      "startSeconds": 551,
+      "text": "can be reached or it can't be but we can't figure that out without doing investigation. One particular way that this may be true is if the package that we're talking about has a vulnerability but it's a certain function. I I'll give you example in node projects. This is a very popular package called Y18N. Now,"
+    },
+    {
+      "startSeconds": 568,
+      "text": "this is just a barebones initialization library, but it has tens of millions of weekly downloads. This is a foundational project. It's probably in most node applications. Now, there's known vulnerabilities in this. One of the known vulnerabilities that we have here is a prototype pollution vulnerability that scores 98 out of 100. This is about"
+    },
+    {
+      "startSeconds": 588,
+      "text": "as critical as you can get. So, obviously, Logic would say that we don't want this in our project. However, maybe it's doing something really important. Maybe a whole bunch of other stuff depends on it, which in this case is true. Now, there's a certain function that allows this prototype vulnerability to happen. That function is called set"
+    },
+    {
+      "startSeconds": 606,
+      "text": "local. So, let's say the scenario that our application is using this and it's a transitive dependency. So, it's downstream. What we may discover is that at no point is the function set local used or called by any other dependencies or our application. Now that means that what makes this vulnerable isn't true for our"
+    },
+    {
+      "startSeconds": 628,
+      "text": "application. So we could ignore it. But again, how do we find this out? Well, we have to do a lot of deep diving into how our application works to find it. But let's bring up Aikido Security and have a look at some of this. So the the first thing that I want to point to is that call tree. In my dashboard, I've narrowed down the results to just SCA."
+    },
+    {
+      "startSeconds": 649,
+      "text": "And so here we can see all the dependencies that we have. But at the top corner we have auto ignored. So you can see that here. And then we can click on the reason why this is ignored. And we can see that there's various here. Dependency is not used in production. Affected function is not used. So like all there's all of these different"
+    },
+    {
+      "startSeconds": 665,
+      "text": "various reasons of why we could ignore it. So this actually gets rid of around about 80% of all of the results that we have. Sometimes more, sometimes less. None of this is magic. It's going to depend on your application, right? But if we click on some of this dependency not in use, what we can do is we can click on here it says reach re uh"
+    },
+    {
+      "startSeconds": 683,
+      "text": "reachability analysis and we can actually see that call tree that I was talking about. Sometimes that call tree is is small. This is the this is the package that we're that we introduced. These are the other packages that were introduced because of that. Sometimes it's ginormous like in this case you can see there's this massive call tree that"
+    },
+    {
+      "startSeconds": 699,
+      "text": "we have. But the point is is that it's understanding how everything is used and therefore is able to understand the process of how our application is using it. And this is why it's able to get rid of a lot of those alerts because it understands that this may be behind a dev tool that this isn't actually in production or that it can even"
+    },
+    {
+      "startSeconds": 719,
+      "text": "understand if we click here the affected function is not as use. I'll go to the example that I used before of Y18N. We can look at this. We can see yep the function that's vulnerable is set local. we're not using that. So, doesn't matter about the call tree that we're using. Uh we're not actually using that. And of"
+    },
+    {
+      "startSeconds": 735,
+      "text": "course, it checks that in all of the uh the packages that we have. The other area that's really important is that if we go back to uh our results, we can see here under the fix. Now, the fix is giving us say, hey, we need to upgrade to this latest version to fix this. Right? That's very cool. But we can see here this little"
+    },
+    {
+      "startSeconds": 754,
+      "text": "kind of caution symbol. What this says is this letting us know that there's a breaking change. That means that if we upgrade to the version that we need to to get rid of the vulnerability, it's going to break our application. Now, this is really important because we can actually see all of the all of the packages that don't have that and then"
+    },
+    {
+      "startSeconds": 770,
+      "text": "upgrade it. So, we can immediately get very quickly ahead and then we only need to focus on the few that actually have breaking changes. And the final thing that modern SCA tools will all typically have is something called autofix. And this is essentially creating the code for you to upgrade the dependencies. So autofix is kind of great and this is"
+    },
+    {
+      "startSeconds": 791,
+      "text": "when you need the additional context of what's going to break uh and areas like that because now you can just automatically upgrade everything that's not going to break within a couple of clicks of the button and you can go on about your way. So I hope now you understand SCA tools and how they all work together and you've you've seen a"
+    },
+    {
+      "startSeconds": 808,
+      "text": "couple of different tools uh in action. We bring out a different tool video every single week. So, if you want to learn more about different types of security tooling, then make sure you subscribe to the channel and stay tuned for next week's video where we're going to be talking about secrets detection."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:56.509Z"
+}

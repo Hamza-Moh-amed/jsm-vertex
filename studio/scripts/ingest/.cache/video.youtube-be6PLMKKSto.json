@@ -1,0 +1,103 @@
+{
+  "_id": "video.youtube-be6PLMKKSto",
+  "videoId": "be6PLMKKSto",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=be6PLMKKSto",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 78,
+      "label": "Sharding techniques"
+    },
+    {
+      "startSeconds": 163,
+      "label": "Manual vs Automatic sharding"
+    },
+    {
+      "startSeconds": 267,
+      "label": "Advantages of sharding"
+    },
+    {
+      "startSeconds": 313,
+      "label": "Disadvantages of sharding"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "what is database sharding traditionally data has been stored in an rdbms or relational database management system data is stored in tables as rows and columns for data with 1 to n or endtoend relationships a process of normalization would instead store the data in Separate Tables joined together by Foreign Keys which ensure that the data in these"
+    },
+    {
+      "startSeconds": 25,
+      "text": "tables do not get out of sync with each other and can be joined to get a complete complete view of the data however as data size increases traditional database systems run into bottlenecks on CPU memory or dis usage they will need increasingly high-end and expensive Hardware in order to maintain performance even with top Quality"
+    },
+    {
+      "startSeconds": 46,
+      "text": "Hardware the data requirements of most successful modern applications far exceed the capacity of a traditional rdbms sometimes the structure of the data is such that the tables holding data can be broken up and spread across multiple servers this process of breaking up large tables into horizontal data partitions Each of which contains a"
+    },
+    {
+      "startSeconds": 69,
+      "text": "subset of the whole table and putting each partition in a separate database server is called sharding each partition is called A Shard sharding techniques most times the technique used to partition data will depend on the structure of the data itself a few common sharding techniques are geobase sharding dat data is partitioned based"
+    },
+    {
+      "startSeconds": 91,
+      "text": "on the user location such as the continent of origin or a similarly large area like East us or west us typically a static location is chosen such as the user's location when their account was created this technique allows users to be routed to the node closest to their location thus reducing latency however there may not be an even distribution of"
+    },
+    {
+      "startSeconds": 111,
+      "text": "users in the various geographical areas range-based charting range-based charting divides the data based on the ranges of the key value for example choosing the first letter of the user's first name as The Shard key will divide the data into 26 buckets assuming English names this makes partition computation very simple but it can lead"
+    },
+    {
+      "startSeconds": 134,
+      "text": "to uneven splits across data partitions hash based hash based sharting uses a hashing algorithm to generate a hash based on the key value and then uses the hash value to compute the partition a good hash algorithm will distribute data evenly across partitions thus reducing the risk of hotspots however it is likely to assign related"
+    },
+    {
+      "startSeconds": 156,
+      "text": "rows to different partitions so the server can't enhance performance by trying to predict and preload future queries manual versus automatic sharting some database systems support automatic sharting the system will manage the data partitioning automatic sharting will dynamically repartition the data when it detects an uneven distribution of the"
+    },
+    {
+      "startSeconds": 177,
+      "text": "data or queries among the shards this this leads to higher performance and better scalability unfortunately many monolithic databases do not support automatic sharting if you need to continue using these databases but you have increasing data demands then the sharding needs to be done at the application layer however this has some"
+    },
+    {
+      "startSeconds": 196,
+      "text": "significant downsides one downside is a significant increase in development complexity the application needs to choose the appropriate sharding technique and decide the number of shards based on the projected data Trends if those underlying assumptions change the application has to figure out how to rebalance the data partitions at"
+    },
+    {
+      "startSeconds": 214,
+      "text": "runtime the application has to figure out which Shard the data resides in and how to access that Shard another challenge with manual sharding is it sometimes results in an uneven distribution of data among the shards this is especially true as data Trends differ from what they were when the sharding technique was chosen hotpots"
+    },
+    {
+      "startSeconds": 232,
+      "text": "created due to this uneven distribution can lead to Performance issues and server crashes if the number of shards chosen initially is too low repartitioning will be required in order to address Performance regressions as data increases this can be kind of tough especially if the system needs to have no downtime operational processes such"
+    },
+    {
+      "startSeconds": 252,
+      "text": "as changes to the database schema also become rather hard if schema changes are not Backward Compatible the system will need to make sure that all shards have the same schema copy and the data is migrated from the old schema to the new one correctly on all shards let's talk about some advantages of sharding first sharding allows a system to scale"
+    },
+    {
+      "startSeconds": 272,
+      "text": "out as the size of the data increases it allows the application to deal with a larger amount of data then can be done using a traditional rdbms second having a smaller set of data in each Shard also means that the indexes on that data are smaller which results in Faster query performance next if an unplanned outage takes down A"
+    },
+    {
+      "startSeconds": 294,
+      "text": "Shard the majority of the system remains accessible while that Shard is restored down time doesn't take out the whole system finally smaller amounts of data in each Shard mean that the nodes can run on commodity hardware and do not require expensive high-end Hardware to deliver acceptable performance the disadvantages of sharding those also"
+    },
+    {
+      "startSeconds": 316,
+      "text": "exist not all data is amenable to sharding foreign key relationships can only be maintained Within A Single Shard manual sharding can be very complex and can lead to hotpots because each Shard runs on a separate database server some types of cross Shard queries such as table joins are either very expensive or"
+    },
+    {
+      "startSeconds": 335,
+      "text": "just not possible once sharding has been set up it's very hard if not impossible on some systems to undo sharding or to change The Shard key each Shard is a live production database server so you need to ensure High availability via replication or other techniques this increases the operational cost compared to a single"
+    },
+    {
+      "startSeconds": 355,
+      "text": "rdbms and there you have it I hope this video gave you a better sense of what sharting is and how it works"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:42.233Z"
+}

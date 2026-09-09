@@ -1,0 +1,46 @@
+{
+  "_id": "video.youtube-2o5m1ovfl3c",
+  "videoId": "2o5m1ovfl3c",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=2o5m1ovfl3c",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Next.js 13 makes it super easy to show instant feedback when navigating to server-rendered pages. Let me show you how Here we're looking at a Next.js 12 app with two routes – a home route and a post route – and this post, uses getServerSideProps. So when we click the post link, we're not going to see any feedback until getServerSideProps"
+    },
+    {
+      "startSeconds": 20,
+      "text": "runs and the new page renders and this can be a little confusing to users who don't know whether the app is responding or it's loading data and if we copy this and paste, this dynamic route into a new tab, we do see the browser loading spinner, but that's only if the initial render is from the server and there's not"
+    },
+    {
+      "startSeconds": 39,
+      "text": "much else we can do to improve this. So let's see how the Next.js 13 makes this a lot better. I've got the same app here in Next.js 13, and if we open up app/posts/page.tsx will see the exact same page, except for loading data directly inside of our server component. So if we come over to our app, we'll see"
+    },
+    {
+      "startSeconds": 61,
+      "text": "exactly the same behavior when we click on posts and if we open the server rendered page in a new tab, we'll also see the browser loading spinner. But if we come back to our home page, refresh and click again. We'll notice that on subsequent navigations rendering is actually instant and that's also true when we use the back"
+    },
+    {
+      "startSeconds": 85,
+      "text": "and forward button of the browser. So this is already a huge improvement over Next.js 12... Thanks the Next.js 13's router cache, but we can do even better than this. If we come over to our app and add a new file, right under our post, directory called loading.tsx and we paste in a React component. Let's come back to our app."
+    },
+    {
+      "startSeconds": 107,
+      "text": "Go home and reload and check out the new behavior. So right, when I click posts, we actually see our loading template being rendered. Let's do that again. As soon as I press, we get an instant loading state, so our users know our app is responding. And of course, we can come over here and get a little bit"
+    },
+    {
+      "startSeconds": 130,
+      "text": "Fancy with our loading state so that the whole experience is even more seamless. And of course, even with the loading templates our router cache is still working for us. So subsequent navigations are instant. Now, the cool thing about these loading templates is that they're actually server components that are stringed up from our backend"
+    },
+    {
+      "startSeconds": 151,
+      "text": "via suspense and because suspense and streaming work on the server-side now, if we're to grab this URL and open a new tab and paste it in, We're actually going to see our new loading template stream up instantly, as soon as our page loads, and then the data will be fetched on the server. And then the app will re-render once that data is ready."
+    },
+    {
+      "startSeconds": 175,
+      "text": "And I think it's just so cool to see all these layers come together to give our users instant feedback, whether they're navigating on the server or on the client."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:09.652Z"
+}

@@ -1,0 +1,54 @@
+{
+  "_id": "video.youtube-nzeKH7moGfo",
+  "videoId": "nzeKH7moGfo",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=nzeKH7moGfo",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Have you ever clicked pay now on an app and nothing happens? This page keeps loading 5 seconds, 10 seconds, then an error message. Frustrating, right? This usually happens when one service in the back end fails or respond slowly. In a micros service system, everything is connected. If one service breaks, other can fail too. So how do we stop that"
+    },
+    {
+      "startSeconds": 25,
+      "text": "from happening? In this video, I will show you three smart ways to make your microservices more reliable. Retry, circuit breaker, time out. Let's start with the first one. Sometimes a service fails once but works fine if you try again. This might be because of a small network issue or a temporary error. This is where retry helps. It means if the"
+    },
+    {
+      "startSeconds": 51,
+      "text": "first try fails, try again automatically. Let's say your service calls a payment API. If it fails the first time, retry will try again maybe two or three times before giving up. Here we are using the retry annotation from resilience. This method call payment calls the payment service using rest template. If this call fails,"
+    },
+    {
+      "startSeconds": 72,
+      "text": "Spring Boot will retry it automatically based on the default settings, usually three times. If all retries fail, it will go back to the fallback method and return a simple error message instead of crashing. Now imagine the payment service is not just failing once. It's broken for a while. Retry again and again won't help. It will just waste"
+    },
+    {
+      "startSeconds": 96,
+      "text": "time and overload the system. This is where circuit breaker comes in. A circuit breaker watches for repeated failures. If a service keeps failing, the breaker opens and blocks all future calls for some time. After waiting a few seconds, it tries one request. If it works, the circuit closes and traffic starts again. It just like an electric"
+    },
+    {
+      "startSeconds": 120,
+      "text": "circuit breaker at home. It trips when there is a too much load, then resets. This code uses the circuit breaker annotation. If the call payment method fails too many times in a row, let's say five out of 10, this circuit opens and for a short period, no more calls will be made to the payment service. During this time, any new calls go straight to"
+    },
+    {
+      "startSeconds": 144,
+      "text": "the fallback method. After a while, it will retry one request again. If it succeeds, the circuit closes. This helps your app avoid calling broken services again and again. Now, let's say this service isn't failing. It's just very slow. Waiting too long can block your app and waste resources. That's where timeout comes in. It sets a"
+    },
+    {
+      "startSeconds": 170,
+      "text": "time limit. If a service doesn't respond in time, the call is stopped. Imagine calling customer care. If no one picks up in 30 seconds, you hang up. That's a timeout. In code, we set this using a config file and annotation. Here we configure 2 seconds timeout for the user service in the EML file. That means if"
+    },
+    {
+      "startSeconds": 193,
+      "text": "the service takes more than 2 seconds to respond, the call is canled. The method returns a completable future which is required by the time limiter to support a sync timeouts. This protects your app from getting stuck due to slow responses. So let's quickly review. Use retry when you expect temporary issues. Use circuit breaker when a service keeps"
+    },
+    {
+      "startSeconds": 217,
+      "text": "failing and use timeout to stop long slow calls. These three patterns make your microservices stronger, faster, and more reliable. Instead of crashing or freezing, they help your app recover and respond smartly. That's it. You have just learned how to build resilient microservices using retry, circuit breaker, and time out. If you want more"
+    },
+    {
+      "startSeconds": 244,
+      "text": "Spring Boot examples or a full demo app using these features, comment below."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:11.160Z"
+}

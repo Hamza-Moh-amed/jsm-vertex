@@ -1,0 +1,102 @@
+{
+  "_id": "video.youtube-_Q9KSFUZH0c",
+  "videoId": "_Q9KSFUZH0c",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=_Q9KSFUZH0c",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "your Docker image could be smaller and faster let's talk about using multi-stage builds to optimize your Docker files for super fast and efficient images hey I'm Kyle from Depot and this is a Docker file for a rust project it's not a good Docker file for a number of reasons but the point is if you want to build and deploy a rust"
+    },
+    {
+      "startSeconds": 16,
+      "text": "project this will do it you could start editing the source and rebuild the image without even having rust installed but there are a few issues here that will make our image build slower and still be much larger in size than it needs to be the bigger the image the longer it will take to push and pull or deploy not to"
+    },
+    {
+      "startSeconds": 32,
+      "text": "mention if you're paying for all that bandwidth and storage it'll start to add up Docker is an excellent build tool and great for packaging and deploying applications but we don't want to ship our build tools and source code in the image that we're deploying let's build this image and double check how big it is currently if we build it and run"
+    },
+    {
+      "startSeconds": 48,
+      "text": "Docker image LS we can see that it's almost 2.5 gigs and by the way this is just a simple hello world API so that's suspiciously large for what is really just a single binary we need to run if we look back at our Docker file it makes sense our base image is the rust image which has all of the tooling needed to build our project and we don't really"
+    },
+    {
+      "startSeconds": 65,
+      "text": "need that once we have our binary we copy our source code into the image when we build it and then we obviously don't need or want that in our final image so what should you do build it locally and copy it into a container well that would work but it kind of defeats the point of using Docker in a lot of ways Docker is"
+    },
+    {
+      "startSeconds": 81,
+      "text": "great for keeping our build process portable repeatable and cached so what we'll actually do is use two Docker images one for building the project and one for running it and we'll do this in one Docker file using multi-stage builds let's go back to our Docker file and see what we can do first in our base image we'll give it a name so that we can"
+    },
+    {
+      "startSeconds": 98,
+      "text": "reference it in our final image by labeling this from statement we are creating a stage in our build process essentially a separate image that we can reference and reuse later we'll name this the Builder and everything will stay mostly the same until we hit the build step right here where we run cargo build once that completes we'll have the"
+    },
+    {
+      "startSeconds": 115,
+      "text": "binary we need to run our application but we no longer need anything else from this image so we'll start a new stage this time our final stage that we intend to deploy because this is the final stage we don't have to give it a name because we won't be referencing it anywhere else but more importantly in this different stage we can use a"
+    },
+    {
+      "startSeconds": 130,
+      "text": "different base image one that is much smaller and only contains the necessary runtime dependencies to run our binary if we compile our rust app statically we can even run it inside a scratch image which is the smallest possible base image you can use as it contains well nothing scratch is a special base image that is completely"
+    },
+    {
+      "startSeconds": 148,
+      "text": "empty but capable of running statically compiled binaries it's also where images like dbn and buy box are built from which are adding in the file system and libraries relevant to those distributions if you're writing for python or no. JS or most other non-comp miled languages you'll often want to use an Alpine variant of your runtime image"
+    },
+    {
+      "startSeconds": 164,
+      "text": "which is usually considerably smaller than the default image then we can use the copy command with the from flag to copy the binary out of the Builder stage and into our final image by the way there are much better ways to handle caching dependencies specifically but it can be a little different depending on each language and we aren't trying to"
+    },
+    {
+      "startSeconds": 181,
+      "text": "focus tooo much on any individual language today so while this is a good example of multi-stage builds just to be clear we can optimize this even further but if you want a perfect Docker file template for rust node.js or other languages I'll have them linked below okay so let's build this new Docker file and compare it to our last attempt"
+    },
+    {
+      "startSeconds": 198,
+      "text": "remember the last image was almost 2.5 gigs with our new multi-stage build Docker file our final image is just barely 5 megabytes for reference a photo taken on my phone is about 5 .7 megabytes or put another way our new image is just about 500 times smaller than our original one I'm going to show you one last example with no. JS"
+    },
+    {
+      "startSeconds": 218,
+      "text": "independency caching because there's actually one more really important benefit to multi-stage builds that we didn't really talk about yet having a small final image is great for deployment but it doesn't necessarily make our build times any faster we can push it faster so that's a big Improvement but we can use multi-stage"
+    },
+    {
+      "startSeconds": 233,
+      "text": "builds to take advantage of caching in our build process this is a sample multi-stage Docker file for a node pnpm project again you can find this link and full guide for this Docker file below but what I want to show you is how a third stage can be used to cach dependencies in this example we'll start with a common base image node 20 in this"
+    },
+    {
+      "startSeconds": 252,
+      "text": "case and name it as such we'll reference the same base image in each of our stages the first real stage here is our dependency stage where we will copy in just our package.json and pmpm lock files so that we can install our dependencies usually when we're working on a project most of our changes are going to be in the source code much less"
+    },
+    {
+      "startSeconds": 273,
+      "text": "often are we going to be changing our dependencies by separating out our dependencies into a separate stage we can take advantage of doctor's caching mechanisms to only rebuild this stage when there are changes to our package files without this typically every time we made any change to our project and went to rebuild the docker image we"
+    },
+    {
+      "startSeconds": 291,
+      "text": "would also be rerunning the pnpm install every time even if the dependencies haven't changed you'll notice we're also using a special Mount flag here this is is a special feature we'll go into in another video but it's essentially am mountable volume where you can store your cash and reuse it between build stages now we'll have a build stage very"
+    },
+    {
+      "startSeconds": 308,
+      "text": "much like our rust example where we will mount in our cache and copy the source code in to build our project what will happen most often in this build process now is buildkit will recognize in this copy command that the source code is changed and it will invalidate the cache for just this stage but not the dependency stage assuming our"
+    },
+    {
+      "startSeconds": 326,
+      "text": "dependencies haven't changed and once again just like before we'll have a final stage where we'll copy in just the built JS version of our app and run it and that is how we can take advantage of multi-stage builds and Docker to optimize our build process reduce the size of our images and speed up our deployments of course if you're running"
+    },
+    {
+      "startSeconds": 342,
+      "text": "that in an ephemeral CI environment that may not be all that useful if your cash is being thrown away at the end of every job for that we have Depot remote Docker Builders replace a Docker build command with the depot build command or use our GitHub actions and centralize your builds in the cloud with persistent cash"
+    },
+    {
+      "startSeconds": 357,
+      "text": "for up to 40 times faster builds running your builds and Depot not only frees up your local machine for other tasks but it also gives you the benefit of a shared cash across all of your projects and team members links to everything we talked about are in the description we'll have more Docker optimization tutorials coming almost every week so"
+    },
+    {
+      "startSeconds": 371,
+      "text": "please hit subscribe and we'll see you next time happy building [Music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:24.298Z"
+}

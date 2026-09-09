@@ -1,0 +1,155 @@
+{
+  "_id": "video.youtube-0XrviXgk_rY",
+  "videoId": "0XrviXgk_rY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=0XrviXgk_rY",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "What is tsconfig.json?"
+    },
+    {
+      "startSeconds": 45,
+      "label": "Creating the file"
+    },
+    {
+      "startSeconds": 85,
+      "label": "The basic structure"
+    },
+    {
+      "startSeconds": 135,
+      "label": "target — which JavaScript version"
+    },
+    {
+      "startSeconds": 190,
+      "label": "module — how imports work"
+    },
+    {
+      "startSeconds": 245,
+      "label": "outDir and rootDir"
+    },
+    {
+      "startSeconds": 295,
+      "label": "strict mode — the big one"
+    },
+    {
+      "startSeconds": 355,
+      "label": "What strict actually turns on"
+    },
+    {
+      "startSeconds": 415,
+      "label": "strictNullChecks in action"
+    },
+    {
+      "startSeconds": 470,
+      "label": "noImplicitAny"
+    },
+    {
+      "startSeconds": 520,
+      "label": "Path aliases — baseUrl and paths"
+    },
+    {
+      "startSeconds": 580,
+      "label": "Using the alias in code"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 4,
+      "text": "This one file decides whether TypeScript catches your bugs before your users do or lets them slip straight into production. Most developers copy a tsconfig.json from the internet and never understand a single line inside it. That's the mistake. Master this file and TypeScript becomes your most powerful safety net."
+    },
+    {
+      "startSeconds": 28,
+      "text": "Let's actually understand it option by option. So, what exactly is tsconfig.json? Think of it as the rulebook for the TypeScript compiler. When you run TypeScript, it looks for this file in your project root and follows whatever instructions you put inside. It controls how your code gets checked, where the output goes, and how strict"
+    },
+    {
+      "startSeconds": 53,
+      "text": "the type checking should be. Without it, TypeScript just guesses with defaults. And the defaults are rarely what you want. Let's create one from scratch. The easiest way is to let TypeScript generate it for you. Open your terminal and run npx tsc init. This creates a tsconfig. json with sensible defaults and tons of"
+    },
+    {
+      "startSeconds": 79,
+      "text": "commented-out options you can turn on later. Notice it doesn't install anything globally. npx grabs the TypeScript compiler on demand. Here's the file it generates, cleaned up. Everything important lives inside a key called compilerOptions. That's where 90% of your settings go. Outside it, you'll often add include and"
+    },
+    {
+      "startSeconds": 102,
+      "text": "exclude arrays to tell TypeScript which files to look at. Don't worry about memorizing all of this. We'll break each piece down one at a time. Let's start with target. TypeScript compiles down to plain JavaScript, but which version of JavaScript? That's what target controls. If you set it to ES2022, modern features like optional chaining"
+    },
+    {
+      "startSeconds": 126,
+      "text": "stay as is. If you set it to a much older version like ES5, TypeScript rewrites your code to work on ancient browsers. For most projects in 2026, ES2022 is a safe, modern choice. Pick the lowest version your users actually run. Next up is module. This decides how your import and export statements get compiled. Older code used commonjs, which is the"
+    },
+    {
+      "startSeconds": 155,
+      "text": "require style modules you see in node. Modern projects use node next or es next, which keep the clean import export syntax. As a beginner rule of thumb, if you're building for modern node, use node next. If you're using a bundler like Vite, use es next. Pick the wrong one and your imports simply won't resolve. Now, where does"
+    },
+    {
+      "startSeconds": 182,
+      "text": "the compiled JavaScript actually go? That's the job of outdir and rootDir. rootDir tells TypeScript where your source files live, usually a folder called src. outdir tells it where to dump the compiled output, usually a folder called dist. This keeps your clean TypeScript source separate from the generated JavaScript. Never commit your dist folder."
+    },
+    {
+      "startSeconds": 210,
+      "text": "That's why we exclude it. Now, for the most important option in the entire file, strict. Setting strict to true is like switching TypeScript from polite suggestions to a strict teacher who catches every mistake. It's actually a master switch that turns on a whole family of stricter checks at once. Honestly, you should keep this on for"
+    },
+    {
+      "startSeconds": 235,
+      "text": "every new project. Yes, it'll complain more in the beginning. But, every complaint is a bug. It just stopped you from shipping. So, what does strict actually enable behind the scenes? It flips on several flags together. No implicit any stops TypeScript from silently letting variables be any type. Strict null checks forces you to handle"
+    },
+    {
+      "startSeconds": 261,
+      "text": "null and undefined properly. This one catches a huge number of real-world crashes. Strict function types and a few others tighten up how functions are checked. You can toggle these individually, but turning on strict is the clean shortcut that gives you all of them. Let me show you why strict null checks is a lifesaver."
+    },
+    {
+      "startSeconds": 284,
+      "text": "Imagine you fetch a user, but the user might not exist. Without this check, TypeScript happily lets you access user. name even when user could be undefined, and you get a crash at runtime. With it on, TypeScript forces you to check first. This single flag has probably prevented more billion-dollar null pointer bugs"
+    },
+    {
+      "startSeconds": 307,
+      "text": "than any other line of config. Here's another flag worth understanding. No implicit any. When you write a function parameter without a type, TypeScript secretly assigns it the any type. Which basically turns off all checking for that value. That defeats the whole point of using TypeScript. With no implicit any on, TypeScript"
+    },
+    {
+      "startSeconds": 331,
+      "text": "yells at you to add a type. It forces you to be intentional, and your code becomes self-documenting. Now, let's fix something that drives every developer crazy. Those ugly relative imports with three dots and slashes everywhere. Path aliases solve this. You set a base URL, then define paths that map a clean alias to a real folder."
+    },
+    {
+      "startSeconds": 358,
+      "text": "Now, instead of importing from dot dot slash dot dot slash utils, you just write at utils. It's cleaner, it survives file moves, and it reads beautifully. Here's that alias in real code. Notice how clean the import looks now. at utils/format No matter how deep this file is buried in your folders. One important note,"
+    },
+    {
+      "startSeconds": 384,
+      "text": "TypeScript understands these aliases for type checking, but your runtime or bundler needs to know about them, too. Tools like Vite and TS Node handle this with a small extra setting. We'll cover bundler setup in a future video. Let's talk about which files TypeScript even looks at. The include array tells the compiler"
+    },
+    {
+      "startSeconds": 406,
+      "text": "where to find your source, usually everything inside src. The exclude array tells it what to skip. You almost always exclude node modules and your output dist folder, because compiling those would be slow and pointless. A common beginner mistake is forgetting include entirely, which makes TypeScript scan your whole"
+    },
+    {
+      "startSeconds": 429,
+      "text": "project and slow to a crawl. Two more options that make life easier. Source map generates a map file that links your compiled JavaScript back to your original TypeScript. So, when you debug, you see your real source code, not the messy compiled output. Declaration generates dot d.ts files, which are type definition files."
+    },
+    {
+      "startSeconds": 454,
+      "text": "You only need declaration if you're publishing a library that others will import. For a regular app, skip it. Let me give you a few modern flags worth turning on in 2026. ES module interrupt makes importing common JS packages painless. Skip lib check speeds up compilation by skipping type checks on library files."
+    },
+    {
+      "startSeconds": 477,
+      "text": "Force consistent casing in file names prevents headaches when your code works on Mac, but breaks on a Linux server because of capital letters. And verbatim module syntax is the modern way to keep your import and export handling predictable. These are all safe defaults. Here's a complete production-ready tsconfig you can actually use today."
+    },
+    {
+      "startSeconds": 502,
+      "text": "Strict mode on, modern target and module, clean path aliases, source maps for debugging, and proper include and exclude. Copy this, tweak the paths to match your folders, and you've got a rock-solid foundation. The difference now? You understand every single line. No more blind copy-paste. Finally, let's prove it works. Run npx tsc with the"
+    },
+    {
+      "startSeconds": 532,
+      "text": "no emit flag to type check your whole project without producing any files. If you see no errors, your config and your code are in great shape. This is the exact command you'd run in a CI pipeline to catch bugs before they ever reach users. And that's the whole point of mastering this file. And that's tsconfig.json fully decoded."
+    },
+    {
+      "startSeconds": 556,
+      "text": "Remember the three big takeaways. Always turn on strict mode to catch bugs before your users do. Use path aliases to kill those ugly relative imports. And set your target and module to match where your code actually runs. Next up in our TypeScript track, we're diving into TypeScript generics. The feature that unlocks truly reusable, type-safe code."
+    },
+    {
+      "startSeconds": 583,
+      "text": "If this made TSConfig finally click, hit subscribe and drop your biggest TypeScript question in the comments. We read every one."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:44:04.619Z"
+}

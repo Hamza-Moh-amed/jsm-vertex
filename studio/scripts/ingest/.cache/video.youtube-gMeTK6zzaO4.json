@@ -1,0 +1,475 @@
+{
+  "_id": "video.youtube-gMeTK6zzaO4",
+  "videoId": "gMeTK6zzaO4",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=gMeTK6zzaO4",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "What is Tool/Function Calling?"
+    },
+    {
+      "startSeconds": 189,
+      "label": "Defining Custom Tools"
+    },
+    {
+      "startSeconds": 351,
+      "label": "LLM Tool Response"
+    },
+    {
+      "startSeconds": 500,
+      "label": "Executing Tools"
+    },
+    {
+      "startSeconds": 779,
+      "label": "Additional Tool Behavior"
+    },
+    {
+      "startSeconds": 885,
+      "label": "Advanced Tools with Pydantic Schemas"
+    },
+    {
+      "startSeconds": 1073,
+      "label": "Executing Advanced Tools"
+    },
+    {
+      "startSeconds": 1198,
+      "label": "Universal Tools and Functions"
+    },
+    {
+      "startSeconds": 1257,
+      "label": "Defining Models & Tools w/LangChain"
+    },
+    {
+      "startSeconds": 1362,
+      "label": "Binding Tools w/LangChain"
+    },
+    {
+      "startSeconds": 1467,
+      "label": "Executing Tools w/LangChain"
+    },
+    {
+      "startSeconds": 1616,
+      "label": "Tools & LLMs as Agents"
+    },
+    {
+      "startSeconds": 1660,
+      "label": "Tool Calling Agent"
+    },
+    {
+      "startSeconds": 1753,
+      "label": "ReAct Agent"
+    },
+    {
+      "startSeconds": 1847,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hello everybody Adam LK here and today we're going to be diving into tool and function calling with language models now what tool and function calling is is it's essentially the ability to reliably connect language models to external tools functions or apis you've likely seen and used some form of function calling when using something like chat"
+    },
+    {
+      "startSeconds": 17,
+      "text": "GPT which has the ability to write python code and then can use the function of actually executing the python code to show something like a graph or it can use the tool of searching the web and then execute that function to get realtime data or even when you ask it to generate an image it's not actually the language model"
+    },
+    {
+      "startSeconds": 35,
+      "text": "that's generating the image but it uses the function of do the image generator with a prompt that it makes to actually generate this image and so being able to connect language models with existing and custom functions like the ones that we just saw really gives them the ability to do way more than just generate text and so at the heart of it"
+    },
+    {
+      "startSeconds": 54,
+      "text": "function calling is the ability for language models to reason through when they need to actually use some sort of of external tool and then what it can do is it can generate some form of structured response that's parsible in a way that we can grab the arguments for that tool and then be able to execute them ourselves in more digestible words"
+    },
+    {
+      "startSeconds": 71,
+      "text": "though it's essentially just going to let the language model know that it has some sort of functions available to it some examples might be like I send an email or get current weather and then it'll also know what the input Arguments for these functions are so for example like get current weather takes the location as a string and then it takes a"
+    },
+    {
+      "startSeconds": 89,
+      "text": "unit for the tempure temperature as either Celsius or Fahrenheit and then if you were to ask to language model something like what is the weather in San Francisco it would then generate some sort of response that's parsible that tells you to call the get current weather function along with the location as San Francisco and the unit as maybe"
+    },
+    {
+      "startSeconds": 107,
+      "text": "Fahrenheit and this functionality is super useful as some of the common use cases outlined by open AI here is the ability to use function calling for something like creating assistance that answer questions by calling external apis converting natural language into API calls or even extracting structured data from text and so to briefly just go"
+    },
+    {
+      "startSeconds": 125,
+      "text": "over the basic sequence of function calling before we show this all in action and defining our own it essentially follows this flow you're going to call the model with the user query and some sort of user question and then the model is also going to have a set of functions defined and its functions parameter this is how it's"
+    },
+    {
+      "startSeconds": 140,
+      "text": "going to know what functions it has available and also the different arguments to those functions the model itself then can choose to call one or more functions and if it does its response then will be a Json output and the Json output will specify what function it wants to call and then all of the arguments that it wants to call"
+    },
+    {
+      "startSeconds": 157,
+      "text": "the function too and then what we have to do then is parse that Json into code and then call the functions with the provided arguments and then we append all of that context back to the messages and call the model again giving it all that and letting the model summarize the results back to the user so really well"
+    },
+    {
+      "startSeconds": 174,
+      "text": "the name implies that the model is kind of Performing some action it's really not the case the model itself is is deciding to use some sort of function and then coming up with the arguments to that function or tool it's not actually running the tool that's up to us to parse and do ourselves so with the introduction and background out of the"
+    },
+    {
+      "startSeconds": 191,
+      "text": "way let's actually take a look at how some of these functions look and how to use them with language models and to do this we're going to be using the example of open AIS tools and then eventually later on down the line we're going to show how you can use Lang chain to make your own custom Universal tools for any"
+    },
+    {
+      "startSeconds": 206,
+      "text": "sort of model but the format that the model is actually going to be looking for to know what tools are available to it is actually going to look a little bit like this this Json schema and for this example we're going to be looking at a tool that will be getting the exchange rate and within this schema we're going to have the type which is a"
+    },
+    {
+      "startSeconds": 222,
+      "text": "function and then within the function it takes in a name so that's going to be get exchange rate and then a description and the description is really important because this is what the model is going to know kind of when to use or what the function is actually useful for so for getting the exchange rate we put in get"
+    },
+    {
+      "startSeconds": 239,
+      "text": "the current exchange rate of a base currency and a Target currency so that when you do actually interact with a model that has this tool available it will know that it can use this tool to find the current exchange rate and then within that we have to specify the different parameters or the different function arguments that are in here and"
+    },
+    {
+      "startSeconds": 256,
+      "text": "for that we have base currency Target currency and date within all of these you have to specify a type so for base currency and Target currency that's just going to be a string and then also another description because this is what the models going to look at to know what to put in as these actual arguments so"
+    },
+    {
+      "startSeconds": 274,
+      "text": "for base currency that's obviously going to be the base currency for exchange rate calculation and then some examples of what that might look like Target currency is going to be the target currency for exchange rate calculations and then what that might look like and then here on date I also have it as a type string and then the description"
+    },
+    {
+      "startSeconds": 291,
+      "text": "being a specific day to reference in year month date format you can also pass in this required parameter here to tell the model that it's it's required when calling this function to put in a base currency and a Target currency however it's not necessarily required to put in a date in this example the schema that we're passing to the language model"
+    },
+    {
+      "startSeconds": 310,
+      "text": "would then kind of line up to an actual function here that we have defined which is this git exchange rate function which takes in the base currency as a string the target currency as a string and the date as a string but has a default to latest and then it returns a float and so then this is what we're actually"
+    },
+    {
+      "startSeconds": 325,
+      "text": "going to be executing once we get the inputed arguments from the language model and as a quick second example before we show what that execution actually looks like I have a second tool defined here that's going to search the internet and that of course takes in the name of search internet the description is get internet search results for"
+    },
+    {
+      "startSeconds": 340,
+      "text": "real-time information and then the properties are just going to be one search query that's a string and takes the description of the query to search the web for which is of course the one required argument there so to get a tool response we'll be using the openai direct API just so that we can call this and we're going to pass in the model as"
+    },
+    {
+      "startSeconds": 358,
+      "text": "GPT 40 we're going to pass in our messages which is going to contain our prompt of how much is a dollar worth in Japan and then we can put in the tools as a list so I have these first tools here defined up above within a list in and of itself and then that goes in there and then you can also pass in a tool Choice which we'll expand on a"
+    },
+    {
+      "startSeconds": 377,
+      "text": "little bit later but let us see what is actually output from the model when we ask how much is a dollar worth in Japan so that'll run for just a second and then if we print out the responses nicely it looks a little bit like this so the full response is up here but breaking it down a little bit with just this quick parsing function that I've"
+    },
+    {
+      "startSeconds": 394,
+      "text": "got here you can see that the chat completion message looks a little bit like this and it actually didn't return any text whatsoever but it did return one tool call and so we can see that the tool call was to call git exchange rate and then it responded with its arguments of Base currency of USD and Target currency of JPY and so this is perfectly"
+    },
+    {
+      "startSeconds": 413,
+      "text": "in line with our defined schema for this tool that takes in the base currency the target currency as a string and then once it kind of in this format so it was able to understand that that it had that tool available to it and so then when I asked for how much the dollar worth it called that tool and then these are the"
+    },
+    {
+      "startSeconds": 430,
+      "text": "arguments that it wants to pass into it so to give our model a little bit of a more complex Challenge and see if we can use multiple tool calls at once I'm going to now ask how much is the dollar worth in Japan how about Poland and what's the current news in Argentina My Hope here is that it will call our git exchange rate twice and then our search"
+    },
+    {
+      "startSeconds": 446,
+      "text": "internet function once so let's give that a whirl and then print it out and great yeah we can see that it returned a lot more now and it didn't return any message as is on par with what we just saw but we did see that we have three tool calls two to get exchange rate one with USD and JPY one with USD and pln and then one search"
+    },
+    {
+      "startSeconds": 471,
+      "text": "internet query with the search query here and then it wants to search for current news in Argentina so now we've seen that this is working out well the model understands that it has the two available functions to it and then it also has enough reasoning capabilities to know when it actually wants to use these and so when it wants to use these"
+    },
+    {
+      "startSeconds": 488,
+      "text": "it returns a tool call and then the arguments for that tool in this dictionary or Json format The Next Step then is of course executing these functions and then returning the context back to the language model which as we saw a little bit earlier I have these functions clearly defined as actual functions that will return actual"
+    },
+    {
+      "startSeconds": 506,
+      "text": "results down here we have the G exchange rate which I showed earlier and then a search results which uses the duck ducko search API to just take in a string text and then return some Snippets from the web using duck ducko so now that we have the functions defined and then we also have a model that knows that it has the"
+    },
+    {
+      "startSeconds": 523,
+      "text": "tools with the correct corresponding schemas that match the inputs to the functions and can generate the arguments for them what we need to do then is put it all together and so to do this it's going to be a bit of a multi-step process we're first going to get our initial response by passing in our user message which is just our original"
+    },
+    {
+      "startSeconds": 540,
+      "text": "prompt which might be something like you know how much is the dollar worth in Japan right now and then we're going to get our first response back from the model and the model similar to what we showed up above will have all of the tools that we just defined available to us and so we're likely then going to get"
+    },
+    {
+      "startSeconds": 555,
+      "text": "a full response that looks a little bit like this that may contain one or more tool call and from the tool call we know what the function name is and the arguments so what we're going to do is actually look at all of the tool calls extract the tool call name extract the tool called arguments and then what we're going to do is call that function"
+    },
+    {
+      "startSeconds": 574,
+      "text": "with the arguments that we parsed from the response of the language model and once we get the output from whatever function was called what we want to do is send it right back into the language model to get our final answer with the context from that called function and to do that we have to put in a specific tool message which if you're familiar"
+    },
+    {
+      "startSeconds": 592,
+      "text": "with the way that open AI handles things like assistant versus user messages the tool message is what it uses to specify what tool call actually returned what and so it'll take in a tool call ID the role which is of course going to be the tool the name of the function and then the content which is the function"
+    },
+    {
+      "startSeconds": 609,
+      "text": "response and so then what we're going to do is we're going to append any and all tool messages to our total messages which at this point our messages will have the original user message the AI assistant response here which will likely have all of the tool calls in there and then it'll now have the tool output messages with all of the outputs"
+    },
+    {
+      "startSeconds": 630,
+      "text": "from those tools and then what we do is we pass in all of those messages all at once to get our second response which is just going back into GPT 40 here with all of those messages to get our quote unquote second response that has all of the context from the called tools this is a lot easier to understand in action"
+    },
+    {
+      "startSeconds": 648,
+      "text": "so let's actually run it with how much is the dollar worth in Japan right now and we'll see that the initial message was of course the user saying how much is the dollar worth in Japan right now we see that the response message is this and we see that contains a tool call and the tool call ID is right here and then"
+    },
+    {
+      "startSeconds": 663,
+      "text": "it wants to run the base currency of USD and the target currency of JPY through the git exchange rate function we then execute that function here with this line the function response gives us 158 we append the tool call and its output to all the messages pass it all back in for that second response and so then our"
+    },
+    {
+      "startSeconds": 682,
+      "text": "quote unquote second response which in other words would be the first response to our original question would be as of the most recent data one USD is equivalent to approximately 158.523 return this just like before our first message is going to be our prompt and then the response from the language model are going to be all of these tool"
+    },
+    {
+      "startSeconds": 726,
+      "text": "calls which it's going to do three in particular it's going to call get exchange rate with USD to JPY get exchange rate with USD to pln and then it's also going to call search internet with current news in Argentina so we can see that all of these function calls came in as tool calls and then we called all of them and got the responses here"
+    },
+    {
+      "startSeconds": 748,
+      "text": "and then here here and then all of this stuff here and then we appended all of the tool calls with their respective IDs and then the outputs back into all of our messages and then the lm's final response was then our exchange rates of USD to JPY USD to pln and then some current news in Argentina so even with more advanced function calls you can see"
+    },
+    {
+      "startSeconds": 771,
+      "text": "that it's actually able to call multiple things at once which we then execute and then use as context to get our final response back to the user couple things to note here is that we're passing in this tool Choice option which we have defaulted to Auto and then also the model is calling a bunch of functions at once so you can actually specify a few"
+    },
+    {
+      "startSeconds": 790,
+      "text": "of these things and it takes a few different arguments which I have laid out here so the default behavior for function calling is set to Auto and this lets the model decide whether to call a function and if so which functions to call however there's three main ways that you can actually customize the default Behavior depending on your use"
+    },
+    {
+      "startSeconds": 807,
+      "text": "case you can force a model to to always call one or more function if you set tool choice to required then the model will select any function to call at least once you can also Force the model to call one specific function if you pass in tool Choice and then this dictionary here of the type with the name and then you can also disable"
+    },
+    {
+      "startSeconds": 826,
+      "text": "function calling and force the model to only generate user facing messages with tool choice of none and so these options give you a little bit of the flexibility to say when you want a function to be called if you need a function to be called what function to be called or if you want functions to be called at all"
+    },
+    {
+      "startSeconds": 840,
+      "text": "one of the other things is that there also exists the option for parallel function calling and so what parallel function calling is is essentially what's been happening up here it it'll pass out multiple tool calls and then we can parse all of them and run all of these tools in parallel and so if you have this on it'll do multiple function"
+    },
+    {
+      "startSeconds": 860,
+      "text": "calls together in batches but if you turn it off what it'll do is it'll actually only call one function at a time so you won't get these three all at once that could be multiple tools if you just want something to be going on once but with these two optional parameters you can really specify exactly how many tools you want to be called what tools"
+    },
+    {
+      "startSeconds": 879,
+      "text": "to be called and when so super useful for getting more granular into your specific use case with function calling great so now that we have a general understanding of what functions are how to set up some pretty simple ones and then looking at actually executing them and getting your full response back from the language model let's look at a bit"
+    },
+    {
+      "startSeconds": 897,
+      "text": "more Advanced Techniques and ways to set up functions and so for more advanced functions what we can actually use are pantic Json schemas to simplify things a little bit because what you don't want to really be doing is getting lost in all of the indents and the wonderful Json that's happening up here so a really easy way to generate the"
+    },
+    {
+      "startSeconds": 919,
+      "text": "parameters for a model is by actually using a pantic base model class and so using pantic and being able to take advantage of things like python typing can let you set out some very complicated and involved function parameters for my example here of a more advanced function I have one that covers sending an entire email campaign and so"
+    },
+    {
+      "startSeconds": 938,
+      "text": "this will take in recipients a subject body text any attachments different personalization a send time the priority for it different tracking options and a campaign ID and then using the typings and using this pantic class of the base model what I'm able to do is actually Define my parameters and how I want them to be treated all nicely here in an"
+    },
+    {
+      "startSeconds": 959,
+      "text": "organized manner for example I can say that for recipients I want it to be a list of strings for something like attachments I want it to be an optional list of HTTP URLs for things like personalization that might even be an optional dictionary that's a string that has dictionaries of strings in there or something like you know tracking which"
+    },
+    {
+      "startSeconds": 979,
+      "text": "might be an optional dictionary that has a string and Boolean values so you can see now where using um pantic and different typing hints you can actually set up a lot more complicated flows without having to do all of the fancy Json schema writing yourself and then with all of these we can pass in our descriptions so that the language model"
+    },
+    {
+      "startSeconds": 998,
+      "text": "will know what it should put there if it's looking at putting something in here so for example like our subject it might be string specifying the email subject line or for personalization it might be dictionary for personalizing email content with a little bit about what the key and value is and some examples there or something like"
+    },
+    {
+      "startSeconds": 1016,
+      "text": "priority we might have it as an enumerator set they can only choose from different things here these three options of low normal or high and you can pass in all of this super nice advanced stuff and set it up a little bit easier than actually writing out all of the plane ja on yourself putting the tool together in a way that open AI can"
+    },
+    {
+      "startSeconds": 1033,
+      "text": "actually ingest it then is as simple as just passing in the type the function name and description and then in the parameters you can use then your schema here the do schema method from our pantic base model class and so what that will then look like is all of this lovely customization that has all of the different parameters with every single"
+    },
+    {
+      "startSeconds": 1055,
+      "text": "typing thing and optional and required stuff all here nice and lovely and this ability to use the pantic base models really just makes it a lot easier to Define these more advanced more in-depth and more granular functions like this that aren't just going to be taking in you know one or two string values so let's actually try this out in action"
+    },
+    {
+      "startSeconds": 1075,
+      "text": "and my prompt here is going to be can you send an email to adaml youtube.com Sam ultman open.com and Elon Musk twitter.com about the cool YouTube channel youtube.com/ adaml for July 20th at 8: a.m. Pacific this is a high priority and include just click tracking with name personalization campaign is going to be campaign 13 also have my"
+    },
+    {
+      "startSeconds": 1096,
+      "text": "LinkedIn as the attachment here and sign off your response with Adam l in the body and so passing that all off to the language model we can see what we get so we can see that we indeed get a completion that has a function call and it wants to call the send email campaign function it gave me a list of the recipients a string of the subject it's"
+    },
+    {
+      "startSeconds": 1118,
+      "text": "giving me some body text here it has some attachments as a list of HTTP URLs it's personalization is then going to be by the email for first name here in a lovely dictionary form it's giving me a send time in the specific date time format give me my priority as high and the tracking as the specific dictionary here and also my campaign ID so you can"
+    },
+    {
+      "startSeconds": 1140,
+      "text": "see that even with these super super Advanced functions the language models are pretty good at knowing when to use them and then actually inputting in the arguments so just to give a little bit of exam of an example of what this might look like in the final State I have this function here that will simulate sending"
+    },
+    {
+      "startSeconds": 1159,
+      "text": "off an email campaign with all of this stuff so with that simulation ran you can see that my email campaign campaign 13 with was sent out with a high priority it was sent out to adaml youtube.com with this subject and then all of this nice personalization went into it and then it had the body text it had the attachments here my scheduled"
+    },
+    {
+      "startSeconds": 1181,
+      "text": "send time is correct for 8: a.m. and then it had the tracking as just for clicks and it being true great so hopefully that got you thinking about some of the cool ways that you can actually Implement and use more advanced functions and the advanced function calling capabilities of these models so now that we've gone over how you can set"
+    },
+    {
+      "startSeconds": 1200,
+      "text": "up your own functions use them and execute them with open AI models you're probably wondering does it look the same for other models and other capabilities and the answer there is generally no while open ai's tool calling functionality is tuned so that it takes in kind of a Json schema like this something like anthropic is actually"
+    },
+    {
+      "startSeconds": 1220,
+      "text": "going to be this list here with different things like this so there's no one really standardized format for function calling a second issue too is that being able to understand and use function calling is a fine-tuned ability in these larger models so not every model even has the ability to do this however there are a lot of models that"
+    },
+    {
+      "startSeconds": 1240,
+      "text": "are currently available from open AI from anthropic from Google and then some other companies here as well that have this ability and so the easiest way to kind of Define your own tools and then be able to plug and play with different models that have function calling abilities is actually using linkchain standardized framework as they give you"
+    },
+    {
+      "startSeconds": 1257,
+      "text": "a standardized way way of setting up an llm and defining a tool and then they handle all of the different formatting things in the back end that will make it compatible with the different llms this makes it really easy to just plug and play with different llms and different tools across different providers making"
+    },
+    {
+      "startSeconds": 1274,
+      "text": "it super easy so to show what that looks like let's actually set it up in link chain and of course we're going to instantiate an llm and for this example I didn't want to use open AI since that's all that we used before so we're going to be using clae 35 Sonet there's then three really straightforward ways of actually defining your tools with"
+    },
+    {
+      "startSeconds": 1291,
+      "text": "laying chain you can either use the tool decorator which is just at tool over an existing function and then what I did also is you have to put in a bit of a descriptor here and then this is of course going to be the tool description that gets passed and then it's also helpful to put in the different typing here in your actual input to your"
+    },
+    {
+      "startSeconds": 1309,
+      "text": "function but just attaching the tool decorator to an existing function on top of it we'll turn it into an invocable tool meaning then that if we use the object that Lang chain will then make for us with this git exchange rate and use the invoke method with the expected parameters here you can actually just run this with the arguments and then get"
+    },
+    {
+      "startSeconds": 1329,
+      "text": "your desired output plain and simple like that they similarly support pantic base models similar to what we did with the marketing email campaign so I have a shortened version here as an example and then they also have a bunch of different tool Integrations so instead of using the duck duck goo API directly what we"
+    },
+    {
+      "startSeconds": 1346,
+      "text": "can do is actually use their Lang chain community tools of duck duug go search results and then in just one or two lines actually set up that tool with just a quick function like this which similar to our exchange rate function can also be invocable like this and we can get those Snippets there and then to pass the tools in along with the"
+    },
+    {
+      "startSeconds": 1364,
+      "text": "language model object that we put they just have this very simple bind tools method where if you take your list of the tools that we have here and then pass in your llm which we have up here as CLA 35 Sonet and then have bind tools with the tools list that will then give you another object where the llm actually then knows that it has all of"
+    },
+    {
+      "startSeconds": 1385,
+      "text": "these tools available to it and so this is different from actually having to pass in the tools as a list every single time we invoke it like what we were using with the open AI API and once we've bound the tools to the llm it's now ready to be used so what we can do is then just invoke the llm object with something like when was linkchain"
+    },
+    {
+      "startSeconds": 1402,
+      "text": "founded and how much is a dollar worth in Japan right now and then the output that we'll actually get is so anthropic if we head back over here will actually output some form of text where it's thinking a little bit of what it should do so it put out to answer your questions I'll need to use two different tools one for search and one for"
+    },
+    {
+      "startSeconds": 1420,
+      "text": "currency exchange rate and it knows that it has the search and the currency exchange rate and then we get back these tool calls and the tool calls are for duck Dugo results Json with the arguments of the query here and then the other one is get exchange rates with the arguments of the base currency and Target currency so almost exactly"
+    },
+    {
+      "startSeconds": 1440,
+      "text": "similar to what we were seeing with open AI but now this is just using Lang chain in a standardized format and the great part about having the tools actually in a format where we can directly execute them with the invoke method is that it makes it super super easy to then take all these tool calls pass them back into"
+    },
+    {
+      "startSeconds": 1457,
+      "text": "our tools and then do the full circle of what we did with actually passing in the user query executing the tools and then having the AI respond with the executed tool context doing that with Lang chain a little bit like this we're going to be taking our initial prompt converting it into a human message with the human"
+    },
+    {
+      "startSeconds": 1473,
+      "text": "message function here and then passing that into our llm with tools to get the original llm response back and so the llm here is going to give us our tool calls and then what we can do is just go through all of the tool calls select which one we want and then we can just directly invoke them with the tool call arguments that the llm provided we're"
+    },
+    {
+      "startSeconds": 1495,
+      "text": "then able to use the tool message function to just properly format the tool output back into the proper formatting for the full conversation that we're keeping track of and then of course this full conversation with the humans prompt the ai's tool calls and then the results of all of the AI tool calls us tool messages will be passed in"
+    },
+    {
+      "startSeconds": 1516,
+      "text": "to get our final message but before we get the final message we can see that this has my original prompt we then see that the AI says to answer your questions I'll need to use two different tools one to search for information and one to to check the currency rate let me do that and then it has a few inputs here so it wants to use duck duck goo"
+    },
+    {
+      "startSeconds": 1536,
+      "text": "for when was l chain founded and then it wants to use the git exchange rate for the base currency of USD and the target currency of JPY and then we can see that we actually have all of the tool messages here now because we are able to directly invoke them we have the first tool message from Duck Duck Go search"
+    },
+    {
+      "startSeconds": 1555,
+      "text": "that responded with all of that and then we have the second tool output which is from the exchange rate tool that has this content here and then passing all of this right back into the language model we'll then get our final response which looks a little bit like this now let me answer your questions based on the information I've gathered when was"
+    },
+    {
+      "startSeconds": 1576,
+      "text": "it founded this is all this how much is the dollar worth right now and $1 is 8.51 ETC then a little bit of a summary of those so this is really the exact same thing that we did with all of the open aai functions with parsing out the arguments from them and parsing out which function to call at what time and then attaching that all in the right"
+    },
+    {
+      "startSeconds": 1598,
+      "text": "messages to then pass all back and to get our final response with the tool calls but now done with Lang chain which will then allow you to of course plug- Inplay different llms and it'll cover all of the formatting and expedite a lot of the executing of the tools for you as well with their standardized framework"
+    },
+    {
+      "startSeconds": 1616,
+      "text": "so to round out our discussion of tools to and function calls I wanted to talk of course about one of the main use cases that I'm seeing for tools and for functions and that is of course for creating agentic systems which the brief overview of what this kind of llm agent idea is is taking in a user request some"
+    },
+    {
+      "startSeconds": 1633,
+      "text": "sort of llm will then have access to a memory or of course the prior list of messages some form of tools and some sort of Chain of Thought reasoning or planning module to better approach the user's request we've gone over all sorts of different kinds of agents and setting up our own agents on this channel so I'll link to some videos right now and"
+    },
+    {
+      "startSeconds": 1653,
+      "text": "also in the description below but linkchain actually has a few automated ways of putting together some of these agents and the first more simpler ones will actually just handle all of what we were doing before with setting up invoking the tools and then attaching all of that to our memory and putting it together to get our final output all in"
+    },
+    {
+      "startSeconds": 1671,
+      "text": "a few different lines of code here so this will allow you to also very easily set up your flows with your different Tools in your model providers and then create kind of this workflow of actually taking in the input message invoking the tools and then getting your output message without having to go through all"
+    },
+    {
+      "startSeconds": 1690,
+      "text": "of those steps the most simple form of this is just going to be their create tool calling agent function that they have here that takes in a prompt an llm and different tools which you put into an agent and then you can wrap it all up into a nice executor that actually executes everything and this is just going to essentially do everything that"
+    },
+    {
+      "startSeconds": 1707,
+      "text": "we were doing in just a few lines so if we put this together and then actually run the query of when was langra Cloud released and how much is a dollar worth in Japan right now you can see that it'll actually automate doing all of these different steps so it'll invoke duck ducko it'll invoke get exchange rate and then it'll handle passing all"
+    },
+    {
+      "startSeconds": 1729,
+      "text": "of that back into the language model which will get our final output text here which I've printed a little bit nicer here so that just packages up all of what we were doing with the intermediary steps of appending the different tool messages executing the different tools figuring all that stuff out into one nice line so that you can"
+    },
+    {
+      "startSeconds": 1749,
+      "text": "actually just put this together and run it with your queries right off the bat and then you can start to get a little bit more advanced with their create react agent which is based on this paper here react synergizing reasoning and acting and language models which is one of my favorite ones to show simple demonstrations of and it follows a"
+    },
+    {
+      "startSeconds": 1766,
+      "text": "different prompt of asking questions making the llm go through different thoughts and then having the llm actually take actions and then doing different observations on those actions and then repeating until it's happy with the final result that it's put so we can actually put that together very easily by grabbing their preset react prompt"
+    },
+    {
+      "startSeconds": 1784,
+      "text": "making a react agent with just create react agent and then packaging it all up into an agent executor here and so if we run the same thing we can then see that it enters into this agent executor chain we can see a little bit more of this reasoning to answer this question I'll need to search for information about oops about Lang graph cloud and Lang"
+    },
+    {
+      "startSeconds": 1803,
+      "text": "chain and then it'll take that action and it says I don't have specific information about Lang Chain's founding date yet let's break this down and then let's search for Lang Chain's founding date so it even went a little bit further than that and so it was able to give me Lang graph Cloud Lang chains founding date and then give me a nice"
+    },
+    {
+      "startSeconds": 1822,
+      "text": "final answer there all in this sort of reasoning action and observation flow so you can really see the power of combining the ability for a language model and its Advanced reasoning together with external tools like web search or like sending an email or something like that alt together into really more advanced flows which can be"
+    },
+    {
+      "startSeconds": 1841,
+      "text": "really impactful to whatever use case you're handling and to whatever data you're managing as an end user that being said after going through all this you should have a pretty good understanding of what llm tool and function calling is how to set up your own tools how to set up Advanced tools and where some of those tools and"
+    },
+    {
+      "startSeconds": 1857,
+      "text": "function calling capabilities are starting to be used today so if you have any questions please leave comments in the comment section below if you liked what you were seeing consider dropping a like and if you want to support the channel and see more like this make sure to hit that subscribe button thank you and I hope you learn something"
+    },
+    {
+      "startSeconds": 1872,
+      "text": "interesting today"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:07.741Z"
+}

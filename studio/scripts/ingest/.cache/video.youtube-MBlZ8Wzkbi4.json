@@ -1,0 +1,335 @@
+{
+  "_id": "video.youtube-MBlZ8Wzkbi4",
+  "videoId": "MBlZ8Wzkbi4",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=MBlZ8Wzkbi4",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 52,
+      "label": "The Naive Way"
+    },
+    {
+      "startSeconds": 258,
+      "label": "The Better Way"
+    },
+    {
+      "startSeconds": 981,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "In this video, you're going to learn everything that there is to know about data fetching in React, the modern way, which honestly is really important because as a React developer, you're going to be fetching data a lot in your applications. Now, before we get into that,"
+    },
+    {
+      "startSeconds": 11,
+      "text": "there's two things that I want to mention. The first one is that if you didn't know, I also have a course. It's called Project React, and it teaches you way more than I teach in this video, and honestly, all of my other videos. It's going to show you how to build a real project"
+    },
+    {
+      "startSeconds": 23,
+      "text": "with React, a big and complex project, and it's going to teach you all of the things that you would need to become a good React developer. You can find it in the first link in the description. The second thing is that I also have a newsletter that's all about React. It's called Import React,"
+    },
+    {
+      "startSeconds": 36,
+      "text": "and it's completely free, and it's delivered to your inbox every single week. You're also going to be able to find that in the description. Cool. So now with those things being mentioned, let's now dive into data fetching in React and learn how to do it the modern way. All right,"
+    },
+    {
+      "startSeconds": 52,
+      "text": "cool. So let's begin. Now, I already have a video on data fetching on this channel that I did last year, and this code actually that you're seeing here is the code from that video, just slightly modified a little bit. What we're going to do in this video is we're going to take"
+    },
+    {
+      "startSeconds": 63,
+      "text": "the code from that previous video, and we're going to bring it in the modern day and age, and I'm going to show you better ways to fetch data, ways that I would actually recommend that you do in your projects today. Because as you're going to see, the code that we have here,"
+    },
+    {
+      "startSeconds": 75,
+      "text": "the code that's also in my previous video is something that I like to call the naive way of fetching data, and I would not recommend that you do this in a project today. However, you need to know and understand how to do this, because it's very important to know how to get"
+    },
+    {
+      "startSeconds": 86,
+      "text": "from this to the actual recommended way to fetch data. So this is the code that we have, right, we have a base URL over here, which is basically the place that we're actually getting our data from. And then we have a couple of state variables here that essentially handle everything that we would"
+    },
+    {
+      "startSeconds": 100,
+      "text": "need for data fetching, right, we have error, we have loading, we have posts, which is our actual data that we're getting from the base URL. And then we also have a state variable for the page. And then all of the work happens inside of this use effect over here. So we have one use effect,"
+    },
+    {
+      "startSeconds": 113,
+      "text": "we have this fetch post functions, and it does everything. It handles the loading state, it actually calls the fetch request to actually get the data, it then sets the data in the state, it also handles the loading state by sending it here to true and then to false, also handles"
+    },
+    {
+      "startSeconds": 126,
+      "text": "errors. And even as a bonus, also has the abort control over here that handles race conditions. Now, if you're a React developer, you've probably already seen code like this, right, the thing that we all have. And if you're a junior React developer, you might be tempted to do this in your"
+    },
+    {
+      "startSeconds": 139,
+      "text": "application. But I would recommend that you don't do this. Because although this is functional, and this is going to work, right, it is going to fetch the actual data as you expect and set all the states correctly. This is not the efficient way of doing things. And here's why the first reason"
+    },
+    {
+      "startSeconds": 152,
+      "text": "is that you have to do all of this yourself, you have to write all of the code yourself, you have to create and manage your own states for error and loading and all of that. And then you have to manage this use effect over here to actually fetch the data and make sure that you're updating the"
+    },
+    {
+      "startSeconds": 164,
+      "text": "states at the correct place at the correct time. And more importantly, not to forget anything. This is super easy to introduce bugs, I can guarantee you that you're going to forget something if you do this a lot. And you're going to introduce bugs and you're putting a lot of work on yourself when"
+    },
+    {
+      "startSeconds": 177,
+      "text": "you don't actually have to do it. And then another reason why I wouldn't recommend that you do this in your project, one that might not be so obvious is that this is actually missing functionality that you would typically expect from data fetching in any application, right? For example, caching,"
+    },
+    {
+      "startSeconds": 190,
+      "text": "we have no caching at all here. If we're fetching the first page of the posts, and then we're going to change to page one and go back to the first page, we're going to hit the back end again, even though we've just fetched the first page again, and we should have cached that data and"
+    },
+    {
+      "startSeconds": 202,
+      "text": "we should have returned the results from the cache instead of hitting the back end again, right, that's something that you would want to do in an application, right? That's a sign of a good application, you cache your data, and you don't hit the back end unnecessarily. With this code,"
+    },
+    {
+      "startSeconds": 213,
+      "text": "we don't have this. And if we wanted to implement this, we would have to implement caching ourselves, which I hope that you know that it's very difficult. But then even if you were to implement the cache yourself, you're still missing functionality, for example, background refetching,"
+    },
+    {
+      "startSeconds": 226,
+      "text": "right, let's say that you do have the data in the cache, and you're showing that to the user, ideally, what you will want to do is at the same time, trigger a request in the background, the user doesn't see that to just refresh the data in case that there's new data to be found,"
+    },
+    {
+      "startSeconds": 238,
+      "text": "right? That's another functionality that if you want to have, you would have to implement yourself. And there's so many more things and doing it this way, you're going to have to write all of that code yourself, you're going to introduce a lot of bugs. And if you want to have"
+    },
+    {
+      "startSeconds": 249,
+      "text": "this in any other components, or even share the data in other components, you're not going to be able to or it's going to be very difficult to do yourself, especially as a junior, right, so I wouldn't recommend that you do this in a React project. However, there's one exception, there's"
+    },
+    {
+      "startSeconds": 262,
+      "text": "one time where I would actually strongly recommend that you do this. And that is if you've never worked with React before, you're just learning React. And you've never done data fetching in React before, I would in that case, have you do this, because this is going to teach you a lot,"
+    },
+    {
+      "startSeconds": 275,
+      "text": "first of all about React and how it works, it's going to teach you about data fetching and all the different pieces that you need to know and think about to actually fetch data successfully. And it's also going to teach you a lot about use effect, right, you have to do all of this"
+    },
+    {
+      "startSeconds": 287,
+      "text": "using use effect. And you have to learn about the lifecycle of use effect, which is very important and seem a crucial as a React developer. So only in that case, if you're learning React, if you've never seen this before, I would have you learn this, understand this, and then you can move on to"
+    },
+    {
+      "startSeconds": 301,
+      "text": "doing something better. And this is exactly what I do in project react in my course. That's why I push this so much. And that's why I recommend it because it literally has everything that you need to be a good React developer. Now, let me show you the recommended way, the better way,"
+    },
+    {
+      "startSeconds": 313,
+      "text": "the improvement way to actually fetch your data in React, if you're fetching data on the client here, we're going to go to fetch example number two. And here we have something very similar, we have the same base URL fetching data from the same place as before. But we have a lot less code,"
+    },
+    {
+      "startSeconds": 326,
+      "text": "as you can see over here, we still have one state variable for the page over here, that's fine. But then we only have this piece of code that actually has all of the functionality that we had before in this first example, and even more, but only with this amount of code. And that is because"
+    },
+    {
+      "startSeconds": 340,
+      "text": "over here, we're using React query. So if you don't know, React query is an asynchronous state management solution, which happens to fit very well with the data fetching. And this the benefit of doing this is that it does all of the work for you. It does everything that we've done here and"
+    },
+    {
+      "startSeconds": 355,
+      "text": "more. And it does it for you. And you don't have to do it yourself. That's the whole point of using something. And that's the whole point of not doing this yourself is because there are solutions out there that are tested that are well maintained that do all of this and more for you. So why"
+    },
+    {
+      "startSeconds": 368,
+      "text": "wouldn't you use them, right, as you can see here, we have a data variable, which I alias to post, this is the same as our post over here, we don't have to manage it, React query is doing it for us, then we have is error, right, which is the same as our error over here, we have a spending and then"
+    },
+    {
+      "startSeconds": 381,
+      "text": "we have a bunch more we have is loading, we have let's see is fetched is fetched after mount is loading is loading error is paused, you have more variables in here that you would honestly know what to do with them. And that's a good thing. And to get this to work, all that you have to do"
+    },
+    {
+      "startSeconds": 394,
+      "text": "is just pass it here a query key, which I'll get to in just a moment to actually define what query you're actually fetching. And then you pass it a query function, which is the same thing that we had before we're fetching the same URL passing the same properties. And then you just return data,"
+    },
+    {
+      "startSeconds": 407,
+      "text": "whatever data you return in here, react query is going to put it here in this data property. And it's automatically going to handle the error states if this stores an error, for any reason, it handles it, you're going to get a spending to know if this is loading or not. And you're going"
+    },
+    {
+      "startSeconds": 420,
+      "text": "to be able to use it in the actual JSX in the same way that you would do it in here. But again, with a lot less code, and you're not doing this yourself. And more importantly, this is tested, and this doesn't have bugs, right. So this makes a lot of sense. And then you also have other"
+    },
+    {
+      "startSeconds": 433,
+      "text": "benefits, for example, the cache, right. In the first example, you had to implement your own cache yourself. In this example, with react query, you don't have to do that by this query key over here, react query is actually going to identify what query this is here, we gave it posts."
+    },
+    {
+      "startSeconds": 447,
+      "text": "And we also gave it the page, if we give it the page here, it's going to know that, hey, I'm going to have page zero. So I'm going to fetch the data of page zero. But then if I ever need to fetch the data of page zero, again, I'm just going to return the results from the cache instead"
+    },
+    {
+      "startSeconds": 459,
+      "text": "of hitting the back end again, which again, is a performance optimization. And it's something that you would want in your application, you don't have to do that yourself, it's automatically managed. And you can even configure it, you can do here, for example, stale time, you can configure"
+    },
+    {
+      "startSeconds": 471,
+      "text": "how long the cache is actually valid, you can put any value here, you can put the GC time, which is how long the garbage collection time is going to be, you can look at the documentation of react query to like really understand these. But you can completely customize this,"
+    },
+    {
+      "startSeconds": 483,
+      "text": "and it's all done for you. And you just have to use this. And you're good to go. And another benefit that again, is not so obvious, you can even use the same query in a different component and get access to the same data, because you're going to be pulling it from the cache instead"
+    },
+    {
+      "startSeconds": 497,
+      "text": "of hitting the back end. With this example, if I put the same code in a different component, we would have two requests hitting the same back end with the same data in two components that is inefficient, right. So there's a lot of benefits to using something like react query,"
+    },
+    {
+      "startSeconds": 510,
+      "text": "because it does all of the work for you. And you don't have to do it. And it's such little codes to actually get this working, right. So if you're working in a project, and you're fetching data in a client component right here at the top, let me remind you, we're in the client environment,"
+    },
+    {
+      "startSeconds": 521,
+      "text": "I will get to server at example number three, in just a moment, I would highly recommend and this is the standard nowadays to use react query, or something similar for all of the reasons that I've just mentioned. And honestly, you don't even have to specifically use react query, you can use"
+    },
+    {
+      "startSeconds": 535,
+      "text": "something that is similar. For example, a lot of people use SWR, right, it's pretty similar. It also gives you access to hook over here with similar data variables that you can also use, right, this is the same principle. If you're using, for example, I don't know GraphQL, you're"
+    },
+    {
+      "startSeconds": 548,
+      "text": "probably going to use Apollo GraphQL, right, they also have something like a use query over here, there you go, you get your GraphQL query, and then you pass it to use query, which is very similar to react, right, it's the same hook practically, and you get access to the same variables over here,"
+    },
+    {
+      "startSeconds": 562,
+      "text": "no matter what you're using, if it's GraphQL, if it's react query, if it's SWR, if it's TRPC, you want to use something like this that does the work for you, because the same principle applies, don't write the code that's already written, use something that's tested that works. And"
+    },
+    {
+      "startSeconds": 576,
+      "text": "that does the work for you. Now, let's move on to example number three. And this one is a little bit different, because in here, we're going to be working within a server environment. So in react, nowadays, in modern react, you can also do things on the server, you can have something that is"
+    },
+    {
+      "startSeconds": 588,
+      "text": "called server components. I also have a tutorial video on server components that you can watch to understand what they are. Server components, as their name implies, they actually run entirely on the server, they never make it to the client, the only thingAnd here's what data fetching would"
+    },
+    {
+      "startSeconds": 614,
+      "text": "look like in that environment. So here, because we're running this component on the server, we actually get another benefit, which is that we can make this an asynchronous component. We can have this component be asynchronous, which means that we no longer need to worry about rendering,"
+    },
+    {
+      "startSeconds": 627,
+      "text": "about different states, about loading states. We can just have this asynchronous and literally fetch the data in the body of the component. You cannot do this with a client component. This only works because this runs on the server. And then we're getting right the response over here from"
+    },
+    {
+      "startSeconds": 640,
+      "text": "our fetch. We're doing the same exact thing. Here, I just put a await promise to just make it a little bit slower. You're going to see why in just a moment. Then we're checking the response if the response is okay. If it's not, we can throw an error or we can redirect to somewhere else or we"
+    },
+    {
+      "startSeconds": 653,
+      "text": "can show some other UI to let the user know that something went wrong. If the response is okay, we get our post over here by doing another await, the response.json. Again, this is the same code that we had in the client component. It's the same code as we have here, but we're"
+    },
+    {
+      "startSeconds": 666,
+      "text": "putting it directly in the body of the component because this is an asynchronous server component. And then we can just create some HTML, some JSX over here, and just directly render out our post. There's no loading, there's no pending, there's no anything else. It's simple and you don't have to"
+    },
+    {
+      "startSeconds": 680,
+      "text": "use literally any dependency. So this is a huge benefit of using server components if you can, because it reduces a lot of the complexity and you're doing things with a lot less code and a lot less dependencies. Now granted, you are losing a little bit of functionality, you have no"
+    },
+    {
+      "startSeconds": 693,
+      "text": "loading state. So in here, for example, while this fetch request is happening, this component is not going to get rendered because it doesn't have data, it's awaiting the data, it's not going to get rendered. I'm going to show you now how to get around this, but it's something that you"
+    },
+    {
+      "startSeconds": 705,
+      "text": "have to know. You're in a different environment, you're in the server environment, so things will work a little bit differently. So you're losing some complexity in one way, and you're adding a little bit of complexity in the other way. But honestly, it's a net positive. So let me now show"
+    },
+    {
+      "startSeconds": 717,
+      "text": "you all of these examples. So we can see how they all behave, right. So I have all my components over here. And let's start with fetch example number one. So we're going to put this here, we're going to go back to our application, we're going to make things a little bit simpler, and"
+    },
+    {
+      "startSeconds": 728,
+      "text": "we're going to reload and see what happens. So you see, we have loading for a split second, if I can just maybe, let's see, go to my network over here, and then make it fast 3g to make things a little bit slower, we're going to see that I mean, it's mostly the same, but fair enough, we have loading,"
+    },
+    {
+      "startSeconds": 742,
+      "text": "and then we have our data, if I increase the page, it's going to load again, if I increase the page, it's going to load again. But if I go back to a page that everyone to one or three, actually, there's a bug, let me just fix this one second, this should not be plus one, this should be minus"
+    },
+    {
+      "startSeconds": 756,
+      "text": "one, there we go, we're going to refresh. So we're going to increase the page from zero to one, we're going to be in one, then I'm going to go back to zero. And we're still fetching the same data over again, right, there's no caching, as I've mentioned, so this is fetch example number one,"
+    },
+    {
+      "startSeconds": 769,
+      "text": "then if we comment this out, we comment fetch example number two, we go back here, we refresh, we have the same URL. Now I'm going to go here to page one, I'm going to go back to page zero, and the results are much faster. I know it's a little bit harder to see over here. Wait,"
+    },
+    {
+      "startSeconds": 782,
+      "text": "no, that was wrong. That was wrong. We're still incrementing the page, I have the same bug in both components. That's really funny. Let's save. And let's start over again, ignore that this happened, I'm going to leave this in. So we're on page zero, we're going to press increment, we're page one,"
+    },
+    {
+      "startSeconds": 795,
+      "text": "then we go to page zero. And you see, there was no loading, nothing flickered, we go back to page one. And now I can change the pages. And we're getting the results from the cache, this is better, this is a better user experience, it's better for our back end. And it's better overall."
+    },
+    {
+      "startSeconds": 808,
+      "text": "But then if I go to page two, we haven't fetched that page yet. So we're going to get the data. But then I go back to one, go back to two, two is also cached, right? This is how fetch example number two works. And finally, let's try fetch example number three, this is the asynchronous"
+    },
+    {
+      "startSeconds": 821,
+      "text": "server component. So we're going to come here and refresh, right? And now this is going to take a little bit longer. But you're going to see there's no loading, there's no flickering, our actual entire page is waiting, you see here at the top, it's loading, it's loading until we get"
+    },
+    {
+      "startSeconds": 834,
+      "text": "the data back from a server component, right? So server component, again, doesn't have rendering, it's not actually running on the client, all that we get is the HTML once the server component actually finished running, right? So that's how it works by default without doing anything"
+    },
+    {
+      "startSeconds": 847,
+      "text": "else to it. Now, if you want to add loading to this component, which honestly you would write, because we don't want to have less functionality than we had before, then what you would do is you would use suspense. So I can comment this out over here, I can comment the suspense. And"
+    },
+    {
+      "startSeconds": 859,
+      "text": "suspense is a component in react that essentially creates a boundary around a component, and then will actually not prevent the entire component, everything else of this home component over here to block while it's waiting for that it is going to create a boundary, and only this part is going"
+    },
+    {
+      "startSeconds": 874,
+      "text": "to block while the rendering of fetch example three happens. And one of the cool things is you can provide a fallback to display while that is happening. And you can show here the loading indicator, right? So let's see how that looks like. So now with this code, if I reload the page,"
+    },
+    {
+      "startSeconds": 886,
+      "text": "you're going to see loading while the page is actually loading. And once the component renders, and it actually does everything that it needs to do, we're going to see our data, right, we have the same functionality as we had before, but we're doing things a little bit differently,"
+    },
+    {
+      "startSeconds": 898,
+      "text": "right? So this is what data fetching looks like in a server component. Now, one important thing about fetching data in server components is, as you can see here, we no longer have a state variable for the page, we're no longer refetching things when the page changes. That's because we're"
+    },
+    {
+      "startSeconds": 909,
+      "text": "in a server component, there is no state, there is no re rendering the page, if we want to have the same functionality, we'll now have to go in the URL. And based on the URL, we will actually get the page to fetch in the server component. And then the caching over here, we also don't have it,"
+    },
+    {
+      "startSeconds": 922,
+      "text": "the caching will no longer be have to implemented by a library they're using, but rather by the framework of choice they're using to run your server components. Most probably nowadays, Next.js Next.js has a lot of caching, and they do this based on the URL, right? So these are small"
+    },
+    {
+      "startSeconds": 936,
+      "text": "details. But really, it's ultimately the same thing. It's just a different way, a more efficient way of doing the same thing. We're fetching the same data using the same properties, we're just doing it in a slightly different way. And honestly, I mean, this is really all they need to"
+    },
+    {
+      "startSeconds": 949,
+      "text": "be able to fetch data in your react applications. And now you know how to do it all, you know how to fetch data in a server component, you know how to fetch data correctly in a client component by using react query or something similar. And you also know how to not fetch data, how to not"
+    },
+    {
+      "startSeconds": 962,
+      "text": "fetch it incorrectly in a client component. And more importantly, you also know why not to do this and why you should do this instead. So now no matter what project you're working on, no matter what they use to actually fetch the data, you know the best practices, you know what to do what not"
+    },
+    {
+      "startSeconds": 975,
+      "text": "to do. And you're hopefully a better developer. And now you know everything that there is to know about data fetching in react, you enjoyed this video and you want to see more videos just like this one, make sure to leave this video a big thumbs up. You can also click here to subscribe"
+    },
+    {
+      "startSeconds": 988,
+      "text": "or you can click here to watch a different video of mine that YouTube seems to think that you're really going to enjoy. And with that being said, my name has been Darius Cosden, this is Cosden Solutions. Thank you so much for watching and I will see you in the next video. Ciao, ciao."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:29.684Z"
+}

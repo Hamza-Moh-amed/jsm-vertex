@@ -1,0 +1,111 @@
+{
+  "_id": "video.youtube-GvNrhULVpHI",
+  "videoId": "GvNrhULVpHI",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=GvNrhULVpHI",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Why AI needs guardrails in production"
+    },
+    {
+      "startSeconds": 35,
+      "label": "What we’re building: self-correcting local AI"
+    },
+    {
+      "startSeconds": 80,
+      "label": "The stack: LangChain + LCEL + Streamlit + Llama 3 (Ollama)"
+    },
+    {
+      "startSeconds": 130,
+      "label": "Designing the 3-stage flow (Generate → Evaluate → Repair)"
+    },
+    {
+      "startSeconds": 205,
+      "label": "Writing evaluation criteria (what “good” looks like)"
+    },
+    {
+      "startSeconds": 280,
+      "label": "Building the evaluator chain in LCEL"
+    },
+    {
+      "startSeconds": 345,
+      "label": "Designing the repair prompt (fix + upgrade output)"
+    },
+    {
+      "startSeconds": 415,
+      "label": "Wiring evaluator → repair into a reusable guardrails workflow"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 1,
+      "text": "[music] All right. Hey everyone, welcome back to the lang chain by project series. And today we're building something that feels genuinely smart. An AI that doesn't just answer your question. It actually checks its own answer, judges the quality, and fixes itself if it's wrong. This is one of those projects where you"
+    },
+    {
+      "startSeconds": 26,
+      "text": "immediately understand the power of Langchain. You ask a question, the AI responds. Another part of the AI reviews the response. And if it fails the check, a third step improves it automatically. All three steps, generation, evaluation, and repair, run right on your laptop through Llama and Streamlit. So, let's"
+    },
+    {
+      "startSeconds": 48,
+      "text": "jump straight into the code and see how this entire self-correcting system is built. We start with the imports. We import Streamlit because that's the UI layer. We import optional from typing for a helper function later. Then we bring in chat Olama from the lang chain community package. This is what connects us to the local llama model running in"
+    },
+    {
+      "startSeconds": 70,
+      "text": "Olama. We also import chat prompt template to build prompts and stream output parser to convert the model's responses into plain text. Next, we define the model name. Here we are using Llama 3.23B. This must match a model that already exists in your Olama installation. Then we configure the streamlit page with a title and a wide layout. After"
+    },
+    {
+      "startSeconds": 100,
+      "text": "that, we set up the model. We create the LLM object using chatma passing the model name and a temperature of 0.4. Lower temperature means cleaner, more controlled answers. We also create the parser object using stream output parser which converts the output into simple text. Now we create the prompts for the three"
+    },
+    {
+      "startSeconds": 125,
+      "text": "stages of our pipeline. The first one is the generation prompt. This prompt tells the AI to be helpful, answer clearly and respond to whatever input the user provides. It has one placeholder called input where the user's question will go. The second prompt is the evaluation prompt. This part of the AI acts like a reviewer. We give it the original"
+    },
+    {
+      "startSeconds": 152,
+      "text": "question and the AI's answer. Then we ask it to judge the answer on correctness, clarity, and completeness. And most importantly, it must reply in a fixed format. It either says pass followed by a short explanation or fail followed by what is wrong and why. This strict format is important because the rest of the pipeline depends on it."
+    },
+    {
+      "startSeconds": 180,
+      "text": "The third prompt is the repair prompt. This one only runs if the evaluation step fails. It gets the original question, the incorrect response, and the reviewer's feedback. and its job is simple. Rewrite the answer so it becomes correct, clear, and complete. Once the prompts are ready, we turn each one into a chain by piping the prompt"
+    },
+    {
+      "startSeconds": 206,
+      "text": "into the model and then into the parser. So, we end up with a generation chain, an evaluation chain, and a repair chain. Next, we define a small helper function called get text. This function makes sure that no matter what shape the model returns, whether it returns an object or just a string, we extract clean text"
+    },
+    {
+      "startSeconds": 232,
+      "text": "from it. It checks if the response has a content attribute. If it does, we return that content. If not, we convert the entire object to text. This keeps everything safe and predictable. Then we create the sidebar. The sidebar has a title that says guardrail controls. It has a checkbox that lets the user choose whether the system"
+    },
+    {
+      "startSeconds": 259,
+      "text": "should automatically repair failed answers. By default, auto repair is turned on. Below that, we show a small info box explaining that this episode demonstrates self- evaluation, guardrails, and conditional repair, all running locally. Now we move to the main interface. We set the main title to episode 11 self-correcting AI system."
+    },
+    {
+      "startSeconds": 289,
+      "text": "Then we add a caption that shows the pipeline in simple words generation evaluation repair. Below that we add a horizontal line. Then we add a text area where the user can type any question they want. And finally we add a button called run AI pipeline. Now for the execution section. When the user clicks the run button we first"
+    },
+    {
+      "startSeconds": 317,
+      "text": "check if the input text is empty. If it is we show a warning. If not we begin the three-step process. Step one is the generation step. Inside a loading spinner. We call the generation chain with the user's input. We extract the clean text using our get text helper. Then we display it under a heading called initial response. Step two is evaluation."
+    },
+    {
+      "startSeconds": 347,
+      "text": "We show another spinner. Run the evaluation chain by passing the question and the answer and extract the feedback. We display the feedback under evaluation result. The first line of that feedback will either be the word pass or the word fail. We store that first line in a variable called verdict. If the verdict"
+    },
+    {
+      "startSeconds": 371,
+      "text": "is fail and the auto repair checkbox is enabled, we run the repair step. Inside a spinner, we call the repair chain passing the original question, the incorrect response and the reviewer feedback. We extract the text and display it under repaired response. If the verdict is fail but auto repair is turned off, we simply show a warning"
+    },
+    {
+      "startSeconds": 398,
+      "text": "saying that the response failed review but repair is disabled. If the word it is pass then everything is good and we show a success message saying the response passed quality checks. Finally, at the bottom of the page, we show a footer that says episode 11 lang chain lce guardrails. And that completes the full walkthrough"
+    },
+    {
+      "startSeconds": 426,
+      "text": "of the code exactly as it's written. >> [music]"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:38:54.258Z"
+}

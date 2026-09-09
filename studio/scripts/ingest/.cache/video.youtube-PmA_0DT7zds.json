@@ -1,0 +1,74 @@
+{
+  "_id": "video.youtube-PmA_0DT7zds",
+  "videoId": "PmA_0DT7zds",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=PmA_0DT7zds",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "So one of the big problem challenges in using vector databases in machine learning applications is updating embeddings, right? So you change a model, you need to basically update the entire index. Is there any breakthroughs of being able to maybe do that in place and maybe creating a new version of already existing index in place"
+    },
+    {
+      "startSeconds": 23,
+      "text": "and just committed at some point in time so that you don't need to create a new one? That's always a tough question. We actually get this question a lot now, typically, if you use a vector database, you’ll have an embedding model that you want to use in mind. And that embedding model hopefully won't change for a period of time."
+    },
+    {
+      "startSeconds": 38,
+      "text": "If you do get a V2 or V3 of that embedding model, yes you will have to reindex everything. There are ways around that. So for example, if I have an original domain of data and that domain of data is good for very specific embedding, my embedding model fits that domain of data. And I want to extend now all of a sudden I have a new domain of data."
+    },
+    {
+      "startSeconds": 65,
+      "text": "And I want to train a new embedding model over that. I have two separate. I want to combine that with my original domain of data. What I can do is I can train a new model that learns to mimic the embeddings of the old model. Yeah I have some type of L2 loss. I train a model that learns to mimic the embeddings of my old model"
+    },
+    {
+      "startSeconds": 90,
+      "text": "over the old domain of data, while still providing me with useful, relevant information. Relevant embeddings for my newer domain of data, right? If I just have a pure upgrade in terms of my embedding model, like one embedding model is much better than the other over very wide domain of data."
+    },
+    {
+      "startSeconds": 109,
+      "text": "You will have to reindex everything in your vector database. That's the unfortunate reality of it. There there might be some tricks that we could use. So, you know, maybe we could train some sort of encoder or we could train some sort of multi-layer perceptron to map old embeddings to new embeddings. But I would still have"
+    },
+    {
+      "startSeconds": 133,
+      "text": "to embed that into my vector database. And, you know, things become a little more complicated. But long story short, yeah. If you have a pure upgrade for your data, and you have a completely new model, you unfortunately will have to reindex a lot of data. If instead what you're looking at is maybe potentially have a"
+    },
+    {
+      "startSeconds": 152,
+      "text": "new domain of data, and I want to be able to extend my old domain of data to this new domain of data as well, I can simply apply some sort of L2 loss to make sure that my old domain of data is there in line with my new domain too. I can imagine having optimize such cost function and do it like that. But I'm skeptical about the"
+    },
+    {
+      "startSeconds": 175,
+      "text": "performance here, because it would also mean that the new model, we'd be using a very similar feature space. Otherwise element of vector. If you can use the same feature space then it sounds feasible that it should work. But if your problem requires, you would get significantly better performance if you can use different features, like"
+    },
+    {
+      "startSeconds": 211,
+      "text": "your model will figure out what those features will represent. But I think it is, Yeah for some use cases, I think it can work. I totally agree with you. And that's why if you have like a new domain of data and if you have all this old data that you've built an embedding model across,"
+    },
+    {
+      "startSeconds": 236,
+      "text": "and all of a sudden you have this new data and that new data is a different domain. Let's say your old data is all financial documents and your new data is all legal documents. And you want a new model that can handle all those documents together. Then it makes sense. I think it makes sense to apply this loss to use the old model as a"
+    },
+    {
+      "startSeconds": 258,
+      "text": "teacher in some way shape and form. The reason is because at the end of the day these embedding spaces are not spherical. They're not spherical in these high dimensions. They're very, very isotropic. If we could visualize 768 dimensions, right? You can imagine we do tSNE or UMAP and"
+    },
+    {
+      "startSeconds": 285,
+      "text": "we sort of shape them down to three dimensions so that we can visualize them. They're like very, very oblong and they're very oddly shaped. And there might be like a cluster here in this embedding space. And like a different bigger cluster here in this embedding space. They're not spherical in high dimensions. And that's why"
+    },
+    {
+      "startSeconds": 303,
+      "text": "if you have a totally new domain of data, I think it's possible. I haven't actually tried. So don't take my word for it, but that's why I think it's possible to sort of have a new embedding model that handles all of your data together, not just your old data, but also your new data. If that's assuming that you have different domains."
+    },
+    {
+      "startSeconds": 322,
+      "text": "Getting pretty deep in ML here but I imagine there is some research about this. I guarantee you there's research about this. I’m like 99.9% sure there's research about this. I just haven't read any papers associated with it. For anybody who's listening, if you are aware of some research, feel free to reach out to me. I'd love"
+    },
+    {
+      "startSeconds": 341,
+      "text": "to sort of go through some of those papers as well. But it's an open problem for sure. It's definitely an open problem."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:51.502Z"
+}

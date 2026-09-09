@@ -39,7 +39,7 @@ export function searchMcpUrl() {
 }
 
 function authHeaders() {
-  return { Authorization: `Bearer ${assertEnv("SANITY_API_READ_TOKEN")}` };
+  return { Authorization: `Bearer ${assertEnv("SANITY_ORGANIZATION_TOKEN")}` };
 }
 
 export function createSearchMcpClient(): Promise<MCPClient> {
