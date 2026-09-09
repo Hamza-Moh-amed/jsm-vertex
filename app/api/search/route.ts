@@ -1,11 +1,12 @@
 
 import { openai } from "@ai-sdk/openai";
-import { ModelAnswerSchema, SearchRequestSchema } from "@/lib/search/types";
+import { ModelAnswerSchema, SearchRequestSchema, SearchResponse } from "@/lib/search/types";
 import { NextRequest } from "next/server";
 import type { MCPClient } from "@ai-sdk/mcp";
 import { createSearchMcpClient, fetchInitialContext } from "@/lib/search/mcp";
 import { generateText, Output, stepCountIs } from "ai";
 import { buildSystemPrompt, buildUserPrompt } from "@/lib/search/system-prompt";
+import { groundHits } from "@/lib/search/ground";
 
 
 
@@ -18,8 +19,13 @@ import { buildSystemPrompt, buildUserPrompt } from "@/lib/search/system-prompt";
  * what the model can even see.
  */
 
-const DEFAULT_MODEL = "gpt-5";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+
+
 const MAX_STEPS = 6
+const DEFAULT_MODEL = "gpt-5";
 
 
 function errorResponse (status: number, error: string) {
@@ -76,10 +82,36 @@ export async function POST(request: NextRequest) {
             providerOptions: {openai: {reasoningEffort: "low", textVerobsity: "low"} }
         })
 
-        // const results = await groundHits(output.hits, sort)
-        
-    } catch (error) {
-        
-    }
+        const results = await groundHits(output.hits, sort)
 
+        const response: SearchResponse = {
+            query,
+            sort,
+            count: results.length,
+            courseCount: new Set(results.map((result) => result.courseSlug)).size,
+            reply: output.reply,
+            results,
+        }
+
+        return Response.json(response)
+    } catch (error) {
+
+
+        if(request.signal.aborted) {
+            return errorResponse(499, "Search was cancelled")
+        }
+
+        console.error("[api/search]", error)
+
+        const message = error instanceof Error ? error.message : ""
+        const unconfigured = message.startsWith("Missing environment variable")
+
+        if(unconfigured) {
+            return errorResponse(500, "Search is not configured")
+        }
+
+        return errorResponse(502, "Search is unavalible right now. please try again later")
+    } finally {
+        await mcpClient?.close()
+    }
 }
