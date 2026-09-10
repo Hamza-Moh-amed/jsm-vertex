@@ -22,7 +22,7 @@ interface SearchResultsProps {
     searchField: ReactNode,
 }
 
-type State = {status: "loading"} | {status: "error"} | {status: "ready", response: any | SearchResponse} 
+type State = {status: "loading"} | {status: "error"} | {status: "ready", response: SearchResponse} 
 
 const SearchResults = ({
     query,
@@ -30,7 +30,7 @@ const SearchResults = ({
     searchField,
 }: SearchResultsProps) => {
 
-    const [state, setState] = useState<State>({status: "ready", response: "" })
+    const [state, setState] = useState<State>({status: "loading"})
     const [attempt, setAttempt] = useState(0)
     const router = useRouter()
 
@@ -145,12 +145,6 @@ const SearchResults = ({
             </select>
             </div>
             </div>
-
-
-            <div className='mt-4 flex flex-col gap-4'> 
-                Response
-            </div>
-
 
         </>
     )
