@@ -1,0 +1,78 @@
+{
+  "_id": "video.youtube-MUSoj2JcD4A",
+  "videoId": "MUSoj2JcD4A",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=MUSoj2JcD4A",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "in this video I'll talk about a very interesting and important concept called tree shaking in JavaScript this concept can really improve your application's performance now before explaining tree shaking you must know what bundlers are in JavaScript you must have heard of webpack or rollup as a JavaScript developer well they're exactly what we"
+    },
+    {
+      "startSeconds": 19,
+      "text": "call bundlers bundlers are tools used to combine multiple JavaScript files into a single file called a bundle this bundle can then be used in a web application or website to reduce the number of HTTP requests needed to load the JavaScript code they reduce the number of HTTP requests because when a web page loads the browser makes a separate HTTP"
+    },
+    {
+      "startSeconds": 39,
+      "text": "request for each Javascript file referenced in the HTML this can slow down the page load time and increase the load on the server by using a bundler the JavaScript code is combined into a single file which means the browser only needs to make one HTTP request to fetch the entire code base this can significantly improve the page load time"
+    },
+    {
+      "startSeconds": 60,
+      "text": "and reduce the load on the server now bundlers can optimize your application in many ways one of which is called tree shaking so what is tree shaking tree shaking is a technique used by modern JavaScript bundlers such as webpack or rollup to eliminate dead code from the final bundle dead code refers to parts of your JavaScript code base that are"
+    },
+    {
+      "startSeconds": 80,
+      "text": "never executed or used in your application the process of tree shaking involves analyzing your code base and identifying which parts are actually used and which parts are not the unused parts are then removed from the final bundle resulting in a smaller bundle size and improved performance so how to enable tree shaking using webpack to"
+    },
+    {
+      "startSeconds": 99,
+      "text": "improve our application's performance for that let's see an example with some simple JavaScript code and minimal webpack setup first create a new directory for the project and navigate into it in your terminal I will name my directory as tree shaking example then initialize a simple new node.js project with npm in it after that install the"
+    },
+    {
+      "startSeconds": 120,
+      "text": "required dependencies webpack webpack CLI Babel loader and Babel preset EnV table loader in case you didn't know is used to convert code written in modern JavaScript into plain old JavaScript code supported by older browsers then create a new file named webpack.config.js in the root directory of your project with the following"
+    },
+    {
+      "startSeconds": 142,
+      "text": "configuration all this configuration does is it sets up webpack to use payable to transpile your JavaScript code and enables tree shaking by setting the used exports optimization flag to true this part setting the used exports optimization to True is what enables tree shaking and it's all we are concerned about for this tutorial if you"
+    },
+    {
+      "startSeconds": 162,
+      "text": "want to know how to set up webpack and what these other terms mean then that's for a whole different tutorial now create a new file named math.js in the root directory of your project with the following code to keep things simple I will use these add and multiply functions after that create a new file named index.js in the root directory of"
+    },
+    {
+      "startSeconds": 182,
+      "text": "your project with the following code then run the webpack build command to generate the bundle.js file in the dist directory this should successfully compile your JavaScript files and generate the bundle.js file in the desk directory now create a index.html file and add the following code in it make sure the script points to the bundle.js"
+    },
+    {
+      "startSeconds": 201,
+      "text": "file in this directory generated from webpack open the index.html file in a web browser and check the console log to verify that the add function was successfully imported and used from the mac.js module if the console log is present then it means the bundle.js works fine now how to see the bundle size before and after using tree shaking"
+    },
+    {
+      "startSeconds": 222,
+      "text": "in the example I demonstrated for that we can use the webpack bundle analyzer plugin to visualize the size of our bundle and compare the size before and after tree shaking to install the plugin run the following command in your project directory then add the plugin to your webpack.config.js file the this will add the bundle analyzer plugin to your"
+    },
+    {
+      "startSeconds": 242,
+      "text": "configuration and generate a report of the bundle size when you run the webpack build command now run the webpack build command again after the build is complete open the generated report in your web browser the report will show the size of each module in your bundle and you can compare the size of your bundle before and after tree shaking you"
+    },
+    {
+      "startSeconds": 261,
+      "text": "can clearly see the parse size and gzip size have significantly reduced in the analyzer tool when tree shaking is applied just to give you an overview of what these terms mean the stat size is the actual size of the bundle in bytes it includes the size of all the modules assets and other files that are included"
+    },
+    {
+      "startSeconds": 278,
+      "text": "in the bundle parse size is the size of the code after it has been parsed by webpack this includes only the code that is actually used by the application and excludes any dead code that has been eliminated by webpack's tree shaking algorithm gzip size is the size of the bundle after it has been compressed using the gzip algorithm this is the"
+    },
+    {
+      "startSeconds": 298,
+      "text": "size that the bundle will be when it is transferred over the network to the client's browser so you can see in the bundle.js file within disk directory the contents of the code are significantly reduced before and after applying tree shaking because it removes all the dead or unused code such as multiply function"
+    },
+    {
+      "startSeconds": 314,
+      "text": "and so on so this is how tree shaking optimizes the performance of your application and I hope you found this example useful that's all for the video if you found this video insightful then don't forget to like And subscribe and as usual stay tuned for more"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:09.229Z"
+}

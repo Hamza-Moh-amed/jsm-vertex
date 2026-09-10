@@ -1,0 +1,131 @@
+{
+  "_id": "video.youtube-5s6dIkrv6Y4",
+  "videoId": "5s6dIkrv6Y4",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=5s6dIkrv6Y4",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 47,
+      "label": "When You Need Generics"
+    },
+    {
+      "startSeconds": 165,
+      "label": "How To Create A Generic Component"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "One of the most misunderstood concepts in React is how generics work with components. In this video, I'm going to clear up any confusion that you could possibly have with generics and component and show you why they're an incredibly useful feature you need to know to write good quality React applications. Welcome back to Web Dev Simplified. My"
+    },
+    {
+      "startSeconds": 19,
+      "text": "name is Kyle and my job is to simplify the web for you so you can start building your dream project sooner. And if you like this video where I deep dive into some of the more complex features in React, you're going to love my React Simplified course which covers everything you need to know about React all the way from the basics up to more"
+    },
+    {
+      "startSeconds": 34,
+      "text": "advanced features like generics. So, if you're interested in that, check out my React Simplified course linked in the description or even just check out my TypeScript course if all you care about is TypeScript cuz I also cover all the React TypeScript you need to know as well. I'll link that in the description as well. So, to look at the real quick"
+    },
+    {
+      "startSeconds": 48,
+      "text": "example code that we have, we have this list component. And this list component takes in an array of data and then it uses that data inside of this get key and this get row function to be able to print out information. So, if we scroll down to that list component, you can see right now it's very simple. I have my"
+    },
+    {
+      "startSeconds": 64,
+      "text": "data, my get key function, and my get row function. And all I'm doing is I'm looping through my data and for each item, I'm rendering out what the row for that item should be and I'm getting the key for that item just to make sure that React can render everything out properly. So, I have all of my types and everything set up. But, you'll notice"
+    },
+    {
+      "startSeconds": 79,
+      "text": "I'm currently using an any type right here for my data as well as my get key has an any right here and my get row has an any right here. And that's because I don't know what the type of this particular data is going to be whenever I pass it in. Right now, you can see I have an ID and a name. What happens if I also wanted to throw in like an age"
+    },
+    {
+      "startSeconds": 96,
+      "text": "property into here as well? This is why currently I have things typed as any so I can just pass in any data I want and it'll work fine. The problem with this though is if I come in here with my person object, you can see it has a type of any. So, I don't get any fancy auto complete at all. So, I can't say that it has a name property or whatever and"
+    },
+    {
+      "startSeconds": 112,
+      "text": "there's just no safety in regards to what data is being passed in here. I essentially want my type of person inside of this get key and get row to be exactly what each one of these individual pieces of data is. So, one thing that I could do is I could come and I could manually type that. I could say, \"Okay, this is going to be an"
+    },
+    {
+      "startSeconds": 126,
+      "text": "ID, which is a number, and a name, which is a string.\" And I could just use that for all of these different types. And now we can see that this works fine. I come here, I get auto complete for my ID and my name. But, the problem is now if I want to pass something else, like an age property, I'm immediately getting an"
+    },
+    {
+      "startSeconds": 142,
+      "text": "error because this age property doesn't exist on ID and name. If you ever run into a problem like this where you want essentially the type of something to be inferred from the type of something else, that's generally where you're going to want to reach for generics. And doing them in the form of React components is rather simple and very"
+    },
+    {
+      "startSeconds": 156,
+      "text": "similar to normal TypeScript generics. But, if you're not already familiar with normal TypeScript generics, I highly recommend checking out my full video on that. I'll link it in the cards and description for you. But, essentially, let's remove this age property from here. And instead of hardcoding what this type is going to be, I'm going to"
+    },
+    {
+      "startSeconds": 170,
+      "text": "change this to be using a generic instead. I'm going to call that generic item. It doesn't matter what you call it. A lot of times you may see it called T or something like that. It really doesn't matter what you call it. You can call it anything you want. We just created our own type called item. And we want this type to be able to infer"
+    },
+    {
+      "startSeconds": 185,
+      "text": "whatever we pass in as our data. So, to do that, we just pass in some angle brackets here and say we're going to be passing in a type called item. By making this into a generic type, we're essentially saying that this lips prop has this item type that it can accept, and it can be anything at all that we want. Now, down here, we obviously need"
+    },
+    {
+      "startSeconds": 201,
+      "text": "to pass in our generic as well. We can again call this whatever we want. We could call it T. I'm just going to call it item again, the exact same name. And to make sure that you're, you know, sure that they're not the same exact thing, I'm going to call this one item type. Just to be clear that this generic right"
+    },
+    {
+      "startSeconds": 214,
+      "text": "here is different from this one up here. I'm just passing in this new item type property. And this comes from my list function. So, here, I'm going to make this actual component a generic component. So, now we have a generic function, and we have a generic type. Technically, you don't need this generic type. I could write this entire type in"
+    },
+    {
+      "startSeconds": 231,
+      "text": "line right here if I wanted to and that will work fine if I change around the names of everything to be exactly the same, this item type. But in our case, I'm passing in a custom prop type here just because that's most likely what you're going to work with. So now my list component has its own particular generic type of item type and I'm"
+    },
+    {
+      "startSeconds": 247,
+      "text": "passing that along to my prop type right here so I know exactly what the type of all these are going to be. And now you'll notice that I still get awesome auto complete. You can see I get item and name or ID and name. And if I wanted to add in like an age property here of 29, let's add an age onto Sally as well."
+    },
+    {
+      "startSeconds": 262,
+      "text": "Doesn't really matter what it is. Now down here, you'll see I now also have that age property that I can use inside the display. I could change this to age and now you can see the ages are displayed instead of the names. Now the reason this all works super magically is because TypeScript is smart enough to infer what the type of our item prop"
+    },
+    {
+      "startSeconds": 278,
+      "text": "here is supposed to be, that generic item type. It's smart enough to infer that because it says, \"Okay, my data is an array of items. I passed it in an array that has objects with an ID, a name, and an age.\" So it's smart enough to know, \"Okay, this item type is just an object with an ID, a name, and an age.\" And it's able to infer that for"
+    },
+    {
+      "startSeconds": 294,
+      "text": "us. But in some cases, TypeScript may not be smart enough to infer this depending on how you wrote your code. So you can actually pass in your own type right here. So this looks a little bit weird when you write out React components like this, but you can put your React component and then directly after the name of your component, put"
+    },
+    {
+      "startSeconds": 309,
+      "text": "two more of these angle brackets and now we can type in whatever we type we want. So we can say here we're going to have an ID which is a number, we're going to have a name which is a string, and let's say that our age is going to be optional. So let me just come in here and say that it's going to be an optional number just like that. Close"
+    },
+    {
+      "startSeconds": 325,
+      "text": "off that object. And now if we give this a quick save, everything still works fine. The only difference is down here, my age is an optional property because I essentially told TypeScript that it's going to be an optional property inside of there. So we have our age which is optional or we have our name in here"
+    },
+    {
+      "startSeconds": 340,
+      "text": "which is required. So I could come down, I could have a new person, and this new person give them a new ID, and we can make the age not exist because again, it's an optional property, but I couldn't add anything else on here like is programmer would be give me an error because I didn't define that up here in this particular hard-coded version of my"
+    },
+    {
+      "startSeconds": 356,
+      "text": "generic. But, if I remove this hard-coded version, it's going to do the inference for me. So, it knows that this person is going to be an ID, name, age, and this is programmer property. So, we have all of those different properties available for us right here. So, very rarely do I actually pass along the actual generic like this to a component,"
+    },
+    {
+      "startSeconds": 373,
+      "text": "but in the rare circumstances where you need to, this is exactly how you would do it. You would pass it in just like this. I know it looks a little bit funky, but that's just the way you need to do things with TypeScript. Now, if you enjoyed this really quick video, you're absolutely going to love my React and TypeScript courses. I'm"
+    },
+    {
+      "startSeconds": 386,
+      "text": "going to link them both down in the description below, but if you're looking to master TypeScript or React, those courses go from the absolute beginnings of React and TypeScript all the way up to what you need to know to actually write real-world React and TypeScript applications. So, depending on which one you want to learn or if you want to"
+    },
+    {
+      "startSeconds": 400,
+      "text": "learn both, they're going to be linked down in the description for you. And with that said, thank you very much for watching and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:53.406Z"
+}

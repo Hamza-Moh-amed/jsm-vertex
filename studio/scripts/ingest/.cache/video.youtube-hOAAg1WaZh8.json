@@ -1,0 +1,146 @@
+{
+  "_id": "video.youtube-hOAAg1WaZh8",
+  "videoId": "hOAAg1WaZh8",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=hOAAg1WaZh8",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Hello everyone. Uh I welcome you all to this new tutorial. I know it's after a long long time. I was actually enrolled into a master's program in machine learning and artificial intelligence. Uh but yeah, I just get got done with my final semester and now I'll be sharing a lot of things with you. So this video is"
+    },
+    {
+      "startSeconds": 15,
+      "text": "all about consuming serverside events in React and what's the need and how to implement it at a very core level and then there are other utilities that we can explore using MDN docs. Uh so the first question that might be coming to your mind is that why serverside events when we already have rest graphql and websockets right there are a lot of"
+    },
+    {
+      "startSeconds": 32,
+      "text": "communication frameworks in case if you're um I mean not frameworks but protocols in case you're not familiar with these I have talked about these in my previous videos you can check them out but yeah I mean technology is evolving pretty quickly and restful services which were once ruled out by graphql and then we have uh duplex"
+    },
+    {
+      "startSeconds": 51,
+      "text": "communication meaning both sides websockets and web RPC then what is need for what is the need for this new serverside events and that's what we're going to talk about. So think of this in a way you know like how these modern LLM powered applications run. I hope you all are using AI extensively because if you're not I would highly recommend and"
+    },
+    {
+      "startSeconds": 68,
+      "text": "yeah I'll be coming up with more tutorials on working with AI agent development frameworks etc etc. But just to give you a contrast uh these machines do a lot of heavy computation multi-step agent reasoning resource intensive tasks you know these could take times and unlike traditional APIs which had a specific task to do like update the"
+    },
+    {
+      "startSeconds": 86,
+      "text": "database fetch some records these tasks can take a longer longer time and you know the way we used to handle these things earlier was to just show a spinner in front end UI you just get the response however since we already see that you know there's lot of challenge uh to be very specific um like if if if it's taking a long In those cases, it"
+    },
+    {
+      "startSeconds": 105,
+      "text": "actually makes the user experience non-intuitive and that is where server side events come into the place. I would say it's more to improve user experience but at the same time also to cut off the huge payload. You can get humongous amount of API response and you want to make sure that you don't want to have all of that in a single call rather join"
+    },
+    {
+      "startSeconds": 120,
+      "text": "it incrementally. So if you see this is the flowchart whenever user submits a query to your front-end application. It sends a request to LM server. It starts its processing and the way these are designed is that they stream out the partial responses which are loaded immediately in the UI and once they are done responding they stream the final"
+    },
+    {
+      "startSeconds": 135,
+      "text": "response with some signal like uh it's closed and it's done which basically shows into the UI. So I hope this diagram makes sense. So in very short uh server side events are required because number one you don't want to send huge amount of data as part of single uh request. Now you will cause network latency and sometimes due to u unstable"
+    },
+    {
+      "startSeconds": 152,
+      "text": "connections you may not give the best experience in with the help of streaming you give partial experience and then the last chunk can be sent and resent you know based on the configurations. Uh but yeah that's one reason and another reason is that these LM servers are going to take a lot of time. Now there will be one more question is that you"
+    },
+    {
+      "startSeconds": 165,
+      "text": "know why not websockets rather than uh serverside events. So the major difference between a web soocket and a serverside event is that you know it's designed for birectional communication that is server to client. However, serverside events are designed for unidirectional communication that is always from server to client. So like"
+    },
+    {
+      "startSeconds": 180,
+      "text": "restful API calls, it does not close the connection immediately. It keeps receiving those stream chunks and once it's done then only it closes the connection. We don't need a birectional call in this case. And just to give you an understanding, this is how it goes like request go uh to the server LM engine and keep on streaming the um"
+    },
+    {
+      "startSeconds": 196,
+      "text": "response. And this is why it's a lightweight built-in to HTTP uh perfect for LM streaming and fallback friendly uh with firewalls and proxies compared to websockets. Okay, so let's go and check out how do we do the streaming in React. So before we start with the front end side, I have just created a dummy you know stream example endpoint. So I'm"
+    },
+    {
+      "startSeconds": 214,
+      "text": "using Python fast API. You're free to use any other service. So this is a streaming payload. Currently it's just like here uh there are five sets of message but assume these to be you know very big messages. So like big chunks of let's say 5 10 KBs etc. they are sent one by one. And this is the event generator. So if it is disconnected we"
+    },
+    {
+      "startSeconds": 231,
+      "text": "break it otherwise we keep on yielding. I hope you're familiar with keyword. This is very important um you know in understanding these cases like unlike a proper response yield keeps on you know yielding until a specific condition is met. So this this is how it goes. So for every chunk it sends that payload and"
+    },
+    {
+      "startSeconds": 245,
+      "text": "once that is done it sends it as done. Okay. And this is like the streaming response event source response the decorator for SSC. So this is a very simple code. Um if I show you how this works in postman. Okay. So let me just try to hit this end point and then you can see every once again it's sending me stream messages and once it's done it"
+    },
+    {
+      "startSeconds": 262,
+      "text": "says connection closed. Okay. And if you see that's what we are doing. So we are just uh sleeping for one second and uh we are sending the stream data. Okay. So I hope you got a understanding of uh how the streaming works based on the back end setup. Now let's see how we can implement this in React using very simple web API event source. Uh note"
+    },
+    {
+      "startSeconds": 280,
+      "text": "that this is a very simple example just to make you understand how it works. If you're familiar with websockets, uh you can actually understand this very well what's happening and everything. So I kept it simple for the sake of understanding but you can make it even more complex like based on the data that you are getting from the stream you can"
+    },
+    {
+      "startSeconds": 294,
+      "text": "perform different actions etc etc. Okay. So this is my message which I'm storing and then this is my loading state and this this is just a progress info because as the process goes we want to make it more intuitive. Again we can have more progress kind of thing like how many chunks it's going to emit etc etc. Okay. Um so what we do is we use"
+    },
+    {
+      "startSeconds": 310,
+      "text": "this event source again uh this is an MDN API. You can always look into the reference. It has much more than just creating a stream source. You have credentials and other details also. Uh but here just to keep things simple and you set the loading to true meaning that now streaming has begun and on every action uh look carefully how this is"
+    },
+    {
+      "startSeconds": 325,
+      "text": "similar to websockets on every message that you capture you just pass the message and if the par message if the past message contains a message attribute that was being sent from the back end. If you look here carefully uh this one so if if that attribute is present then we append that to the messages and keep doing this. Um if any"
+    },
+    {
+      "startSeconds": 342,
+      "text": "error happens we are just logging the error and um connection closed and all these things. Uh this will only be required if you don't have this. So let's say if you don't have any event listener on end then it will uh come and fall back to on error. But if you have this then we won't see these logs. This will only on error will only trigger if"
+    },
+    {
+      "startSeconds": 357,
+      "text": "there's a genuine error and not when the connection is closed. When the connection is closed it will set the progress to stream ended all these things and log the details and set loading to the false. And whenever the connection is open if you want to perform any actions you can set the progress info and all those things. And"
+    },
+    {
+      "startSeconds": 368,
+      "text": "here is our JSX. So just a H1 and then if it is not loading then get the messages. If it is loading the stream is already going on. Uh then the progress info what is happening? How is server responding? This is just an example and the messages that are being streamed. Okay. So now let's go to the browser and see how this all works."
+    },
+    {
+      "startSeconds": 385,
+      "text": "So this is our UI as we saw. Uh so let me just open the console also and clean it up. And now if I just click on this get messages. So you can see that these uh if I go to network tab let me just quickly uh yeah let me clear it off and then do it again. Okay, so if you see that this is um event stream as you can"
+    },
+    {
+      "startSeconds": 406,
+      "text": "see there's no response header but yeah this is how it's coming in. So the data is being streamed in form of a serverside event and this keeps on going to the UI and yeah I mean that's that's the core of this logic. So assume that these payloads are too big then in that case you can break it down into multiple"
+    },
+    {
+      "startSeconds": 419,
+      "text": "payloads and stream it out. Okay and if you see the console we see that stream ended. If you carefully look at this one uh event source failed this is not showing up. This is basically stream is ending from here. Right? So if I just so if you see like this stream ended okay but let's say if I just comment this part out then see what happens"
+    },
+    {
+      "startSeconds": 439,
+      "text": "since now now there's no event listener to listen to the end of the stream it will fall back to this error state okay and let's see what happens so if I reload it clear this get messages so now everything is behaving as expected but once the stream ends you will see that event source fail right so that is the"
+    },
+    {
+      "startSeconds": 453,
+      "text": "thing if you keep this one in place then it will always go once the event end it's always going to end come in here but otherwise it will go to event source fail uh and that is important because otherwise uh if you don't have this then in that case you know it will be confusing to know like you can see that this is this is going this way. So it's"
+    },
+    {
+      "startSeconds": 467,
+      "text": "important because otherwise you will never know whether it is a genuine error from the back end or if it the stream ended for some other reason and yeah you can do a lot of these customizations and if I just um where is that event source and go to the MDN reference you will see that uh the docs are there I mean I would"
+    },
+    {
+      "startSeconds": 481,
+      "text": "highly recommend you to go through these docs it's very good actually you know things like uh with with credentials and all those things. So it it gives you a descriptive like uh there are what are the events that are supported and yeah one good thing is that it's compatible with all these modern browsers which is"
+    },
+    {
+      "startSeconds": 494,
+      "text": "a very good news. So you don't have to face any issues while doing the stream and um yeah I mean uh what is there? Yeah like uh read only credentials and all these things if you want to set it to true or false uh to you know send it uh and then it also gives you the state and all these details. So worth looking"
+    },
+    {
+      "startSeconds": 510,
+      "text": "at the actual MDN docs but this is on a high level how this all works. Uh I hope you like this tutorial. Um please let me know if you want to know more about these. Um yeah I'll be creating more such tutorials. I'll be focusing on the back end side of things. How you can work with agents, how you can develop agents quickly and you know how you can"
+    },
+    {
+      "startSeconds": 525,
+      "text": "deploy those agents and what is the best practices that are supposed to be followed um on top of these videos. Uh but yeah, if you have any specific thing in mind, feel free to drop down in comments. Maybe we can cover it in the next video. Until then, bye-bye."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:38:56.560Z"
+}

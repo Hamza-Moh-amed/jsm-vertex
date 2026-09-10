@@ -1,0 +1,98 @@
+{
+  "_id": "video.youtube-t99NvIazD68",
+  "videoId": "t99NvIazD68",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=t99NvIazD68",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hey programmers welcome back before we talk about item potency which I think is something that every developer should be aware of let me give you a fun fact first well a couple years ago Uber Eats had an incident in India well there was a glitch that let people order free food for the whole weekend long story short"
+    },
+    {
+      "startSeconds": 19,
+      "text": "this glitch was coming from the fact that Uber Eats was contacting a payment provider such as stripe and this payment provider was returning different error messages every time for for the same error and by that Uber Eats the API of Uber Eats wasn't able to dis distinguish them and was creating new orders every time so how is it actually related to"
+    },
+    {
+      "startSeconds": 41,
+      "text": "our topic now well first of all let's define it potency or it potency doesn't really matter it's something in software and technology that typically refers to the idea that you can perform an operation multiple times without triggering any side effects meaning imagine you have a function some pure function and you call this function many"
+    },
+    {
+      "startSeconds": 62,
+      "text": "times you can call it many times and the result has to be the same every time doesn't matter how many times you call it the result has to be the same if it's not meaning it's not it important and why is it so important in our case well whenever you're developing apis you have to make sure that your API is consistent"
+    },
+    {
+      "startSeconds": 79,
+      "text": "in its Behavior well imagine this following scenario imagine you have a client that makes a request to create an order and this is a post request okay so the client makes a request to the API and then the API wants to save it in the database because this order has to be saved somewhere well imagine in the Uber's case this database was actually a"
+    },
+    {
+      "startSeconds": 100,
+      "text": "payment provider and the payment provider had a database but in our case it's going to be just a database so we now try to save this in a database and we create a burger okay the burger is now saved in the database what the database is going to do is it's going to return the the message to the API either it's successful the query was successful"
+    },
+    {
+      "startSeconds": 119,
+      "text": "uccessful either it errored out and obviously our query was successful because we now have a burger in the database but obviously when the API is returning the results to the client this part can actually cause a failure it can be a network disruption it can be an actual exception in our code but the client is going to think that hey now I"
+    },
+    {
+      "startSeconds": 140,
+      "text": "have an error meaning why not press the same order button again and now we have a second try the client makes the same request here and the API thinks that okay another post request I'm going to save this in the database as well and now we end up having two burgers and now the database Returns the success message"
+    },
+    {
+      "startSeconds": 158,
+      "text": "to the API the API Returns the success message message to the client and the client thinks okay my or my order is on the way but actually the client ordered two times this is exactly what happened with Uber so I guess you're already thinking like what can we actually do here what's the remedy for it and how can we fix it before we go into that I"
+    },
+    {
+      "startSeconds": 179,
+      "text": "want to dive a bit deeper into the item potency itself and when it actually is important so we all have these different HTTP methods that we can perform okay we have a get head and some of them are actually fetching the information others are adding new information so get head put delete trace an option actually"
+    },
+    {
+      "startSeconds": 201,
+      "text": "don't really need to be aware of item potency okay what needs to know about item potency and where we have to be careful is the post and Patch because post is going to create something new in the database and Patch is very similar actually to put if you don't know the difference I would suggest you to go and Google it but basically put in replaces"
+    },
+    {
+      "startSeconds": 224,
+      "text": "the item in the database as a whole while patch only patches it meaning if you have an array put is going to completely replace an array but patch is going to extend the array this is why we need to be careful with item potency when we use these two two methods obviously delete doesn't have to care about item potency because we're simply"
+    },
+    {
+      "startSeconds": 244,
+      "text": "deleting the item and in which scenarios do we have to be careful well the scenario is like a complete or complete purchase page where you actually have your order button because this page is the one that is performing this itm poent action and every time you're on this on this kind of critical pages of your application you have to remember"
+    },
+    {
+      "startSeconds": 263,
+      "text": "about item potency so let's go back to the solution or at least a potential solution and the solution that is out there in the industry is something called an item potency key I will call it X item poy ID or you can also call it a key so the ID is going to be a unique identifier or in other words just a random ID generated in our application"
+    },
+    {
+      "startSeconds": 286,
+      "text": "memory all right so how is this going to function in our graph here well whenever a client makes a critical at importancy critical requests such as pressing the order button here we're going to attach this to our request and notice that I added an X kind of a notation to that that this can be ah header a request"
+    },
+    {
+      "startSeconds": 308,
+      "text": "header doesn't have to be a payload we can attach it as a request header when the request goes to the API the API here can now handle the logic but the first time the client makes a request the API is going to keep this item pocy key then actually make a query to the database when the burger is created we're talking"
+    },
+    {
+      "startSeconds": 329,
+      "text": "about the first burger then the database Returns the success me message to our API and now this item potency key that we have here has to be stored somewhere in a memory and well we're going to talk about these different places where you can store this item potency key but basically API has to keep track of this"
+    },
+    {
+      "startSeconds": 346,
+      "text": "item potency key because the second time when the user is makes a request with the same item pocy because some kind of an error happened in the first time the API already knows that hey I already have an import a key with the same ID that you're sending me meaning the database has previously succeeded with creating your order and now I'm simply"
+    },
+    {
+      "startSeconds": 368,
+      "text": "not going to contact the database and return you a success message right away because your previous order has already been placed now a valid question would be where do exactly do we store this it potency key should we store it in the application memory well probably not I would suggest storing it either in in a normal database this database can"
+    },
+    {
+      "startSeconds": 389,
+      "text": "basically basically live or it can be a table within this database that you're using here or even better we can see that we can also make use of a Rus cache a Rus cache will live somewhere here where API usually contacts before reaching out to the database which is going to hold these item potency keys to make use of the to make use of it to"
+    },
+    {
+      "startSeconds": 411,
+      "text": "have a proper error handling okay and what this item poy key would normally look like is very simple on the front end or on the client whenever we're making a request such as this we're making a request to the cart we're going to attach this header and every time we make a request this header is going to be there as simple as that I'm not going"
+    },
+    {
+      "startSeconds": 430,
+      "text": "to show you the backend code because it would be more complicated there is some if statements based on the request that you make to your Rus cash but I hope you get the general idea okay guys if you like this video make sure to subscribe leave a like as always it's going to help my channel a lot and I will see you in the next video goodbye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:23.412Z"
+}

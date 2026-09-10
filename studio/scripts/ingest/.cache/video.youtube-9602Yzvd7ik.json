@@ -1,0 +1,103 @@
+{
+  "_id": "video.youtube-9602Yzvd7ik",
+  "videoId": "9602Yzvd7ik",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=9602Yzvd7ik",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction to Next.js Routing"
+    },
+    {
+      "startSeconds": 16,
+      "label": "Setting Up a New Next.js Project"
+    },
+    {
+      "startSeconds": 43,
+      "label": "Understanding File-Based Routing"
+    },
+    {
+      "startSeconds": 86,
+      "label": "Creating Your First Route"
+    },
+    {
+      "startSeconds": 182,
+      "label": "Implementing Additional Routes"
+    },
+    {
+      "startSeconds": 296,
+      "label": "Handling Non-Existing Routes"
+    },
+    {
+      "startSeconds": 317,
+      "label": "Conclusion and Next Steps"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Let's dive into one of NextJS's core features, routing. NextJS uses a file system-based routing system, meaning the URLs you can access in your browser are determined by how you organize your files and folders in your code. Let me show you how this works with some practical examples. I have created a new NextJS project using the command npx"
+    },
+    {
+      "startSeconds": 21,
+      "text": "create-next-app@latest routing-demo. Routing-demo is the name of our project. When the command completes successfully, you should have a project similar to mine. Navigate to the source folder. Now, we will start fresh by deleting the app folder, since we are going to build our routes from scratch. I mentioned earlier that NextJS has a"
+    },
+    {
+      "startSeconds": 45,
+      "text": "file-based routing mechanism. You might naturally wonder, does every file in our app folder become a route? Not quite. NextJS is built around conventions, and routing is one area where these conventions are particularly important. There are three main conventions to remember. First, all routes must live inside the app folder. Second, route"
+    },
+    {
+      "startSeconds": 68,
+      "text": "files must be named either page.js or page.tsx, depending on whether you're using TypeScript. Third, each folder represents a segment of the URL path. When these conventions are followed, the file automatically becomes available as a route. Let's put this into practice. For scenario one, we want to create a home page that shows up when someone"
+    },
+    {
+      "startSeconds": 90,
+      "text": "visits our site at localhost:3000. Let's head back to VS Code and implement the scenario. The first key convention in NextJS routing is that all routes must be placed in an app folder within the source directory. Let's create this folder. The second convention is that any file meant to be a route must be named page.tsx"
+    },
+    {
+      "startSeconds": 113,
+      "text": "or page.js if you're not using TypeScript. Let's create a page.tsx file in the app folder. From this file, we will default export a simple React component. Export default function home, and this returns an each one tag that says welcome home. And just like that, we have created our first Next.js route. In the terminal,"
+    },
+    {
+      "startSeconds": 138,
+      "text": "run the command npm run dev to start the dev server. In the browser, visit localhost:3000, and you will see welcome home displayed. This is our first key routing concept to remember. page.tsx file inside the app folder automatically maps to your site's root URL. With that, we have successfully implemented scenario one."
+    },
+    {
+      "startSeconds": 161,
+      "text": "Before we continue, let's talk about the layout.tsx file. Even though we deleted this file when removing the app folder, Next.js will automatically create and set it up when you first access the root route. We will explore layouts in depth later, but for now, just remember that this file gets automatically created behind the scenes."
+    },
+    {
+      "startSeconds": 182,
+      "text": "Now, let's tackle scenario number two. For this scenario, we need to create two additional routes, one for the about page, and one for the profile page. The URL will read localhost:3000/about, and localhost:3000/profile. Back in VS Code, let's create these routes. There are three simple steps. First, create a new folder called about"
+    },
+    {
+      "startSeconds": 205,
+      "text": "inside the app folder. Second, inside this about folder, create a page.tsx file. Third, from this file, default export a React component. Export default function about, which returns an each one about me. Similarly, create yet another folder in the app folder called profile. Inside the folder, create a page.tsx file."
+    },
+    {
+      "startSeconds": 233,
+      "text": "From this file, default export a React component. Export default function profile, return an H1 tag that says my profile. After saving the files and heading back to the browser, the home page will still be displayed at the root route, localhost:3000. When you navigate to localhost:3000/about, you will see the about me page, and"
+    },
+    {
+      "startSeconds": 256,
+      "text": "similarly, going to /profile will show the my profile page. Scenario two is now complete. The second key routing concept to remember is that routes are directly tied to their folder names within the app directory. A page.tsx file inside the about folder maps to the /about route, and a page.tsx file inside the profile folder maps to"
+    },
+    {
+      "startSeconds": 279,
+      "text": "the /profile route. Let me show you a quick visualization of everything we have covered so far. It is pretty straightforward. page.tsx in the app folder directly maps to the root route, and each folder in the app folder directly maps to a segment in your URL. Now, you might be wondering what happens if someone tries to access a URL that"
+    },
+    {
+      "startSeconds": 300,
+      "text": "doesn't match any file in your app folder. Let's say someone tries to visit /dashboard. In this case, Next.js has got you covered. It will automatically serve up a 404 not found response. You don't need to write any special code to handle these non-existing routes. By now, you should have a solid understanding of how"
+    },
+    {
+      "startSeconds": 320,
+      "text": "file-based routing works in Next.js. The beauty of this system is that you don't need to mess around with installing and configuring a router in your code. Your file and folder structure does all the heavy lifting. This is a perfect example of Next.js's philosophy of favoring conventions over configuration when it comes to routing. All right, let's"
+    },
+    {
+      "startSeconds": 340,
+      "text": "continue exploring more routing concepts. Supporting the channel is free. Please like and subscribe. It helps a lot."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:44.342Z"
+}

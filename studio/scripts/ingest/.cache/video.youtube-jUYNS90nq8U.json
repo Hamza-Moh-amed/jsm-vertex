@@ -1,0 +1,247 @@
+{
+  "_id": "video.youtube-jUYNS90nq8U",
+  "videoId": "jUYNS90nq8U",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=jUYNS90nq8U",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 47,
+      "label": "Creating Helm Chart"
+    },
+    {
+      "startSeconds": 295,
+      "label": "Installing our helm app"
+    },
+    {
+      "startSeconds": 387,
+      "label": "Helm Templating"
+    },
+    {
+      "startSeconds": 875,
+      "label": "HelmChart Notes to Display information to the user"
+    },
+    {
+      "startSeconds": 980,
+      "label": "Helm Templating for Prod/Dev Environments"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "in this video you're going to learn how you can create your own Helm charts allowing you to deploy your kubernetes application in a single command we will go over how to generate a Helm chart the files and folder structure and get into Helm templating which will allow you to deploy your kubernetes application with"
+    },
+    {
+      "startSeconds": 18,
+      "text": "different values this is very valuable for those of you trying to customize Helm charts for different environments like Dev staging and production as always the code you see in this video is available in the description below so you can take it and follow along with the video after watching this video you should have the skills necessary to use"
+    },
+    {
+      "startSeconds": 37,
+      "text": "Helm to customize any kubernetes application so this is going to be really beneficial for those of you learning Helm for a job or just for your own personal projects okay so the first step in creating any Helm chart is to create the actual folder structure and files for your basic uh Helm template so you can do this with a command or you can just"
+    },
+    {
+      "startSeconds": 60,
+      "text": "create these folders and files manually I'm going to run the command and this is going to generate some general scaffolding for us and then we're just going to delete what we don't need and then add in our custom application now in the description below I have all the code that I'm going to be doing in here so make sure to check out my GitHub if"
+    },
+    {
+      "startSeconds": 79,
+      "text": "you want to use the same code but let's go ahead and generate that scaffolding so I'm going to run the command Helm create and then we give our Helm chart a name here so I'll just call mine web app one and let's open this up in vs code and have a look at what it generated for us all right so we have it up in vs code"
+    },
+    {
+      "startSeconds": 100,
+      "text": "and this is the folder that it created this web app one and let's have a look at it here so if we pull it down you can see that it created this charts folder this templates folder the helm ignore file uh charts.yaml and a values.yaml so let's go over these really quickly there's charts.yaml file is going to contain all the information about our"
+    },
+    {
+      "startSeconds": 123,
+      "text": "Helm chart this one you don't have to worry too much about uh other than just giving it a name and incrementing the version number as you make changes in the future is basically all you're really going to need to do with this one what we're more interested in is this templates folder and this values.yaml file in the values.yaml file you can see"
+    },
+    {
+      "startSeconds": 145,
+      "text": "that it's giving a bunch of default values here and basically this is going to be the default configuration for your Helm chart now there's a lot of stuff in here and you don't need to use any of this and you can customize this however you would like so I'm actually just going to take this and delete everything and we're just going to have a blank"
+    },
+    {
+      "startSeconds": 165,
+      "text": "values.yaml file and we're just going to create one from scratch as that's the best way to learn helm now this next folder is this charts folder basically if your chart has any dependencies on other charts this is where you're going to throw them uh it's not going to be something you get into until you're making more complicated Helm charts this"
+    },
+    {
+      "startSeconds": 185,
+      "text": "last folder here is the templates folder and this is where you're going to be putting most of your stuff in you can see that it generated quite a few different files here and this is just an example nginx app it looks like so we're not going to need any of these we're actually going to delete these but you can see this is sort of what a Helm"
+    },
+    {
+      "startSeconds": 206,
+      "text": "application looks like and there's a couple good examples on how to do the templating in here so it's it's nice to have if you need a reference so I'm going to go ahead and take all these files and you don't need this test folders either so I'm just going to delete all this and then I'm going to go into my templates original folder and again this"
+    },
+    {
+      "startSeconds": 231,
+      "text": "is on my GitHub if you need it and I'm just going to take these three templates copy them and throw them in this templates folder and just to show you guys exactly what this application does you can see that it's got a deployment a service and a configuration map and these specific manifests are from my kubernetes"
+    },
+    {
+      "startSeconds": 250,
+      "text": "training video so if you want to look into the details at how I created this you can check that out but basically what this does is it creates a deployment which is going to generate looks like five pods here and it just runs a simple web application so that's the deployment that does the pods this is the service that brings in the"
+    },
+    {
+      "startSeconds": 271,
+      "text": "traffic on Port 80 and then there's a config map now if we wanted to deploy the application we're ready to go so let's go ahead and do that and then we're going to take these manifest files and apply Helm templating to them so we can have different configurations for a Dev environment and like a prod environment but before we do that let's"
+    },
+    {
+      "startSeconds": 292,
+      "text": "just go ahead and deploy the application all right so we are back in the terminal here and uh we want to be in a specific folder so we want to be in the parent folder of our Helm charts and then we're going to run our Helm install command so I'm going to paste it in here and you can see it's this Helm install we give"
+    },
+    {
+      "startSeconds": 316,
+      "text": "it a unique release name and then we specify the location of our Helm chart which is just the web app one folder so go ahead and run it and it should deploy your application and if you do a cube control get all you can see that it released everything you can see that there's been five pods a load balancer has been created deployment and a"
+    },
+    {
+      "startSeconds": 342,
+      "text": "replica set so if you want to test out the application and you're using minicube you can go minicube tunnel and this should Tunnel traffic to your load balancer let's just open another browser here and just go curl localhost 80 and you can see that it's returning some traffic let's go ahead and open a browser as well"
+    },
+    {
+      "startSeconds": 366,
+      "text": "and I'll pull it over here you can see it's our default web application here with the image and customized with config map and then it gives us the container name that is serving it so a nice little test application for us that we can actually customize so let's go ahead and customize this application using Helm templating so let's have a"
+    },
+    {
+      "startSeconds": 388,
+      "text": "look at our manifest files and just have a look at some of the redundancies in here so you can see that for basically everything we're just specifying a name my web app and then some labels and basically if I mistyped any of this stuff it would be really annoying to find and troubleshoot so instead what we can do is put a value in"
+    },
+    {
+      "startSeconds": 417,
+      "text": "here for the application name and then just use Helm templating to stream that value to these files so let's go ahead and go here so the first thing you want to specify for all your values is dot values and then you can give it a unique name so I'll go app name and I'm just going to take this and I'm going to put it wherever I think is necessary"
+    },
+    {
+      "startSeconds": 443,
+      "text": "so name I want it to be the same as the label and then the selector wants to select it based on the the app name for our deployment instead of my deployment let's just make it the same as the app name and uh just put everything here for the image name I'm going to keep that like that and then for the config map Let's uh"
+    },
+    {
+      "startSeconds": 472,
+      "text": "just leave it as is actually let's go into our values.yaml and I'm just going to paste this in here and uh vs code is yelling at me because this isn't a valid Syntax for our values file but that's okay what I actually want to do here is take this and this is just going to be your basic yaml key value pairs so let's give it a"
+    },
+    {
+      "startSeconds": 499,
+      "text": "name we'll go my Helm app and now uh let's actually pull up the terminal again and I'll just do it from here and uh basically I'm going to take that last command I did which was the helm install and I'm going to say instead of install I'm going to go upgrade and now that I actually have templating enabled I need to specify this"
+    },
+    {
+      "startSeconds": 523,
+      "text": "values.yaml file so I'm going to go dash dash values and I need to be aware of the directory that I'm in so it's going to be web app one slash values and there we go so we can see that the release has been upgraded I'm just going to pull up my other terminal here so you can see better clear the screen and do Helm LS"
+    },
+    {
+      "startSeconds": 551,
+      "text": "and you can see revision number two so Helm has been updated and if we do Cube control get all you can see our old pods are terminating and everything is coming up with that new name so that's how easy it is to enable templating let's go ahead and template the rest of our application and you'll see just how easy it actually is"
+    },
+    {
+      "startSeconds": 577,
+      "text": "all right so back in vs code Let's uh fill out this values file with some more parameters and then we'll get into creating a separate values file for a production release and a development release so let's open up our manifest files now and see what else we can template here so the service looks good the only thing I can think of is the"
+    },
+    {
+      "startSeconds": 601,
+      "text": "namespace here so let's just take this and just change it to namespace and make sure to do that in all of our manifest files and then in the values just give it a namespace and then we'll set it as default and again when we create yaml files for our Dev and our production we'll make sure to override this in those ones so that's"
+    },
+    {
+      "startSeconds": 632,
+      "text": "a good thing to template the next thing I want to template is the configuration map so let's take this and we're going to create a value called config map dot name and then let's take this here and the other thing I want to template for our application is this custom header so we can modify it in the values yaml file so I'll take this here"
+    },
+    {
+      "startSeconds": 659,
+      "text": "and instead of configmap.name I'm going to call it configmap dot data dot custom header now I'm just making up these value names you could call them whatever you want but a good practice is to make them match exactly what they are in your manifest files so this is a config map and then under the data I have a custom"
+    },
+    {
+      "startSeconds": 684,
+      "text": "header so that's why I have it like this now let's go ahead and go into the values file and do the config map name and then the custom header so we'll go into values and we'll go config map and then underneath that we'll give it a name I'll call it Helm app config map v1.1 and then underneath there we will go data and then"
+    },
+    {
+      "startSeconds": 714,
+      "text": "I forget the name of it it was a custom header so we'll throw custom header this app was deployed with Helm so I think that's mostly everything we want uh let's just do one more thing in the deployment and uh another common thing that you would probably do is uh template the image name so we'll take this and I'm actually going to split this up"
+    },
+    {
+      "startSeconds": 746,
+      "text": "into two separate values so let's call it image and then we want name and then the tag so the name is going to be this devops journey one my web app and this is a container that's hosted on Docker Hub so we'll keep this name here but we're going to move this tag down here and now let's go back into the deployment and steal these curly braces"
+    },
+    {
+      "startSeconds": 786,
+      "text": "and then say image dot name and then image dot tag and we need a colon between these and since there's a string value in here we need everything in quotations so now it should say the image name pulled from values.yaml and then the tag that we have on there and additionally since this deployment is mapping the config map to it we should use that"
+    },
+    {
+      "startSeconds": 819,
+      "text": "config map name so I'm just going to steal that from here and do it here and now everything in our application should be consistent so let's go ahead and deploy this then we'll create a separate deployment for development and one for production so I'm just going to go into my readme and I'm going to steal this upgrade command pull up a terminal"
+    },
+    {
+      "startSeconds": 849,
+      "text": "and paste it in and now my application should be upgraded and if I do a Helm LS you can see that the output isn't so good just because of my terminal size but let's uh just make sure that the pods are running and it looks like the old ones have terminated and the new ones are up so that's looking good so let's get into"
+    },
+    {
+      "startSeconds": 877,
+      "text": "deploying uh Dev version and prod version but before we do that I want to show one more thing that's actually pretty important and that's how to Output some configuration information for the user when they install your Helm app so to do that uh just underneath your template just create a new file and just call it notes dot text"
+    },
+    {
+      "startSeconds": 901,
+      "text": "and then anything you put in here it's going to Output to the user so I have in my readme the actual commands that we want to run and it's just two basic commands basically it just Maps the service name to a variable and then it does some port forwarding and then that's how you can access the application so I'm going to take these two lines"
+    },
+    {
+      "startSeconds": 925,
+      "text": "and throw it in the notes.txt and let's re-run the deployment command which is the helm upgrade command and then run it again and now you can see when you run the upgrade it outputs these two commands to the terminal letting you know how to access the application so let's go ahead and run these and now it's port forwarding and when"
+    },
+    {
+      "startSeconds": 959,
+      "text": "you pull it up in a web browser you can see that this app was deployed with Helm which is exactly what we put in our configuration map so that notes.txt file is quite helpful and you can actually template it as well which we're going to be doing next when we do our prod and development deployment so let's go ahead and do that"
+    },
+    {
+      "startSeconds": 980,
+      "text": "okay so coming back here um let's go to our values.yaml file and I'm just going to copy and paste another one here and I'm going to rename it to values Dash Dev and we can keep everything in here that's fine but basically whatever we put in here is going to override the default I actually don't want to override many of these things so I'm"
+    },
+    {
+      "startSeconds": 1006,
+      "text": "going to take out what I don't want to override so we'll keep the app name the same and the image we want to be the same in all versions so I'll just take that out and then the config map name can be the same but I want the data to be different and for the namespace to be different as well so for Dev I'll put it in the dev namespace"
+    },
+    {
+      "startSeconds": 1034,
+      "text": "and then for our custom message I'll say welcome to Dev and that should be enough for our proof of concept so let's go ahead and copy this one paste it and just rename it to prod and change the values here now additionally we have this notes.txt file as well so let's go here and we want this to be dynamically filled out"
+    },
+    {
+      "startSeconds": 1069,
+      "text": "as well so let's go ahead and do that so I'll actually type it here you know is the two curly braces dot values Dot namespace and then let's do the same for the app name and then up here as well and now this will be dynamically filled out and it should give out different information for Dev and production the value in this"
+    },
+    {
+      "startSeconds": 1104,
+      "text": "namespace is going to be dynamic now in that output message uh let's go back to our readme and the next thing we should do is create a namespace for Devon prod if you don't already have one I think I already have these namespaces created and I actually have this set to an alias which a lot of people might not have so I'll"
+    },
+    {
+      "startSeconds": 1125,
+      "text": "just change this really quickly in the notes and then uh just copy and paste these in here and it looks like I already have the namespaces created so that's good we should be able to deploy our applications and then beneath this I have the two Helm install commands one for prod and one for Dev so I'm going to take one of these and then just go to"
+    },
+    {
+      "startSeconds": 1150,
+      "text": "the terminal and I'll explain it there so I'll paste it in here and it looks exactly like our other commands we specify the default values but then we also specify an additional values file using this Dash F switch and you can see that it's specifying values Dash Dev and I'm also specifying dash n Dev and this is for the namespace for"
+    },
+    {
+      "startSeconds": 1178,
+      "text": "the helm release and this is just a good practice to make sure that your Helm release is in the same namespace as the kubernetes resources that you're deploying this will make a little more sense when we have a look at our release after we deploy this so let's go ahead and run this command and I'm getting an error here so let's have a look and I"
+    },
+    {
+      "startSeconds": 1200,
+      "text": "have the wrong value here it's actually my it's not my web app it's web app one so I'll make sure to fix this in the readme file and it was incorrect in two places there we go it looks like it's fixed now and you can see at the bottom here it's outputting this and it resolved the namespace properly so this should be able to get us access"
+    },
+    {
+      "startSeconds": 1230,
+      "text": "uh but before we do that Let's uh do another release and then just change all these values to prod so namespace prod use the prod yaml file and then for the release name let's change it to prod as well and then if we do a Helm LS Dash Dash all Dash namespaces and then just make that look nicer you can see that we have our three releases"
+    },
+    {
+      "startSeconds": 1267,
+      "text": "we have the original one that we worked on before and now we have one for Dev and one for prod and if we do a cube control get all dash n and do and have a look at Dev we can see everything for Dev in there and then if we check prod you can see all the prod resources there now let's go ahead and actually access our web"
+    },
+    {
+      "startSeconds": 1295,
+      "text": "application and make sure that we're getting the custom header for each of those environments so scrolling up let's have a look at Dev first so I'll just copy and paste these two and you can see I'm forwarding traffic so let's pull up our browser and refresh it and you can see that we're in Dev and if we do this again using the prod ones"
+    },
+    {
+      "startSeconds": 1326,
+      "text": "you can see that it works for prod as well so that's it for your tutorial on Helm templating if you enjoyed the video or have any questions please leave me a comment below and make sure to check out the description of this video which contains links to other Helm and kubernetes related videos thanks again for watching and I'll see you in the"
+    },
+    {
+      "startSeconds": 1344,
+      "text": "next one"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:22.278Z"
+}

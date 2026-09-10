@@ -1,0 +1,62 @@
+{
+  "_id": "video.youtube-7ijBiXddB7w",
+  "videoId": "7ijBiXddB7w",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=7ijBiXddB7w",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "let's understand authentication with a cool example imagine you have a secret club and you want to make sure only members can enter to do that you need a way to verify who they are that's what authentication does in the back end authentication is the process of checking if someone is who they say they are it's like when you enter a password"
+    },
+    {
+      "startSeconds": 17,
+      "text": "or use your fingerprint to unlock your phone in the digital world the backend is like the bouncer at the club checking your credentials to make sure you're a member when you want to access a website or app the backend server asks you to provide some information like a username and password it's like showing your membership card to the bouncer the"
+    },
+    {
+      "startSeconds": 35,
+      "text": "backend server then checks this information against a list of authorized users it has just like the bouncer checking your name against the club's membership list if the username and password you provide match with the backend server has stored it means you're a trusted user and the server lets you in if there's a mismatch it"
+    },
+    {
+      "startSeconds": 52,
+      "text": "means you're not authenticated and access may be denied authentication is essential for security because it ensures that only authorized people can access certain parts of a website or app it helps predict your personal information and keep sensitive data safe so in simple terms back-end authentication is like the bouncer at a"
+    },
+    {
+      "startSeconds": 70,
+      "text": "club checking your membership card to make sure you're allowed to enter it's the backend server verifying your credentials to make sure you're a trusted user before granting you access to a website or app now continuing with the bouncer example let's understand authorization so once you have passed the authentication and proved that"
+    },
+    {
+      "startSeconds": 87,
+      "text": "you're a member of the club authorization comes into play authorization is like getting a special stamp on your hand that determines what you're allowed to do inside the club it sets the boundaries and permissions for your access in the digital world authorization is the process of determining what actions or parts of a"
+    },
+    {
+      "startSeconds": 103,
+      "text": "website or app you're allowed to access after you have been authenticated it's like the club's rules that specify which areas are off limits or what activities you can participate in once you're inside the backend server acting as the club's rule enforcer checks your authenticated identity and looks inside your access permissions it decides what"
+    },
+    {
+      "startSeconds": 122,
+      "text": "you can or cannot do within the website or app based on your role or level of Authority for example imagine the club has different areas like the dance floor VIP lounge and kitchen authorization ensures that only certain members have access to specific areas the bouncer based on your membership level or role will allow you into certain sections and"
+    },
+    {
+      "startSeconds": 141,
+      "text": "restrict access to others in the back end authorization Works similarly once you're authenticated the server checks your assigned roles permissions or access levels it then determines what parts of the website or app you're allowed to visit and what actions you can perform for instance if you're a regular member you might have access to"
+    },
+    {
+      "startSeconds": 160,
+      "text": "General features like viewing event schedules and making reservations however if you are a VIP member you might have additional privileges like accessing exclusive content or making special requests authorization ensures that users can only do what they are permitted to do within the website or app it helps predict sensitive data and"
+    },
+    {
+      "startSeconds": 178,
+      "text": "Resources by resting creating access to authorized individuals in simple terms authorization in the backend is like the bouncer giving you a special stamp or access level after you have proven your identity it determines which areas or actions you're allowed to access within a website or app based on your role or"
+    },
+    {
+      "startSeconds": 195,
+      "text": "permissions now on a side note there are various authentication methods you can use in your application such as username and password token based authentication single sign-on multi-factor authentication and more I will certainly make a video explaining these different types of authentication methods in the future so stay tuned for that so that's"
+    },
+    {
+      "startSeconds": 214,
+      "text": "all for the video if you found it insightful don't forget to like And subscribe and stay tuned for more"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:40.055Z"
+}

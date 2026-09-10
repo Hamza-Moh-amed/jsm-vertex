@@ -1,0 +1,99 @@
+{
+  "_id": "video.youtube-6M9aZzm-kEc",
+  "videoId": "6M9aZzm-kEc",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=6M9aZzm-kEc",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "SO underrated"
+    },
+    {
+      "startSeconds": 12,
+      "label": "Objects are mutable!"
+    },
+    {
+      "startSeconds": 114,
+      "label": "How as const works"
+    },
+    {
+      "startSeconds": 158,
+      "label": "Object.freeze"
+    },
+    {
+      "startSeconds": 199,
+      "label": "Deriving types from as const"
+    },
+    {
+      "startSeconds": 270,
+      "label": "keyof typeof"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "so someone just asked in the chat like what is the most underrated typescript feature and I think the most underrated feature is as constant as const is just so useful in so many different situations first of all let's just describe what as constant is so let's say you've got an object here we've got const object equals this and let's say"
+    },
+    {
+      "startSeconds": 17,
+      "text": "we got there let's just make it sort of a set of roots or something now when we look at these roots here if we hover over them if we try to access like roots.home here Roots dot home then this is going to be typed as string and if we try to let's say cons go to root and we say okay I want you to basically be able"
+    },
+    {
+      "startSeconds": 37,
+      "text": "to pass in kind of like any of these roots any of home or admin or users how do we type this well we'd have to say that root is going to be like this or this or users and that's pretty Grim because it's kind of like we've repeated ourselves right you should not ever be doing this where you have multiple sources of Truth for the the same type"
+    },
+    {
+      "startSeconds": 60,
+      "text": "and this works you know like everything's fine go to Roots you know we've got this we've got admin users autocomplete and great but what if we wanted to derive one from the other if I try to do this if I try to say okay root dot admin like this it's actually going to yell at me even though rootstart admin is one of these members here so"
+    },
+    {
+      "startSeconds": 80,
+      "text": "why is it yelling at me let's have a look you can see here that it was expecting this admin or users but you passed string I didn't pass string I passed this thing here well typescript thinks that what you've got here in this object is a string just a plain old string admin string it doesn't understand that this is forward slash"
+    },
+    {
+      "startSeconds": 99,
+      "text": "admin and the reason for this is that rootstop admin it could be changed it could be made into like whatever like this there's nothing to say that that's not going to be changed so typescript infers it as a string that can be changed so how do we then change it to be something that can't be changed how do we make make it so that this object"
+    },
+    {
+      "startSeconds": 121,
+      "text": "here is like consted forever well we say as const and now two things happen so first of all rootstock admin now gets an error saying you cannot assign to admin because it's a read-only property if we hover over Roots here it's no longer home string administering user string it's home this admin this uses this"
+    },
+    {
+      "startSeconds": 142,
+      "text": "pretty cool and so if I delete this here now rootstop admin we can see that it's being inferred as forward slash admin if I remove the as const it's now being inferred as string so as cons what it does is it makes objects read only you notice that something we could have done here is we could have used object dot"
+    },
+    {
+      "startSeconds": 162,
+      "text": "freeze object.freeze does the same thing and it actually works on the type level two except it works at runtime object.freeze prevents it from being manipulated so if I say root start admin equals this for instance then it's going to yell at me for the same reason but object.freeze will Works in a different way because it doesn't let you doesn't"
+    },
+    {
+      "startSeconds": 182,
+      "text": "do it deeply so if I have like a deep root here then I can actually modify Roots dot deep dot whatever equals something like this so object of freeze only works on the top level whereas as const actually works on the whole tamale baby oh yeah I haven't talked about this yet so we need to talk about our go to root function because I'll go to root"
+    },
+    {
+      "startSeconds": 203,
+      "text": "function now it's still got all of this repetitive information wouldn't it be great if one could infer from the other let's say type of roots is type of roots type of is super useful with ascons because what this means is we can extract the type of this type here so we've now got access to home admin and users right there which is super nice"
+    },
+    {
+      "startSeconds": 225,
+      "text": "now then how do we extract the object values from there well I'll give you a little trick that you can do let's say we've got our roots and type of roots we're going to index into this kind of with a dynamic property access and we're going to say key of type of roots what what is going on there so we've got this"
+    },
+    {
+      "startSeconds": 248,
+      "text": "route now isn't how this admin or users I I can actually just replace this with root root and now if I say go to root and I've got this admin users I can now add a new one so new user is going to be users new and I can now this now gets added without meaning to like repeat myself anyway it's absolutely beautiful but let's take a look at this syntax"
+    },
+    {
+      "startSeconds": 273,
+      "text": "What's Happening Here is we're basically doing like an object.values but on the type level we're indexing into these roots and we're saying okay let's say type root Keys is key of type of roots what do you think this is type is going to be this type is going to be home or admin or users or new user here right so"
+    },
+    {
+      "startSeconds": 294,
+      "text": "it's going to be like a union type of all of these keys and now I could index into this root by saying if I just index into it and say home then I'm going to get this like uh this one here right because I'm just saying it's home indexing to it with home I can pass a union here so I can pass in admin there and now I get home or admin into here"
+    },
+    {
+      "startSeconds": 316,
+      "text": "but what I could do is I could just pass in this Union which is also generated from here into this little slot there and that means I get to do like an object of values on it because the root Keys then get passed into the type of roots in fact let me just reduce this down even more and then I end up with all of the values of that thing"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:55.610Z"
+}

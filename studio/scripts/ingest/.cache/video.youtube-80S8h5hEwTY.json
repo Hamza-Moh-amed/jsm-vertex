@@ -1,0 +1,179 @@
+{
+  "_id": "video.youtube-80S8h5hEwTY",
+  "videoId": "80S8h5hEwTY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=80S8h5hEwTY",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 52,
+      "label": "Project Overview"
+    },
+    {
+      "startSeconds": 162,
+      "label": "How CSRF Works"
+    },
+    {
+      "startSeconds": 315,
+      "label": "How To Fix CSRF Vulnerabilities"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "So, you've spent a ton of time on your auth system, you're making sure that all your cookies are super secure, you have good session authentication, you're making sure no unauthenticated requests are coming through, you have CORS set up, and you think your application is secure, but there's one giant hole in your application, and that is something"
+    },
+    {
+      "startSeconds": 15,
+      "text": "called CSRF. This stands for cross-site request forgery, and I know it sounds super complicated, but honestly, the entire idea behind this is that some other site is making a request to your site pretending to be another user. This is a very common issue that a lot of sites run into, and luckily, the fix for it is"
+    },
+    {
+      "startSeconds": 33,
+      "text": "incredibly simple. In this video, I'm going to walk through exactly what this is and the fix to this problem. Welcome back to Web Dev Simplified. My name is Kyle, and my job is to simplify the web for you, so you can start building your dream project sooner. And today, I'm going to be talking all about CSFR or cross-site request forgery. Now,"
+    },
+    {
+      "startSeconds": 52,
+      "text": "if you're not already familiar with the basics of session-based authentication, I have a full video covering that. It actually uses this exact same project. I'm going to link it in the cards and description for you. I recommend you check that out first. Once you've watched that video though, you're going to know that in this application, we"
+    },
+    {
+      "startSeconds": 66,
+      "text": "have a very simple session-based authentication system set up that I'm going to walk you through really quickly. We have three buttons on our page for logging in, and on our back end, we have users for WDS and for Kyle. So, when I click login WDS, I'm logged as WDS. Same thing for Kyle. And if I try to log in as Jim, I'm unauthorized"
+    },
+    {
+      "startSeconds": 82,
+      "text": "cuz there is no Jim user. And all these functions do is they just make a request to my API that is doing that logging in right here, and it's just showing that I'm logged in as that user. And the important thing is it's sending down a cookie with my session. So, if I just inspect my page right here, and I go over to the network tab, or I'm sorry,"
+    },
+    {
+      "startSeconds": 98,
+      "text": "not the network tab, the application tab, and I look at my cookies, you can see we have a cookie for our session ID, and it has a long value for my session ID for that current user. And in that session on my server, I'm saving my user information. So, whenever I log in, you can see here, I'm saving a session that"
+    },
+    {
+      "startSeconds": 113,
+      "text": "links my user and that session ID. That way, every time I make a request, I send along that session ID, and now I can access that user, for example, if I try to get the admin data. So, if I log in as WDS, and I click get admin data, you can see it returns, but Kyle is not an admin. So, when I try to get the data, you can see we don't have that"
+    },
+    {
+      "startSeconds": 129,
+      "text": "information being sent to us. Now, I also included some other stuff for deleting my account. So, if I log in as WDS, and I click delete, and now I try to actually get my admin data, you can see I'm unauthorized, and if I try to log in as WDS, you can see it's not working cuz there is no account for that user anymore. It's been completely"
+    },
+    {
+      "startSeconds": 143,
+      "text": "deleted. Now, if we go over to our client, you can see that in order to make this work, we're just doing a fetch request, and this is doing a post method request here, and that's all that's happening right here. Pretty straightforward stuff. Generally, you'd probably do a delete here if you're doing a delete, but in our case, we're"
+    },
+    {
+      "startSeconds": 157,
+      "text": "using a post cuz it shows some of the vulnerabilities to cross-site request forgery. So, that's how this all works. How exactly is this vulnerable? Cuz you may think this is super secure because when we're saving our cookies, you're noticing we're doing secure and HTTP-only. That means that the cookie is never exposed to JavaScript, so no one"
+    },
+    {
+      "startSeconds": 172,
+      "text": "can steal that session ID. That's great. We also have set up so it only accepts requests coming from our particular URL. Again, that's super great. We can't make requests from some other URL, but we actually can. Course does not prevent people from submitting forms from other URLs. So, what I also have is another page over here, localhost:5501,"
+    },
+    {
+      "startSeconds": 194,
+      "text": "evil.html. It's a completely different URL. I know they're both on localhost, but this is running on a different port, and according to Course, those are two completely different sites. Normally, it would block me if I tried to make a request from that 5501 to my normal 5500. And in this evil.html, all I'm doing, really simply, is I'm making a"
+    },
+    {
+      "startSeconds": 213,
+      "text": "post action on a form that is going to that delete user, and you can see that this is happening automatically as soon as I go to the page. I don't even need to click any buttons at all. So, let me real quickly log in as Kyle. You can see I'm authenticated as Kyle. That's super great. Everything is working as we would"
+    },
+    {
+      "startSeconds": 227,
+      "text": "expect. Now, all I need to do is just go to this page. It's on a completely different URL, and if I go to this page, you can see it has deleted that Kyle user. And if I come in here try to log in, you can see it's now unauthorized cuz that Kyle user has been deleted. Now, you're probably wondering how exactly is this possible if you have"
+    },
+    {
+      "startSeconds": 242,
+      "text": "CORS set up and all these other precautions? And the reason for this is every single time that you make a request to a server, the cookies are sent along automatically. So, I was logged in as Kyle on this page, so my cookie for that Kyle session was already saved in the cookies. And then when I made a request to this server here, it"
+    },
+    {
+      "startSeconds": 259,
+      "text": "sent that cookie along automatically to the server. And my server just saw that and went, \"Okay, let's go. We're good to go.\" And the reason CORS did not prevent this is because when you do a form action such as a form post here, CORS doesn't prevent that. And CORS doesn't actually prevent a lot of things. It's"
+    },
+    {
+      "startSeconds": 274,
+      "text": "not really a great security method per se because it doesn't prevent like servers from communicating with other servers. Now, that particular use case of servers calling other servers isn't important in this case because your cookies aren't saved on the server, but it is just something to know that CORS is not really a security measure. It's"
+    },
+    {
+      "startSeconds": 289,
+      "text": "more just something there to try to help with certain things, but it shouldn't be seen as like an all be all security measure. So, we're getting around our CORS and we're able to send requests using the cookies of that user that are saved in the cookies. So, in order to make sure that this request problem doesn't happen, we need to have some"
+    },
+    {
+      "startSeconds": 305,
+      "text": "other type of validation that is not saved in the cookies. That way it's not automatically sent along with our request. And if we look at our server here, our non-CSFR version, this is the version that is vulnerable, you can see that it's very basic stuff, but essentially in our delete request here, all we're doing is we're getting our"
+    },
+    {
+      "startSeconds": 321,
+      "text": "session and we're checking to see if we have a user. And if we do have a user, then we're deleting them and we're deleting their session. Pretty straightforward stuff. Now, let me show you how this CS RF version works where we have some other piece of validation. So, let me open that up real quick. We have our normal server here. I'm"
+    },
+    {
+      "startSeconds": 336,
+      "text": "actually going to run that instead of our other server. So, I'm just going to start this up. This is going to be for our correct version of our application. Here we go. So, what this correct version does is when we log in, we have a additional step that's happening is we're creating this random token. Doesn't matter what it is, it's just a"
+    },
+    {
+      "startSeconds": 351,
+      "text": "random string of values, which is used for authentication purposes, and we're making sure we send that random value down to our user on the client. Then, if we make sure that we use the correct client, so this right here is all the correct code. I'm just going to paste this in. It's almost identical. You can see what happens when we log in, what"
+    },
+    {
+      "startSeconds": 367,
+      "text": "we're doing is we're just saving that CS RF token inside of a variable here. So, it's just being saved locally in our JavaScript. There's no way any other site could access this is not saved anywhere else. And then what we're doing is anytime we send along a request, for example, if we wanted to delete our user, we make sure we send along that"
+    },
+    {
+      "startSeconds": 382,
+      "text": "CSRF token inside of the body. Then, if we go check our server real quick, we can actually see inside that delete function, instead of just checking our session, we're also checking to make sure the CSRF token is matching. And you'll notice that when we create our session, we link that together with our user and our token. So, every single"
+    },
+    {
+      "startSeconds": 400,
+      "text": "session has a token and it's going to have a user, and we need to make sure not only does our session ID match, but also our CSRF token matches. So, if we want to see if this is working, let's just refresh everything on our page. I'm going to log in as Kyle, get my data, that worked fine, delete, and log in. Everything you can see is working just"
+    },
+    {
+      "startSeconds": 417,
+      "text": "fine. Now, let's actually look at what's being printed out in the console. I'm just going to refresh everything real quick, and if I click log in, you can see that works. Get admin data, it's working, and when I click delete, you can see it's passing along some information. If we look at what we're logging out, we're logging out our"
+    },
+    {
+      "startSeconds": 429,
+      "text": "session, which is the first object, which is our user, and our token, and we're logging out the body that's being passed up, which in our case is also just this token. And these two tokens are exactly the same. They match, which is why our request is going through just fine. But, let's see what happens when we go over to that evil version of our"
+    },
+    {
+      "startSeconds": 445,
+      "text": "page. So, let me just make sure I refresh everything again. I'm going to log in as WDS. And then what I want to do is I want to go to that URL, which is 5501 evil.html. And when I hit enter, you're going to notice we get an unauthorized error. And And we look at what's being printed out in our console, you can see"
+    },
+    {
+      "startSeconds": 462,
+      "text": "the session has properly been caught. We're saying, \"Hey, we know that this is the WDS user based on their session ID, but we didn't pass a CSRF token over to our API.\" So, this check right here where it checks to see if the token in our session is the same as the token in our body is obviously going to fail because there is no token in our body."
+    },
+    {
+      "startSeconds": 479,
+      "text": "And this is the key to preventing these different vulnerabilities. Essentially, all you're doing is creating a random string of characters. In our case, it's just a random UUID. It doesn't matter what it is. It just has to be random, completely random. You're giving that to the user and you're saying, \"Whenever"
+    },
+    {
+      "startSeconds": 492,
+      "text": "you make a request, send us this random information. And as long as that random information matches the random information we gave you when you actually logged in, then you're fine, good to go, doesn't matter, everything works. But if a site is trying to steal your information and pretend to be you, they're not going to have that random"
+    },
+    {
+      "startSeconds": 508,
+      "text": "information because, as you can see, we didn't store it anywhere. It's just stored locally inside of JavaScript. It's not stored in local storage, it's not stored in cookies. And that's the key. Generally, you don't want to store this anywhere. You just have it locally on your JavaScript or locally in your form, somewhere like as a hidden"
+    },
+    {
+      "startSeconds": 522,
+      "text": "element. And that's going to be fine cuz there's no way this other site has access to that information because it's not stored anywhere at all. And you just pass that along whenever you make an API request. And that right there is what doubly authenticates you. First, you authenticate you are yourself, and then"
+    },
+    {
+      "startSeconds": 536,
+      "text": "this essentially is authenticating that you are coming from this page and you yourself made this request and not someone else. Now, when you actually create this CSRF token, doesn't really matter too much. For example, if you're doing like a traditional server-side rendered application, you may create this token every single time the user"
+    },
+    {
+      "startSeconds": 552,
+      "text": "loads up a page. So, if they go to a page, it's automatically going to add that token into the form for them. That way, they don't have to manage anything at all with it. But if you're doing more of like a API style system, like a React application, you may want to create that when the user logs in, for example, like"
+    },
+    {
+      "startSeconds": 566,
+      "text": "we're doing here. The process of actually creating it and when you create it isn't too important. Just a matter that you actually have this token, you send it to the user, and they're able to send it back to you, and you can validate it. That's the part that really matters. And that's all there is to CSRF tokens. If you want to dive further into"
+    },
+    {
+      "startSeconds": 582,
+      "text": "authentication, you're going to definitely want to check out my session-based authentication tutorial. It's going to be linked right over here. I also have tutorials on how to implement authentication in Node.js. Those are going to be linked right over here as well. With that said, thank you very much for watching and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:54.456Z"
+}

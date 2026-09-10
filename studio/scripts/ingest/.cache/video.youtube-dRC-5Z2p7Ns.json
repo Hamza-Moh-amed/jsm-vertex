@@ -1,0 +1,359 @@
+{
+  "_id": "video.youtube-dRC-5Z2p7Ns",
+  "videoId": "dRC-5Z2p7Ns",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=dRC-5Z2p7Ns",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 640,
+      "label": "CubeCat Top"
+    },
+    {
+      "startSeconds": 880,
+      "label": "HPA"
+    },
+    {
+      "startSeconds": 1270,
+      "label": "Create a Service"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hello everyone welcome back to another session by k21 Academy today our export trainer will be discussing horizontal board Auto scaling using the 2048 game as an example so please watch the video till the end this is the application which is deployed I've exposed it to the outside world some some random game right it's a 2048 Tile game it pretty"
+    },
+    {
+      "startSeconds": 23,
+      "text": "popular right now I have deployed it and I've have multiple replicas I have exposed it to the outside world of course we don't share the IP address report number to the end users we all know before we deploy our application to the outside world you need to put them behind a DNS server you need to on a web proxy and Port ad that's what we do"
+    },
+    {
+      "startSeconds": 45,
+      "text": "right so if you if you don't really give the IP addresses you can't you don't expect your end users to remember the IP address import number where those are the additional steps what you need to do when you deploy your application so Productions that's outside the scope of kubernetes for now well the point is"
+    },
+    {
+      "startSeconds": 59,
+      "text": "this application is exposed assuming you know we have some URL set here some DNS name and now I have five copies of it and there are thousand plus users accessing this game actually this game becomes white and pretty popular and now millions of users start accessing it what's going to happen but what's going to happen is this one guy this for"
+    },
+    {
+      "startSeconds": 79,
+      "text": "replicas are not enough not enough per se is maybe you know a million users are accessing five copies of them are able to do you know take over the load but the game becomes viral and now hundreds of users Millions thousands of users are accessing it these guys are going to get picked out so what do I need to do when I need to add more"
+    },
+    {
+      "startSeconds": 101,
+      "text": "copies increase the replicas and so far whatever we have learned the replica is what we did was scaling up manually two o'clock in the night is sudden search you don't expect me to log in and increase the count of replicas or can we do well kubernetes has a solution for you and that's called as horizontal part of Auto scalar HBA as we call it in"
+    },
+    {
+      "startSeconds": 125,
+      "text": "short horizontal pod Auto Scala what does this guy do well we created another controller which sits on top of any machine sorry any controller which you can scale you hand over the scaling part to that I've copied this from the documentation so you create another controller called as HPA and you give the scaling behavior of"
+    },
+    {
+      "startSeconds": 150,
+      "text": "that particular replica set or deployment to HPA now HP is sits on top of the deployment keeps an eye of course you need to tell that as part of your desired State when to scale what to scale and stuff like that so what do you need to mention you need to mention few things to HPA so you're asking somebody else to keep an"
+    },
+    {
+      "startSeconds": 167,
+      "text": "eye and scale but somebody else is HPA in our case right so when you create dhpa first thing you tell is there can be hundreds of deployments out there in your cluster so you need to give which deployment am I talking about we need to give a scaled Target reference telling that there is a deployment called as game that is what"
+    },
+    {
+      "startSeconds": 185,
+      "text": "I'm talking to you about keep an eye on this guy fine I'm going to keep an eye on that guy then when do I scale what is the trigger point for me yeah you want me to add some replicas increase when the load increases correct so you need to give me some threshold some threshold what threshold well until the version 1.22 the only option HPA"
+    },
+    {
+      "startSeconds": 212,
+      "text": "what was in the version big one of the of the API resource there it had only one field called this target CPU utilization the CPU utilization of the parts combined of all the parts combined of this deployment is going to take that into consideration default is 80 percent when the CPU utilization goes above 80 percent of these parts that means cheap"
+    },
+    {
+      "startSeconds": 240,
+      "text": "fertilization is directly proportional to the number of requests to what your application part is handling right now if I go look at CPT position maybe it's zero because there's no request at all so if you have millions of users accessing in millions of requests if there's a lot of context if you're switching your CPU utilization"
+    },
+    {
+      "startSeconds": 255,
+      "text": "goes up right so you give that as part of your desired State when you create a HPA you tell listen at this particular threshold maybe 50 when the CP utilization goes above 50 percent scale up and do what we'll scale up and add more replicas now I've mentioned the threshold as 50 so as long as the C per utilization of all the parts which is"
+    },
+    {
+      "startSeconds": 280,
+      "text": "being managed by this deployment is under 50 the HPA is not going to do anything this is my desired state tillage 50 you don't need to do anything if it breaches 50 percent maybe it goes to 60 maybe it goes to 70 you need to do what you need to start adding more parts we need to start adding more parts and then collectively try to bring down the"
+    },
+    {
+      "startSeconds": 303,
+      "text": "CP utilization to below 50. so for example if I had only one pod and if I had and then the secret relation went to maybe 80. right so if I there's an algorithm go I'll go show that algorithm to you that the algorithm is uh you know your current metric value divided by designated current is 80 desired is maybe 40 more example for"
+    },
+    {
+      "startSeconds": 325,
+      "text": "division purpose if I keep it simple it's going to show you as two so two is the number of replicas what you need to add so that you know you've received utilization goes to 80 and if there's only one part replica there if you add two of them the load can get distributed the CPU utilization to have come down to 40."
+    },
+    {
+      "startSeconds": 342,
+      "text": "that is an algorithm let me look at that but the point is you need to whatever you need to do how many other replicas you need to add add them add them to bring the desired threshold to whatever I have so if it goes to 70 80 90 meaning that number of Parts what we have we're not able to handle this load break it down 250 so bring it down"
+    },
+    {
+      "startSeconds": 363,
+      "text": "to 50 what do you need to do you need to start adding more parts meaning scale up right and now I do not say for example if you have a design of a service can an attack where you're constantly being smart and constantly being hit that threshold is going to go no matter how many parts you keep on adding the secret utilization is not"
+    },
+    {
+      "startSeconds": 382,
+      "text": "going to come down to your threshold so I want you to scale up but I don't want you to infinitely scale up on max out my cluster resources so what I do is I give the upward limit as well it's called the max I want you to scale up keep on adding Parts one two three four five six seven eight whatever part you want to bring that threshold to my"
+    },
+    {
+      "startSeconds": 403,
+      "text": "desired value but for some reason you can't bring it down don't infinitely keep spilling up I know my application it does not need to go up Beyond 10 replicas Max so I give a upward limit it tries to scale up from whatever account you have to to the max value and if even Beyond Max it's not able to bring it down to the threshold"
+    },
+    {
+      "startSeconds": 422,
+      "text": "it is going to ignore it similarly when everything is uh fine and there is no you know everything is beyond the threshold what is the minimum number of replicas I want you to manage I will set that to minimum number maybe I will set it to two for any given point of time I want two copies the threshold is under 0 or 0 to 50 keep"
+    },
+    {
+      "startSeconds": 446,
+      "text": "the minimum count so the scaling part I will hand over to another controller called as HP and I give these four options to him he's going to look at that which deployment what threshold and it's going to scale up gradually try to add more parts to bring it to the desired level if it is not able to do that it will stop at the max level when"
+    },
+    {
+      "startSeconds": 466,
+      "text": "everything is fine it will maintain the minimum replicas what you've asked for that's your HPA that's how you're going to create another controller called as horizontal pod Auto Scala let's go take a look at that but one thing is for HPA to work it needs to have some metric value the metric value here is a CPU utilization"
+    },
+    {
+      "startSeconds": 487,
+      "text": "so how can I get that metric value that opens up another question is what kind of monitoring do I have available out of the box in the kubernetes cluster what I have set up right now the answer for that question is I do not have any monitoring going on right now because when you make use of qbdm to set up your cluster there's no monitoring involved"
+    },
+    {
+      "startSeconds": 507,
+      "text": "there's monitoring needs to be an additional item on top of it kubernetes supports various different tools per se there is a metric server a very lightweight application which can monitor the two basic resources you have that memory and CPU but again that is not installed or deployed by default you need to deploy it or there are other"
+    },
+    {
+      "startSeconds": 532,
+      "text": "tools very quite popular there is promotius which is very popular you need to again it's not installed by default when you set up cuberium cluster you need to add on create a deployment create Prometheus this is a deployment and you need to enable monitoring on top of it how you can make use of elastic stack they are paid versions like data"
+    },
+    {
+      "startSeconds": 550,
+      "text": "dog dinatra is there many of them available that kubernetes has support for all of them there are images of those available few of them are open source few of them are paid versions like data dog and stuff like that you can set them up but there is a monitoring server which is available for you of course it is not deployed by default but there is"
+    },
+    {
+      "startSeconds": 570,
+      "text": "a monitoring server called as metric server so every cubelet that cubelet which is running on every node of your cluster has a sub component called S3 advisor C advisor stands for container advisor it's an open source tool when you're running Shand download Docker you can also install that what does this guy do this guy captures your CPU and memory"
+    },
+    {
+      "startSeconds": 590,
+      "text": "utilization to basic requirements is a metric server it's a thin very thin lightweight in-memory kind of an application which is provided to you by kubernetes you can make use of that you can it's not deployed by default you can deploy it it's going to talk to your cubelet on every node and it's going to capture the"
+    },
+    {
+      "startSeconds": 609,
+      "text": "memory and CPU this metric server is not stateful meaning you know it does not store anything on the database it does not tell you what was the CP transition 20 days ago it's not going to tell you all of that it's going to show you what the current memory and CPU utilization is so you need to have the HPA to work it"
+    },
+    {
+      "startSeconds": 626,
+      "text": "needs the metrics metrics to be running you need to have some monitoring going on there so you need to have the metric server installed we need to do that right now which is not installed in my machine right now so this is another command called as cube cattle top that also makes use of your metric server so if it's a cube"
+    },
+    {
+      "startSeconds": 644,
+      "text": "candle top and show me the CPU fan memory of the nodes available out there it's going to come back to you and complain metrics API is not available so if I take you to the documentation and if you look at Matrix server it tells you you get enough metric server fetches metrics from cubelets and exposes via Matrix API Cube top command"
+    },
+    {
+      "startSeconds": 665,
+      "text": "can work with it it tells you it is not installed by default you can do so by you know visiting the GitHub and downloading it there's a URL here it talks about what metric service tells you it is very resource efficient takes only one Milli code of a CPU 2 MB of memory and what it does it collects metrics every 15 seconds"
+    },
+    {
+      "startSeconds": 684,
+      "text": "and support up to 5000 nodes in a cluster and you know you can just deploy it this way and your metric server will be installed so right now when I came back when I did the cube card at the top now it says Matrix API not available because a metric server is not deployed let's go ahead and deploy the metric server real quick"
+    },
+    {
+      "startSeconds": 704,
+      "text": "copy the same yeah one file what we saw in the documentation and it deployed something if I quickly go back and do cubecat will get parts in the namespace cube system we see the metric server is in the container creating stage we can also do iPhone watch it's currently running but not ready it's going to come back already said it"
+    },
+    {
+      "startSeconds": 724,
+      "text": "sometime very way the point is we've deployed The Matrix server now when I go back and do Cube cable top nodes now it does not tell you Matrix API not available like the way it did earlier now it's telling you some other error because the Matrix server is still not up yet it's still not come to the ready state to accept the traffic once it"
+    },
+    {
+      "startSeconds": 742,
+      "text": "comes up it's going to take 15 seconds to go scrape the Matrix so the cube cattle top command is working because we have installed the metric server good now this is also another important interview question or interview the exam question as well so this top command works with respect to the nodes the pods and the container level as well so I can"
+    },
+    {
+      "startSeconds": 763,
+      "text": "do Cube candle top pods as well so it's going to show you at the part level the memory and CPU right and if I have multiple containers like for example top Parts iPhone and Cube hyphen is for STM so for example view of net has multiple containers has two containers in it so if I look at we want to look at the container level"
+    },
+    {
+      "startSeconds": 785,
+      "text": "it's going to show you that value at the container level as well like in the pot I have multiple containers I want to look at the CPU memory utilization of the container level you can you will look at the Pod level you can you want to look at the node level you can so the top command shows you nodes and parts all right additionally it also has uh"
+    },
+    {
+      "startSeconds": 805,
+      "text": "option like sort by I can do iPhone 5 and so on iPhone 5 equals to m e m o r y it's going to sort that why are you showing all this stuff well like I told you the exam is going to be a combination of questions which take less time and the question will take larger time there can be a simple question this is okay listen in this namespace there"
+    },
+    {
+      "startSeconds": 826,
+      "text": "are 20 Parts running can you tell me which part is consuming highest number of how much highest memory so for example if you run the top command on the namespace maybe everything looks something like this everything showing as 15 18 15 19 16. when you look into the naked eye everything looks the same for you so scenarios like that if you"
+    },
+    {
+      "startSeconds": 846,
+      "text": "have a question there can be a question on there you can just do sort by memory or if the questions are on CPU you can sort by CPU just want to sort it out for you here of course 234 is right up top we can identify if there's a question if I ask you a question which is the pod in this particular namespace consuming"
+    },
+    {
+      "startSeconds": 862,
+      "text": "highest number of CPU or memory your answer is this question despondent so you need to take the part name and write that part name as the answer to that question so that from that point of view top command is what I showed you a little bit in depth but we came here looking for the hpf all right let's go and look at the HPA for HPA to work I need"
+    },
+    {
+      "startSeconds": 883,
+      "text": "to have the metrics and we install the Matrix good let me quickly clean things up keep cattle delete let's go look at the HPA right now so for HPA to work what do we need we needed the deployment to be created let me quickly get the deployment yaml I'm going to create a yaml file deployment apply from file web app.yamal we've"
+    },
+    {
+      "startSeconds": 904,
+      "text": "created a deployment let me open the deployment let's look at the deployment I'm going to delete few lines here this is the regular deployment what we have seen so far okay we have a spec we have replicas we have selector and we have template right the regular deployment so let me undo the lines what I delete it"
+    },
+    {
+      "startSeconds": 925,
+      "text": "now we're getting introduced to A New Concept New Concept of War of resources so optionally you can specify the resources what your container needs most common resources what you have are CPU and memory I have seen this somewhere yes let me save this let me go back to Docker when I was running the container Docker container and ask for help we"
+    },
+    {
+      "startSeconds": 951,
+      "text": "made use of something what hyphen hyphen memory remember by default your container can consume as much as memory available on the Node by Design we don't want that to happen why this is a badly written code there's a memory leak there's an attacker who got access to the container he's cropping up all the memory of that container well"
+    },
+    {
+      "startSeconds": 970,
+      "text": "that container is going to consume all the memory on the Node the other containers other processes on the server are going to starve we don't want that we understand our application we know our application does not need a memory is certain Beyond a certain limit so when we ran our containers we made use of hyphen iPhone memory or"
+    },
+    {
+      "startSeconds": 987,
+      "text": "iPhone M as an option and we set the upper limit so beyond this limit your container could not make use of the memory what happened when install it well based on how you would be of defined your application maybe out of memory exception and stuff like that similar you had something else hyphen hyphen CPU where you could Define how much of CPU"
+    },
+    {
+      "startSeconds": 1007,
+      "text": "your containers can make use of by default they can make use of as much as a CPU available on your host right that's when you ran your containers specify some options with memory you add the memory soft limit as well preservation that amount of memory will be the result for you now back to the kubernetes world same containers of what"
+    },
+    {
+      "startSeconds": 1026,
+      "text": "we're running so far what we ran without any limits so now the way you restrict that CPU and memory in the kubernetes world by another keyword under your containers pick under here container spec you see under your spec containers is where you have because you need to specify these limits at every container level"
+    },
+    {
+      "startSeconds": 1047,
+      "text": "right so we have two ways of doing it we have resources we have under resources limits and requests and there are two resources your memory Colony double quotes memory is represented in bytes kilobytes megabytes gigabytes and CPU is in melee course and again it is also M here well memory we understand is in by eight kilobytes"
+    },
+    {
+      "startSeconds": 1071,
+      "text": "megabytes gigabytes right CPU resource units are called as coarse one physical CPU or one virtual CPU is one zero two four melee course well here M here stands for Billy course that means if I had one CPU of 100 Milli is nothing but 10 percent of CPU so this particular container can't see beyond 10 of CPU meaning the 10 of my CPU of that"
+    },
+    {
+      "startSeconds": 1095,
+      "text": "host is equal to 100 CPU for this container CPUs in cores memory isn't bytes we understand that resource units concept I'm going to Deep dive on that right so there are two ways of defining it what under resources you have limits you have request what are these two well first let's look at the request so when you specify resource request for a"
+    },
+    {
+      "startSeconds": 1121,
+      "text": "container in a pod this information is used by two people first it is used by Cube scheduler so far the scheduler was doing whatever it was doing right we never told my scheduler to do what we wanted to do we are getting introduced to certain things when I'm telling my schedule I listed dude put me on to any node I don't care as long as that node"
+    },
+    {
+      "startSeconds": 1141,
+      "text": "has this much amount of memory for me are this much amount of CPU for me so scaling the makes use of this information to decide which node to place you on so it's going to look at the hundreds of nodes what you have let's go to search for the nodes which has at least this much of resource what you have asked for is available there it becomes"
+    },
+    {
+      "startSeconds": 1160,
+      "text": "the filtering criteria for your scheduler of course if the 100 nodes 500 and after 150 nodes are having this capacity it's going to filter those 50 and it's going to rank and score and choose any one of them based on which case the highest ranking but I give the filtering condition that's your request that's Point number one scannular make"
+    },
+    {
+      "startSeconds": 1177,
+      "text": "sure this is information good and whatever you mentioned under the limits whatever you've mentioned the limits that's your upper limit your container can't make use of Beyond this cubelet on that particular node is going to enforce this limit so your container can't see beyond this what happens well what happens if you're running your"
+    },
+    {
+      "startSeconds": 1196,
+      "text": "application and your CPU which is stuck there right same story memory same story gets killed usually without a memory exception oaf limit is enforced by cubelet and your container is not allowed to use beyond what is the limit request is made use of it too guys first guy is the cube scheduler which uses his information to put decide which note to"
+    },
+    {
+      "startSeconds": 1217,
+      "text": "put you on and then what it does when it goes to a particular node cubelet what it does also reserves the requested amount of that resource for especially for your use only for your container use it's going to do a soft reservation out there that is your request so I'm going to undo what I have added here in the HP"
+    },
+    {
+      "startSeconds": 1237,
+      "text": "I kind of introduced this concept to show you the scaling part because by default that container can consume as much as resources I can't add that much load to scale up automatically but we wanted to introduce A New Concept how do you restrict your limits and how do you do soft reservations and you tell your scheduler where to put you is with the"
+    },
+    {
+      "startSeconds": 1255,
+      "text": "help of resources under your containers under resources you say limits and requests the two kind of resources you have memory and CPU memory in bytes and CPU in your codes all right but we came here to look for HPA as a concept and we got introduced to something else new good so I'm going to create this deployment right now I think we did"
+    },
+    {
+      "startSeconds": 1274,
+      "text": "already created this it can get on so we've created a deployment which has three replicas and that is request what we have said right life is good fine I need to create a service for this to access it good so what do we do we learn the exposed command very easy to create a service we'll say Cube cuddle expose a"
+    },
+    {
+      "startSeconds": 1291,
+      "text": "service a deployment what is the name of your deployment here the name of my deployment and what is the port number for my service with whatever I want what is the name of the service if you don't mention this option the name of deployment will be the name of your service I will say create me a service whatever name right and I will say maybe"
+    },
+    {
+      "startSeconds": 1309,
+      "text": "create me a type is equal to node Port because we have learned that of course I could do Expose and help it shows me all the options I'm just showing you a few easily I was able to create a service good now Cube cat will get all we also have a service note Port created this is the port number what is been given to me"
+    },
+    {
+      "startSeconds": 1328,
+      "text": "good so if I say in my Etc host files I've added Cube Node 1 as an entry and if I said support number and I'm able to access that application fine now we need to see the HPA let's create the h PA for this guy let me download the Yaman file for my HP kind as horizontal pod Auto Scala the group belongs to Auto scaling"
+    },
+    {
+      "startSeconds": 1351,
+      "text": "the version is B1 in the new versions in the new versions of the kubernetes at 1.23 onwards two three two four two five the version of Auto scale has been upgraded to V2 V2 has more options more options where you can specify V1 is only one option what you have called as Target CPU utilization percentage well under the HPA spec there are four things"
+    },
+    {
+      "startSeconds": 1373,
+      "text": "which is the target reference hundreds of deployments which deployment you want me to scale up well there is a deployment which belongs to apps as a group version V1 name of this guy this is what I want you to keep an eye on I'm telling my hpf and I'm telling what is the CP utilization default is 80 percent and I want the scale up to happen faster"
+    },
+    {
+      "startSeconds": 1392,
+      "text": "I have mentioned 20 as my default so it needs to ensure at any given point of time the certification of those parts out there collectively is below 20 percent so we'll do whatever you need to do add as many as replicas as you want to bring it down to below 20 percent but I don't want you to max out my cluster"
+    },
+    {
+      "startSeconds": 1409,
+      "text": "resources I don't want you to infinitely scale maximum you can scale up to 10. beyond that well don't do anything I know my applications Max 10 should be enough when it is all under 20 under the threshold life is good I wanted to maintain minimum of two replicas I've mentioned that I'm going to create my HPA keep cattle apply from file"
+    },
+    {
+      "startSeconds": 1433,
+      "text": "hpa.yaml my HPA got created very nice Cube cadded at all and I have HPA also created here that HPA is referencing a deployment name as web application and right now it's telling I don't know what is the current CPU utilization because when you deploy an HPA HP is going to score scrape your metrics you already have exposed geometrics API you have"
+    },
+    {
+      "startSeconds": 1456,
+      "text": "installed your Matrix API server and it's going to scrape this metrics every 15 seconds can we change all of that of course we can change all that behavior default is 15 seconds you don't want it to keep on scraping your metrics and slow down things that's why the default value is set to 15 seconds so it's going"
+    },
+    {
+      "startSeconds": 1472,
+      "text": "to take some time like 15 seconds if you come back and look at it now it is captured what is your current metric value now these parts of this deployment currently are consuming zero percent of CPU nobody is accessing it so we need to do what I add some load how do I do that I need to access that application correct so what will we do we will make"
+    },
+    {
+      "startSeconds": 1492,
+      "text": "use of a tool called as Siege as a third party tool I am going to run that when I have installed it tool called SC this is a regular tool General load testing tool http is load tester that is and just to add some tool load or that so if I quickly do Cube I will get all this is the port number what I have correct so what do I do if I make use of"
+    },
+    {
+      "startSeconds": 1512,
+      "text": "the tool what we have installed called a Siege and I say concurrently is the quiet mode don't give me any verbose output concurrently as five users for the time of two minutes I want you to hit this URL that URL is Q by fitting over to what and the port number any node name node IP you can make use of I can make use of my node name"
+    },
+    {
+      "startSeconds": 1533,
+      "text": "because I have added that IP address in my Etc host file otherwise you can make use of node IP you can internally again the cluster I can make your cluster IP and this port number node name node IP and this port number as well so what's going to happen is going to hit this URL for two minutes straight As five continuous the moment you hit is what's"
+    },
+    {
+      "startSeconds": 1552,
+      "text": "going to happen it's going to say welcome to nginx 200 response right maybe it takes a milliseconds and then it's going to again going to bombard it with the same request so it's going to do in this two minutes maybe you know a couple of thousands of transaction so in a way what happens all of my pods are going to get busy the CP utilization of"
+    },
+    {
+      "startSeconds": 1569,
+      "text": "those guys is going to go up we have Captain CP utilization little bit of CPU Spike there that going to cross the threshold of 20 and it plcd scaling up happening let me get the CG right now is running let me come back to other screen what we have this Matrix is claimed every 15 seconds right right now it is showing as zero"
+    },
+    {
+      "startSeconds": 1593,
+      "text": "percent so after 15 seconds it's going to come back and go look at the Matrix now that we are bombarding it constantly hitting this guy the CP utilization is going to go up slowly you see the CPU went up to 18 right now still not enough to trigger the scale up Beyond it's still below 20 still it's not going to do anything it's"
+    },
+    {
+      "startSeconds": 1614,
+      "text": "still going to maintain the same replica so we're still constantly hitting it and now we see there's Matrix jump to 36 percent so it needs to add more parts to bring it to 20 percent so you realize I need to add three more replicas and four more replicas you see four more replicas were scaled up so guys this was our"
+    },
+    {
+      "startSeconds": 1633,
+      "text": "expert from team k21 academy and if in case you want to have a deeper dive and want to build a career in kubernetes and Docker including devops then we have something really special for you we have our free class on mastering kubernetes Dockers and devops that includes how to build in demand skills and land a higher"
+    },
+    {
+      "startSeconds": 1653,
+      "text": "paying job so for that you just have to visit k21academy.com forward slash k8s to do you have to click on book your free seat now and after that select an event date according to your availability enter your name your email address your phone number and click on yes save my seat moving ahead you'll be seeing this kind"
+    },
+    {
+      "startSeconds": 1674,
+      "text": "of interface here just have to save this link on the extreme Right add it to a calendars and I'll see you in the free class till then take care and keep learning"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:10.036Z"
+}

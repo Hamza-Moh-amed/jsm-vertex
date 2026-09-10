@@ -1,0 +1,107 @@
+{
+  "_id": "video.youtube-lYxGYXjfrNI",
+  "videoId": "lYxGYXjfrNI",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=lYxGYXjfrNI",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 6,
+      "label": "BM 25"
+    },
+    {
+      "startSeconds": 85,
+      "label": "Code Time"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Okay. So one of the things that people want to do often is have hybrid search in their particular retrievers. So what is hybrid search? Hybrid search is basically the combination of having both a keyword style search along with a vector style search. So we've got the advantages of doing sort of keyword lookup."
+    },
+    {
+      "startSeconds": 22,
+      "text": "but also the advantage of doing the semantic lookup that we get from embeddings and a vector search So this makes use of a tool called BM 25. now BM 25. Is not a new algorithm at all. This has been around from, through the seventies, eighties for a long time. And to be really honest as someone who's battled against this,"
+    },
+    {
+      "startSeconds": 42,
+      "text": "this is a really good algorithm. meaning that for a long time, as people have worked on trying to come up with better embeddings. and using deep learning, often many techniques were actually just beaten by this BM 25 algorithm. So I'm not going to go into depth about this. You can certainly look it up on the web and read a little bit about it."
+    },
+    {
+      "startSeconds": 62,
+      "text": "But basically this is all about creating sparse vectors. So where you're counting words or N grams in here, and you're doing a whole bunch of things with TFIDF So if you've come across Term frequency or inverse document frequency stuff before so you'll know that this is the driving force behind BM 25."
+    },
+    {
+      "startSeconds": 85,
+      "text": "one of the things that's really good with BM 25 is it's very quick to compute. So often where using vectors and using dense methods, which are embeddings they will be, slower than just doing this kind of, counting of words and working things out that way. So one of the cool things that you can do in LangChain is you can"
+    },
+    {
+      "startSeconds": 105,
+      "text": "actually make a BM 25 sparse retriever And what it does is actually sort of, hides a lot of what's going on in the background. it uses the BM 25 package that you can put in here To do your lookups. But you'll see in LangChain, it's actually very easy to implement. So we basically just have, you know, from LangChain retrievers, we"
+    },
+    {
+      "startSeconds": 126,
+      "text": "import the BM 25 retriever in here. Now, what we're going to do is I'm going to go through the BM 25 stuff and then we're going to combine it with just a simple sort of embedding retriever and combine them together in an ensemble retriever so that you've got both keyword look up and you've got, you know, the sort of normal embedding"
+    },
+    {
+      "startSeconds": 146,
+      "text": "lookup for semantic lookup as well. so here I'm just bringing in some vector stores. I've got, I'm using open embeddings here. We're only using open embeddings for the vector store part with the ensemble retriever, not for the BM 25. BM 25 will calculate its sparse vectors by itself here. All right."
+    },
+    {
+      "startSeconds": 164,
+      "text": "So you can see that I've made a simple sort of list of documents. And you can see here one of the things I'm trying to do with this, and this is taken from their example, on the LangChain side, I've just played around with it a little bit more. And what I want to sort of show you here is that we've got you know,"
+    },
+    {
+      "startSeconds": 179,
+      "text": "I like apples, I like oranges, apples and oranges are fruits. I like computers by Apple. I like, I love fruit juice. Right. So we've got sort of the word apple here but it's got some different meanings in some ways. So, the key word retrieval will tend to just retrieve the keyword. So if a word matches, it will be brought back."
+    },
+    {
+      "startSeconds": 201,
+      "text": "And we can see this if we sort of instantiate our BM 25 retriever. We pass in this doc list. We set, our K returns to be two. And I give it the word apple. Sure enough. It comes back with, I like computers by apple. and it's actually surprising that it's not getting the other ones, cause they're not direct matches in here."
+    },
+    {
+      "startSeconds": 223,
+      "text": "If I ask you it a green fruit, it gives us fruit juice cause it's got fruit, I guess. and I'm not sure exactly why it's giving back, I like computers by Apple in here. but you can see that when we look at this, in the dictionary, this is just passing in our documents are in here. So, this is sort of like a key word search."
+    },
+    {
+      "startSeconds": 242,
+      "text": "So BM 25 is used in things like elastic search. It's used in a lot of very quick search algorithms that are out there. The embedding or the dense, retriever here, we're just using a normal sort of embedding lookup. Now, in this case, I'm using OpenAI embeddings. but really any embeddings do the same sort of thing."
+    },
+    {
+      "startSeconds": 262,
+      "text": "And I'm just going to bring this into a faiss or a faiss vector store. and we can see that here again we're just setting up to K equals two. And you'll see that this time, when I say a green fruit. straightaway, it gets, you know, apples and, yeah as fruits and also, I like apples. We don't get the computer one in here."
+    },
+    {
+      "startSeconds": 283,
+      "text": "So this is doing a more of a semantic lookup. So the thing that we can do is we can combine these. So what happens if we combine them is we basically make an ensemble retriever. An ensemble retriever we just pass in the retrievers that we want to have, normally you probably going to use this for a sparse retriever and"
+    },
+    {
+      "startSeconds": 303,
+      "text": "a dense retriever, but there's no reason why you couldn't use it for different, Retriever's as you go through. And then we set up a weighting system. so this is going to help with determining how it re ranks the results from the two of these. You can see now when I put this in and I say a green fruit."
+    },
+    {
+      "startSeconds": 322,
+      "text": "the first thing I get back here is, you know, I love fruit juice, apples and oranges or fruits. I like apples. And the final one is the you know, Apple computer one. Whereas if I put in Apple phones, so this is not you know, computers, but semantically, it can work out straight away that, ah, okay."
+    },
+    {
+      "startSeconds": 339,
+      "text": "I like computers by Apple is the one that goes at the top here. So here we're getting the advantage of, this hybrid search system where we're getting both the keyword search look up and we're getting the semantic look up. This is something that you can try out for different projects and see"
+    },
+    {
+      "startSeconds": 356,
+      "text": "when does having hybrid search for your use case actually help as opposed to just purely semantic search. It certainly becomes useful for things where people know exact words that are going to appear in a text or something. And they're looking for someone's name or something like that."
+    },
+    {
+      "startSeconds": 375,
+      "text": "then the hybrid search can actually be really beneficial for that kind of thing. So, anyway, This is a very simplified example of this. have a play with it yourself. Try it out for some of your own use cases and see how you get on. As always. if you've got questions, please put them in the comments below."
+    },
+    {
+      "startSeconds": 392,
+      "text": "if you found this video, check out more in the series of different sorts of retrievers and different techniques that you can use for retrieval augmented generation. I will talk to you in the next video. Bye for now."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:49.274Z"
+}

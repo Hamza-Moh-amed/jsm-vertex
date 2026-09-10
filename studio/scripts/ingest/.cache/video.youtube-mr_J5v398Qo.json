@@ -1,0 +1,387 @@
+{
+  "_id": "video.youtube-mr_J5v398Qo",
+  "videoId": "mr_J5v398Qo",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=mr_J5v398Qo",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 50,
+      "label": "Schema migrations"
+    },
+    {
+      "startSeconds": 120,
+      "label": "Recipe"
+    },
+    {
+      "startSeconds": 175,
+      "label": "Change type of column"
+    },
+    {
+      "startSeconds": 200,
+      "label": "Migrations"
+    },
+    {
+      "startSeconds": 580,
+      "label": "Locktimeout"
+    },
+    {
+      "startSeconds": 770,
+      "label": "Exponential decay"
+    },
+    {
+      "startSeconds": 910,
+      "label": "How can we empower people"
+    },
+    {
+      "startSeconds": 1010,
+      "label": "New column and new table"
+    },
+    {
+      "startSeconds": 1443,
+      "label": "Tablecloth analogy"
+    },
+    {
+      "startSeconds": 1692,
+      "label": "Wrapup"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Hello, this is, uh, I'm Nikolai, and my co-host is Michael. Hi Michael. Hello Cola. So we will be talking today about my, one of my favorite topics, most favorite topics, and, um, I think it's very, quite often under, um, underestimated when we grow, when our database and workloads grow. Uh, it'll be about. Migrations, right?"
+    },
+    {
+      "startSeconds": 31,
+      "text": "Or, but what kind of migrations? Migrations is not a good term. I don't like it, but we all use it because of some, I guess some Ruby guys now, right? Or where did it start from? Database migrations. It sounds like we migrating from one place to another, but, uh, actually it's about schema changes."
+    },
+    {
+      "startSeconds": 50,
+      "text": "Yeah, I've heard the phrase scheme of migrations as well. Uh, so we are talking specifically about, and I know this is implicit in what you are saying, but I don't think everybody, um, has this implicit but zero downtime migration. So how do we, how do we do ache of migration in a way that doesn't block rights or reads or Yeah, absolutely."
+    },
+    {
+      "startSeconds": 72,
+      "text": "Something that, it's a better If we're, yeah, well, anybody that's building products, building applications, managing a database, uh, if it has any success at all, it's gonna change over time, right? You're gonna want to add things, you're gonna wanna change things. You might even wanna rename Three deployments per day as usual. Yeah. Ab Yeah."
+    },
+    {
+      "startSeconds": 92,
+      "text": "But, and a lot of those changes, uh, by default, the, the way that they happen take locks, right? So, uh, those locks on small tables nice and fast, but once they start getting bigger, those locks can be really problematic. So we're talking about changes that can cause these heavy locks for long periods of time and alternatives to"
+    },
+    {
+      "startSeconds": 114,
+      "text": "or or cannot acquire Lock, Yep. Yep. Absolutely. Also this is more, yeah, more dangerous. And, uh, it's, it's, um, it usually remains unnoticed until some level of workload. Uh, but I have a good recipe and probably this recipe will work for everyone. And we will, we will just end this episode as"
+    },
+    {
+      "startSeconds": 134,
+      "text": "promised long earlier, much earlier than u usual, when. Latest our episodes. So we, we promised to not to exceed 30 minutes to ourselves and to our, some of our listeners, and let's try to do it. I, I, I see a timer here. So recipe is simple. Let's have ID column with perfect UL ID or U I D version 7 98."
+    },
+    {
+      "startSeconds": 160,
+      "text": "I don't remember some ID column that can be inter eight. Just don't use inter four, right? N J. B or without B, it depends, but column, and that's it. Well, actually the integer, the integer four, integer eight, uh, question is a really good point, and that the reason that that's problematic is because changing the type of a"
+    },
+    {
+      "startSeconds": 183,
+      "text": "column is one of these issues. It was one of these operations that takes, uh, I know it very well. I I've earned more than a hundred K on it. Just on this sold task for multiple companies, at least four companies, so, yeah. But yeah, so obvi, obvi, I think we could probably do, uh, quite a long time on that issue alone."
+    },
+    {
+      "startSeconds": 206,
+      "text": "But my, my main point was that it's because that requires a migration. So that is one of the, one of the category of issues here. I guess it would take a long time to discuss the details of every single one, so I was hoping we'd give some, maybe, Newbies, a little bit of a, an insight into what kinds of things can cause problems."
+    },
+    {
+      "startSeconds": 227,
+      "text": "Uh, you don't understand. Let's, let's put everything to Jason and, and we don't need migrations. That's it. uh, I understood, but I thought you were like being facetious. Right? We get like, that's the whole NoSQL argument, right? They, they made the, they had the marketing claim of schemaless. Don't worry about migrations ever."
+    },
+    {
+      "startSeconds": 244,
+      "text": "And, and there's some compelling stuff in there until, but the, but then the benefit of relation database is, a lot of the reason a lot of us love them is we get validation just mention that, uh, multiple banks and financial organizations, so, and also e-commerce, uh, organizations, uh, used, uh, this approach, uh, just on for everything"
+    },
+    {
+      "startSeconds": 262,
+      "text": "and Schemeless and or. Like how, how it's cold, uh, and, uh, it, um, doesn't work well for data. You, you, uh, where you need good quality of your data, right? For example, billing, billing system. And this, this is on one hand, on and on another hand. Also, uh, I can, uh, encourage listeners to read the article from Michael Stone Breaker."
+    },
+    {
+      "startSeconds": 289,
+      "text": "It was an e DB blog. Uh, co-authored with, uh, Albert Hernandez. Yep. Right about, uh, how bad it is to avoid, uh, good normalization. So normalization, generalization should be, uh, in, in our toolbox, and both, by the way, and the, if we talk about it, uh, schema changes are inevitable, right? So, yeah."
+    },
+    {
+      "startSeconds": 313,
+      "text": "Let, I, I want to just to exclude this because some, someone can ask, uh, why do we need it at all? The schema changes. But Right. Let's, let's start from like, I agree with you. Let's start from some, from something simple. You try to add a column and it's, it's very simple column without defaults, without anything."
+    },
+    {
+      "startSeconds": 334,
+      "text": "Like, I just want some small column on the right side of my table. That's it. And suddenly you have traffic, uh, went down for many minutes. What happened? I mean, traffic to this table, it's like partial down times. Other tables are accessible, but this table even sells are blocked. What happened? What do you think? Something waiting on a lock."
+    },
+    {
+      "startSeconds": 359,
+      "text": "Right? Like something gets stuck behind that. Yeah. It's, I think this is something that eventually should be improved in pos, right? It, it retries or how, how would you. right? So, We have created this concurrently. We can, we have two stage procedure to create various, um, constraints like form keys or check constraints"
+    },
+    {
+      "startSeconds": 385,
+      "text": "or, or, or unique constraints and unique index of course. Uh, concurrently. So we have, we have tools to avoid the long, exclusive locks. Long, uh, exclusive locks are inevitable to adjust. Uh, sche mine in system catalogs brief, at least brief exclusive lock is needed, but there are two big problems. Uh, at least two very big problems first. Okay."
+    },
+    {
+      "startSeconds": 412,
+      "text": "Three. First, we first is very obvious we cause full table rewrite. For example, if you change interval four to inter eight with with single live, single comment alter table arone, you'll cause full table re rewrite and if it has one, Billion rows probably. This is when you think, oh, it's already 50% of capacity, which is 2.1 billions, roughly."
+    },
+    {
+      "startSeconds": 440,
+      "text": "This is when you already start be being nervous and, uh, try to do something. In this case, full table rewrite will cause very long, uh, lock and nobody will, will be able to talk to this table. But this is obvious, right? We, we do some work, uh, while still keeping holding this. Exclusive lock, of course, even cellex are not possible."
+    },
+    {
+      "startSeconds": 463,
+      "text": "There is another problem, slightly like lighter problem, problem when we, uh, don't need to rewrite whole table, but we need to at least scan it at least once to, to check that. For example, constraints is, uh, not violated by existing rows. So it's just read, but still long because billion rows, right?"
+    },
+    {
+      "startSeconds": 484,
+      "text": "And during this we also hold this exclusive law, but these two problems are quite obvious. There is one particular problem with hits everyone, and we don't have anything inside out of a boxer inside POCUS itself. And, uh, people just keep, no, not noticing it until they reach some thousands of TPSs. And this problem is nasty."
+    },
+    {
+      "startSeconds": 506,
+      "text": "It's like we try to obtain our lock for one millisecond or less just to adjust our system catalogs, but we cannot because for example, uh, somebody read from something from this table and didn't close transaction or still reading from it, or OWA is running in. Non-regular mode in transaction idea, wraparound prevention mode."
+    },
+    {
+      "startSeconds": 532,
+      "text": "And in this case, auto vacuum doesn't yield so it won't auto kill itself. Uh, in this case, uh, we are need just wait to this lock to be acquired and this is easy to see in producer activity, weight event. For our session. Right. But the problem is why it's nest. Why is it nest? It's okay to be blocked. Uh, if it, if it's only about us, right?"
+    },
+    {
+      "startSeconds": 559,
+      "text": "But the problem is, uh, we have a long line of all other transactions who try to even read from this table and they form long line behind us waiting if we will succeed or fail. This is it. This is our like, landscape of problems with. Making Skima changes. Yeah. I feel like you d dove into kind of like, I know it's"
+    },
+    {
+      "startSeconds": 584,
+      "text": "one of the simpler examples, but it's also one of the more complex ones, right? Like it's, it's one of those things that looks fine in a lot of them, Yeah, it's simple, but. A lot of the time it's fine and then sometimes it's a problem, right? It's, um, so it's a, a real challenge, that one. Yeah."
+    },
+    {
+      "startSeconds": 600,
+      "text": "So, um, well before we move on from that one, solution. I think you've written a good, really good blog post that includes us as a one of the examples. Um, so I'll make sure I link that one up. But we can, we can, um, there's a setting where we can cancel things that are the, in this example, right? Or we, Walk time out a stay on time out."
+    },
+    {
+      "startSeconds": 623,
+      "text": "Uh, uh, yeah, for example, p um, for example, PGE Park does it, uh, with P Park does something like that. Um, and it uses statement time out, Mm-hmm. Okay, but it's old school, old-fashioned way because it'll affect also GML and so on. We, there is lock time out. Uh, and, uh, well statement I'm out. If you do it in your session, if you have"
+    },
+    {
+      "startSeconds": 649,
+      "text": "quite complex transaction, very properly organized. So all locks are closer to the, the end because locks, uh, all acquired locks will be held until the variant of transaction, the rollback or, or commit. So in this case, if you use statement amount, it'll be applied both to dgl and dml, including cell. So there is a finer. Gray, how to say it."
+    },
+    {
+      "startSeconds": 675,
+      "text": "Special, uh, timeout, fine grant setting, uh, which will be applied only to, uh, lock acquisition, not to whole statement duration. And it's called Lock Timeout. And of course I prefer using it. I don't remember what P Park decided that they originally said, oh, we need to think when I proposed to use lock time"
+    },
+    {
+      "startSeconds": 694,
+      "text": "out because statement, time out, uh, you, you know, it's. It's, it was not working well in some cases with Ger Park, I don't remember details. It was long ago. Uh, but lock them out is what you can use at least to not to block others for long. Because if you are lo, if you are being blocked, not"
+    },
+    {
+      "startSeconds": 715,
+      "text": "being able to acquire lock, you block others, at least it can be like, okay, half a million, half a second. Right? Why so, so why, why this value? Uh, we had our first episodes about episode about, uh, query duration latency. What is long water? Short for human perception in ltp, uh, case, uh, web and, uh, mobile apps."
+    },
+    {
+      "startSeconds": 741,
+      "text": "So, second is already very noticeable, but half a second or maybe a hundred milliseconds quite good, but depends on the cases. Maybe you try but you fail and you need, you need retry. And in my article, I have another article about it. Right. Uh, any specifically for this problem? Uh, proposing the solution, uh, reprise and low lifetime"
+    },
+    {
+      "startSeconds": 766,
+      "text": "out, maybe increasing with some, uh, back, back of jitter and so like, you know. Yeah, sometimes people call like exponential decay. Like that kind of, Right, right. But, but not until. Hours, right? Not until minutes seven. Still quite limited. And maybe try a bit later and so on and be prepared for your deployments to be failed."
+    },
+    {
+      "startSeconds": 789,
+      "text": "It's fine if you have auto vacuum pro processing. Well, it also depends. I see some people pre prefer. Uh, observing auto vacuum running in this mode, understanding that it starts, it kick off, kicks off early, like at 10%, 20%, usually it depends, uh, of all capacity. It's very safe to, to just terminate it and let it restart later."
+    },
+    {
+      "startSeconds": 811,
+      "text": "But you, if you terminate it, your session will should be already in process of attempt of acquisition of lock, because if you just terminate and go. Try, I bet auto will be sooner than you and you will have, uh, the problem again. So you need to start attempt and kill auto, vacuum for auto, and then it freezes, uh, it, it opens the"
+    },
+    {
+      "startSeconds": 840,
+      "text": "road, uh, in front of you. Right. Uh, but I wanted to mention, you're right, uh, this is one of ki one kind of a problems when you think. It's so simple. Everyone hits it, at least, um, in like silently not noticed until some level of workload. So simple, but it's also complex in, uh, under the hood. If you dive inside, it's like many things, many"
+    },
+    {
+      "startSeconds": 865,
+      "text": "things, but it's so simple. How come people live without, uh, solution to it? And it's still amuses me actually. So I don't understand what, like, I, we definitely need something, but, uh, I have solution, uh, at Apple level outside of poss. But I think at some point inside POCUS should be done. Something."
+    },
+    {
+      "startSeconds": 885,
+      "text": "We see some improvements in the area of partitioning, like detached partition is, is already not blocking and so on. Many things like that. But this is, uh, just let me add the column gracefully, Yeah, well we have I would specify, I would like to specify a number of free tries and logic right inside this alter table statement proposal, right?"
+    },
+    {
+      "startSeconds": 911,
+      "text": "Yeah, it's a good, that's an interesting idea. I, I always think how can you make these things the default, right? Cuz until you know that those settings exist, you're still gonna hit that the first time. But yeah, it would be nice to empower people that do know it's an issue as well. Uh, just wondering how case. Sorry. Yeah, yeah."
+    },
+    {
+      "startSeconds": 930,
+      "text": "Sorry, I, I, I promise not to interrupt. Sorry I'm listening. Um, no. Okay. Let me, let me try, let, uh, I'm wondering how we can help people who don't even know it's an issue. So, like, uh, the, the people I, I've, I've come across really experienced engineers. Some people that I consider, some of the best engineers I've ever worked with."
+    },
+    {
+      "startSeconds": 950,
+      "text": "And for example, this was, I think must have been pre Postgres 11, but somebody adding a column. With a default. So they, they, um, that was always gonna cause an issue and it did. So that this is, this falls into, sorry, I'm, I'm interrupting again. It falls into previous, like we have table, right"
+    },
+    {
+      "startSeconds": 971,
+      "text": "table full scan and this like, uh, Unsuccessful work acquisition problem, right? What you mentioned, it was to full table re rewrite because, uh, pre post 11, uh, when we create a new table, we've defaulted cost full table rewrite. It's quite, it's quite it. This I would expect. I understand this is like the post is not perfect here."
+    },
+    {
+      "startSeconds": 998,
+      "text": "I understand this. Okay. But that I like what? Like how come I, even simpler example, I want to drop a column. Same. Yeah. Yeah. Um, there's some, we, I'm conscious we're not gonna have time to discuss every single case of this. So there is a couple of good articles, um, one on the one I just mentioned on, uh, it was, uh, by Brando, wasn't it?"
+    },
+    {
+      "startSeconds": 1025,
+      "text": "Um, on adding, uh, on the, the change in version 11. And I think the nice thing about that article is it goes into some of, not all of the complexities, he does link to the patch, for example, but how complicated some of the remediations needed to be to make. Adding a column with a default, not a UI case. So that changed in version 11."
+    },
+    {
+      "startSeconds": 1047,
+      "text": "it's not si, it's not trivial. That change, it's uh, it's, there's a lot of places that that touches. So I, I do have sympathy with that. These things are difficult to do and difficult to do in a way that. Still lets people on simple databases just get things done. So I, yeah, I understand like the complexity, but equally"
+    },
+    {
+      "startSeconds": 1067,
+      "text": "it would be nice to not have people shoot themselves in the foot, uh, quite so often as as happens at the moment. Right. And actually this, this, uh, change in POS 11 is very connected to integer four primary key problem. Because if you think about, uh, how you can convert to eight, there are two big, uh, approaches."
+    },
+    {
+      "startSeconds": 1086,
+      "text": "Uh, I call it new column and new table. New table is more like, uh, ppac style. When you need both are should be down, uh, zero downtime. Right. Uh, the second one, new table, it's more like ri p style. You need to create another table, but first, implement triggers that will record all changes. In some delta table."
+    },
+    {
+      "startSeconds": 1108,
+      "text": "And then you do select create table as, as select or just copy like, like some snapshot of existing table. And then you actually draw interesting clicks there as well. And then you need to take care of about, uh, indexes, constraints, form pieces, especially. It's interesting. Very interesting. And then you apply delta maybe in several steps."
+    },
+    {
+      "startSeconds": 1129,
+      "text": "Actually, it's possible to split it to multiple transactions, which I didn't know. Initially I thought, oh, whole Delta needs to be applied in at once. No, PG park is, is much smarter. Uh, we can do in steps just last time should be inside our renaming transaction. But this is more complex, uh, approach than just new column. Yep."
+    },
+    {
+      "startSeconds": 1150,
+      "text": "But if you do, if you do new, new Newcomb, eventually you need to redefine primary key, but primary key. Okay, primary, primary, key. Not only imposs in fear, even, it consists of two things, uniqueness and, and not now two constraints. Uniqueness. We can create index concurrently with unique, create, unique index. Concurrently it might fail."
+    },
+    {
+      "startSeconds": 1172,
+      "text": "We, if that duplicates, we fix it. We eventually, we can create it without, um, uh, long, uh, locks. So it's like so-called, so-called online operation. So create index concurrently is online operation and create unique index concurrently. Create index is not online operation, not uh, how to say online safe or there should be some term for it."
+    },
+    {
+      "startSeconds": 1199,
+      "text": "Zero downtime. It's not proper term because if we block one table, it's not downtime. I call it partial downtime only. Some part of workload which deals with its table is experiencing problems, but everything else is fine, right? So, online operation as the op, as the, yeah. Sounds the, a good friend of mine who is from SQL World, uh, good,"
+    },
+    {
+      "startSeconds": 1220,
+      "text": "very big professional, uh, gave this, gave me this term. I like it as well, online operation. So if, but what about, uh, not now. Before post 11 is terrible. Absolutely terrible. You cannot create it. Period. So yeah, if you create it, you have second type of our problem. You need a full scan. PO needs to fully scan table at creation time."
+    },
+    {
+      "startSeconds": 1247,
+      "text": "And during this time, it, uh, holds this, uh, uh, very expensive exclusive look. But, uh, we've, and, and check constraint can be done in two phases. So you, first, you say, not valid. You create check and stand very fast. Not where it, again, you need to do retrace. If you do it very properly, you need to retry and lo low."
+    },
+    {
+      "startSeconds": 1272,
+      "text": "Cause it's still changing schema, right? But not where it means it'll not be applied for few. Some people think not well. It, it's not valid. Like no, I mean, it's not valid for all data, but it's already being checked for all new rows. Updated or inserted. It's like no validation rather than not Right, that fair? Mm-hmm. Yeah."
+    },
+    {
+      "startSeconds": 1292,
+      "text": "It's, it's already working, but, uh, it's, we skipped validation for existing row and then we now transactional table validate and this doesn't, uh, need the long lock concentrate already there. It's just a flag. And this is like a two phase, two transactions, separate transactions. And this is how we can market, uh, we can create"
+    },
+    {
+      "startSeconds": 1313,
+      "text": "a, a check and strain. Is, uh, our new con is not now, but in before POG Solar 11. If you create check constraint, uh, it cannot be done in two phases, I think since POG 12. If there is check constraint and then you create, not now, it's smart enough. I think GE CAR implemented this, uh, It sees, oh, there is check constraint is not, is not now."
+    },
+    {
+      "startSeconds": 1340,
+      "text": "So I can rely on it. It already validated all row, like I it skip it in POS That would be cool. but using some brain power, we solve the problem for POGS 11 as well. What we can do, we say, because just relying on this new feature, not blocking default. When we create our in eight new id, we say default minus one, not Yeah. Well,"
+    },
+    {
+      "startSeconds": 1368,
+      "text": "And it's, it's magic like POGS thinks, oh, it's, it's this minus one. This default is, is virtual. It doesn't, pos doesn't, um, rewrite whole table. It just says, okay, for all existing tables, we think it's minus one virtually. Right? But if it's already filled with some, we can say not now. Right? Then we back field."
+    },
+    {
+      "startSeconds": 1393,
+      "text": "In batches and drop default minus one goes away. We have real values that not, not now is there. So this trick we used for post level, it's funny, it's like, like very interesting. Like this is like, it feels like art. You, you, you used what you have to achieve something. Uh, Like multiple things, uh, work together and you"
+    },
+    {
+      "startSeconds": 1420,
+      "text": "achieved something very useful. But, uh, then, uh, I, I even was slightly disappointed in the 12, seeing this like, okay, now we can do just check. And then, not now, two in two steps. Then, uh, we create, not now regular, not now. And, uh, this interesting trick is not needed anymore. So,"
+    },
+    {
+      "startSeconds": 1442,
+      "text": "Yeah, I, I know it's not, I know it's not a good analogy, but I quite like thinking about it as the, you know, have you ever seen those magicians putting lots on the table, like a dining table, and then they get the. Um, the tablecloth and then they whip it out just, and with everything stays as it is. A good migration is a bit like that."
+    },
+    {
+      "startSeconds": 1460,
+      "text": "There's always one step at the end that's kind of like the little finesse, the last little thing to make everything work. Uh, but it needs to be really quick and it needs to be like, not change anything. Um, but it can all go wrong as well. So it, if they pull the tablecloth in it and you haven't"
+    },
+    {
+      "startSeconds": 1475,
+      "text": "quite sorted everything out, uh, everything falls on it. Everything smashes basically. Um, so yeah, that's a really good example. And I think we've got some, uh, there's one other blog post that discusses some of that in more detail, which is the Braintree one. I think they've updated on the PayPal blog. So I'll link that up."
+    },
+    {
+      "startSeconds": 1492,
+      "text": "That has some of these like kind of worked examples. And, uh, the, another one I did wanna make sure we covered, or at least I think that's on the slightly more complex side, is one that one of my colleagues covered from GoCardless that caught them out. And I think you cover really well in your post."
+    },
+    {
+      "startSeconds": 1507,
+      "text": "But it is not obvious, which is the foreign key updates. So like the, the fact that it can, that it takes locks on both tables, I think is really like different locks. Different locks. And if, if also, if partitioning involved. It's very interesting. I cannot like, I like, it's very interesting and. Let me also advertise a couple of things."
+    },
+    {
+      "startSeconds": 1533,
+      "text": "First, GitLab, um, uh, has very good migration helpers if you, if you use Ruby. And if you don't use Ruby, still very insightful. It's, uh, they're source code and they have very, very good documentation about all these things. So, uh, it's very well, well tested both on, uh, their production uh, dot com and."
+    },
+    {
+      "startSeconds": 1560,
+      "text": "All GitLab instances, there are so many of them, right? And you need to deploy without seeing what is happening. So fully automated. And sometimes tables are huge, even, uh, if it's not, uh, there.com. So it's like it's very challenging task and they solve it. So their experience, I think, I find their experience is"
+    },
+    {
+      "startSeconds": 1581,
+      "text": "very like one of the best in this area for pogs. And also, of course our tool dap. So if you. Deal with foreign keys on both sides. Sometimes like we need the different types of logs. We, we can, we, fortunately we can, uh, create foreign keys in two steps, but if partitioning is involved, it's tricky how foreign keys are propagated from parent to."
+    },
+    {
+      "startSeconds": 1607,
+      "text": "Like partitions from main table to partitions. Mm-hmm. Mm-hmm. I never, I never keep it in my mind. It's too much. I, I trust Two things. First, documentation, source code. And second, our tool, our tool detects longlasting, uh, exclusive locks. You just need to apply it with either for existing tables."
+    },
+    {
+      "startSeconds": 1626,
+      "text": "Taken from production without PI or something, or just raw production. It's, it's even better if you can afford it in terms of how data, how infrastructure is organized, or you need to like to generate some row, right? For testing. And by the way, by the way, I today, uh, I just used, uh, chat PT to fill tables."
+    },
+    {
+      "startSeconds": 1647,
+      "text": "I had some, I had some, I, I, I had some rose in my table. And I needed to, to have more. Right. Okay. I, I have one gigabyte, I want one gigabyte or 1,000 gigabytes. And help me, it's, it's good in this, if you show examples and it helps you like, uh, increase the size, uh, according to some patterns, uh, to already, already have."
+    },
+    {
+      "startSeconds": 1671,
+      "text": "So, um, if you just test with big data, our tool can, uh, catch. Database, lab engine and DBU app can catch long, long running exclusive logs. And in this case, you understand your solution is not good and you go fix it. I think these, these things I trust, right? so this is great for catching."
+    },
+    {
+      "startSeconds": 1694,
+      "text": "Yeah, this is great for catching two of those classes, right? Like in including the let, let's say it's a large table and. It's the third case is still difficult, right? Because like as in the Go Cardless blog, you need to have some long-running transactional or vacuum as you said, some something hold like, and it's still tricky."
+    },
+    {
+      "startSeconds": 1716,
+      "text": "It's still catches. So I'm not sure if the, maybe the GitLab one does one for that as well, but I think Uh, additional help. Migration helpers, GitLab. GitLab has implemented this approach, uh, a low log timeout, and they have it, uh, they have helpers for, for this, this thing. Uh, but you're absolutely right. And our tool right now doesn't do it."
+    },
+    {
+      "startSeconds": 1738,
+      "text": "Like we don't have, uh, background, uh, transactions which do this. It's, it's technically possible. Uh, yes, like we, we can think about it, but, uh, so far this is something you need to do. And, uh, So, yeah, we cover only two first classes. We are Right. But I see the, sorry. for this, I think everyone should just need to, just"
+    },
+    {
+      "startSeconds": 1762,
+      "text": "needs to have it always, you know, be prepared for long running, like after vacuum or some transactions holding, some even share locks. Blocking our ddl. So we didn't cover, actually interesting topic, how DDL is related to DL and like updates or deletes in batches or like massive insert as well. Also interesting. There are many things, right?"
+    },
+    {
+      "startSeconds": 1788,
+      "text": "And we already reached our limit in time, so let's wrap up. I think we, we scratched surface, but um, but we did well because we. Brought many good, uh, links on the table, right, articles and so on. Materials. and I think we've given some good warning signs. You know, if you're thinking about adding a column, if"
+    },
+    {
+      "startSeconds": 1810,
+      "text": "you're thinking about adding an index, anything to do with partitioning, create detach. Um, we've given some good warning. Oh, foreign keys especially. Anything around renaming. These things are scary and you should be careful and Oh, renaming has issues, renaming has issues also related to application because we have many application notes."
+    },
+    {
+      "startSeconds": 1831,
+      "text": "It's also interesting. Sometimes you cannot simply rename. Yeah. Well, It's interesting and the topic is very broad and, uh, yeah. Warnings are right, and, and just like, I bet most people have issues in their, like, database migrations. They have like, uh, they just don't, if, if you think everything is all right, you, you just don't"
+    },
+    {
+      "startSeconds": 1852,
+      "text": "have, uh, uh, proper cases. Uh, yeah. You ha you haven't met problems yet. They, they, because they, there might be problems lasting a second and nobody noticed. Right. But, uh, later it'll be 10 seconds, then one minute and, uh, it's already bad. So I hope it was, it was helpful. Uh, please read articles, a lot of wisdom there."
+    },
+    {
+      "startSeconds": 1875,
+      "text": "And, uh, yeah, all we mentioned. yep. Nice one. Nicola. Thanks so much and catch you next week. Yeah. Uh, thank you all listeners. So let us know if you like shorter episodes. Okay, son. Take care. Bye."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:29.375Z"
+}

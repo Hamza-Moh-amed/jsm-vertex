@@ -1,0 +1,163 @@
+{
+  "_id": "video.youtube-fGxKOmCuH5w",
+  "videoId": "fGxKOmCuH5w",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=fGxKOmCuH5w",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 17,
+      "label": "Demo"
+    },
+    {
+      "startSeconds": 147,
+      "label": "What are Keys"
+    },
+    {
+      "startSeconds": 366,
+      "label": "What Makes a Good Key"
+    },
+    {
+      "startSeconds": 540,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "what's up guys there's cousin here welcome back to the last and the best react keys and list tutorial you're ever gonna have to watch I promise you if you watch this video and you watch it until the end you're not gonna have to watch another video on Keys ever again because you will completely understand what they"
+    },
+    {
+      "startSeconds": 16,
+      "text": "are and how they are used cool let's begin I have here as usual a very very simple application we have here a list of users from zero to nine and what I want to do first is I want to show you what happens if you don't put your keys properly and then talk about keys and why you should actually even do them so the first thing that I'm going to do is"
+    },
+    {
+      "startSeconds": 34,
+      "text": "I'm going to open up this console here and I'm going to go and find the HTML elements that represents our users here and here they are they are a bunch of buttons because I have an on click event listener to them when I click them this user is going to get deleted I want you to focus your attention here at the bottom and see what happens to these"
+    },
+    {
+      "startSeconds": 53,
+      "text": "elements whenever I delete the user what Chrome is going to do is whenever there's a change to any element it's going to high highlight that element indicating to us that something has changed so watch what happens when I delete user 0. I delete and every single element has highlighted I delete user 1 and every single element has highlighted"
+    },
+    {
+      "startSeconds": 72,
+      "text": "again if I now go and look at the code for this you're going to see that it's really simple we have here our state with our users it's getting initialized by this default users here if I open that it's just a list of static users with an ID and a name property so I wouldn't worry too much about that then we have this handle remove function"
+    },
+    {
+      "startSeconds": 89,
+      "text": "which handles our deletion of a user and then we have the code here that renders each individual user one by one obviously you're going to see that we have an error here it's saying that we're missing a key prop for the element in an iterator and actually if we go back to our code and go to our console we're going to see a similar error in"
+    },
+    {
+      "startSeconds": 106,
+      "text": "our console warning each child in a list should have a unique key prop so now let's see what happens if I add a proper key to this button so I'll do key and then I'll do user.id go back to our application refresh go back to our elements again and open up the buttons and now pay attention to what is highlighted when I delete every user so"
+    },
+    {
+      "startSeconds": 127,
+      "text": "I delete user 0 nothing is highlighted only only this first div here right I delete user one nothing again is highlighted only this div because something is changing in a div right a user is getting removed so what's really going on here why is it that whenever we're providing a key nothing is being highlighted but when we don't provide a"
+    },
+    {
+      "startSeconds": 145,
+      "text": "key everything is highlighted well for this you have to understand how Keys work in react and what they actually are so from reacts perspective keys are identifiers they are a way to uniquely identify every single element in your code to then be able to make efficient updates whenever react has to so whenever we make a change such as"
+    },
+    {
+      "startSeconds": 164,
+      "text": "deleting a user having a unique key will allow react to identify each element and make that change as efficiently as possible now in our case what does it mean to be efficient right well we have to think about what is the work required for react to do to efficiently delete with a user so if we're deleting a user"
+    },
+    {
+      "startSeconds": 182,
+      "text": "we just deleted user 0 really the only thing that react would have to do is delete this user 0 from this list and then leave everything else untouched because user one two three and so on they haven't changed they're the same they have no new props they have no new text no new state they are exactly the same so react doesn't need to do"
+    },
+    {
+      "startSeconds": 202,
+      "text": "anything to them now when we have a key we delete this and you see that nothing is being done to those Elements which is great it's exactly what we want but then if I come to the code and I delete the key that is no longer happening I'll refresh I'll open up the elements again I delete user 0 and everything is being"
+    },
+    {
+      "startSeconds": 218,
+      "text": "updated well that's because react when you don't provide a key it's actually not going to not provide a key it's going to apply one behind the scenes without you knowing it's going to apply the index of the element as a key which means that that is exactly equivalent if I were to do something like user and then index here and then manually"
+    },
+    {
+      "startSeconds": 237,
+      "text": "provide key Index this would be the same in reacts perspective as not providing a key and we can prove this by going back to our application reloading again opening up our elements again and then deleting a user and you're going to see that even with the key of index everything is being highlighted as I delete I delete and everything is"
+    },
+    {
+      "startSeconds": 256,
+      "text": "highlighted so why is that what's really going on well we said that react uses these keys to uniquely identify every single item when making an update and we also said that the most efficient update for this when deleting a user is to just remove that user and leave everything else untouched but if we have the index"
+    },
+    {
+      "startSeconds": 273,
+      "text": "as a key which we have now in our code when we delete the user actually before we delete a user user 0 has the key of zero because that is index 0 it is the first element in the array user 1 has a key of one user 2 has a key of two and so on but now when I click delete user 0 react is going to make that deletion and"
+    },
+    {
+      "startSeconds": 293,
+      "text": "when it comes time to make those updates what you're gonna see is that user 1 is now in the first position of the array which if it has the index as a key that means that it's now receiving the key of 0 which is a different key than it had on the previous render user 2 has now a key of 1 because it's the first element"
+    },
+    {
+      "startSeconds": 312,
+      "text": "well the second element in the array user 3 has a key of two and so on from reacts perspective every single one of these users now has a different key which means that react is going to consider that a whole new element so that's what you're seeing here I delete user 1 every user is offset by one every user has a different key react sees"
+    },
+    {
+      "startSeconds": 332,
+      "text": "those as a different element and so it will recreate and remount the entire element which is why everything is highlighting as I delete a user but now if I come back to my code and instead of index I remove this and I put user dot ID like we had before and then I refresh and do the same things again the reason why nothing is highlighting is"
+    },
+    {
+      "startSeconds": 352,
+      "text": "because even though we've deleted user 0 user 1 still has the same ID that it has before user 2 has the same ID every single user has the same ID because that ID is not dependent on the order that they are in the array so that's what keys are and that's why they are always required and really important whenever"
+    },
+    {
+      "startSeconds": 371,
+      "text": "you're mapping over things in your code and that is why if you don't provide a key react is going to be very obvious about it and it's going to scream at you that hey provide a key because otherwise you're throwing every single performance optimization that I try to do out the window and even though that you can do"
+    },
+    {
+      "startSeconds": 387,
+      "text": "the index here right and you can do this and then index right react is no longer going to complain it's no longer going to throw an error even though this is equivalent to not having a key which might be confusing why is react allowing this it's because react doesn't really care what key you're actually giving it"
+    },
+    {
+      "startSeconds": 403,
+      "text": "it actually has no way to really know if it's good key or not all that it cares about is that you explicitly provide a key as long as you provide any key it could really be a string of like one or something or even just one react is going to be happy because from its perspective you've provided a key and the responsibility to find a good"
+    },
+    {
+      "startSeconds": 422,
+      "text": "key is solely on you so now the question is what makes a good key we've seen that if you provide the index that's not good so then what should you do what you should really think about finding something that is unique across your array something that no two elements are going to have that is going to be the same for example here in our default"
+    },
+    {
+      "startSeconds": 439,
+      "text": "users right if I go to this definition we have an ID property and although in this case it is the index this user's array is never going to change so this ID here this index is always going to be the same we have it here in the state and it's actually the state that is going to change so this users here is going to change so that's why we can't"
+    },
+    {
+      "startSeconds": 459,
+      "text": "use the index of this array but this users here is static it'll never change and so this ID is always going to be the same we could have also used the name property here in our case because here we can guarantee that no two users are going to have the same name but this will differ in your case so be sure to pick a prop property that is unique but"
+    },
+    {
+      "startSeconds": 477,
+      "text": "we could have just as easily come here and instead of ID we could have done name and this would have been exactly the same the point is for you to pick something that you can guarantee will be unique in that array if you're dealing with entities that come from a database usually they will have an ID that is already unique so it's as easy as using"
+    },
+    {
+      "startSeconds": 495,
+      "text": "that ID if you're dealing with something that doesn't really have something you have to get creative and make sure that you give some sort of unique identifier as your key now if you don't do this if you don't provide a unique key you're going to have some very strange bugs because again react uses those keys to"
+    },
+    {
+      "startSeconds": 510,
+      "text": "identify unique items and if two items have the same key in reacts perspective they are the same item so if you delete a user that has the same key it's going to delete both users because they both have the same key right so this is really important so make sure that you spend all of the time that you need to really understand this take this quote"
+    },
+    {
+      "startSeconds": 528,
+      "text": "play around with it on your own really understand and try to put different values for the keys and see what kind of results you get this is a really really important Concept in react and it's actually one of the fundamental concepts of react and how it's used cool so there you go that was a tutorial on react keys"
+    },
+    {
+      "startSeconds": 543,
+      "text": "and lists if you've enjoyed this video if you got any value from it whatsoever please do consider giving it a big thumbs up making sure to subscribe because honestly it really does help me out a lot and it shows me that you enjoy my content and that you want to see more future videos if for some reason you still haven't joined the Discord"
+    },
+    {
+      "startSeconds": 558,
+      "text": "honestly what are you doing you are missing out on the biggest value if you're trying to learn react ever available I post about things like this and way more every single day and honestly if you're a react developer or looking to learn to become a react developer which I can only assume you are since you're watching this video"
+    },
+    {
+      "startSeconds": 574,
+      "text": "this is the best resource available to you on the internet hands down if you want to join I highly recommend it it's the first link in the description down below with that being said my name has been nurse cousin this is cousin Solutions thank you so much for watching and I will see you all in the next video ciao"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:18.369Z"
+}

@@ -1,0 +1,94 @@
+{
+  "_id": "video.youtube-wh98s0XhMmQ",
+  "videoId": "wh98s0XhMmQ",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=wh98s0XhMmQ",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Today we're going to talk about caching - a key concept in system design that is critical for performance but can also cause some issues if not handled properly. Before jumping into what can go wrong, let's quickly cover the basics of what caching is and why it matters."
+    },
+    {
+      "startSeconds": 14,
+      "text": "Simply put, caching is like a memory layer that stores copies of frequently accessed data. It's a strategy to speed things up by keeping data readily available, reducing the need to fetch it from slower databases every time it's requested. For example, think about a database with user profiles."
+    },
+    {
+      "startSeconds": 32,
+      "text": "A cache for this database might store the most popular user profiles so that when someone views a profile, it loads instantly instead of hitting the database on every view. Now even with these performance gains, caching also introduces new challenges. Let's unpack the common problems that can come up. First up, let’s explore Cache Stampede."
+    },
+    {
+      "startSeconds": 53,
+      "text": "Imagine a web server using Redis to cache pages for a set duration. These pages require extensive database calls and take several seconds to render. With caching, the system stays responsive under high load since resource-heavy pages are served from cache. However, under extreme traffic, if a cached page expires,"
+    },
+    {
+      "startSeconds": 72,
+      "text": "multiple threads across the web cluster may try refreshing the expired page at the same time. This flood of requests could overwhelm the databases, potentially causing system failure and preventing the page from being re-cached. So how can we prevent stampedes? A few key strategies: One is locking. Upon a cache miss, each request attempts"
+    },
+    {
+      "startSeconds": 93,
+      "text": "to acquire a lock for that cache key before recomputing the expired page. If the lock is not acquired, there are some options: One, the request can wait until the value is recomputed by another thread. Two, the request can immediately return a “not found” response and let the client handle the situation with a back-off retry."
+    },
+    {
+      "startSeconds": 114,
+      "text": "Three, the system can maintain a stale version of the cached item to be used temporarily while the new value is recomputed. Locking requires an additional write operation for the lock itself, and implementing lock acquisition correctly can be challenging. Another solution is offloading recomputation to an external process."
+    },
+    {
+      "startSeconds": 134,
+      "text": "This method can be activated in various ways - either proactively when a cache key is nearing expiration, or reactively when a cache miss occurs. This approach adds another moving part to the architecture that requires careful ongoing maintenance and monitoring. A third approach is probabilistic early expiration."
+    },
+    {
+      "startSeconds": 153,
+      "text": "In this strategy, each request has a small chance of proactively triggering recomputation of the cache value before its actual expiration. The likelihood of this happening increases as the expiration time approaches. This staggered early refreshing mitigates the impact of the stampede since fewer processes will expire."
+    },
+    {
+      "startSeconds": 172,
+      "text": "Moving on to Cache Penetration. This happens when a request is made for data that doesn’t exist in the cache or the database or cache. This results in unnecessary load, as the system tries to retrieve non-existent data. This can destabilize the entire system if the request volume is high."
+    },
+    {
+      "startSeconds": 189,
+      "text": "To mitigate cache penetration, implement a placeholder value for non-existent keys. This way, follow-up requests for the same missing data hit the placeholders in cache instead of pointlessly hitting the database again. Setting appropriate TTL for these placeholders prevents them from occupying cache space indefinitely."
+    },
+    {
+      "startSeconds": 210,
+      "text": "However, this approach requires careful tuning to avoid significant cache resource consumption, especially for systems with many lookups of non-existent keys. Another approach uses bloom filters, a space-efficient probabilistic data structure for quickly checking if elements are in a set before querying the databases."
+    },
+    {
+      "startSeconds": 230,
+      "text": "Here's how they work: when new records are added to storage, their keys are recorded in the bloom filter. Before fetching records, the application checks the bloom filter first. If the key is absent, the record conclusively doesn’t exist, allowing the application to return a null value immediately."
+    },
+    {
+      "startSeconds": 247,
+      "text": "However, positive key presence doesn’t guarantee existence - a small percentage of cache reads may still result in misses. We have a video on how bloom filters work if you want to learn more. Finally, we come to the Cache Crash. Picture this: our entire cache system suddenly fails. What happens next?"
+    },
+    {
+      "startSeconds": 265,
+      "text": "With no cache layer, every single request now slams straight into the database. This sudden spike in traffic can easily overwhelm databases, jeopardizing overall system stability. What’s worse? Users start obsessively hitting refresh, compounding the problem. A close cousin to the Cache Crash is the Cache Avalanche."
+    },
+    {
+      "startSeconds": 285,
+      "text": "This can happen in two scenarios. One, when a massive chunk of cached data expires all at once. Two, when the cache restarts and it is cold and empty. In both cases, a crushing wave of requests hits the databases all at once. This sudden load spike overwhelms the system,"
+    },
+    {
+      "startSeconds": 304,
+      "text": "much like hundreds of people abruptly cramming through a single tiny door after a fire alarm. So how do we tackle these challenges? First option: implement a circuit breaker, which temporarily blocks incoming requests when the system is clearly overloaded. This prevents total meltdown and buys time for recovery."
+    },
+    {
+      "startSeconds": 323,
+      "text": "Next strategy, deploy highly available cache clusters with redundancy. If parts of the cache go down, other parts remain operational. The goal is to reduce the severity of full crashes. And don't dismiss cache prewarming. Particularly critical after a cold start."
+    },
+    {
+      "startSeconds": 340,
+      "text": "Here, essential data is proactively populated in the cold cache before it's put into service. This avoids abruptly bombarding the databases. As we wrap up, let’s distinguish cache stampedes versus cache avalanche since they sound similar. A cache stampede happens when many requests simultaneously hit the same expired cache entry,"
+    },
+    {
+      "startSeconds": 362,
+      "text": "overwhelming the database as it tries to refresh just that single data point. The cache avalanche is a broader issue where numerous requests for different data flood the system after a cache is cleared or restarted, putting a strain on resources. And that concludes our walkthrough of the common caching pitfalls and how to navigate them."
+    },
+    {
+      "startSeconds": 384,
+      "text": "If you like our videos, you may like our system design newsletter as well. It covers topics and trends in large-scale system design. Trusted by 500,000 readers. Subscribe at blog.bytebytego.com."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:04.486Z"
+}

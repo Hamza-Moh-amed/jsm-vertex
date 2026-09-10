@@ -1,0 +1,87 @@
+{
+  "_id": "video.youtube-NI9wYuVIYcA",
+  "videoId": "NI9wYuVIYcA",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=NI9wYuVIYcA",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 8,
+      "label": "Index"
+    },
+    {
+      "startSeconds": 34,
+      "label": "Linear Complexity"
+    },
+    {
+      "startSeconds": 62,
+      "label": "Binary Search Trees"
+    },
+    {
+      "startSeconds": 109,
+      "label": "BTree Balancing"
+    },
+    {
+      "startSeconds": 166,
+      "label": "Summary"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hi in this video I'd like to talk about be trees how they can help determine what to index and what not to index in an SQL database first let's open any book at the end this is the index the section of the book that points out where important keywords are so if you want to find a term you can look up the pages that"
+    },
+    {
+      "startSeconds": 20,
+      "text": "reference the term instead of going through the whole book similarly to that we can ask our database to keep an index next to a table and when we want to find something specific instead of going through the whole table we will use the index to help with our searches how does this work let's get back to our table if we"
+    },
+    {
+      "startSeconds": 39,
+      "text": "store the table as a link list whenever we want to find an item we would have to Traverse the list until we find it on average we'd have to Traverse half of it and the more items we have the more we have to look through this is called linear complexity or bigo of M but simply it means that the time it takes to look something up grows twice if the"
+    },
+    {
+      "startSeconds": 59,
+      "text": "data set doubl how can we improve that time we can if we sacrifice in something else example space let's try using a separate structure to store where the data is for example a binary search tree we can choose a root and put our elements before or after the root then as our database grows it's easier for us to locate an element as we don't have to"
+    },
+    {
+      "startSeconds": 81,
+      "text": "Traverse the whole tree now the time it generally takes to find an item doesn't roll that quickly it performs in what is called logarithmic time if the data set doubles the search time increases by a linear Factor this is much better than list traversal however if we have more elements on one of the branches we will"
+    },
+    {
+      "startSeconds": 100,
+      "text": "have an unbalanced tree the worst case scenario then is that we still have to Traverse all the nodes to get to the one we want can we do something about it what can we sacrifice to optimize the search time well we can trade off some time it takes to add items to the tree whenever we in a new record we can choose a new route in such a way that"
+    },
+    {
+      "startSeconds": 123,
+      "text": "the height of the tree Remains the Same for all branches there's one more practical thing to consider here disk access is expensive so we want to do that as rarely as possible to achieve that we can store several elements per node in a sorted way this is called a page when traversing the tree you access the dis only to receive the pages"
+    },
+    {
+      "startSeconds": 143,
+      "text": "instead of individual elements the the page has a fixed maximum size when you add a new element to the page and it becomes larger than the limit the page needs to be split and the tree then rebalanced this data structure is called a b tree balancing the B tree is a cost that we have to pay with every insert but our worst case scenario still"
+    },
+    {
+      "startSeconds": 164,
+      "text": "performs in log riing time all right so now after we've seen how an index tree is assembled we can better decide what to index for instance if we add an index to a Boolean column the tree will contain two large branches the storage engine would still have to Traverse lists of pages on the true and false signs the index doesn't really help"
+    },
+    {
+      "startSeconds": 188,
+      "text": "here or take another example let's say you add an index to a column containing very different data like uuids or random numbers it will result in a tree that has to be rebalanced often since the insert go to very different pages causing them to split so if you're doing more inserts on random data perhaps a primary key B Tre"
+    },
+    {
+      "startSeconds": 209,
+      "text": "index is not the best one for you we can also use this knowledge to look a bit closer what we're indexing versus what we're searching for for example if we have a composite index on the first name and last name searching for a concatenation of both will not hit the index or if we're indexing a datetime field but are searching for entries"
+    },
+    {
+      "startSeconds": 231,
+      "text": "using the date part we will also not hit the index every entry has to be transformed before comparison giving an index is a cost and we have to make sure that we benefit from it whenever I design a table I usually play around with indices and do an explain of most common queries that I expect so that's it in this video we"
+    },
+    {
+      "startSeconds": 253,
+      "text": "only looked at a B tree index there are other types some of them are only available to some databases or storage engines and the knowledge of how they work behind the scenes can help you design more efficient tables and queries thanks for watching"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:27.140Z"
+}

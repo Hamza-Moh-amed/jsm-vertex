@@ -1,0 +1,218 @@
+{
+  "_id": "video.youtube-fZ4zKgVXOP4",
+  "videoId": "fZ4zKgVXOP4",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=fZ4zKgVXOP4",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "You have probably heard these terms before. Preload, prefetch, lazy load and so on so forth. This sounds familiar and in different places uh browser, HTML, JavaScript libraries or frameworks like a relay, they show up again and again. But what do they actually do? And more importantly, how do they help you design"
+    },
+    {
+      "startSeconds": 23,
+      "text": "a faster, smoother front-end UI? In this episode, I will walk you through the difference between those terms preload, free fetch, DNS prefetch, how tools like react query, SWR or relay preload data and real world examples like hover trigger dialogue and pre-file cards. By the end, you will know what to use, when"
+    },
+    {
+      "startSeconds": 49,
+      "text": "to use it, and why it matters. Not just in theory, but in practice. You will see how preloading the right code or data at the right time can make your application fails instant, reduce the number of spinners, and avoid costly delays. So, modern front-end apps are often break down into many JavaScript bundles."
+    },
+    {
+      "startSeconds": 74,
+      "text": "Your main application logic, third party libraries, feature modules, and more. This helps keep initial load time low. But it also means that when a user click a button or popup open a model dialogue, there might be visible delay as the browser started to loading everything. But what if we could shift that loading earlier? What if we could tell the"
+    },
+    {
+      "startSeconds": 99,
+      "text": "browser, hey, this is a JavaScript file, this font or this API call is likely to be needed very soon. Start getting it ready now. That's what preload prefetch and lid load aim to resolve. Whether it's using declarative browser hands like uh the link tag with a preload or javascript based preload functions in libraries like sr uh react query and"
+    },
+    {
+      "startSeconds": 125,
+      "text": "relay. Those tools help reduce perceived uh latency and create the snappier interactions. In this video, we will work through the different types of preloading, how they work under the hood and when to use each uh so you can build faster, smarter front-end systems. Let's start with declarative preloading in native approach in browser. Modern"
+    },
+    {
+      "startSeconds": 150,
+      "text": "borders allows you to express your intent directly in HTML using tags like link uh real equals to pre fetch or preload and the browser decide the optimal weight and time to act on it. They complement JavaScript based solution and uh help the browser act earlier even before any javascript executes. placing them in header in the"
+    },
+    {
+      "startSeconds": 176,
+      "text": "HTML document and give the browser a head uh start to warm up critical resources while passing the HTML. Let's start with the link with a preload as a real attribute value. So this tells the browser to start downloading earlier even before the actual script tag appears. Use this when you are loading classic JavaScript uh scripts or fonts"
+    },
+    {
+      "startSeconds": 201,
+      "text": "images you know will be needed soon. And there's a related um value for the real uh on the link tag uh which is a profetch. This tell the browser to fetch the resources when it's idle without blocking critical tasks. Use this for resources that might be needed soon like the next page script or a component but not immediately. And there is a DNS per"
+    },
+    {
+      "startSeconds": 228,
+      "text": "fetch uh value as well. This will start DNS resolution earlier before any JavaScript uh initiates the request. Uh this is useful when your app needs to contact a third party API or separate domain for data so that the as solution is out of the way when the actual request happens. Let's dive into it. So the application we are going to use uh"
+    },
+    {
+      "startSeconds": 254,
+      "text": "for demonstrate these ideas is a profile page. Um basically there is a user uh section and there's a friends of this user section and when you hover on this um there will be a popup and then at the end of the page there is also a list of feeds um you can think of that is um a feed list or something like that. A user"
+    },
+    {
+      "startSeconds": 279,
+      "text": "might interesting in that profile or like a homepage or timeline page and u there a few network request for fetching this information on the showing on the page and at the moment the if we go to the code uh actually I have implemented several uh versions of this uh profile and we're using the fifth version of it."
+    },
+    {
+      "startSeconds": 300,
+      "text": "Uh if we open up the profile uh you can see there is a use effect block that will fetch the user and the friends um in the use effect block. Um it will send two request uh simultaneously to get uh the user by ID and also the friends of that user by ID as well. And during the loading status it will showing a user info skeleton and if something went"
+    },
+    {
+      "startSeconds": 327,
+      "text": "wrong it will show the error message. And then once we have that um user info it will use pass the user to a about um section which is essentially this name and description and the avatar. And then there's a friends list uh that will use a friends uh array. uh it will show these three um frames and uh then at the bottom there's a feeds uh which is"
+    },
+    {
+      "startSeconds": 358,
+      "text": "corresponding to this section and I have add a few uh fixed delays for this a API endpoint so when we are uh heading to this API it will have um a few seconds delay that's pretty much about the setup and if we now go to the page and do a refresh You can see that some skeleton shows up uh first on these user and friends and"
+    },
+    {
+      "startSeconds": 383,
+      "text": "then your feed list. Um let's do it again. Uh if I inspect the network and do a refresh of the page. Um and you can see that the local host is a HTML document is loaded first and then in it it has the reference to the script. The index uh JS is loaded and the index. CSS is loaded as well. And later on uh as we have the"
+    },
+    {
+      "startSeconds": 410,
+      "text": "JavaScript uh the U user API and also the user friends API are kicked off uh and simultaneously and then there will be some other resources loaded um as well. Uh but you can see that there is a clear um timeline here. If I use the performance tab instead, let's do another refresh um to profile the current uh implementation. We can see that"
+    },
+    {
+      "startSeconds": 440,
+      "text": "uh if I zoom in the network here. Um so you can see the uh HTML document is kicked off at this point and then index.js JS and uh CSS and there's some passing work here and then the user and the friends uh request are kicked off. So there's some gap here. You can see there's some delay. It's not very obvious when you refresh"
+    },
+    {
+      "startSeconds": 468,
+      "text": "the page to see that delay. But uh when you profile it, you can see that much cleaner uh in here because the API call is time consuming. It's it has some significant delay. What if we can make that happen earlier on the timeline? So that's where the preload tag come in. So if we go to the index.html and in here, so before the script and"
+    },
+    {
+      "startSeconds": 493,
+      "text": "every other resources, we can ask the browser to preload um the API. So basically we'll do a link um tag with a real equals to uh preload and we want to treat this preload as a simple uh fetch and for the cross original we just put that an anonymous and the reference for this uh will be the URL we are sending the request to and we want to send the"
+    },
+    {
+      "startSeconds": 521,
+      "text": "request to this uh endpoint uh at very earlier stage in here like so. So this basically tell the browser to preload this resource as early as possible even before the script uh or the u CSS and also we want to load the friends for this user as early as possible and with this tags if now we go back to our browser and do another refresh"
+    },
+    {
+      "startSeconds": 550,
+      "text": "uh to fulfilling the current uh change. So you will notice here that the as we are sending the request for the uh uh HTML document the user API and the friends API are kicked off uh instantly along with the index.js and index CSS that move the load much earlier so that will be resolved earlier so we have a faster UI alternately. And if we go back"
+    },
+    {
+      "startSeconds": 580,
+      "text": "to our application doing a refresh, uh we can see some slightly faster UI here. And in the network tab, we can see that the user and friends request are sending out very earlier after the uh document right away. We have this user and friends sending out. And if we inspect this column here, um, open up the priority,"
+    },
+    {
+      "startSeconds": 606,
+      "text": "uh, you can see that the HTML document has a highest priority. And then we have this user with a high priority. And also the friends has a high priority. And also you can see that the uh, HTTP request happened much earlier than the index.js and the CSS. That's why it will uh, render much faster. So why not use preload for everything if it's that"
+    },
+    {
+      "startSeconds": 629,
+      "text": "good? Because the preload is treated as high priority by the browser. It starts uh downloading immediately competing with critical script and assets. If the preloaded resource is not used soon, it can hurt uh initial performance. Use wisely to strike the right balance. And also we notice that there are some uh"
+    },
+    {
+      "startSeconds": 653,
+      "text": "third party um domains we are accessing for the user avatar. These images are from the u pr avatar.cc this domain. And if you want this happen earlier um we can put this DNS um into a link um as well. So basically we can implement that by saying link um the real is DNI prefetch u and we want to provide that h ref to uh this domain. So what it does"
+    },
+    {
+      "startSeconds": 687,
+      "text": "is it will try to resolve this uh DNS name to the IP address as early as possible. So when we actually accessing these uh images or loading the images in a user avatar they'll be much faster because the DNS is has already been resolved. So this is where you use a DNS prefetch. Um it might not very uh noticeable in our keys here because we"
+    },
+    {
+      "startSeconds": 715,
+      "text": "have already have cache the DNS has already been activated as we are accessing but you got the idea especially for the first time when user accessing your application well your application is accessing some third party um domain which you haven't in your browser accessed before and that DNS prefetch will make your application"
+    },
+    {
+      "startSeconds": 735,
+      "text": "much faster. This is a declarative way to implement the preload and we call it a declarative. Um what does that mean is that you describe uh what should happen not how. In HTML you say I want this resource loaded earlier and the browser figure out how and when to do it. Same in React you declare the UI reactive figure out"
+    },
+    {
+      "startSeconds": 762,
+      "text": "what to render. This model makes the code uh easier to reason about and give the browser or framework flexibility to optimize under the hood. You should consider using the native browser based uh approach uh whenever possible. It's simple, reliable and give you uh performance benefit out of the box without worrying about um polyfills or"
+    },
+    {
+      "startSeconds": 788,
+      "text": "compatibility problems. But when native option don't quite fit like when you want to preload resources conditionally based on uh user behavior this is where JavaScript based solution come in. Libraries like SWR react query or relay let you preload dynamically uh in response to uh user interactions like hover or scroll. Those tools give you"
+    },
+    {
+      "startSeconds": 815,
+      "text": "more control and the flexibilities to uh optimize performance precisely where it matters. Let's now have a look at this in action. So for example in the friends list avatar there there is a avatar here when you hover on it we want to load the data for this user detail and when you click it it will open the model dialogue"
+    },
+    {
+      "startSeconds": 840,
+      "text": "uh to show this user's detail information and for such case we cannot like predict the user will click that because they may or may not click the uh particular friend at all. So we want to uh dynamically at the this point to load this um data and the javascript bundle for this uh model dialogue or this popup. So that can be implemented in a"
+    },
+    {
+      "startSeconds": 867,
+      "text": "different approach uh with the javascript uh per loading. React provides a built-in API for code splitting with react lazy and suspense. It allows you to load components only when they are needed and show a fullback like a spinner or skeleton component while uh they are doing the fetch. Uh if you're new to this pattern, I actually"
+    },
+    {
+      "startSeconds": 892,
+      "text": "had a whole video covering the rack lazy and suspense in depth. Uh check them out uh first if you would like a refresher. Uh let's forget the declarative approach for a little bit and go to our application and the profile. And now if we go to a friends list and we can see that in here I'm using rec lazy and suspense API uh combination"
+    },
+    {
+      "startSeconds": 918,
+      "text": "to make this a lazy loading. So basically uh we are importing this friend.tsx tsx. Uh so that will be bundled in a separate uh bundle and um the suspense API will work with this uh lazy bundle and during the loading experience it can show a skeleton and once the friends is loaded it can finally use data. So if you go to the"
+    },
+    {
+      "startSeconds": 944,
+      "text": "friend uh component there's a popover um component that has a trigger and a content. So basically this trigger is like a button we click and then it will show up the content uh of this um user detail. So in here we have a brief component that is using the user that is wrapped uh inside a button a headless button. So we have defined a on mouse"
+    },
+    {
+      "startSeconds": 971,
+      "text": "enter uh here basically it will like trigger the most enter uh handler whenever a user hover onto this uh trigger which is the user avatar here. So if we inspect the component let me put this into the bottom of the page like so and do a refresh and let me clean the network. So if I hover on the avatar immediately you can see a details"
+    },
+    {
+      "startSeconds": 1002,
+      "text": "API is triggered. So that will load the details for the user two. And if I hover on the other one the Bob Smith it will uh load the user three. This happens because we have a preload from SWR which is a library that can maintain a cache that has the API u pass to data mapping. You can think of that as a hashmap uh or"
+    },
+    {
+      "startSeconds": 1032,
+      "text": "something like that and um the key of that map is the um API um path and the result is the um the response from server side. So that means when uh we handle MOS enter we'll preload this cache or like refresh the cache uh under the hood uh that means that we will download the details into a uh local inmemory cache. So and inside the user"
+    },
+    {
+      "startSeconds": 1061,
+      "text": "detail card which is the place where we use the data. Uh if we go to the uh user detail card uh we are using the use SWR uh for this particular key uh and because the data has already been downloaded where we most enter it. So in here in the user detail card it can get this uh data right away from the cache. It's already there. Um and then it can"
+    },
+    {
+      "startSeconds": 1089,
+      "text": "use the data as a details to show the header uh in the paragraph as well. So that's why you see that so quick. So when you click it you can see that data immediately. So that means when you hover it will download or preload the data and when you click it will open up this uh model dialogue with the data already fetched. And there is one more"
+    },
+    {
+      "startSeconds": 1113,
+      "text": "request sending out while we open up this uh model dialogue which is the image. Uh if we can catch the image somewhere uh in the local that will make the uh user experience even better. Uh for example at the moment when we click it it will always load the image uh from scratch. Um but yeah we can enhance that experience by caching this data or the"
+    },
+    {
+      "startSeconds": 1139,
+      "text": "image data somewhere because the cache is maintained by HWR it can handle all the dduplication the cache the cache invalidation uh all these um you know even cancellation under the hood um automatically that can save us quite a lot of effort on the um maintaining this pre-loading behavior. Similarly in react query uh in relay they have the similar"
+    },
+    {
+      "startSeconds": 1165,
+      "text": "implementation details. Basically, they have a big map or a hash um store in the browser memory and when you hover or scroll to trigger a network request, it will firstly look up in the cache first and see if there's already a data and you can use this data from the cache uh immediately to show something on the screen. Under the hood, it will send"
+    },
+    {
+      "startSeconds": 1192,
+      "text": "another request to invalidate the uh cache and once the response is back, the library can refresh the cache and the UI will be refreshed again automatically. This is how you do the preloading um with React libraries. It's a little bit more complicated than the link declarative um way, but it also give you more uh control, more flexibility"
+    },
+    {
+      "startSeconds": 1217,
+      "text": "um to do that with code. And if you want to look into the every uh code implementation details, I have already published a tutorial in my website icodit.com.eu and there is a tutorial here uh which is talking about the advanced data fetching patterns in react uh and you can uh see the profetching techniques in react"
+    },
+    {
+      "startSeconds": 1243,
+      "text": "applications. It has more detailed explanation in articular. Please feel free to have a look and let me know if you have any following up questions. So those techniques are most useful when you can confidently predict the users's next step model uh or dialogue that opens on user in interactions. uh the product card with a quick review um or"
+    },
+    {
+      "startSeconds": 1272,
+      "text": "preview uh router transitions between uh large pages. They can significantly improve the uh perceived performance by getting resource earlier before the user even notice a delay. And uh on the other hand uh there are cases you shouldn't use them. U so be cautious uh in this situations. Uh for example, if you have a heavy date and a large JavaScript"
+    },
+    {
+      "startSeconds": 1298,
+      "text": "chunks that user might never use but you decide to preload it or some mobile devices u on a slow network and unpredictable user pathies will peret guess work uh goes wrong overusing profetch or preload can backfire uh wasting bandwise or even slower down the critical path. So they are not just like a technical terms uh fancy words. They"
+    },
+    {
+      "startSeconds": 1325,
+      "text": "are your performance levels tools that let you take control of the user experience by reducing perceived uh waiting times uh minimize the layout shift and improving responsiveness. If you done that right, they make your UI feel faster. They help you and anticipate what the user might do and made them there before they even click."
+    },
+    {
+      "startSeconds": 1349,
+      "text": "If you learned something today, leave a comment below and I'd love to hear uh how you are using these techniques. And if you are into building faster, scalable uh front-end systems, hit subscribe. I have got more practical episodes coming soon. Thanks for watching and I will see you in next time."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:20.409Z"
+}

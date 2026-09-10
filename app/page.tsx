@@ -20,7 +20,6 @@ export default async function Home() {
     tags: [CACHE_TAGS.course, CACHE_TAGS.lesson, ]
   })
 
-  console.log(courses)
 
   return (
     <PageFrame>

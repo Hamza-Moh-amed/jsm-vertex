@@ -1,0 +1,118 @@
+{
+  "_id": "video.youtube-j3QJ1Rhxxbw",
+  "videoId": "j3QJ1Rhxxbw",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=j3QJ1Rhxxbw",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Welcome to Build Bites Daily. Hey all you NextJS developers out there, you know that feeling when your static homepage just flies? It's instant, but then you click over to a blog post or a product page and there's that little bit of a delay. Well, in this explainer, we are going to crush that delay. Yeah, this is probably one of the most common"
+    },
+    {
+      "startSeconds": 20,
+      "text": "questions I see. You build this lightning fast site, but the performance just doesn't seem to hold up for your dynamic content. Don't worry, you are definitely not alone. And the good news is there's a fantastic solution baked right into Nex.js. So let's talk about what's really going on here. So the whole issue really comes down to how"
+    },
+    {
+      "startSeconds": 37,
+      "text": "dynamic routes are handled by default. I mean they're amazing, right? You can have one file like /slug.js that handles all of your thousands of blog posts. But that flexibility comes with a hidden cost. That hidden cost is in those two words on demand. See, when a user asks for a dynamic page that hasn't been built yet, the server has to scramble."
+    },
+    {
+      "startSeconds": 58,
+      "text": "It has to wake up, go fetch the data, actually render the HTML for the page, and only then can it send it back to the user. Every one of those steps takes time, and that's time your user is just staring at a loading screen. We can do way, way better than that. And that's, my friends, is where our hero of the day"
+    },
+    {
+      "startSeconds": 75,
+      "text": "comes in. Generate static params. This is a seriously powerful function in the Nex.js JS OP router that lets us completely change the game for our dynamic pages, turning that wait time into instant load time. The official docs really say it all. Instead of waiting for a user to show up and ask for a page, we're going to proactively"
+    },
+    {
+      "startSeconds": 95,
+      "text": "tell Nex.js, hey, build all these pages ahead of time when you're building the whole site. It's a huge shift, and it is the absolute key to unlocking that top tier performance. Honestly, the best way to wrap your head around this is to think of it like you're handing Next.js JS, a to-do list or a shopping list. You're just saying, \"Okay, before you"
+    },
+    {
+      "startSeconds": 114,
+      "text": "deploy everything, I need you to go out and create a ready to go HTML page for product ID 1, product ID 2, and my blog post titled Hello World.\" So, what's the result of giving Next.js that list? Well, every single one of those pages gets pre-built, packaged up, and sent to a CDN where it just sits there waiting."
+    },
+    {
+      "startSeconds": 132,
+      "text": "The moment a user clicks the link, bam, the page is served instantly. No server thinking, no on demand rendering, just pure speed, just like your homepage. All right, so that all sounds great in theory, but how do we actually make this build list in our code? You'll be surprised at how simple and intuitive it actually is. Let's get into the"
+    },
+    {
+      "startSeconds": 151,
+      "text": "nitty-gritty. Okay, at its core, the entire job of generate static params is to do one thing, return an array. That's it. And inside that array, you put a bunch of little objects. Each one of those objects tells Nex.js JS about one single page you want it to pre-build. And what's so cool about this is how logical it is. The shape of the objects"
+    },
+    {
+      "startSeconds": 170,
+      "text": "you return has to match the dynamic parts of your URL. So if your URL has a dynamic ID, your object needs a key called ID. If your URL has category and product, well, your object needs keys for both. It just makes sense. Let's look at some real code. Okay, let's start with the most basic case you can imagine. We have a route with just one"
+    },
+    {
+      "startSeconds": 190,
+      "text": "dynamic segment ID. Inside our page.tsx file for that route. We just export our function and return an array of objects. Here we're returning three objects each with a different ID. And that's it. We're literally telling Nex.js, when you build the site, please create static pages for /roduct 1/2 and/prouct/3. Done. So what if your URL is more"
+    },
+    {
+      "startSeconds": 213,
+      "text": "complex? What if you have multiple dynamic parts? It's just as easy. For a route like / product/category/prouct, our objects just need to have keys for both category and product. In this case, we're pre-building two very specific pages. Product one in category A and product two in category B. And yeah, of course, it works with those tricky catch"
+    },
+    {
+      "startSeconds": 232,
+      "text": "all routes, too. For a route using dot dot dot slug, the only difference is that the value for the slug key is an array of strings. Each string in that array becomes a segment in the final path. So, slug equals a1 perfectly generates the path / product/ a1. It's really flexible. Oh, and a super important pro tip here, especially for"
+    },
+    {
+      "startSeconds": 252,
+      "text": "anyone coming from the old pages router. If you're thinking, hm, this sounds a lot like get static paths, you're exactly right. Generate static params is the new modern replacement for get static paths in the app router. Same job, new name. Okay, so hard- coding an array like that is perfect for understanding how this works. But in a"
+    },
+    {
+      "startSeconds": 272,
+      "text": "real world app, you're not going to sit there and type out the IDs for 500 blog posts. Your data is coming from somewhere else. So let's look at how we can generate these paths dynamically. The most common approach is to just build everything up front. You can make generate static params and async function, which is awesome. This lets"
+    },
+    {
+      "startSeconds": 290,
+      "text": "you await a fetch call to your database or your CMS right inside the function. You grab all your posts and then just use a simple map to transform that list of posts into the array of params objects that Nex.js JS needs. This is perfect for your typical blog or doc site where you want every single page to be static and instant. But what if you"
+    },
+    {
+      "startSeconds": 308,
+      "text": "have an e-commerce store with 50,000 products? Building all of those pages at once could make your build times really, really long. So a much smarter strategy is to just build a subset. For instance, you could fetch all your products, but only return the params for, say, your top 100 best sellers. Those 100 pages"
+    },
+    {
+      "startSeconds": 326,
+      "text": "will be instant. What about the other 49,900? They'll get generated on demand the very first time someone visits them and then they'll be cached. It's truly the best of both worlds. And then there's this third really cool option, build absolutely nothing at build time. You can just return an empty array. You're telling Nex.js, hey, don't"
+    },
+    {
+      "startSeconds": 345,
+      "text": "pre-build any of these pages. This means every dynamic page will be generated on demand when it's requested for the first time and then cached. This powerful pattern is known as incremental static regeneration or ISR where your site builds itself over time as it's needed. Now, talking about these different strategies brings up a really important"
+    },
+    {
+      "startSeconds": 365,
+      "text": "question. What happens when a user tries to visit a URL that we didn't pre-build? Well, Nex.js gives us a very clear way to control exactly that behavior. That control comes from a little configuration option called dynamic params. You just export it as a variable from your page file right alongside the function. This one setting tells NexJSJS"
+    },
+    {
+      "startSeconds": 384,
+      "text": "exactly what to do with those unknown or ungenerated paths. And you've got two settings. The default is true. This means if a page wasn't pre-built, Nex.js will try to generate it when it's requested. This is perfect for that subset strategy we just talked about. On the other hand, you can set dynamic params to false. This is like telling"
+    },
+    {
+      "startSeconds": 403,
+      "text": "Nex.js, if the page isn't in my pre-built list, it simply does not exist. Period. Any request for a page that wasn't pre-built will get a 404 error. And just a quick final tidbit you should know, the function behaves a little differently in development versus production. When you're running NextDev, it runs every time you navigate to a"
+    },
+    {
+      "startSeconds": 421,
+      "text": "page so you can see your changes live. But in production, it only runs one time during the next build command to generate all those static files for your deployment. All right, that was a lot of info. Let's just zoom out for a second and recap the big benefits here. Why should you really go to the trouble of using this in your apps? First, and this"
+    },
+    {
+      "startSeconds": 442,
+      "text": "is the big one, performance. Your users get that instant, snappy experience. Second, SEO. Google and other search engine crawlers absolutely love plain HTML files. They can index your site so much faster. Third, you're taking a huge load off your server since it's not constantly having to build pages. And finally, your builds become way more"
+    },
+    {
+      "startSeconds": 461,
+      "text": "reliable and predictable. You know exactly what pages are going to exist when you hit deploy. So that brings me to my question for you. I want you to think about the projects you're working on right now. Is it a blog, an e-commerce site, a portfolio? Which one of your dynamic routes could you give a massive speed boost to with generate"
+    },
+    {
+      "startSeconds": 477,
+      "text": "static params? What pages can you take from on demand and make instant? That's the challenge I'm leaving you with. If you found this explainer useful and it helps clear things up, please do me a favor and hit that like and subscribe button for more deep dives into web development right here on Build Bites Daily. Thanks for watching and happy"
+    },
+    {
+      "startSeconds": 492,
+      "text": "coding."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:39.855Z"
+}

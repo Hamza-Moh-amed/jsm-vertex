@@ -1,0 +1,74 @@
+{
+  "_id": "video.youtube-nNrgRVIzeHg",
+  "videoId": "nNrgRVIzeHg",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=nNrgRVIzeHg",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "in this video we do more advanced aggregation using the group by and having causes all right so let's get into it and I am using the Northwind database if you want it link in the description down below and I'll be using the customers table for this particular example so let's do a basic select all from customers get all of our"
+    },
+    {
+      "startSeconds": 23,
+      "text": "information here I've got to spell it correctly customers so there we go here's a list of all of our customers and we notice that they're in a bunch of different countries but some people are in the same countries and let's say that we want to break down their information see how many customers we have in each country so that's what we want to try"
+    },
+    {
+      "startSeconds": 41,
+      "text": "and solve first right here so what we might think doing is select country so we get their country and then we can use account aggregate function count to to get the number of customers in each country right that's what we're kind of thinking so we launched that query and we get an error message and it says that we need to use the group by clause"
+    },
+    {
+      "startSeconds": 64,
+      "text": "because we're using an aggregate function so if you have an aggregate function up in your select statement as well as a regular non aggregate column name here you need you need to use the group by clause so that way you're essentially grouping by your column name and it'll aggregate on that column name for your aggregate function so I'll show"
+    },
+    {
+      "startSeconds": 88,
+      "text": "you what I mean by using it so we got select country from count all from customers and then we'll do our group by country so if we run that we now see that we have our country name and then we have a count of how many customers we have with the country name with that particular country name so we have like 3 in Argentina five in Spain two in"
+    },
+    {
+      "startSeconds": 114,
+      "text": "Switzerland and we could also do an order by order by count and five and let me do it descending this Sunday five so we see that USA has 13 customers followed by Germany with 11 that France with 11 Brazil 9 and so on and so that's pretty cool you can see how that's working there now let's say we also want ad in city up here so countries city and"
+    },
+    {
+      "startSeconds": 139,
+      "text": "we'll run it and we got another air and that's because we need to also include city in our group by clause down here so let's go in city 5 and boom so now we have it broken down by country and then city and then how many customers in that particular city country combination right so hopefully that's making some"
+    },
+    {
+      "startSeconds": 158,
+      "text": "sense all right now you can also apply some filters so like a where clause as well as a having clause to your query so having comes after the group by clause so it works similarly to a where clause but you can this is how you can filter on your aggregation so like having count as greater than 1 right so let's say"
+    },
+    {
+      "startSeconds": 186,
+      "text": "that we're gonna send some salespeople to these countries and these cities to meet with their customers and we only want to send our sales person to a city that has multiple customers so that way you know they're not flying all the way across the world to visit one city with one customer and we're trying to get"
+    },
+    {
+      "startSeconds": 203,
+      "text": "more bang for our buck so we have that having there we can filter based off of our aggregate function so if I run it again we see all of the cities and countries that have more than one a customer in it right now if I threw this up here in the where clause so where count is greater than one and let me delete it out of here we get an error"
+    },
+    {
+      "startSeconds": 235,
+      "text": "message because we can't do a where statement of filter on an aggregate function it doesn't work like that you can only do a filter with the having a filter on the aggregate function with the having statement which comes after the group by statement now that's not to say you can't we're lost for example we could do where"
+    },
+    {
+      "startSeconds": 261,
+      "text": "country like I don't know let's say one that has an A and a in it for whatever reason so I want a sort or filter for countries that have an A in them and then having and will leave leave that out of there so f5 so now we see all countries that have an A in them feature here so you see that you can use a where where"
+    },
+    {
+      "startSeconds": 287,
+      "text": "clause as well and if you wanted to having count of let's say less than three f5 so now we're looking for all countries that have an A in them and we have less than three customers in that particular city over here city country combination and for one last bit of a shortcut we can also instead of doing group by countries sitting and writing"
+    },
+    {
+      "startSeconds": 316,
+      "text": "out the the name of our columns we could do some shorthand and just do one two and run that and we get the same result as when we typed in country city here we're just doing a little bit of shorthand just to keep things clean and simple and also if you're selecting multiple columns and you have like get going like three or four deep you don't"
+    },
+    {
+      "startSeconds": 336,
+      "text": "have to type out you know three or four different columns you can just use these numbers to keep things straight and so that's really it for this video we covered more advanced aggregate functions including using group by having and where clauses and if you found this video helpful in any way shape or form I appreciate a like"
+    },
+    {
+      "startSeconds": 354,
+      "text": "comment subscribe anything like that and I hope that you have a great rest of the day"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:13.940Z"
+}

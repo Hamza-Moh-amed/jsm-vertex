@@ -1,0 +1,151 @@
+{
+  "_id": "video.youtube-jCGMedd6IWA",
+  "videoId": "jCGMedd6IWA",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=jCGMedd6IWA",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 40,
+      "label": "Why you need useDeferredValue"
+    },
+    {
+      "startSeconds": 119,
+      "label": "How useDeferredValue works"
+    },
+    {
+      "startSeconds": 165,
+      "label": "How to implement useDeferredValue"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "One of the biggest goals of React 18 was to try to fix sluggish and non-responsive applications and to do so they implemented two main hooks. There's the use transition hook and the use deferred value hook. In this video we're going to be specifically focusing on the use deferred value hook, but if you want to look at the use transition hook as"
+    },
+    {
+      "startSeconds": 17,
+      "text": "well as all the other hooks in React, I have a completely free React course that covers every single hook. It's going to be linked down in the description for you. Now with that said, let's get started on use deferred value. Welcome back to WebDev Simplified. My name is Kyle and my job is to simplify the web for you so you can start"
+    },
+    {
+      "startSeconds": 36,
+      "text": "building your dream project sooner. In this video we're going to be talking all about use deferred value. So to get started I kind of want to explain what our application does. We essentially just have a really simple list component which takes in an input prop. This input prop is set to whatever I type into this"
+    },
+    {
+      "startSeconds": 50,
+      "text": "input box over here. As you can see, we just have a simple input box. Whenever it changes, we set this input state variable and pass it down to our list component. But we're going to imagine that this app doesn't even exist. We're just getting this input prop and that's all we know. Inside of here, what we're doing is we're taking our list here,"
+    },
+    {
+      "startSeconds": 65,
+      "text": "we're memoizing it using the use memo hook. And again, if you're unfamiliar with this hook, that free React hooks course is going to be linked down in the description for you. And then what we're doing inside this use memo is we're creating a really, really big list. This list is 20,000 elements long and each element is just the input itself. So"
+    },
+    {
+      "startSeconds": 80,
+      "text": "whenever we change our input, we create a brand new list with 20,000 elements. Well, this right here is going to be pretty slow because that's a lot of elements to render to the page. So if I come over here and I type onto my keyboard for example, right now, I clicked the D key, you can see it takes maybe a second, two seconds to render"
+    },
+    {
+      "startSeconds": 95,
+      "text": "out. And the more information I type like if I start typing right now, you can see it takes a long time before all this information renders out to the screen. Again, multiple seconds. It's slow, it's sluggish and the user does not like to work with this type of experience cuz the input box does not feel responsive. With use deferred"
+    },
+    {
+      "startSeconds": 111,
+      "text": "value, we can actually fix this so that the input box itself is going to feel responsive even if the actual website itself is not that responsive. Now, the way this use deferred value hook works is it's very similar to something like debounce or throttling. Essentially, if you're unfamiliar with those concepts,"
+    },
+    {
+      "startSeconds": 126,
+      "text": "is whenever you're typing inside of an input with debounce, what it's going to do is it's going to wait until you at least spend like 100 milliseconds not typing, and then it's going to do all of the calls. So, you could type in like 10 characters, and as long as there's no more than 100 millisecond gap between each key press, it's not going to do"
+    },
+    {
+      "startSeconds": 141,
+      "text": "anything till you wait 100 seconds or 100 milliseconds after your last key press. With use deferred value, you don't actually specify a hard-coded time. What React does is it just says, \"Okay, I know that this value is going to be deferred. So, if there's a lot of changes going on, I'm not going to do anything, and instead I'm going to wait"
+    },
+    {
+      "startSeconds": 157,
+      "text": "until the application isn't busy with anything else, and then I'm going to go ahead and process all of these different changes.\" So, to use this use deferred value hook, it's actually really simple. First, we just need to import the hook up here at the very top, and then what we need to do is we need to say what"
+    },
+    {
+      "startSeconds": 171,
+      "text": "value we want to defer. In our case, we want to defer this input value. Cuz if this input value has a lot of changes going on, I don't want to render out a brand new list every single time we make a change. Instead, what I want to do is I want to wait until it's been a while since my change has happened before I render out the list in case I type a"
+    },
+    {
+      "startSeconds": 186,
+      "text": "bunch of letters at once. So, we can say that our deferred input here is going to be equal to calling use deferred value with our input passed in. So, all this does inside of React land it says, \"Hey, taking this input, and as long as there's a decent amount of time between when the input changed last time, then update our new deferred input."
+    },
+    {
+      "startSeconds": 204,
+      "text": "Otherwise, keep it the same as it was before until we stop typing essentially.\" Then, what we can do is just replace everywhere we have input with this deferred input. So, here and here. Now, we've essentially replaced every instance of our input with this deferred version of our input. And just by doing that, you're going to notice"
+    },
+    {
+      "startSeconds": 220,
+      "text": "our app is a little bit more responsive. Let me just refresh it real quick, and I'm going to type in a character, for example, A. And you can see that A immediately appears on the screen, and then my list loads afterwards. And that's because of this use deferred value. What's happening inside of React, if we go back into our app components,"
+    },
+    {
+      "startSeconds": 234,
+      "text": "we can see what that looks like as well. You can see inside of here we're setting our input. And this is happening and what's happening is it's setting our input and then normally if we didn't have this deferred value here, what it would do is it'd be popping into this use memo, it'd be calculating out my entire list and then it would be"
+    },
+    {
+      "startSeconds": 248,
+      "text": "rendering out all the information to the screen at once. So it'd be rendering out this new input value as well as my entire new list value as well. But with use deferred value, what's happening instead is it's saying, \"Okay, my input has changed and then I'm going to go into my list component. It's saying use deferred value, so we're just"
+    },
+    {
+      "startSeconds": 264,
+      "text": "going to return the original value, which is nothing.\" So like whatever the value was last time the app rendered, that's what it's going to return. So my list, it doesn't even change. So this use memo doesn't have to run. We don't have to do this lengthy for loop. So nothing changes on our list side of things. And then instead in our app over"
+    },
+    {
+      "startSeconds": 278,
+      "text": "here, we're rendering out our input with the new value. Then it's been a while since we hit our key, maybe a 100 milliseconds or 50 milliseconds has passed, our application has rendered, nothing's happened for a while. So now React's like, \"You know what? It's been long enough. Let me give you the new value.\" So now the deferred input is"
+    },
+    {
+      "startSeconds": 293,
+      "text": "going to be set to this A key that I typed in. It's going to recompute my entire list and then render out the brand new list. So what this essentially allows us to do is specify things that are high priority and low priority. By using this use deferred value, you're saying, \"You know what? This deferred input value is of low priority. I don't"
+    },
+    {
+      "startSeconds": 309,
+      "text": "care if this gets updated immediately or if it takes a little while for it to update because I know it's going to be slow and computationally expensive to do. So I'm going to let it happen later. Whenever it happens, it's okay. I don't really care. Instead, I want things like my input value to be updated immediately"
+    },
+    {
+      "startSeconds": 324,
+      "text": "while something else like this list, it can happen whenever. I really don't care.\" So now this is great because whenever I type over here in my input, for example, I could type a bunch of letters all at once and you can see all those letters are going to show up on the screen all at once, which is really handy. And to kind of show you exactly"
+    },
+    {
+      "startSeconds": 338,
+      "text": "how this works, I'm actually going to use a simple use effect. And inside this use effect, I'm just going to print out some code. I'm actually just going to copy this over. And all this code does is print out what my input value is and what my deferred input value is. And then we're going to make sure anytime our input or deferred input changes,"
+    },
+    {
+      "startSeconds": 353,
+      "text": "we're going to render out this code here. So essentially anytime our input or deferred input changes, it's going to print out what each of those are equal to at the given time. Let me just clear out my application. Going to inspect here, go over to the console, just clear this out. And what I'm going to do is I'm just going to type the character A."
+    },
+    {
+      "startSeconds": 368,
+      "text": "And you can see at first my input is A and my deferred value is nothing. It stayed as the previous value and then after a little while they both got set to A. Let's refresh this and try this again where let's just start out where I type in a bunch of letters all at once like ASDF. You can see my input goes A, AS, ASD, ASDF. And my deferred value"
+    },
+    {
+      "startSeconds": 385,
+      "text": "never changes during that entire time cuz there was no delay in between my character presses. So React is like, \"Okay, things are still changing, things are still changing. I'm not going to update the value yet.\" And then I stop typing. It's been a while so React's like, \"Okay, things haven't changed in a while. Let's update that deferred value"
+    },
+    {
+      "startSeconds": 400,
+      "text": "and render out the brand new list.\" Now the real place that this shines is when you don't actually have access to the ability to set the state. In our case, we could change the code up here for our set input, but imagine that this set input happened in like a library or it happened somewhere else in your application that's far removed from your"
+    },
+    {
+      "startSeconds": 416,
+      "text": "list component. It'd be nearly impossible to use that set state and modify how this works. So instead we can just plop in this use deferred value and it's going to be smart enough to know that, \"Okay, we're going to wait for the change in the input to be long enough.\" And it's essentially going to implement that debounce or throttling behavior for"
+    },
+    {
+      "startSeconds": 431,
+      "text": "us, but it's going to be even better than like a debounce or throttling implementation. Cuz it's not going to be forced to wait like 300 milliseconds. Instead if nothing happens and it can work right away, it's just going to work right away. But if there's lots of changes, it's going to make sure it waits long enough for all of them. And"
+    },
+    {
+      "startSeconds": 446,
+      "text": "React's smart enough to know what's going on inside the library to know when the best time to change this input is. Now if you enjoyed this video, you're definitely going to love my completely free React Hooks course. It's going to be linked down in the description below. It covers every single React Hook that that need to know and it's a"
+    },
+    {
+      "startSeconds": 461,
+      "text": "free, which is absolutely amazing. No ads, nothing like that. So, if you're interested, that's going to be linked down in the description for you. Now, with that said, thank you very much for watching, and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:32.070Z"
+}

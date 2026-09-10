@@ -1,0 +1,94 @@
+{
+  "_id": "video.youtube-aJpzr8648XE",
+  "videoId": "aJpzr8648XE",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=aJpzr8648XE",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 2,
+      "text": "hello and welcome to another lightboard session in this lesson i am going to talk about what are the things that you would want to observe what are the observability systems that you need and why and how would you go about observing it that possibly might be a next one but let's talk about observability and the three types of"
+    },
+    {
+      "startSeconds": 23,
+      "text": "things that you would want to observe the first one includes the metrics and the metrics are the charts and the graphs that you would plot to observe the system's health the network health maybe the application health and so on and so forth so you may want to monitor all the parameters possible in your system and you know you can map it to"
+    },
+    {
+      "startSeconds": 49,
+      "text": "your business school the application of time and so on and the things that would matter you would have to start plotting them and generally you would use a time series database to plot and to store the data monitoring data from your systems so the first thing that you would monitor is the metrics the type of data that you would want to"
+    },
+    {
+      "startSeconds": 70,
+      "text": "monitor would be metrics and this is where you may have what tools such as prometheus which is a very popular tool today to monitor and to set up an observability system along with a visualizer such as graffana very popular duo that you would use and then there are you know you know feeders which will send the data to prometheus"
+    },
+    {
+      "startSeconds": 97,
+      "text": "and grafana and so on so the first type of observability system that you need is the one which provides you with all these metrics the second type of very important from a devops and sre point of view is going to be the logs logs are the treasure trove of information for a debugger so when applications go down or if"
+    },
+    {
+      "startSeconds": 127,
+      "text": "they're not behaving as expected or the systems have a problem typically one of the things that i first look at is always the log files now when you talk about the building and managing infrastructure at scale it is not always possible to go and go to each and every server and check the locks for it uh or when we talk about specially you know"
+    },
+    {
+      "startSeconds": 151,
+      "text": "infrastructures with containers today with container orchestration engines where you'll have you know thousands and thousands of containers which will get deployed day in and day out and you're not going to have the same containers running persistently for months and years so that you can go and log in and check the logs there"
+    },
+    {
+      "startSeconds": 169,
+      "text": "so in cert such cases it's important to collect the log centrally from each of your server each of your container and store it centrally somewhere and then plot it you know and visualize the logs as well and visualizing logs can also be very very useful to actually analyze your systems live what's happening with the systems also go back in time and"
+    },
+    {
+      "startSeconds": 194,
+      "text": "when you have to debug or troubleshoot you can actually replay and go and check the events back in the history on that timeline just amazing feature to have now the tools that you use typically i'm going to talk about the open source tools here and a very popular stack that you use in open source world is the elk stack where you have the"
+    },
+    {
+      "startSeconds": 216,
+      "text": "feeder so you have elastic search which stores all this information which is basically indexing all the information that's your elastic search and you have feeders like you know logstash or kibana and that's where the l of elk stacks comes from e for elasticsearch l for logstash k for kibana just like how prometheus and"
+    },
+    {
+      "startSeconds": 241,
+      "text": "grafana are you know work together most of the time you will find elasticsearch and kibana working in tandem because kibana is a specialized visualizer for elasticsearch it also works with few other things similarly grafana works with three other backends many of the backends actually and then it helps you visualize the data i am"
+    },
+    {
+      "startSeconds": 262,
+      "text": "going to show you the demonstration of both grafana and kibana and that would help you understand how this really works so the second type of information and the things that you observe is the logs and the third part of your observability helps you or would help you understand where the problem is especially with"
+    },
+    {
+      "startSeconds": 283,
+      "text": "microservices environment when things go wrong where is the problem you should be able to point to that place or that application and these traces will help you do that so traces give you basically the span information how your packet or the application is traveling how long it is taking in let's say you have five services and uh you know"
+    },
+    {
+      "startSeconds": 309,
+      "text": "they are working together and you have a workflow where this service talks to this this one through this and this one talks to this this also talks to this and this also talks to this one now you have multiple spans here so when your application the packet is traveling it might go from here to here to here to here and so on and so"
+    },
+    {
+      "startSeconds": 327,
+      "text": "forth or it can take another path here now how long it's taking so when let's say you have a problem like oh your application is slowing down how do you find out where the problem is because you know if you just look at this and find out that you know it's taking 10 milliseconds and i don't know where the problem is then because you"
+    },
+    {
+      "startSeconds": 345,
+      "text": "know you're just looking at the interval uh that it hit here and then it traversed and possibly took this path or this path and went back you know and out so that's the latency you're looking at but where the problem is you'll have to go and check this band first let's say this is taking two milliseconds uh this is taking"
+    },
+    {
+      "startSeconds": 365,
+      "text": "you know again one milliseconds but this one this particular span here has a problem and it's taking about seven milliseconds now you know where it is taking longer uh where you would have to go and optimize where the problem is so once you look at let's say a trace you can actually go and check the logs for that application"
+    },
+    {
+      "startSeconds": 388,
+      "text": "or you can go and look at the metrics you have collected for that application either with kibana or with prometheus it is possible to add the metrics here you know both places as well now from the observability point of view these are the three major things and the type of data that you would observe and monitor first is the metrics"
+    },
+    {
+      "startSeconds": 409,
+      "text": "system network application everything you can generate the metrics for each logs application system logs here you know anything that you run inside your infrastructure which generates the logs you may want to just index it centrally and visualize it traces mainly is part of the application performance monitoring and you may have to modify your"
+    },
+    {
+      "startSeconds": 435,
+      "text": "application a little bit to send the traces out to certain system there are many there are the open system open tracing infrastructure there are tools like jagger which help you visualize your traces as well so next thing that i do after talking about the theory is when i show you the demos i'm going to demonstrate this with prometheus and grafana"
+    },
+    {
+      "startSeconds": 460,
+      "text": "elasticsearch elk stack and the open tracing system one tool with one tool that is jagger right so i hope this helped you understand what all would you want to observe why what is it going to give you the application tracing the logs you know and the metrics right and hope this was useful"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:29.874Z"
+}

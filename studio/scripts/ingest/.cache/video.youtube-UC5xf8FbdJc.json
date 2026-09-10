@@ -1,0 +1,94 @@
+{
+  "_id": "video.youtube-UC5xf8FbdJc",
+  "videoId": "UC5xf8FbdJc",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=UC5xf8FbdJc",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 7,
+      "text": "Back-of-the-envelope math is a very useful tool in our system design toolbox. In this video, we will go over how and when to use it, and share some tips on using it effectively. Let’s dive right in. Experienced developers use back-of-the-envelope math to quickly sanity-check a design. In these cases, absolute accuracy is not that important."
+    },
+    {
+      "startSeconds": 28,
+      "text": "Usually, it is good enough to get within an order of magnitude or two of the actual numbers we are looking for. For example, if the math says at our scale our web service needs to handle 1M requests per second, and each web server could only handle about 10K requests per second, we learn two things quickly:"
+    },
+    {
+      "startSeconds": 49,
+      "text": "One, we learn that we will need to cluster of web servers, with a load balancer in front of them. Two, we will need about 100 web servers. Another example is if the math shows that the database needs to handle about 10 queries per second at peak, it means that a single database server could handle the load"
+    },
+    {
+      "startSeconds": 67,
+      "text": "for a while, and there is no need to consider sharding or caching for a while. Now let’s go over some of the most popular numbers to estimate. The most useful by far is requests per second at the service level or queries per second at the database level. Let’s go over the common inputs in a requests-per-second calculation."
+    },
+    {
+      "startSeconds": 90,
+      "text": "The first input is DAU, or Daily Active Users. This number should be easy to obtain. Sometimes, the only available number would be Monthly Active Users. In that case, estimate the DAU as a percentage of MAU. The second input is the estimate of the usage per DAU of the service we are designing for."
+    },
+    {
+      "startSeconds": 113,
+      "text": "For example, not everyone active on Twitter makes a post. Only a percentage does that. 10%-25% seems to be reasonable. Again, it doesn’t have to be exact. Getting within an order of magnitude is usually fine. The third input is a scaling factor. The usage rate for a service usually has peaks and valleys throughout the day."
+    },
+    {
+      "startSeconds": 136,
+      "text": "We need to estimate how much higher the traffic would peak compared to the average. This would reflect the estimated requests-per-second peak where the design could potentially break. For example, for a service like Google Maps, the usage rate during commute hours could be 5 times higher than average."
+    },
+    {
+      "startSeconds": 156,
+      "text": "Another example is a ride-sharing service like Uber, where weekend nights could have twice as many rides as average. Now, let’s go over an example. We will estimate the number of Tweets created per second on Twitter. Note that these numbers are made up, and they are not official numbers from Twitter."
+    },
+    {
+      "startSeconds": 175,
+      "text": "Let’s assume Twitter has 300 million MAU, and 50% of the MAU use Twitter daily. So that’s 150 million DAU. Next, we estimate that about 25% of Twitter DAU make tweets. And each one on average makes 2 tweets. That is 25% * 2 = 0.5 tweets per DAU. For the scaling factor, we estimate that most people tweet in the morning"
+    },
+    {
+      "startSeconds": 204,
+      "text": "when they get up and can’t wait to share what they dreamed about the night before. And that spikes the tweet creation traffic to twice the average when the US east coast wakes up. Now we have enough to calculate the peak tweets created per second. We have:"
+    },
+    {
+      "startSeconds": 221,
+      "text": "150 million DAU times 0.5 tweet per DAU, times 2x scaling factor divided by 86,400 seconds in a day. That is roughly about 1,500 tweets created per second. Let’s go over the techniques to simplify the calculations. First, we convert all big numbers to scientific notation. Doing the math on really big numbers is very error-prone."
+    },
+    {
+      "startSeconds": 249,
+      "text": "By converting big numbers to scientific notation, part of the multiplication becomes simple addition, and division becomes subtraction. In the example above, 150 million DAU becomes 150 times 10 to the sixth or 1.5 times 10 to the eighth. There are 86,400 seconds in a day, we round it up to 100,000 seconds, and that becomes 10 to the fifth seconds."
+    },
+    {
+      "startSeconds": 277,
+      "text": "And since it’s a division, 10 to the fifth 5 becomes 10 to the minus fifth. Next, we group all the power of tens together, and then all the other numbers together. So the math becomes: 1.5 times 0.5 times 2 And 10^8 * 10 ^(-5) = 10^(8-5) = 10^3 Putting it all together, it’s 1.5x10^3, or 1,500."
+    },
+    {
+      "startSeconds": 310,
+      "text": "Now with practice, we should be able to convert a large number to scientific notation in seconds. And here are some handy conversions we should memorize: As an example, we should know by heart that 10^12 is a trillion or a TB, and when we see a number like 50TB, we should be able to convert it quickly to 5x10^1x10^12, which is 5x10^13."
+    },
+    {
+      "startSeconds": 336,
+      "text": "We are going to ignore the fact that 1KB is actually 2^10 bytes, or 1,024 bytes, and not a thousand bytes. We don’t need that degree of accuracy for back-of-the-envelope math. Let’s wrap up by going through one last example. We’ll estimate how much storage is required for storing multimedia files for tweets."
+    },
+    {
+      "startSeconds": 358,
+      "text": "We know from the previous example that there are about 150M tweets per day. Now we need an estimate on a percentage of tweets that could contain multimedia content, and how large those files are on average. With our meticulous research, we estimate that 10% of tweets contain pictures, and they are about"
+    },
+    {
+      "startSeconds": 380,
+      "text": "100KB each, and 1% of all the tweets contain videos, and they are 100MB each. We further assume that the files are replicated, with 3 copies each, and that Twitter would keep the media for 5 years. Now here is the math. For storing pictures, we have the following:"
+    },
+    {
+      "startSeconds": 400,
+      "text": "150M tweets x 0.1 in pictures x 100KB per picture x 400 days in a year x 5 years * 3 copies So, that turns into: 1.510^8 x 10^(-1) x 10^5 x 4x10^2 x 5 x 3 Again, we group the powers of tens together. This becomes: 1.5 times 4 times 5 times 3, which is 90 and 10 to the (8-1+5+2), which is 10^14"
+    },
+    {
+      "startSeconds": 442,
+      "text": "And that becomes 9x10^15, which is, from the table, 9 PB. For storing videos, we take yet another shortcut. Since videos on average are 100MB each while pictures are 100KB, a video is 1000 times bigger than a picture on average. Second, only 1% of tweets contain a video, while pictures appear in 10% of all the tweets."
+    },
+    {
+      "startSeconds": 469,
+      "text": "So videos are one-tenth as popular. Putting the math together, the total video storage is 1000 x 1/10 of picture storage, which is 100 x 9PB, or 900 PB. In conclusion, back-of-the-envelope math is a very useful tool in our system design toolbox. Don’t over-index on precision."
+    },
+    {
+      "startSeconds": 494,
+      "text": "Getting within an order of magnitude is usually enough to inform and validate our design. If you would like to learn more about system design, check out our books and weekly newsletter. Please subscribe if you learned something new. Thank you so much, and we’ll see you next time."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:06.624Z"
+}

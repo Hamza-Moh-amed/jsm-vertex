@@ -1,0 +1,167 @@
+{
+  "_id": "video.youtube-VRmXto2YA2I",
+  "videoId": "VRmXto2YA2I",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=VRmXto2YA2I",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 15,
+      "label": "Read in Dataset"
+    },
+    {
+      "startSeconds": 80,
+      "label": "First Group By"
+    },
+    {
+      "startSeconds": 188,
+      "label": "Popular Aggregate Functions"
+    },
+    {
+      "startSeconds": 338,
+      "label": "agg Function"
+    },
+    {
+      "startSeconds": 452,
+      "label": "Group By on Multiple Columns"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Hello everybody. Today we're going to be taking a look at the group by function and aggregating within pandas. Group by is going to group together the values in a column and display them all on the same row. And this allows you to perform aggregate functions on those groupings. So let's start reading in our data and"
+    },
+    {
+      "startSeconds": 16,
+      "text": "take a look. So we're going to do import pandas as pd. And then we're going to say our data frame is equal to and we'll say pd.read_csv. Do open parenthesis r and our file path. And we're going to be looking at the flavors.csv right here. So right here we have our flavor of ice cream. We have our base flavor whether"
+    },
+    {
+      "startSeconds": 41,
+      "text": "it was vanilla or chocolate. Whether I liked it or not, the flavor rating, texture rating and it's overall or it's total rating. Now these are all my own personal scores. So you know, I've spent years researching this. So these are all very accurate. But this should be a low stress environment to learn group by and"
+    },
+    {
+      "startSeconds": 57,
+      "text": "the aggregate functions. So the first thing that we can do is look at our group by. Now you can't group by well you can. You can group by flavor but as you can see these are all unique values. What we need is something that has duplicate values or or similar values on different rows that will group together. So this base flavor is actually a"
+    },
+    {
+      "startSeconds": 78,
+      "text": "perfect one to group it on and we'll do that by saying df. group by Do an open parenthesis and we'll just specify base flavor. And this will then group together those values and I need to make sure I can spell properly. This will group those flavors together. So let's run this. And as you can see it actually is its"
+    },
+    {
+      "startSeconds": 100,
+      "text": "own object. So it has a group by data frame group by object. So now that we've grouped them, let's give it a variable. So we'll say group_by_frame. Let's set it's equal to. Let's copy this. We'll run it. And now what we need to do is run our aggregations in order to get an output. So, we're going to say {dot} mean."
+    },
+    {
+      "startSeconds": 125,
+      "text": "And that's all we're going to put just for now. Just to get an output that we can take a look off and then we'll build from there. So, let's go ahead and run this. And right here, we have our base flavor, which is now saying is the index of chocolate or vanilla, and then it's taking the mean or the average of all"
+    },
+    {
+      "startSeconds": 143,
+      "text": "the columns that have integers. Notice that it did not take the liked column, and it did not take the flavor column, cuz those are strings and they cannot aggregate those. And we'll take a look at that later. But, it took all the values that have integers, and then it gave us the average of those ratings. Really quickly, I wanted to give a huge"
+    },
+    {
+      "startSeconds": 160,
+      "text": "shout out to the sponsor of this entire Panda series, and that is Udemy. Udemy has some of the best courses at the best prices, and it is no exception when it comes to Pandas courses. If you want to master Pandas, this is the course that I would recommend. It's going to teach you just about everything you need to know"
+    },
+    {
+      "startSeconds": 174,
+      "text": "about Pandas. So, huge shout out to Udemy for sponsoring this Panda series, and let's get back to the video. So, right off the bat, as averages, with chocolate, I have a much higher rating overall than the ones with vanilla bases. Now, we can actually combine all of this together into one line, and we could do something like this. So, we'll say"
+    },
+    {
+      "startSeconds": 194,
+      "text": "df.groupby and we'll say {dot} mean just like this. And this will actually run it. Before, we didn't have any aggregating function on there, so it didn't run. But, now that we combine it all into one, it will run properly. Now, there are a lot of different aggregate functions, but I'm going to show you some of the most popular ones"
+    },
+    {
+      "startSeconds": 212,
+      "text": "and the most common ones that you will see. So, let's copy this right here. So, we can do {dot} count. And when we run this, we can look at the count. And this will show us the actual count of the rows that were aggregated. So, for chocolate, we had three, so it's going to be three all the way across. And for vanilla, we had six. So, we're"
+    },
+    {
+      "startSeconds": 232,
+      "text": "looking at a higher count of vanilla, which if you're comparing it to this mean up here, that could be a big skew towards the chocolate because if you have one or two good chocolates, it could really pull the numbers up. Whereas, if you had two good vanillas, but the all the other ones were bad, it pulls that average down. So, knowing the"
+    },
+    {
+      "startSeconds": 249,
+      "text": "count of something is really good. Let's take a look at the next one. And we can do min and max, and I'll just run these really quickly. We can do min. And when we run this, the first thing that you should notice is that it now has a flavor and a liked column. And that's because min and max will actually look"
+    },
+    {
+      "startSeconds": 267,
+      "text": "at the first letter in the string or the first set of letters if there are you know, chocolate something. It'll look at the first and then it'll actually populate it. So, chocolate with the ch chocolate is the very first or the minimum value for that string. And for a cake batter, that is the minimum value in vanilla as well. Now, with the liked,"
+    },
+    {
+      "startSeconds": 289,
+      "text": "it's interesting because apparently I liked all the chocolate ones. I'm going to go take a look. So, chocolate I liked, chocolate I liked, chocolate I liked. So, there is no no option in this liked column. So, yes was the only option. And now let's look at max. Oops. And it should do the exact opposite, which is going to take the highest value"
+    },
+    {
+      "startSeconds": 307,
+      "text": "even if it's a string. So, rocky road, the letter r comes later in the alphabet. So, that's what it's looking at. And so does vanilla. And then we have yes as well. And then of course, right here it's taking the max value. So, before we were looking at min, I just focused on those, but it still does the exact same"
+    },
+    {
+      "startSeconds": 324,
+      "text": "thing to these integer columns as well. So, for the max value for vanilla, it was mint chocolate chip. That was our base. So, I had a rating of 10 for this vanilla row or grouping. And then we can also look at the sum. And there are all the sums for these. And again, it only does integer because we can't add the strings. Here are the"
+    },
+    {
+      "startSeconds": 347,
+      "text": "sum or the total values for all of them. And for the total values, since we had, you know, six rows that we're grouping into this vanilla, we now have a lot or a much higher score for vanilla. Now, that's a really simple way to do your aggregations, but there is actually an aggregation function. And let's take a"
+    },
+    {
+      "startSeconds": 364,
+      "text": "look at this cuz this is a little bit more complex, although when I write it out or show you, hopefully it makes a lot of sense. We can do dot agg. So, this is our aggregate function. And what we need to pass into our aggregate function is actually a dictionary. So, let's do an open parentheses, and we're going to do a squiggly bracket."
+    },
+    {
+      "startSeconds": 384,
+      "text": "And then we need to specify what we're going to be aggregating on or what column. So, let's do this flavor rating. Let's copy this. We'll do flavor rating, and I need to put that as a string. And then we'll do a colon, and now we can specify what aggregate functions we want. So, we've done sum, count, mean, min, max, all of those. And we can"
+    },
+    {
+      "startSeconds": 406,
+      "text": "actually put all of those into here and perform all of those aggregations on just one column. So, let's make a list. And then let's say mean, max, count, and uh what's another one? Sum. So, let's do all four of those only on this flavor rating column. And when we run this, we have our base flavor right here, chocolate and"
+    },
+    {
+      "startSeconds": 432,
+      "text": "vanilla. But now we don't have multiple columns, we have one column with multiple columns of our aggregations. And it is possible to pass in multiple columns like that. So, we'll do texture rating. And we'll just come right here and do a comma. Then we'll say uh uh texture rating. And then a colon. I don't know why I spelled it out when I"
+    },
+    {
+      "startSeconds": 458,
+      "text": "copied it, but I did. And And we'll do the exact same ones. And now when we run it, we're getting the exact same columns, mean, max, count, and sum for flavor rating, then mean, max, count, and sum for our texture rating. Now, so far we've only grouped on one column, but we can actually group on multiple columns. Let's go back up here to our data."
+    },
+    {
+      "startSeconds": 480,
+      "text": "And I should have just copied this down here. Let's go back down and just look at this. So, really we only grouped it on this base flavor. But, you can do multiple groupings or group by multiple columns. So, let's do our base flavor, which we did already, as well as the liked column. So, we're going to say df.groupby"
+    },
+    {
+      "startSeconds": 502,
+      "text": "then we'll do an open parentheses. And then instead of just passing through one string, we're going to do a list and we'll say base flavor oops comma and then we'll do liked. So, now when it groups this, it should put two groupings. And let's run this and just see. Oops, I got to say let's just do {dot} mean. So, now we have our chocolate and a"
+    },
+    {
+      "startSeconds": 530,
+      "text": "vanilla. And remember, chocolate only had yes, so that's the only one that it's going to group on, but vanilla had a no and a yes. So, if we look at the vanilla, we have our base flavor vanilla, and then within liked, we have no and a yes. Which can show us that within our vanilla, when we group on these, our no's were really low, but our"
+    },
+    {
+      "startSeconds": 550,
+      "text": "yes's were really high. We actually had a pretty similar rating or very close to the same rating as the ones we really liked in chocolate. And just like we did above, we can take this {dot} agg and I'm going to copy this and it'll perform it on each of those rows. Let me close that. And what did I do wrong? Oh, I need this squiggly bracket."
+    },
+    {
+      "startSeconds": 572,
+      "text": "And it'll show us each of those, so the mean, max, count, and sum for all of the chocolate and vanilla, as well as the groupings of light, yes, and no. Now, after we've looked at all that, and that's how I usually do it, there is one uh shortcut function that can give you some of these things just really quickly. And so, let's go back up here"
+    },
+    {
+      "startSeconds": 593,
+      "text": "and take this. It's just called describe. Um and if you've ever done it, it's just going to give you some high-level overview of some of those different aggregations. So, let's run this. And it's going to give us our chocolate and vanilla. And within each column, it's going to give us our count, our mean, our standard"
+    },
+    {
+      "startSeconds": 610,
+      "text": "deviation, I believe is what that is, our minimum, 25%, 50, 75, and 100, which is our max, then our count and our mean. So, a lot of those aggregate functions, but the describe is, you know, a very generalized um function. We can't get as specific as we were with the previous ones that we were looking at, but I just"
+    },
+    {
+      "startSeconds": 629,
+      "text": "wanted to throw this out there in case this is something that you'd be interested in, because it, you know, technically is showing a lot of those aggregate functions just, you know, all at one time. So, that is our group by and aggregate functions within Pandas. I hope that that was helpful. I hope that you understood, you know, everything"
+    },
+    {
+      "startSeconds": 644,
+      "text": "that we were working on. If you like this video, be sure to like and subscribe, and check out all my other videos on Python, as well as Pandas. And I will see you in the next video."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:41:40.789Z"
+}

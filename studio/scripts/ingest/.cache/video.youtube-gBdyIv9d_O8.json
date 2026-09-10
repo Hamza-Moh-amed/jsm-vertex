@@ -1,0 +1,322 @@
+{
+  "_id": "video.youtube-gBdyIv9d_O8",
+  "videoId": "gBdyIv9d_O8",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=gBdyIv9d_O8",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hello everyone welcome back to my channel this is video number five for 10 weeks of cloud Ops and this video is mainly focused on monitoring logging and alerting on a kubernetes cluster so the reason why I'm wearing a Google Cloud hat is because this project I will be implementing on gke which is Google kubernetes engine but even if you are"
+    },
+    {
+      "startSeconds": 21,
+      "text": "using AWS or aure do not worry because I will be using all the open source tools such as Prometheus grafana and manager all those and you can follow the same steps in whatever kubernetes cluster you are using even your on premises cluster let me quickly walk you through about the challenge here is our uh GitHub repository in which we are uh putting"
+    },
+    {
+      "startSeconds": 46,
+      "text": "all the details of all the challenges and their Solutions as well so if you go to this particular repository which says uh the link is over here and I will paste it in the description section as well and then go to the folder where it says week five inside that the challenge details are there in the readme file like you have to set up continuous"
+    },
+    {
+      "startSeconds": 67,
+      "text": "monitoring alerting and logging on kubernetes cluster and uh you know you can create dashboards you can set up alerts you can stream your lcks to U you know a third party logging service such as uh elastic search logs Stana and uh here are the deliverables detail inside the same folder there is another folder which which is named as"
+    },
+    {
+      "startSeconds": 91,
+      "text": "solution and in this folder I have mentioned all the steps that I have performed including all the commands that I have used you know the helm installation or uh the repositories that I have used for deploying the sample application and uh the installation and configuration steps of all other tools so that would be pretty handy um in case"
+    },
+    {
+      "startSeconds": 113,
+      "text": "you are following along the video before we start the video I just wanted to give a huge shout out to Malik Arjun who implemented this project excellently like he created the detailed blog and the architectural diagram and included all the relevant details uh that was required as part of this challenge so uh thank you for doing this Malik Arjun and"
+    },
+    {
+      "startSeconds": 136,
+      "text": "kudos for the great work if you scroll down he implemented this in eks so if you are using AWS feel free to uh refer this blog as well it was perfectly written and he mentioned everything in detail included all the diagrams and Architectural diagrams wherever required so um you know um everything is there have a look again this link will be"
+    },
+    {
+      "startSeconds": 160,
+      "text": "there in the description section and I have tried to explain a few of these diagrams as well in the video so you know it's coming up right next without any further Ado let's start the video all right uh as part of the first step I'll be logging into the Google Cloud console and provisioning the gke cluster so I already logged in it's console."
+    },
+    {
+      "startSeconds": 181,
+      "text": "cloud.google.com and I'll click on the cloud shell icon on the right side over here and it will provision a cloud shell for me so that I could run the ccloud and Cube C commands uh directly from here instead of using an external client such as py um if you are using it for the first time it will take a few seconds maybe to provision"
+    },
+    {
+      "startSeconds": 203,
+      "text": "the cloud shell for you um but uh other than that it will be instantaneous just like it was for me so I'll just clear the screen and I'll run the command to provision the cluster these commands are already document in the GitHub reposit that I have shown you just now and I have copied the command and uh I've have"
+    },
+    {
+      "startSeconds": 222,
+      "text": "pasted it over here so it says gcloud container clusters create auto that means it's going to be an autopilot cluster so GK has two type of cluster one is a standard cluster in which uh you maintain and manage all the you know worker nodes and then there is an autopilot cluster in which worker notes are also managed by Google cloud and you"
+    },
+    {
+      "startSeconds": 245,
+      "text": "are basically only charged for the workload that is running for you so this is uh the command create auto and then the name of the cluster so I have given it a name as the cloud Ops Community then release Channel you could choose either Rapid or stable or the default Channel and then we have the region I chose it as a Us East one uh once you"
+    },
+    {
+      "startSeconds": 265,
+      "text": "verify everything is right you hit enter and it will start provisioning the cluster for you it will take around 8 to 10 minutes maybe uh so I'm going to pause the video here and I'll come back once the cluster is ready and we can go from there all right so after waiting about 10 minutes or so my cluster is ready now so this is"
+    },
+    {
+      "startSeconds": 283,
+      "text": "the message that it says uh the name is the cloud Ops Community which is what I have given and the location the master version is this which is the uh default version in the stable Channel and then uh the default machine type is E2 medium the node version is same as the control plane version and there are three notes"
+    },
+    {
+      "startSeconds": 301,
+      "text": "running uh which is the default number and now let's go ahead uh and see our cluster from the console as well so go to kubernetes engine and you know if you scroll down you will see the cluster is up and running number of noes it's not showing over here because in autopilot cluster as I've said before worker notes are"
+    },
+    {
+      "startSeconds": 323,
+      "text": "also managed by um by Google Cloud itself so you don't have any access to the work notes as well so you can just manage and focus on your workload so if you do a cube CDL get notes right so here these two notes Let me just clear the screen and run it again here it says uh these two uh nodes created for you but you wouldn't be able"
+    },
+    {
+      "startSeconds": 349,
+      "text": "to SS into that and so on right um so let's move ahead now that we have our cluster ready let's move ahead to our next step which is the helm installation again I have copied the command from the same GitHub repository I'll paste it over here and this will just install Helm for you um let's wait and it says it's"
+    },
+    {
+      "startSeconds": 371,
+      "text": "installed let's clear the screen and run Helm version okay it says uh this version has been installed successfully which is 3.13.1 um we are good to proceed further to the next step which is to deploy uh Prometheus and grafana so I'll I have copied the command again the command to add the because I'll be using the"
+    },
+    {
+      "startSeconds": 395,
+      "text": "bitnami chart that was created and uh so so here is the command to add the repo so Helm repo add bitnami and then uh you know name and it's been added to the repository and now I'll also install the Prometheus uh which is this command and it says the chart is bitnami Q Prometheus um you might not be see seeing uh entirely over here but it is"
+    },
+    {
+      "startSeconds": 421,
+      "text": "there in the repository so you can take it from there so this particular chart will have three components one is the Prometheus operator using which the Prometheus will be deployed it is a one of the popular way of deploying the open source Prometheus then it will have alert manager which which takes care of you know handling and um triggering your"
+    },
+    {
+      "startSeconds": 441,
+      "text": "alert to an external system such as maybe a slack message and then it'll also have a blackbox operator which lets you prop to different endpoints for uh monitoring purpose right so I'll hit enter to install the Prometheus chart okay it says no such file or directory because I haven't cloned the G repository I forgot to do that so let me"
+    },
+    {
+      "startSeconds": 462,
+      "text": "do that first okay so I will clear the screen and I will uh run this command um you know to clone the repository this uh repository is the default repository provided by Google Cloud it will have uh the default application which is is Bank of anthos and along with that it will have some configuration file for Prometheus and"
+    },
+    {
+      "startSeconds": 484,
+      "text": "alert manager so this is what I'll be using I'll hit enter to clone the repository and then CD into the repository uh I inside the repository and um inside that uh there is a folder extras which has that file that uh Prometheus was looking for right so I'll clear the screen and I'll run the previous command again uh"
+    },
+    {
+      "startSeconds": 509,
+      "text": "to install the helm chart of Prometheus hit enter now okay so it took like 5 minutes or so but finally the command was completed and now it says uh let me scroll a little up now it says it's been deployed U this is the Q Prometheus chart with this version so there are now two ways to access the components deployed such"
+    },
+    {
+      "startSeconds": 534,
+      "text": "as Prometheus alert manager either you can convert that into uh service type of load balancer so that it is accessible from outside the cluster or you can do the port forwarding so the commands for port forwarding are already provided over here in the example I'll just copy it from here and we can use it later on"
+    },
+    {
+      "startSeconds": 555,
+      "text": "okay now I'll just clear the screen and let me check what pods have been deployed till now so if you do Cube CDL get pods so we have the Prometheus alert manager and then we have uh the prome P we have we have the blackbox exporter and then we have the Prometheus operator and all of them are in running state which is what we"
+    },
+    {
+      "startSeconds": 579,
+      "text": "needed okay so now that our services are up and running you can run the command to port forward and access the Prometheus uh from the port itself so uh I'll paste the command here uh to do the port forwarding hit enter it will basically expose our Prometheus on Port 9090 um you can open it from here like click over here of where it says web preview"
+    },
+    {
+      "startSeconds": 606,
+      "text": "click over here and then by default the port number would be 8080 so change it to 9090 by clicking over here Change Port enter the new port number 9090 and hit change and preview and it will open a new tab with the Prometheus UI and uh here it is now you can go to status and then hit targets and it will show you all the end points that have"
+    },
+    {
+      "startSeconds": 632,
+      "text": "been exposed so this is your alert manager which is exposed on Port 1993 so this is your Prometheus operator then we have your um Prometheus itself which is running on Port 19990 so it monitors itself as well here is uh the last scrape duration that means it checked the end point 2 minutes ago that it was up and running okay and it says"
+    },
+    {
+      "startSeconds": 659,
+      "text": "the status has up and everything is green that means it is able to reach the endo and there are no reported errors so far right and if you click on alerts currently we haven't configured the alerts here but it's not been fired yet so that is why this field is also blank we'll see that uh in in few minutes then if you click on status and click on"
+    },
+    {
+      "startSeconds": 681,
+      "text": "configuration here is all your configuration which is also mentioned in the in the yaml file uh that we downloaded from the GitHub repository you can check that as well so if you see over here the scrape interval is 30 seconds that means it will check after every 30 seconds the reason why our scrape interval why it was showing as 2"
+    },
+    {
+      "startSeconds": 702,
+      "text": "minutes ago because there is some time difference between my machine and the server itself so it's not able to sync it properly but uh for you it should be able to scrape the Matrix after every 30 seconds and scrape will time out in 10s seconds if it doesn't get the response from the endpoint and the evaluation interview is 30 seconds that means it"
+    },
+    {
+      "startSeconds": 726,
+      "text": "will keep evaluating for 30 seconds and then there are different fields such as alerting configuration and uh all other things so feel free to have a look at that there is Hell lot of details right um what else um here are your rules if you click on rules currently we haven't configured it yet but we will be doing"
+    },
+    {
+      "startSeconds": 746,
+      "text": "it shortly so that's why it's blank and then your service Discovery again this is U A collapsed view of the end points that we have just seen in the targets so it says one of one active targets for uh you know each of those and um yeah you can Define more targets as you wish and you can run all your Prometheus query over here so for"
+    },
+    {
+      "startSeconds": 770,
+      "text": "example up uh this will show you you know click on execute and this will show you your targets that are up the there are different um type of metrics in Prometheus query language like we have counter we have gauge so for example Prometheus HTTP request total so if you click over there click on execute it will show you all the HTTP request and"
+    },
+    {
+      "startSeconds": 793,
+      "text": "the you know response yl of it so I'll go back and I'll proceed further with the installation so our Prometheus is now being installed okay now I'll go ahead and uh install grafana which is which which is what we will use for the visualization so I'll uh cancel this command clear the screen and run the commands to add the grafana helm chart"
+    },
+    {
+      "startSeconds": 819,
+      "text": "to the repository I'll update the uh repo once Helm repo update and then I'll install the helm using this command okay it's been installed and it says the um password would be over here somewhere if you scroll up uh the the username is admin and the password you will get it by running this command so I'll copy the command from"
+    },
+    {
+      "startSeconds": 846,
+      "text": "here okay I'll clear the screen one more time I'll paste this hit enter and this is my uh grafana default password so let me just copy it somewhere uh now for grafana as well we'll do the same thing to access the UI we'll uh do the port forwarding uh let's see if uh the poorts have been deployed correctly or not Cube CTL get pods"
+    },
+    {
+      "startSeconds": 873,
+      "text": "and I don't see any grafana pod okay it's uh still coming up it's uh in pending State okay it's container creating now let's wait for a few more seconds o CTL get parts Hy watch now that uh we have seen how port forwarding Works uh which is the right way of doing it because you know in the production system we wouldn't want to expose the"
+    },
+    {
+      "startSeconds": 901,
+      "text": "services externally like especially these Services Prometheus grafana and so on but for this demo purpose let me try to um change the service type to load balancer so that it'll be easier for us to you know go through the demo so let me clear the screen and uh let me do Cube CDL get SVC first we'll do it for Prometheus so the way to do it"
+    },
+    {
+      "startSeconds": 926,
+      "text": "is uh let's locate the myia service which is over here right so let's do a cube CTL edit and the name of the service SVC hyphen name of the service SVC slash name of the service and hit enter um let's go down and change the cluster IP to load balancer L is uppercase and then B is also upper case load balancer then save the"
+    },
+    {
+      "startSeconds": 957,
+      "text": "file and you do that and do get SVC again now you will see the service type has been changed to load balancer and this will also assign an external IP to it or an external uh DNS through which we can access the Prometheus UI let's do the same for um grafana as well which is over here my release grafana Cube CTL edit"
+    },
+    {
+      "startSeconds": 986,
+      "text": "SVC gra and then go to end of the file change the cluster IP to load [Music] balancer save it and we'll do the same for alert manager as well C CTL edit SVC and this is alert manager go down okay now do get service again and umal IP is still showing a spending for"
+    },
+    {
+      "startSeconds": 1031,
+      "text": "two of those but for Prometheus we still uh we see the Prometheus has got the external IP so I'll copy the IP from here open a new tab and check out Port 9090 right our Prometheus is accessible now we don't have to do the port forwarding anymore and this will be accessible over this URL the same way let's see if it"
+    },
+    {
+      "startSeconds": 1058,
+      "text": "assigns the IP for other services yes it did now so let's open the grafana from here external IP code for grafana was 80 I believe yep so grafana UI is also been presented over here we copied the password from one of the step when we did the grafana installation username was admin and password was the one that we copied uh and login"
+    },
+    {
+      "startSeconds": 1085,
+      "text": "now and um here is the grafana UI for the first time now we need to add the data source from which the grafana will get the data from so hit on data sources add data source as Prometheus right and provide the Prometheus details over here so let's uh take the IP and URL from here Promethea server URI okay and uh let's keep everything as"
+    },
+    {
+      "startSeconds": 1121,
+      "text": "default and hit save and test okay it says successfully queried uh the Prometheus API so let's go back to homepage and we have added the first data source now we can start adding dashboard Bood from here U before that let me show you few more things we need to do some uh some more steps so I'll go back now the sample application that we"
+    },
+    {
+      "startSeconds": 1148,
+      "text": "have cloned uh which is Bank of anthos we will deploy that now uh we are in the same directory and I have copied uh the command to run the Manifest is this I'll hit enter it created a secret which is the prerequisite of that application and then I will apply the Manifest which is uh this command CU CD will apply hyphen have cuber net is"
+    },
+    {
+      "startSeconds": 1172,
+      "text": "Manifest and it will apply all the Manifest uh given in that folder and it created a lot of things it basically created uh the entire application for us to use so let's see Cube CTL get pods okay still coming up um yeah let's let's wait for few more seconds maybe now let's see see if our apps are running or not so I'll do the get pods"
+    },
+    {
+      "startSeconds": 1201,
+      "text": "again and I see everything is running now we don't have any issues let's go ahead and configure the slack so that we can test and uh trigger the notification based on alerts so I'll go to api. slack.com and uh click over here which says create an app and uh click over here from scratch now give this app a name let's"
+    },
+    {
+      "startSeconds": 1226,
+      "text": "call it alert pick a workspace so I'll pick the workspace that I have created just for this demo purpose and hit create app now um inside this add functionality and feature click over incoming web hooks because we will be configuring the web hook okay now activate it now scroll down and where it says add new web hook to the workpace click over"
+    },
+    {
+      "startSeconds": 1255,
+      "text": "here and allow the permission for a particular Channel let's see um I would want uh to publish the notification in this particular Channel 10 weeks of cloud Ops I'll select that and click allow um and then uh basically I'll copy the web hook URL from here this is what we need to configure uh from there let's let's take it back I'll"
+    },
+    {
+      "startSeconds": 1281,
+      "text": "just uh make a copy of it so we will be creating a secret for alert manager let me clear the screen and I'll paste the command over here is Cube C create secret generate alert manager slack web hook and we have to provide our web hook URL over here that we have just copied so from here I'll copy this and I'll paste this here right and hit"
+    },
+    {
+      "startSeconds": 1307,
+      "text": "enter this is done now apply the alert manager config to configure the alert rules for us so paste it over here and it says say it's been created now we will set up the props on which Prometheus will uh look into and uh the alert manager configs as well so I'll apply these two manifest as well which is a prop for every single application"
+    },
+    {
+      "startSeconds": 1334,
+      "text": "that we have and then we have for alert rules as well okay it's been created now let's go back and see if we see any difference now um from this is pretty pretty much the same number and if you go to alerts now it says uh it configured the alert for all of the application that means you know uh it is showing over here but"
+    },
+    {
+      "startSeconds": 1359,
+      "text": "it is not been triggered that is why it is showing as green now what we can do is we can try to simulate an failure by uh scaling down an application so let's pick uh this particular application we'll scale this one down contacts right so clear the screen Cube CTL scale deployment contacts hyphen hyphen replicas zero so it triggered the scale down"
+    },
+    {
+      "startSeconds": 1392,
+      "text": "let's wait for a few seconds now there should be an alert and there should be a slack notification because this is what we have configured okay uh after a few seconds uh now this is showing as Amber um the state is pending but it says over here in the prop says if the contact application status is zero that means unreachable for 1 minute"
+    },
+    {
+      "startSeconds": 1417,
+      "text": "or you know show this as a warning message so this is what it is doing but if we scale it up it this should be resolved but let's see if it triggered the notification or not if we go back to our slack Channel it did not trigger the notification yet maybe because it is still um evaluating itate is pending let's see if it is firing or not should"
+    },
+    {
+      "startSeconds": 1440,
+      "text": "be firing I believe okay now it shows as red that means the alert is firing and the application is not reachable let's go to our okay so we have got the alert now which says uh this is firing check contact spots and its logs and services and available now to resolve this what we can do is we can scale this back to one replica okay now let's wait"
+    },
+    {
+      "startSeconds": 1470,
+      "text": "again but you don't have to let me wait and I'll just pause it okay so after some time so this is now green again the alert has been resolved that is why uh the status has been changed and let's go back to our slack uh workplace okay so here it is we have now received the resolved alert as well now that the alert has been resolved we have"
+    },
+    {
+      "startSeconds": 1494,
+      "text": "scaled the application back to its original state um okay so uh this is what we wanted to test now let's move ahead before moving forward let's quickly see what's been done so far so we have our Promethea servers deployed along with the grafana alert manager and blackbox operator so these were the components that we have"
+    },
+    {
+      "startSeconds": 1517,
+      "text": "deployed so how it works is Prometheus server pull the Matrix from our applications with the help of node exporter basically node exporter or blackbox operator these are the third party services that helps exporting the node level metric CPU memory displace utilization and so on so these type of metrics are then"
+    },
+    {
+      "startSeconds": 1537,
+      "text": "pulled by the Promethea server and those metrics are stored in its local storage this is a tsdb database you know tsdb stands for time series database in which all the information are stored in Time series right um then uh you can also find Target with the help of service discovery which is what we have seen as"
+    },
+    {
+      "startSeconds": 1559,
+      "text": "well and based on the metrics or based on the alert rules that we have configured it then pushes the alert with the help of alert manager so you can um pushes uh email notification uh or any third party service such as Ops Genie pager Duty or in our case we have used slack right this is uh what's been done grafana how it works this part is"
+    },
+    {
+      "startSeconds": 1585,
+      "text": "pending this is what we're going to do now grafana uh will pull the details using the promql which is Prometheus query language from the Prometheus server or the database itself because Prometheus is what we have configured as the data source in grafana if you remember as the first step now it will pull all the details with the help of"
+    },
+    {
+      "startSeconds": 1608,
+      "text": "queries and then it will help visualize all those details we can also s set alerts through gaana itself and we'll see all those details now okay now let's go back to our grafana okay so now you can go to um dashboards from here and click over here to General if it's collapsed else uh it'll show you uh some default dashboards based on"
+    },
+    {
+      "startSeconds": 1633,
+      "text": "kubernetes so you can select anything that is relevant to you uh let's say this one um now it uh won't show you everything you know uh there is cluster dis usage memory CPU these details are missing for a reason because I have used autopilot kubernetes cluster on gke on which we don't have access to nodes and there are certain restrictions as well"
+    },
+    {
+      "startSeconds": 1658,
+      "text": "due to which I'm not able to install any external node exporter or cube State metrics on top of it and uh so I've tried it already and it's not like it's not allowing me to uh install all those things so basically CPU memory all those um metrics are not exposed because uh you know with autopilot GK cluster they have already"
+    },
+    {
+      "startSeconds": 1684,
+      "text": "enabled Google manage Prometheus which is a manage service by Prometheus that is why open source is not you know fully supported in that um so that's a shame but uh if you're using any other cloud or even if you are using standard GK cluster then you should be able to install node exporter and you know uh rest of the process is uh"
+    },
+    {
+      "startSeconds": 1706,
+      "text": "same so um this is um you know u a a sample dashboard where you are seeing uh deployment replicas how many are updated and uh you know up to-date replicas over here if you can see so all the deployments that we have running for example Cube DNS connectivity agent even though they are um part of different namespace because this dashboard we have"
+    },
+    {
+      "startSeconds": 1731,
+      "text": "not applied any filter so it is showing you everything um and here are workload as well like front end uh one replica and so on right so if you want to make any changes for example to this particular or any widget so far so click over here then click add it so uh if you remember I have told you in the beginning that it works based on the"
+    },
+    {
+      "startSeconds": 1757,
+      "text": "Prometheus query language so this query that's been generated over here let me just uh zoom in U so this quy over here this is nothing but your promql Prometheus query language so if you copy this and you go back to your Prometheus to paste it over here and maybe replace the variable let's say um so it autop populated the available name"
+    },
+    {
+      "startSeconds": 1786,
+      "text": "spaces so let's say uh default name space hit enter hit execute and then it will show you all the matrics in table or even graph format like whatever you have selected so one replica of each of these workloads right um this is how you can make any changes so you can update this query you can uh you know filter it or"
+    },
+    {
+      "startSeconds": 1813,
+      "text": "anything that you want to do or even you can if you are not comfortable with promql you can go to Builder over here you know and you can build your own query so if you see you can build your own query using the Met matx you can change the Matrix from here or you can use data source node anything else as well and um then you can filter with"
+    },
+    {
+      "startSeconds": 1837,
+      "text": "with different labels and and lots of things you can do but this was not uh like this is just I wanted to give you a brief introduction that is why I have opened it so I go back and now like if you want to use this dashboard you can just save it and maybe rename it or um if there if there there is any changes that needs to be done you can do"
+    },
+    {
+      "startSeconds": 1859,
+      "text": "that but for now please ignore these things because as I've already mentioned um try not to use the autopilot cluster because I've already SP like past four five hours troubleshooting this issue and then finally I got to know that's why I thought of sharing with you do not use autopilot gke cluster all right so"
+    },
+    {
+      "startSeconds": 1878,
+      "text": "that's it for this demo I hope this was uh somewhat helpful to you and understanding the concept and you were able to do um the and so on along with me if you face any issue please let me know in the comment section below or feel free to join our Discord community and uh there are a lot of individuals who are ready to help you out whenever"
+    },
+    {
+      "startSeconds": 1899,
+      "text": "you seek any assistance and uh thank you so much for watching I hope this was helpful and you have a good day I will see you soon with the next video"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:26.657Z"
+}

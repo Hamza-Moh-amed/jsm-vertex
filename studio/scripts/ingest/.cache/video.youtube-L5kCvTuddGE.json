@@ -1,0 +1,98 @@
+{
+  "_id": "video.youtube-L5kCvTuddGE",
+  "videoId": "L5kCvTuddGE",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=L5kCvTuddGE",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "performance in react so I have a little demo here where I have a few components and I have an input that every time I change the value the welcome input changes this value and I have a button that sets a values it's like a counter that is displayed in here as well inside the button and what happens is every time I click it this welcome input gets"
+    },
+    {
+      "startSeconds": 26,
+      "text": "displayed again although the props that displayed do not actually show up why this is happening so well there are actually although this the demo is really simple there are actually a variety of things going on in this demo so let's see how I have set it up I set up a provider a react provider so that I can show things that happen when we use"
+    },
+    {
+      "startSeconds": 50,
+      "text": "a context I use some lifted state that is inside the root of our demo component where I have the counter the countries used inside the counter comner which is effectively just a button that when it gets click set counting set is set to set count plus one then I have um then I have this provider which essentially has a welcome message and"
+    },
+    {
+      "startSeconds": 75,
+      "text": "set welcome message and is used so that I can use this values throughout the application in particular I can you know take this value when I display the welcome input um and the demo is what you've seen so let's have a look again every time I click the hello button the welcome input renders when I change the welcome input"
+    },
+    {
+      "startSeconds": 99,
+      "text": "also renders so let's have a look at things one by one why is the input being rendered when react says that it's only going to re-render things when the props is going to change all right so the reason why this is happening this first welcome input to the render um and you're welcome to post the video and try to figure it out yourself if you"
+    },
+    {
+      "startSeconds": 122,
+      "text": "want to all right let's go on and let's see why happens here in the choose a provider we provide those value welcome message and set welcome message those two values are a complex object and not a simple variable they're an object and the react cannot inferior whether this value has changed because it's an object and the reason is"
+    },
+    {
+      "startSeconds": 148,
+      "text": "that in JavaScript object comparison only happens through reference not true value so to explain it I'm going to use the console I'm going to use a const a equal to a equal to 1 const b equal a equal to one so as you can see A and B are basically effectively they have the same value but if I do equal a equal to B I actually"
+    },
+    {
+      "startSeconds": 176,
+      "text": "get false as a statement this is what the react is using to do the comparison we need to tell a react somehow that the way the comparison is going to work for the object in this provider needs to come need to be converted in a different way how can we do this well reactor offers us something called use memo which is a"
+    },
+    {
+      "startSeconds": 201,
+      "text": "memorization component but it doesn't just do memorization meaning that you do a long computation actually have a video about this that you can check out um it does not do a memorization of values it actually Compares these values on through an object called react use memo what does it look like it basically looks like this it's a react use memo"
+    },
+    {
+      "startSeconds": 231,
+      "text": "in which we are sent to reactor that the value this value that we pass through only changes when either welcome message or a set welcome message changes okay so now with this change with this change we went from value being a plane object to Value being a react. memo we are we should get that this component should not re-render again when they"
+    },
+    {
+      "startSeconds": 261,
+      "text": "counter changes why because we told it that the provider re-renders only when welcome message changes so when method when I do a modification to the input is going to render and we should see the welcome input is rendering in the console but then when I do it um when actually click the counter button and welcome messages just used then"
+    },
+    {
+      "startSeconds": 288,
+      "text": "count is what is increased then I should get no um now we render all right so let's have a look let's refresh the page welcome input is rendered the second render is because we are using a reacting strict mode so let's clear the console click hello one one two and as you can see the welcome input is being re-rendered okay so what's"
+    },
+    {
+      "startSeconds": 317,
+      "text": "going on here did not say that this should not happen again well yes however we do this for the values and then we pass through all the children's all right so if you actually see the counter the demo we actually have the provider but then we also have discount variable that is happening and we are telling react well actually um make me"
+    },
+    {
+      "startSeconds": 350,
+      "text": "update this variable and because I am updating this variable then the welcome input has to refresh because in here I might have like a user factor or a set data for example I'm displaying the time of the day so react is going to also refresh this component here all right so how can I tell react that this component is actually pure"
+    },
+    {
+      "startSeconds": 374,
+      "text": "component than when I want to refresh it only when some of the state variables actually change so actual react comes to us and we have another utility method which is called react dot memo and this erectile memo essentially works the same way as the provider where we use the react.use memo however in this case it's a for a"
+    },
+    {
+      "startSeconds": 401,
+      "text": "component so we're telling react this is a pure component which you should only refresh when the state variables are actually changing so let's have a look again at the demo let's refresh the page clear the console and as you can see now this component is not anymore being re-rendered all right so we have the counter"
+    },
+    {
+      "startSeconds": 423,
+      "text": "we have the welcome message with the button and now in here let's have another look at what is going on with this component so I'm going to create a new component called stateless component and I'm gonna add it to My Demo performance just outside of the state the stateless component I just render a div that says I do not ever change"
+    },
+    {
+      "startSeconds": 448,
+      "text": "uh pardon the layout so what happens is that every time in this page is changing um of course in the subtree uh of the pages it's changing that is iranda is rendering why is this happening well for a very similar reason to what was happening before the status component because the counter is changing in the other state reactor doesn't know if in"
+    },
+    {
+      "startSeconds": 479,
+      "text": "here I'm doing some set effects therefore it's trying to say well to be safe I'm going to render it is some of the props inside of it have changed then I will be able to handle the scenario so how can we fix this problem again you can pause the video and go on on your own if you want to give it a try but that is how we're gonna do it we're"
+    },
+    {
+      "startSeconds": 504,
+      "text": "going to add a react memo around the component so that's with the react disease a component that we only want to re-render when some of the state inside the component is going to change so if I go back to My Demo I refresh the page I render we see a render Happening Here and then when I click the button we do not see it rendering even though the"
+    },
+    {
+      "startSeconds": 528,
+      "text": "counter is changing here and here and when I change the input it's only rendering the inside of the input so that's everything for today I hope this was a useful demonstration to you if you liked the video please leave a thumbs up and if you have any questions please leave a message and if there is something you would like to be discussed"
+    },
+    {
+      "startSeconds": 551,
+      "text": "in next video leave a message below thank you very much and see you next time bye bye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:13.844Z"
+}

@@ -1,0 +1,154 @@
+{
+  "_id": "video.youtube-1xjSQJWejZM",
+  "videoId": "1xjSQJWejZM",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=1xjSQJWejZM",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "what's up guys Terrace cousin here welcome to the last used transition tutorial video you're ever going to have to watch I promise you if you watch this video and you watch it until the end you're never going to have to watch another video on this ever again alright cool let's begin and let's talk about use transition so here in front of us we"
+    },
+    {
+      "startSeconds": 17,
+      "text": "have a very simple application as usual right you have an application with three tabs You have about posts and contact and in here there is a problem that is going to be very apparent soon that we can solve with use transition and that problem is going to be in the posts tab first let's go to the contact Tab and"
+    },
+    {
+      "startSeconds": 33,
+      "text": "tap this and if we do you're going to see that we see some contact information here there was no problem we can go back to the about tab everything works super smoothly but as soon as we tap the post tab nothing happens at least for a while right it takes a little bit of time and then we have all of the posts and if you"
+    },
+    {
+      "startSeconds": 49,
+      "text": "can see here we have a lot of posts actually if I just scroll down to the very bottom we have 2500 posts that's a lot of posts to render on a single page now usually in a real application if I can just scroll back up here you're going to see that man this is a lot of posts right you're not often going to run into this kind of situation like how"
+    },
+    {
+      "startSeconds": 68,
+      "text": "often do you build an application where you have to show 2500 posts initially on the first render usually it doesn't always happen like this what you usually do is you use pagination you factor maybe the first 20 posts and then as the user Scrolls down you fetch more and more posts right that's going to make rendering this entire page a lot faster"
+    },
+    {
+      "startSeconds": 86,
+      "text": "because you're only showing the first 20 posts but there are some situations where you actually can't do this and you have to render an insane amount of data on the first render and in those situations is where you would use something like use transition so now let's look at the code for this so this is the code that's running this entire"
+    },
+    {
+      "startSeconds": 104,
+      "text": "application this is the main component here we have here our three tab buttons right we have about posts and contact each of them will set the selected tab which is a state variable that is held here at the top level through this function here select tab which literally just sets the tab to the current tab and then at the bottom here based on the"
+    },
+    {
+      "startSeconds": 122,
+      "text": "selected tab we render either the about tab the post tab or the contact top the top button component is a very simple component it just renders out the main button component from component slash UI we're going to revisit this later the other components for example the abouts tab literally it just renders out a paragraph so there's nothing there and"
+    },
+    {
+      "startSeconds": 141,
+      "text": "then we have this post tab component which does our artificial slowing down if you look here we have this Loop that runs 2500 times for each time it will render out the slow post component the slow post component is right here it'll just do nothing for one millisecond and this is what results to our post tab being so slow now here's the actual"
+    },
+    {
+      "startSeconds": 159,
+      "text": "problem because like I said rendering out all of these posts sometimes is inevitable and that's not the problem in this video the problem was not really obvious and it happens when I go to click about and then I try to click posts again but before posts get successfully rendered with all of the posts I try to click contact you're"
+    },
+    {
+      "startSeconds": 176,
+      "text": "going to see that I'm not able to click contact until posts has finish rendering so I'm here now in about I'll click posts and then click contact before I did and nothing happened only after posts has finished rendering do we then immediately skip to contact if I do this now again I'll click post and I'll click about I clicked about nothing happens"
+    },
+    {
+      "startSeconds": 196,
+      "text": "until post has finished rendering and then my UI is going to show me some stuff and then we completely skip over posts and we go directly to about one more time click posts click contact and then nothing happens until posts renders and then we immediately go into contact this obviously is a bad user experience what essentially is happening here is"
+    },
+    {
+      "startSeconds": 215,
+      "text": "that this post rendering is freezing the entire UI until it's finished rendering and then the UI will catch up with the most up-to-date status in this case it's the about page I do it again in this case is the contact page right it's delaying the entire rendering of the UI until it can finish rendering this is"
+    },
+    {
+      "startSeconds": 232,
+      "text": "obviously bad and you want to avoid this and the way that you avoid this is you use the hook called use transition if I go back to the code here use transition is a hook that is going to tell react that some transitions some updates in the UI are non-priority which means that they're not as important as some others"
+    },
+    {
+      "startSeconds": 250,
+      "text": "and that if the situation needs them to be they can be interrupted to prioritize the updates that actually have priority so in our case if I go back now to the app what should have priority when I click posts and then click about the clicking of about should have priority because that is my most up-to-date intent the last click that I did was on"
+    },
+    {
+      "startSeconds": 268,
+      "text": "about which means that the page that I want to see is about and I no longer care about posts but because of the way that we currently set up our app posts will block the entire UI and not allow me to go to contact in this case until it finish rendering which is bad I want as a user to go directly to contact or about or whatever is my latest update"
+    },
+    {
+      "startSeconds": 287,
+      "text": "and not care about posts because that is my up-to-date priority so that's where the use transition hook comes into play we're going to use it to interrupt the rendering of the post so that we can go to about our contact or any other update and skip rendering post if we no longer care about it and you're going to see"
+    },
+    {
+      "startSeconds": 303,
+      "text": "the way that we do this is really really simple so first we're going to come up here and import to use transition from react so use transition from react and then we're going to create here our use transition hook so we'll do const is pending and then start transition I'm going to let copilot complete almost everything for me this"
+    },
+    {
+      "startSeconds": 321,
+      "text": "is the syntax of you use transition it's always going to return to two things is pending and start transition which is very similar to as you can see here you state then all we have to do is where we are making the update in this case set tab here we just have to wrap this in start transition and that is going to do"
+    },
+    {
+      "startSeconds": 338,
+      "text": "everything for us so come here and do start transition and then come here set Tab and let copilot do its thing and then just remove this one and then I just have to close this parenthesis here and then save and now if I go back to the code and refresh just so we have a clean slate I can click post I can go to contact and I immediately see contact"
+    },
+    {
+      "startSeconds": 358,
+      "text": "and post has been abandoned I can do the reverse I can click post I can go to about and about is rendered instantly and post is discarded now this doesn't mean that post is never rendered if I click posts and just do nothing and wait for all the posts to render all of the posts you're gonna see are fully rendered that's not what use transition"
+    },
+    {
+      "startSeconds": 375,
+      "text": "does use transition just interrupts if there's something else that should be important for example I click contact I click post I click about it's going to discard post and then render the about right so you can see the benefits of using use transition all we had to do is wrap our state update in start transition and react does everything"
+    },
+    {
+      "startSeconds": 393,
+      "text": "automatically now this will work with any state update right the reason why this works here is because we're using set tab which comes from you state right this will not work with some other function that doesn't update State this is a specific State update optimization because react as you've seen does everything automatically it will only do"
+    },
+    {
+      "startSeconds": 410,
+      "text": "it for state but that doesn't mean that we can't do it through props for example if I were to come here to tab button and then just copy this piece of State here this use transition put it here come here paste this here and then just import it here from react at the top then copy the select top function here and comment paste it here in this"
+    },
+    {
+      "startSeconds": 428,
+      "text": "component we are going to make some space here and rename this to handle click and then I'm going to remove this because the parameter is now going to come from the parent I'm still going to leave start transition but now I'm just going to make some updates to my props here so I'll do some destructuring I'm going to do on click and then dot dot"
+    },
+    {
+      "startSeconds": 445,
+      "text": "rest instead here we're going to pass rest to the button and then inside of this handle click function I'm just going to do on click question mark Dot and then remove tab and basically what this means is that I've just accessed this on click property from the button which actually if I go to the button props here you're going to see that"
+    },
+    {
+      "startSeconds": 466,
+      "text": "there is a function called on click which is optional right so that's why I have the question mark I'm accessing this function here so that I can wrap it in start transition then I have to put the question mark because again this is optional so it's not always going to be there and then I'm just going to pass the rest of the props as we had before"
+    },
+    {
+      "startSeconds": 483,
+      "text": "to button and then here all we have to do is on click and then just pass handle click what I've essentially done here is the same thing that I had before with the only difference that I now moved the use transition hook inside of this tab button then if I go back to the parent here I can get rid of this huge transition here I can get rid of this"
+    },
+    {
+      "startSeconds": 502,
+      "text": "start transition here get rid of this and then save this as so this is initially as we had it before and now the transition is going to happen inside of the top button and you're going to see that now our app works exactly in the same way I can go to contact I can go to about I can go to post it's going to wait a bit to render the post just"
+    },
+    {
+      "startSeconds": 519,
+      "text": "like before or I can go to contact I can click post and then go to about and it's still going to interrupt the render right so start transition will work with any function that updates the state even if it comes from the parent even if it's updating the state of a parent the only requirement is that you have a function"
+    },
+    {
+      "startSeconds": 536,
+      "text": "that updates the state so that then react can do all of its magic behind the scenes and do everything for you automatically now one more benefit of doing it this way is that now we can use this is pending Boolean value if you've seen here we have and used is spending at all use spending is a value that will tell you when there's a transition in"
+    },
+    {
+      "startSeconds": 554,
+      "text": "progress so we can use this now in this tab button to render something else if the transition is currently loading so what I can do is I can come here and I can say if is pending I can just return maybe just a paragraph that says loading then I have to add here because I forgot to return and now if I go back to my application"
+    },
+    {
+      "startSeconds": 575,
+      "text": "and I refresh just so I have a fresh start whenever I click post it's going to say loading because there's a transition happening and then it's going to render all of the posts this is great if you want to show something to the user as a transition is happening it's always a better user experience to show that something is happening instead of"
+    },
+    {
+      "startSeconds": 592,
+      "text": "having the user wait for a couple of seconds with nothing they'll think that the app is broken this is the power of use transition it's not a hook that you're going to use all of the time in every single component but when you do have to use it it makes it really useful so that you can defer some updates and prioritize others to provide your users"
+    },
+    {
+      "startSeconds": 609,
+      "text": "with a much better user experience when for example you have no other choice but to render 2500 posts in a single page cool so there you go that was the tutorial on use transition I told you after this you're not gonna have to watch another video on use transition ever again if you've enjoyed this video make sure to click subscribe right here"
+    },
+    {
+      "startSeconds": 627,
+      "text": "it would really help me out a lot there's a video here that you can watch I'm sure it's super awesome because it's made for me and with that being said my name has been nurse cousin this is cousin Solutions thank you so much for watching and I will see you in the next video ciao"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:36.443Z"
+}

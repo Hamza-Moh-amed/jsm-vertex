@@ -65,9 +65,7 @@ function readStartSeconds(value: string | string[] | undefined, durationSeconds:
 const LessonPage = async ({params, searchParams}: PageProps<"/lessons/[slug]">) => {
     const {slug} = await params
     
-    const lesson = await getLesson(slug)
-    console.log("This is the lesson", lesson)
-    
+    const lesson = await getLesson(slug)    
     
     if(!lesson) notFound()
     const course = lesson.course

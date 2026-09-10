@@ -9,16 +9,23 @@
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
-    "start": "sanity start"
+    "start": "sanity start",
+    "seed:videos": "node scripts/seed/resolve-videos.mjs",
+    "seed:build": "node scripts/seed/build-ndjson.mjs",
+    "seed:import": "sanity dataset import scripts/seed/seed.ndjson --dataset production --replace",
+    "context:import": "sanity dataset import scripts/context/vertex-search.ndjson --dataset production --replace",
+    "ingest:videos": "node scripts/ingest/ingest-videos.mjs",
+    "ingest:build": "node scripts/ingest/build-ndjson.mjs",
+    "ingest:import": "sanity dataset import scripts/ingest/videos.ndjson --dataset production --replace"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^6.12.0",
+    "@sanity/vision": "^6.13.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "sanity": "^6.12.0",
+    "sanity": "^6.13.1",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

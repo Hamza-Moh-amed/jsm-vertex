@@ -1,0 +1,170 @@
+{
+  "_id": "video.youtube-E3j-4XH0q4g",
+  "videoId": "E3j-4XH0q4g",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=E3j-4XH0q4g",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Hey everybody. In this video, I'm going to show you the three ways you can latency optimize that slow AI agent or AI application. Uh this is a super common problem coming up with organizations that are building on generative AI. And here is why. Okay. Uh imagine right in that application uh it's a basic application at first. It's"
+    },
+    {
+      "startSeconds": 22,
+      "text": "a chatbot, right? So, in a basic chatbot, you're going to have a request that goes to an LLM and that LLM is going to reply. And usually that's a great user experience because you get an answer within a few seconds of asking that question because even some of the biggest LLMs for simple queries can respond pretty quickly, even with a"
+    },
+    {
+      "startSeconds": 40,
+      "text": "simple rag architecture, right? Um, and so for these type of chatbot applications, what we tend to think about is a metric called TTFT or time to first token, right? and AI applications running this architecture are generally very fast and have a fast user experience. However, this is a very limiting architecture and what we see"
+    },
+    {
+      "startSeconds": 58,
+      "text": "customers starting to adopt at scale are what we would call agentic architectures and latency optimization becomes way more important with agents. Okay? because they're much more complex systems. And generally speaking, the pattern that the problem that we see is people that are building agents start building these"
+    },
+    {
+      "startSeconds": 78,
+      "text": "agents using just the biggest models for everything, right? So you might have an agent. Here's like a a somewhat common agent architecture where you have an agent planner that takes a user request, is going to send that request into um some system that thinks about what what tools that it's going to use and how"
+    },
+    {
+      "startSeconds": 96,
+      "text": "it's going to collect data. It's going to collect a bunch of data and do a bunch of stuff based on that request and then it's going to think about a response and give that back to the user. Right? So now we're talking about a multi-step workflow here that adds a lot of latency because each step in this process is a potential LLM call. Right?"
+    },
+    {
+      "startSeconds": 113,
+      "text": "And so I see customers they get their agents working with just the largest models on Earth. So they get the agents working with like all sonnet 4 or sonnet 37 like really big smart models but they're so slow that they come back to us and say hey great news we got our agent working uh now we're going to need a little bit of help um optimizing"
+    },
+    {
+      "startSeconds": 134,
+      "text": "latency for that agent. So uh let me tell you more about how we can do that. There are three uh primary ways that we see customers optimizing latency today. And we're going to start with what I would say is kind of the the the simplest uh and and most straightforward way and that's by using native features that optimize latency. This can get you"
+    },
+    {
+      "startSeconds": 157,
+      "text": "some really quick wins in terms of latency. So to be specific here, uh a great technique that's available on many providers and is available for a lot of the models on Bedrock today is prompt caching. Prompt caching as you can see right here uh can reduce cost and latency by extremely high margins right up to 85 or even 90%. So that's that's a"
+    },
+    {
+      "startSeconds": 185,
+      "text": "very easy thing that you can actually just turn on and for a lot of applications applications that have a lot of the same sort of query patterns this is an instant latency optimization. Okay, so this is something that if you're thinking about latency or cost, uh you should consider turning it on for an app, testing it out, and seeing if it"
+    },
+    {
+      "startSeconds": 203,
+      "text": "performs well and if it leads to savings. Another really easy native way to optimize latency for an application is to use latency optimized inference, right? So there are different uh kind of back-end systems a and back-end inference systems for models can be designed in different ways. And so in the context of a provider like Bedrock,"
+    },
+    {
+      "startSeconds": 224,
+      "text": "the the LLM provider on AWS, you can use standard or latency optimized inference. It's just a flag in the request that you send into the model. And when you use latency optimized interest or sorry inference, you get sent to a backend, you know, cluster that is more optimized for latency, right? So that's those that's like a really simple way is"
+    },
+    {
+      "startSeconds": 244,
+      "text": "caching uh and then just optimizing uh via these you know native configs right now you know you can do some prompt optimization in there as well. However like uh I'm kind of assuming if you got your agent working you've you've optimized your prompt to some degree. Now let's go back to the the diagram here. Uh another way that we can"
+    },
+    {
+      "startSeconds": 267,
+      "text": "optimize here is all of these steps are potential LLM calls. So like let's go back and assume like I was mentioning before that we built every step on sonnet. Sonnet is a great model but it's a slow model. And another uh challenge with these agentic architectures is because a request is going to go through many different"
+    },
+    {
+      "startSeconds": 290,
+      "text": "steps. It means that you stream response streaming is not as effective anymore. Like in a chatbot when once the first token hits you can start sending that back to a user and most LLMs generate tokens faster than humans can read, right? So it creates a good user experience. In the context of agents, end to-end latency is what"
+    },
+    {
+      "startSeconds": 311,
+      "text": "you're thinking about because you need this request, the full payload of the request to pass through every step before a response get gets returned to the um client, right? Um and so what we see is customers will start with building on on just the biggest models like a sonnet or an opus or like a llama for large model. There's a lot of"
+    },
+    {
+      "startSeconds": 330,
+      "text": "different big models that are super uh good at a lot of tasks. Um so what we will have customers do is start looking at their application and figuring out are there any steps in this application. Can we break this application down and decompose it and find opportunities to take a step off of a big model and put"
+    },
+    {
+      "startSeconds": 350,
+      "text": "it onto a smaller model? Right? So uh we want to take a large parameter step like for example uh the planning step. Let's say you're running that on sonnet. Maybe you can like optimize the prompt and get that planner to run on Haiku instead, which is a smaller model, right? And this can be applied to any family of"
+    },
+    {
+      "startSeconds": 368,
+      "text": "models. But hopefully you can get a sense for what I'm saying here in that each step in your agent process is an opportunity to look at that step and run it on a smaller model by optimizing the prompts or other techniques like um like fine-tuning those models, right? So like just to just to make it real for you in"
+    },
+    {
+      "startSeconds": 389,
+      "text": "the console, right? What I'm saying is a lot of customers will build an agent on cloud 3.7 or cloud uh four sonnet models. But if you can get a step to run on haik coup instead, right? Be by either fine-tuning or or customization or may maybe you could even get that running on a on an open source model like from llama that's fine-tuned. Um"
+    },
+    {
+      "startSeconds": 410,
+      "text": "there's a lot of latency uh savings to be to be had in in that sort of a workflow. So uh one way I see customers doing this is they'll they'll customize models. So they might use something like SageMaker to fine-tune a model or they might use something like Amazon Bedrock which has a model distillation feature"
+    },
+    {
+      "startSeconds": 427,
+      "text": "which is basically a way to take a large model and then transfer its knowledge and understanding and capabilities into a smaller model for a specific task. I see customers using these features to fine-tune and and customize models and then just importing uh that customized model into Amazon Bedrock. Okay. And what that allows you to do if I go back"
+    },
+    {
+      "startSeconds": 447,
+      "text": "to our architecture is a step like let's say the planner step is running on claude 37 today um if I send a request into that planner um it might take six seven seconds to respond but if I'm able to get that running on haik coup it might be responding in 1 second or two seconds or I even see instances where you can fine-tune a a small parameter"
+    },
+    {
+      "startSeconds": 467,
+      "text": "llama model and get subsecond response time for uh certain steps. Right? So, so now imagine this. Imagine I've got three steps, a planner step, a responder step, and then this intermediary like data collection step. Imagine I'm able to take all of these steps from a large model like Sonnet and put them all onto a small model via fine-tuning or"
+    },
+    {
+      "startSeconds": 489,
+      "text": "distillation like for example a a small 8 billion parameter llama model, right? What that would actually do is, you know, if if all three of my steps were on set 37, my end to-end latency might be something like 15 seconds, which is like, you know, okay for some apps, but for other apps, that's pretty unacceptable. Where if I"
+    },
+    {
+      "startSeconds": 510,
+      "text": "could move all of those to Llama 8B and get near sub-second latency on Llama 8B, which I've personally seen customers able to accomplish on AWS, uh you could actually get that into time to be more like 3 to four seconds, right? Meaning like you could have a multi-step workflow like this but deliver the same speed and response time that you would"
+    },
+    {
+      "startSeconds": 532,
+      "text": "kind of expect from a traditional chatbot uh architecture, right? That tends to run very fast because it's not so um doesn't have so many uh steps and so many LLM calls on the back end. Okay, so that that's a this is a more advanced way to improve latency by customizing models. However, what I see is a lot of customers uh that reach some limit of"
+    },
+    {
+      "startSeconds": 554,
+      "text": "optimizations available with things like caching and um native latency optimized inference options will go towards prompt optimization for smaller models. Uh distillation or fine-tuning into a smaller model for steps in their workflow that are particularly um long, right? So that means you need to be able to see and and if you're building"
+    },
+    {
+      "startSeconds": 575,
+      "text": "agents, you probably have some agentic architecture or system that allows you to see step by step um how long each call or each step in your workflow is. And that gives you a guide for like which areas to focus on optimizing first, right? Like if you have a step that takes 10 seconds sometimes, that's a great candidate step for you to go and"
+    },
+    {
+      "startSeconds": 595,
+      "text": "look at optimization via uh moving it to a smaller model via one of these uh techniques, right? And then maybe the the final thing uh here that customers will do to optimize latency is you can of course just change your actual infrastructure right so if you work in an environment where you have control over the actual instance type um the"
+    },
+    {
+      "startSeconds": 616,
+      "text": "chip architecture you use makes a huge difference like for example there are if you're using Nvidia there's the A100 series chips and then there's the H100 series chips and the H uh sorry the H series chips are the newer chips and they're I've seen them cut latency in half sometimes over the A100 series chips, right? So sometimes it's a simple"
+    },
+    {
+      "startSeconds": 636,
+      "text": "hardware upgrade and you know when you get into that space you're kind you're throwing money at the problem. Um however that is a great way to get performance. It's always been a good way in technology to get performance is to just buy uh beefier hardware uh systems, right? And so that that certainly applies within the world of uh LLM"
+    },
+    {
+      "startSeconds": 652,
+      "text": "latency as well. And then uh I we also see a lot of customers actually looking at their agentic architecture and and asking the question like can I break this down or or can I simplify it in a way. So like basically you know as an agent generalizes over many tasks right um you might you might start with a small task of like say I want an agent"
+    },
+    {
+      "startSeconds": 677,
+      "text": "to like generate powerpoints for me and then over time you might have it doing a lot of different complex tasks that tends to kind of weigh down um a very simple agentic architecture like the one I have on the screen here. And so uh we I do see and and this is still newer because this is like to get to this stage you have to have first built a"
+    },
+    {
+      "startSeconds": 697,
+      "text": "successful agent right um but we do see customers adopting something called a multi- aent uh architecture or multi- aent workflows and that's where you you might have multiple different agents right that do different things and then between those multiple agents you might actually um have some like I we've heard I've heard it called"
+    },
+    {
+      "startSeconds": 721,
+      "text": "different things but for now we'll just call it a supervisor agent right and uh that agent can kind of orchestrate what sub agents to call for different tasks and so uh again this is a this is a change in architecture from a more simple agentic architecture uh but it is oftentimes necessary as you want uh agents that can do a wider range"
+    },
+    {
+      "startSeconds": 745,
+      "text": "of tasks but you don't want disperate different user experiences is you you know you don't want to have companies don't want to have like five different UIs for for different agents right if you're if you do a job and you need five agents to do that job a supervisor agent allows you to have all those agents in"
+    },
+    {
+      "startSeconds": 762,
+      "text": "in the same uh place and kind of like a seamless user experience. Uh and again there are latency optimizations to be had from architecture changes like this that give you more fine grain control of how user traffic is flowing through these models and through these systems. I was talking really fast. The video was"
+    },
+    {
+      "startSeconds": 780,
+      "text": "longer than I wanted it to be. I hope this was helpful though that this this is pretty comprehensive. I I if I miss anything, let me know in the comments if there are other strategies that you've seen customers using to optimize LLM latency on AWS. But uh for me, this is what I would be thinking about if I were"
+    },
+    {
+      "startSeconds": 797,
+      "text": "trying to optimize latency for an Aentic application today. And I hope that this was useful. Happy building and take it"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:38:39.867Z"
+}

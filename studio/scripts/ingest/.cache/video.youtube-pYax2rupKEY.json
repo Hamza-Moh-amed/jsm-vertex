@@ -1,0 +1,106 @@
+{
+  "_id": "video.youtube-pYax2rupKEY",
+  "videoId": "pYax2rupKEY",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=pYax2rupKEY",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "With the huge amount of large language models out there today, it can be a bit overwhelming to choose the perfect one for your use case. Plus, the decision you make might have an impact on the accuracy of your results, as well as cost and performance. But don't worry. In the next few minutes, I'll show you as a developer how"
+    },
+    {
+      "startSeconds": 16,
+      "text": "I independently evaluate different models, both proprietary and open source, and walk you through different demos of model use cases, like summarization, questioning and answering on your data, and more. Now, some people start off by looking at benchmarks or leaderboards,"
+    },
+    {
+      "startSeconds": 31,
+      "text": "but for me, the biggest consideration for model selection is the problem that you're trying to solve. Because while GPT and other SaaS-based models are an easy and fast way to begin prototyping, many organizations need the full control, customization, and flexibility that an open-source model like Llama or Mistral provides."
+    },
+    {
+      "startSeconds": 49,
+      "text": "But no matter what you choose, you'll need to consider the performance, speed, and price of the model. And there's a lot of tools to help out with this. So, let's get started. Here I'm starting off at artificial analysis, comparing the entire landscape of models, both proprietary and open source."
+    },
+    {
+      "startSeconds": 65,
+      "text": "And you're probably gonna see some familiar names here, but something I do wanna note is that there are some trends. For example, with higher intelligence, typically results in a higher price or higher cost. While at the same time, smaller models might result in faster speeds and lower costs at the same time. Let's take intelligence as an example."
+    },
+    {
+      "startSeconds": 84,
+      "text": "So, the numbers that they calculated actually result from a variety of benchmarks on MMLU-Pro and similar evaluations. But let's say that you're scaling things up to millions of queries to your model. You probably don't need a PhD-level AI for a simple task like that. But one of my favorite community-based platforms to evaluate models is"
+    },
+    {
+      "startSeconds": 103,
+      "text": "the Chatbot Arena Leaderboard by UC Berkeley and ALM Arena, which combines over a million blind user votes on models to rank them and essentially provide a vibe score. Because benchmarks sometimes can be reverse engineered by models, the Chatbot Arena is a great way to understand what the general AI community thinks is the best model."
+    },
+    {
+      "startSeconds": 123,
+      "text": "And this directly correlates to its abilities on reasoning, math, writing, and more. Plus, let's say, for example, that you want to compare two different models. You can actually do so in the interface. For example, I tried out this prompt to write an example customer response for a bank in JSON,"
+    },
+    {
+      "startSeconds": 139,
+      "text": "and we're able to compare between Granite 8 billion and Llama 8 billion. So it's pretty cool, right? And finally, for simply open-source foundation and fine tune models, the Open LLM Leaderboard has a wide variety of model metrics and filters in order to understand which model might be best for your specific use case."
+    },
+    {
+      "startSeconds": 157,
+      "text": "For example, if you have a GPU or you wanna run it locally on your machine or even do real-time inferencing on a mobile or edge device. So what's great is that you can easily select these filters and see the model directly on Hugging Face. For example, the number three result here is the Granite model."
+    },
+    {
+      "startSeconds": 174,
+      "text": "And on Hugging Face, you can understand the millions of models and datasets that are on there and understand how you can use it on your machine. Now, we've taken a look at the general model landscape here, but let's start testing these out locally with our data. For example, this Granite model that we have here on Hugging Face."
+    },
+    {
+      "startSeconds": 191,
+      "text": "In order to test out different models and their use cases, we're going to use Ollama, which is a popular developer tool that enables everybody to run their own large language models on their own system. It's open source, and it has a model repository, meaning that we can run chat, vision, tool calling, and even a rag-embedding models locally."
+    },
+    {
+      "startSeconds": 210,
+      "text": "So to start, we're going to run Granite, specifically that Granite 3.1 model that we took a look at earlier on Hugging Face. And here, it's already quantized or optimized and compressed for our machine. And we're going to give it a quick question to make sure it's running. Talk like a pirate. Let's make sure. And there we go."
+    },
+    {
+      "startSeconds": 229,
+      "text": "We've got a funny response from our model. But now, with the model running locally on our machine, I want to use it with my own data to understand what it can do and its possibilities. We're going use RAG or retrieval augmented generation in order to do this. Here's an open-source AI interface called Open WebUI."
+    },
+    {
+      "startSeconds": 247,
+      "text": "And it's going to allow us to use a local model that we have running, for example, Granite, with Ollama, or maybe any open AI-compatible API model remotely as well. But let's think about it as an AI application, right? The back end could be our model and model server. And the front end could a user interface like this that allows us to take in"
+    },
+    {
+      "startSeconds": 267,
+      "text": "our own custom data, to search the web, or to build agentic applications all with AI. So let's start off with RAG by attaching a file of something the model traditionally wouldn't know. This is specific enterprise data, right? Stuff that the model wasn't trained on originally, and specifically about Marty McFly."
+    },
+    {
+      "startSeconds": 286,
+      "text": "And we're going to provide this to the model and ask a specific question. What happened to Marty McFly in the 1955 accident from the claim? Now, traditionally, a model wouldn't know about this information. But by using an embedding model in the background, as well as a vector database,"
+    },
+    {
+      "startSeconds": 302,
+      "text": "we're able to pull certain information from that source document and even provide that in ah the citations here to have a clear source of truth for our model's answers. So we're about to try out RAG here, but also different agentic functions as well. And it's a great place to get started with your own unique data."
+    },
+    {
+      "startSeconds": 320,
+      "text": "Now, let's say that you're building applications and you want to use a free coding assistant within your IDE. Well, traditionally, you need to use a SAS offering or a specifically fine-tuned coding model. But now, more recently, one model can now work with a variety of languages, including your code. So, what I've set up here is Continue."
+    },
+    {
+      "startSeconds": 338,
+      "text": "And it's an open-source and free extension from the VS Code marketplace or IntelliJ and specified it to use a local model that I have running with Ollama, that Granite model from earlier. So what we're able to do is to chat with our code base, explain entire files, and make edits for us."
+    },
+    {
+      "startSeconds": 354,
+      "text": "So here, I think we should add comments and some quick documentation on what this class is doing so that other developers can understand it as well. So I'm going to ask to add java.comments describing the service. And it's going to go in and add this necessary and important documentation"
+    },
+    {
+      "startSeconds": 370,
+      "text": "to my project inline and be able to ask me to approve it or to deny it. So, I think it's pretty cool. And it is a great way to use an AI model with your code base as well. Okay great, so now you know the various ways to evaluate and test models, both from online leaderboards and benchmarks, as well as from your own machine."
+    },
+    {
+      "startSeconds": 391,
+      "text": "But remember, it all comes down to your use case, and there's even hybrid approaches of using a more powerful model in conjunction with a small model on device. But we're just getting started, because after experimenting with models comes the stage of building something great with AI. Now, what are you working on these days?"
+    },
+    {
+      "startSeconds": 408,
+      "text": "Please let us know in the comments below. But as always, thank you so much for watching. Be sure to leave a like if you learned something today and have a good one."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:38:24.957Z"
+}

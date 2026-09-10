@@ -1,0 +1,107 @@
+{
+  "_id": "video.youtube-fBgk_cNCnsk",
+  "videoId": "fBgk_cNCnsk",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=fBgk_cNCnsk",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 29,
+      "label": "3 Key Questions"
+    },
+    {
+      "startSeconds": 78,
+      "label": "What type of data are you working with?"
+    },
+    {
+      "startSeconds": 130,
+      "label": "What do you want to communicate?"
+    },
+    {
+      "startSeconds": 248,
+      "label": "Who is the audience and what do they need?"
+    },
+    {
+      "startSeconds": 336,
+      "label": "Free Course: Data Literacy Foundations"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "we live in a world that runs on data it's how Amazon and Netflix know which movies and products to recommend how Starbucks manages a global supply chain and how Uber connects drivers with passengers in real time but the thing is data skills aren't just for tech companies or professional analysts anymore everyone works with data to some"
+    },
+    {
+      "startSeconds": 20,
+      "text": "degree and everyone can benefit from data literacy skills in this video we're covering an important topic that will help you take your data literacy to the next level when it comes time to decide how to visualize a data set or which specific chart to use it's important to ask yourself three key questions number one"
+    },
+    {
+      "startSeconds": 40,
+      "text": "what type of data are you working with is it geospatial time series categorical hierarchical or something more specialized number two what exactly do you want to communicate are you showing a comparison a composition a relationship or a distribution and number three Who is the audience and what they need are you sharing this with"
+    },
+    {
+      "startSeconds": 63,
+      "text": "an analyst a manager executive or the general public how you answer these questions will help you determine which type of chart or visual is most appropriate given the context so let's unpack each of these in a bit more detail so question one what type of data are you working with there are many flavors of data out there including"
+    },
+    {
+      "startSeconds": 84,
+      "text": "common ones like time series geospatial categorical and hierarchical but you might might also come across some more unique and specialized types of data as well like financial statements textual data funnel stages survey responses and much much more and the key takeaway here is that the type of data you're working"
+    },
+    {
+      "startSeconds": 103,
+      "text": "with often helps determine which type of visual will best represent it some common examples include using maps for geospatial analysis line charts to show time series and bar or column charts for categorical comparisons other more specialized examples include things like waterfall charts to track Financial balances ler scales to summarize survey"
+    },
+    {
+      "startSeconds": 124,
+      "text": "responses even word clouds to visualize information from text-based documents question two is all about understanding what you want to communicate whether it's a comparison composition distribution or relationship comparison visuals as the name suggests are used to compare values over time or across categories common visuals here"
+    },
+    {
+      "startSeconds": 146,
+      "text": "include variations of bar and column charts along with line or area charts for showing time series and some less common examples might be something like a funnel chart if you specifically want to show sequential stages like for example the number of applicants who made it through each round of a hiring process composition visuals are used to"
+    },
+    {
+      "startSeconds": 166,
+      "text": "break down the component parts of a hole this is where you'll typically use stacked bar or column charts pies and donuts stacked area charts for showing composition changes over time and maybe things like tree Maps or sun sunbursts if you're dealing with hierarchical data specifically distribution visuals are useful when you want to show the"
+    },
+    {
+      "startSeconds": 186,
+      "text": "frequency of values within a series like the Olympic Athlete example we talked about earlier in this course by far the most common and effective visual for showing distributions is the histogram but there are others as well like box and whisker charts density plots violin charts or heat maps and last but not least relationship visuals help you show"
+    },
+    {
+      "startSeconds": 207,
+      "text": "correlation between multiple variables this is typically done using Scatter Plots or variations like bubble charts but you might also use tools like a heat map or correlation Matrix to show a relationship as well now you might be feeling a little bit lost or overwhelmed given just how many types of visuals exist but let me give you some peace of"
+    },
+    {
+      "startSeconds": 226,
+      "text": "mind 90% of the time basic variations of bar column and line charts will be the simplest and clearest way to visualize your data so keep it simple avoid using complex or custom visuals unless you absolutely need to and make sure to prioritize Simplicity and Clarity over Aesthetics and design that takes us to our third question who is the audience"
+    },
+    {
+      "startSeconds": 251,
+      "text": "and what they need one of the most common mistakes that we see people make is that they design based on what they want to build not what Their audience needs to see designing effective visuals requires a level of empathy and an understanding of who your audience is and exactly what they're looking for so here are a few examples including an"
+    },
+    {
+      "startSeconds": 270,
+      "text": "analyst manager and executive the analyst tends to be someone who wants detail they like to understand exactly what's going on at a granular level so they're likely to respond well to things like data tables or combo charts with enough detail to support root cause analysis the manager typically wants more summarized data that leads to clear"
+    },
+    {
+      "startSeconds": 290,
+      "text": "insights that will help them operate the business for the manager audience it's best to stick with common charts and graphs and only enough detail to support specific insights or recommendations and finally the executive needs highlevel crystalclear kpis to track Business Health and Topline performance things like kpi cards or very simple charts"
+    },
+    {
+      "startSeconds": 312,
+      "text": "with minimal detail unless it adds critical context to those metrics so bottom line here is that how you choose to visualize and present data is very much a function of who will be consuming it analysts or data Specialists may want granular details or complex charts while managers or execs often prefer highle metrics with a focus on clear data"
+    },
+    {
+      "startSeconds": 335,
+      "text": "driven insights if you enjoyed this content and want to see more we've got a brand new data literacy foundations course and it's entirely free you can check it out at Maven analytics. so whether you're an individual looking to build confidence a leader seeking to empower and upskill your team or a data professional just"
+    },
+    {
+      "startSeconds": 355,
+      "text": "trying to stay ahead of the curve this is the course for you we've got a lot to cover so let's Dive In"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:04.132Z"
+}

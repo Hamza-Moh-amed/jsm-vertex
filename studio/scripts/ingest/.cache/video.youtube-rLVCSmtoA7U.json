@@ -1,0 +1,483 @@
+{
+  "_id": "video.youtube-rLVCSmtoA7U",
+  "videoId": "rLVCSmtoA7U",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=rLVCSmtoA7U",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 34,
+      "label": "Environment Setup"
+    },
+    {
+      "startSeconds": 181,
+      "label": "Themes & Color Palettes"
+    },
+    {
+      "startSeconds": 393,
+      "label": "Loading Datasets"
+    },
+    {
+      "startSeconds": 496,
+      "label": "Relational Plots, Scatterplot, Lineplot"
+    },
+    {
+      "startSeconds": 840,
+      "label": "Distribution Plots, Histograms, KDE Plots"
+    },
+    {
+      "startSeconds": 1155,
+      "label": "Categorical Plots, Boxplot, Barplot, Swarmplot"
+    },
+    {
+      "startSeconds": 1460,
+      "label": "Jointplot, Pairplot"
+    },
+    {
+      "startSeconds": 1548,
+      "label": "Heatmap"
+    },
+    {
+      "startSeconds": 1806,
+      "label": "Clustermap"
+    },
+    {
+      "startSeconds": 2024,
+      "label": "Regression Plots"
+    },
+    {
+      "startSeconds": 2105,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Today we're going to do a crash course on Seabor, a data visualization package in Python which makes it super simple and easy to create statistical graphics. It's based on Mattplot Lib but much easier to use and it's much easier to create complex looking and advanced graphs. In this video, we're going to mostly cover the different plot types."
+    },
+    {
+      "startSeconds": 16,
+      "text": "I'm going to explain how they work and how to customize them. And we're going to look at some styling options. If you like this video, let me know by hitting a like button and subscribing. But now, let us get right into it. >> [music] >> All right, so we're going to do a crash course on Seabour and I want to get started right away. As I already"
+    },
+    {
+      "startSeconds": 38,
+      "text": "mentioned, Seabour is a data visualization library for Python built on top of Mattplot Lib and it makes it super easy to create statistical visualizations of data sets or of data in general. Now, in this video today, I want to cover as much as possible in a short amount of time, which is why I want to get started right away with the"
+    },
+    {
+      "startSeconds": 54,
+      "text": "environment setup. For this, open up your terminal. Navigate to a directory of your choice where you want to be working in. In my case here, that is going to be the tutorial directory. And here now, make sure you have seabor on your system. You can do that with your basic Python installation by just doing pip or pip 3 install seabor. And we're"
+    },
+    {
+      "startSeconds": 73,
+      "text": "also going to need a second package called Jupiter Lab. This is going to be our development environment. This is what we're going to use to work with interactive Python notebooks. And in my case, since I'm not using the system level Python installation, I'm going to say UV init. And then I'm going to install these packages with UV add. But"
+    },
+    {
+      "startSeconds": 92,
+      "text": "in your case, if you're just using your basic Python version, pip or pip 3, install these packages. So UV init, and then UV add, the same packages, seabour Jupyter lab in my case. If you want to, you can also use uv. Once you have this, you can just run Jupiter lab. And in my case, I have to do UV run Jupyter Lab to"
+    },
+    {
+      "startSeconds": 111,
+      "text": "make sure I'm using the version of this particular uh environment here. And then this opens up Jupyter Lab in my browser. So you can move the terminal somewhere else. Don't close it. And now we can get started by creating a new IPython notebook. So just click on this button here. You can save this. I'm going to call this main.ipb."
+    },
+    {
+      "startSeconds": 130,
+      "text": "I'm going to make it full screen. Zoom in a little bit. And for those of you who have never worked with interactive Python notebooks before, the idea is quite simple. Instead of having one Python file where you run everything from top to bottom every time, you can run individual cells of code. So I can say here A= 10. Then I can say print A"
+    },
+    {
+      "startSeconds": 148,
+      "text": "as a separate cell. And then I can say A= 20. And then I can go back and just run this cell here. And then I have 20. I don't have to run everything from scratch every time. The reason this is useful is or the reason it's useful in machine learning in data visualization data analysis context is because often times we do something like loading the"
+    },
+    {
+      "startSeconds": 168,
+      "text": "data, pre-processing the data, training a model, evaluating a model and then you want to just do some small thing in addition to what you already have. You want to add an additional graph or something and then of course you don't want to have to rerun everything from scratch. So what we're going to do here first is we're going to say import"
+    },
+    {
+      "startSeconds": 185,
+      "text": "seabor as SNS. This is the go-to alias. This is the alias that is used in the documentation and all of the code examples. This is just seabour imported in a shorter way. And the first thing I want to cover now is how to set the theme, what the different color pletes look like and how we can choose the styling of our plot. Then we're going to"
+    },
+    {
+      "startSeconds": 206,
+      "text": "go into loading data sets and then we're going to cover the different plot types. This is going to be the structure of this crash course today. So the first thing is we can say snss.et theme and then we can choose a theme name by saying style equals and whatever the theme is that we want to choose. Now the full list of available themes is"
+    },
+    {
+      "startSeconds": 225,
+      "text": "available in the documentation. You will find a link to it in the description down below. But first of all let's see what a graph looks like without setting a particular theme. So I can do something simple like sns.catterplot scatter plot and then I can provide the x values one two three and the y values one two three nothing too fancy here"
+    },
+    {
+      "startSeconds": 244,
+      "text": "very basic stuff and if I do this you can see we have a very basic mattpot lip- like looking graph like a scatter plot basically um but if I say here now style is equal to dark grit which is my favorite from the defaults then I can rerun this and you can see we have a different layout a different style here So you can play around with that. You"
+    },
+    {
+      "startSeconds": 267,
+      "text": "can try the different styles that are available. This one is my favorite. It has a light gray background here with a grid and that's I think more uh pleasant for the eye. So in addition to that, we also have so-called color palletes. So I can go and say sns.col plet. And if I just run it like this, we will see the default plet which is blue,"
+    },
+    {
+      "startSeconds": 293,
+      "text": "orange, green, red, and so on. But we can also provide a specific name if we want to. So I can go and say for example uh one of them is called set two as far as I know. So we have set two. I'm not sure if we have set one. Yeah, we do have set one, set two, then set three. And you can play around with this and see which one you like. There's also um"
+    },
+    {
+      "startSeconds": 315,
+      "text": "I think one is called paired. This is this one. Then we also have stuff like hls and then you can provide a number. So that is a color spectrum and you can provide a number to specify how many colors you want to have. So that's also kind of interesting. Um and then we also have stuff like rocket for example. So you have different names"
+    },
+    {
+      "startSeconds": 336,
+      "text": "also something you can look up in the documentation. The cool thing is you can also make this continuous. So you can say here uh that this is the plet you want to use and then you can say cmap equals true or I think it's called as cap equals true. And now you have essentially this as a spectrum instead of just having distinct colors, discrete"
+    },
+    {
+      "startSeconds": 354,
+      "text": "colors. Now the interesting thing happens when you set it. So what you can do is you can just say SNS set and then plet and then you can choose to use one of these schemes. I personally am going to go with the default one. I just prefer the most. But what you would do here is you would either provide the string or"
+    },
+    {
+      "startSeconds": 373,
+      "text": "you would provide the plet object. So you could do SNS color plet and then you could define it here and then you can pass it to set plet if you want to. I'm not going to do that. I'm going to go with the default and this is what we're going to use for our plotting. And by the way, I think the default is called deep. So I think if we do that, we"
+    },
+    {
+      "startSeconds": 391,
+      "text": "should not change anything. All right. So that's the initial style setup. Then we're going to also load the data sets that we're going to use today from seabboard. Now this is not mandatory. You can use a pandas data set from anywhere. You can load it from a CSV file. You can get it from the web. You can uh load it from scikitlearn from"
+    },
+    {
+      "startSeconds": 408,
+      "text": "TensorFlow. We're just going to keep it simple today and we're going to load them directly from Seabor. So these are mostly basic data sets that you probably already know if you did some data science in the past. But you can do SNS.load data set and then you can just provide the name of the data set. Now if you"
+    },
+    {
+      "startSeconds": 425,
+      "text": "don't know what data sets are available, you can just say SNS.get data set names. This is going to list all the data sets that are available. But for the most part today, we're going to use the tips data set. So, this is basically how much people are tipping in a restaurant depending on what the total bill is and the gender and whether"
+    },
+    {
+      "startSeconds": 446,
+      "text": "they're smokers or not and the day that they went for dinner and the daytime also. So, that is the data set essentially and we can do some visualization stuff with this data set. So now we can move on to the core part of this crash course which is the different plot types and how to do plotting using Seabor in general because"
+    },
+    {
+      "startSeconds": 462,
+      "text": "the approach is a little bit different to that of Mattplut. In Mattplot Lib a lot of stuff has to be done manually. We need to say I want a legend. I want to display this feature in this way with this color and this styling and this extra visualization. In Seabor we can also style a lot manually but most of the stuff is done for us automatically"
+    },
+    {
+      "startSeconds": 481,
+      "text": "by just providing the features that we're interested in. So let me show you how this works. Let's go and say tips data. I'm going to save this now in a variable is going to be equal to SNS load data set. And it's just going to be tips. And now let's go with a simple scatter plot. So I'm going to say here plt dot or not plt sorry snss dot"
+    },
+    {
+      "startSeconds": 504,
+      "text": "scatterplot. And we're going to provide in this case here just the data set. And now we're going to say on the x-axis I want to have a certain feature and on the y-axis I want to have a certain feature. So I'm going to say on the x-axis I want to have the total amount of the bill and on the y-axis I want to have the tip. So if I do that I will get"
+    },
+    {
+      "startSeconds": 526,
+      "text": "a scatter plot that looks like this. The more money you spend the more you tip usually makes sense. This is a positive trend and that is a simple scatter plot. Now what we can do with Seabor that is not so easily done with Mattplot lip is I can say that I want to vary aspects of this visualization based on certain"
+    },
+    {
+      "startSeconds": 543,
+      "text": "features. For example, I might want to say that the gender should color the points differently. So if it's male, I want to have a certain color. If it's female, I want to have another color. Now, how do I do that? Without doing any fancy color codes, I can just say hue is equal to and then the name of the variable, in this case, sex. And if I do"
+    },
+    {
+      "startSeconds": 564,
+      "text": "that, you can see I automatically get this visualization here with a legend male female and the colors represent this particular feature. Now I can also do the same thing with the size. I can say that the size of the group should determine the size of the data point. So I can go and I can say size is equal to size. Run this. And now I have"
+    },
+    {
+      "startSeconds": 585,
+      "text": "differently sized points just by providing the name of the feature here. All based of course on the data set being present as a data frame. Um and I can do that with different things as well. So what else do we have? Maybe we can say that the smoker should determine the style. So I can say style is equal to smoker. Is it a smoker or not?"
+    },
+    {
+      "startSeconds": 606,
+      "text": "And if it's a smoker I get a circle. If it's not a smoker I get an X across basically. So that is also a customization option. And that is how Seabour works in a nutshell. We have the different plotting functions and there are a lot of different uh plotting functions and the aspect that we want to link to a certain variable. We just have"
+    },
+    {
+      "startSeconds": 626,
+      "text": "to provide the variable name for that specific aspect. This is super convenient and it's not possible like this in mattplot lip. Now another thing that's interesting is we have figure level functions and axis level functions. Scatter plot is an access level function. We just do one axis here, one visualization and that's it."
+    },
+    {
+      "startSeconds": 644,
+      "text": "We can do the exact same thing that we did with the scatter plot function with a different function called real plot. And real plot basically does the same thing but we can use it with multiple different modes. So I can say or different kinds I should say. So kind is equal to scatter for example. This is going to result in basically the same"
+    },
+    {
+      "startSeconds": 666,
+      "text": "plot. We do have some differences here like the legend is outside of the actual visualization here but essentially it's the same effect. We have a scatter plot with all the same parameters just that we have to provide the kind scatter which also implies there's other kinds of visualizations that we can use here."
+    },
+    {
+      "startSeconds": 682,
+      "text": "But one thing that we can do with such a relational plot here and which is not possible with the scatter plot is we can have multiple axes here multiple plots so to say in one figure and not only that we can also say that the split into different graphs should happen based on a feature. So for example, I also have"
+    },
+    {
+      "startSeconds": 703,
+      "text": "the feature day here. We have Thursday, Friday, Saturday and Sunday. And I could say that I want to have four different graphs for these days. How do I do that? All I have to do in the real plot function is I have to say column is equal to or call is equal to day. This is now going to take this and make four different plots that represent the same"
+    },
+    {
+      "startSeconds": 724,
+      "text": "graphic as before but split into four different days. Now if this is not what I want, I can also go and say column wrap is equal to two. Then I would have a 2x two grid and I can see this a lot easier. And I can of course exchange all of this. So I can say for example that the color should be based on the day and"
+    },
+    {
+      "startSeconds": 745,
+      "text": "the column should be based on sex. And then I would have two graphs and many more colors. So that is the basic idea of working with real plot versus scatter plot. There's also line plot which has the same effect as um as calling real plot with kind line. I'm going to show you that now. So if I say let me use a different data set for this Dow data."
+    },
+    {
+      "startSeconds": 768,
+      "text": "For the Dow Jones data I'm going to say SNS load data set Dow Jones. This is just a stock index. Uh so we can take a look at this data as well. Dow data that is just a stock price or the index price I should say. And now I can go say SNS line plot dow data and I can say X is equal to date and Y is equal to price. That's basically it."
+    },
+    {
+      "startSeconds": 800,
+      "text": "We get this line chart. Same thing happens if I do this with real plot and kind line. So real plot kind line has the exact same effect as this. again looks slightly different but I can also do the same thing with scatter of course which doesn't make a lot of sense in this case but it's possible so rail plot can be multiple"
+    },
+    {
+      "startSeconds": 825,
+      "text": "plots line plot and scatter plot but we can also split by column and um or split column-wise based on a feature which is quite convenient and this also exists now for different plot types real plot includes scatter and line but we also have for example this plot so distribution plot I can go and say sns s do.isplot."
+    },
+    {
+      "startSeconds": 847,
+      "text": "This is not dist so without a t. It's displot. And I can say I'm interested in the tips data and I'm just interested in the distribution of the tips. So I can do that and I immediately get a histogram without even providing the kind because that's the default. I can say kind is equal to hist which will have the same"
+    },
+    {
+      "startSeconds": 866,
+      "text": "effect. And of course you guessed it I can also go and just do histplot directly. So I can say hist plot like this without the kind parameter and it's going to be roughly the same visualization just a different figure size. So we have this plot hist plot but of course what can I do with this plot that I cannot do with histplot? I can"
+    },
+    {
+      "startSeconds": 887,
+      "text": "split um based on a feature into multiple plots. So I can say here that the column should represent the different genders. And now I have two histograms which is not possible with the hist plot. However, what I can also do in the his plot is I can say that the color should be based on sex and then I would have the two histograms uh yeah in front"
+    },
+    {
+      "startSeconds": 912,
+      "text": "of one another with some transparency. This is something that I can do. And this displot function also now contains more kinds than the real plot function. So another plot that I can do is I can say SNS KDE plot. Not even sure what KDE stands for. I knew it once. But basically it's like a histogram but as a continuous line. So I can say tips data"
+    },
+    {
+      "startSeconds": 933,
+      "text": "x is equal to tip and then we get something like this. But the cool thing is it's not just that I can do this with one variable like a histogram. I can also turn this into a kind of contour plot by providing a second variable. So I can say that the total bill should also be um represented here and I can say plot then I'm going to get it like"
+    },
+    {
+      "startSeconds": 956,
+      "text": "this. And theoretically, I could also say that the color should be determined by gender. And then I would have two of these plots on top of one another. And depending on what you're trying to show here, you can of course play around and do different things. Uh what we can also do here, I think there's a parameter"
+    },
+    {
+      "startSeconds": 973,
+      "text": "called fill. Then this looks a little bit more professional if you do it like this. Uh we could also say maybe that the color represents the days. This is also possible. But then of course maybe you need to work with some transparency here manually. But you get the idea. With all these plots we have the data and we have different"
+    },
+    {
+      "startSeconds": 992,
+      "text": "parameters and all we have to do is we have to pass feature names and then we can do some custom stuff. I recommend with all of these functions if you want to go deep into one of them if you want to style very specific aspects of them. You either need to go onto the mattplot level. So you can use Mattplutlib in"
+    },
+    {
+      "startSeconds": 1008,
+      "text": "combination with Seabor since Seabour is built on top of Mattplot Lib, but also you can go to the documentation and see what parameters there are. I'm not going to cover all of these functions in detail, but I'm going to show you how they work, what you can do with them on a basic level. And then you can go deeper into them if you want to. And of"
+    },
+    {
+      "startSeconds": 1024,
+      "text": "course, what you can do here with a KDE plot, you can also go again and do it using this plot. And then you can just say kind KDE. same result but you can also now split by column and say for example column is sex and then you would have two plots side by side that is again the difference between this plot and the"
+    },
+    {
+      "startSeconds": 1047,
+      "text": "child functions or I should say the axis level functions so another function that we can plot or use here is the ECDF plot which is like a cumulative uh density so I can or cumulative probability I can Say again tips data and then X is equal to tip. That is basically not the histogram but the cumulative probability which essentially"
+    },
+    {
+      "startSeconds": 1072,
+      "text": "means that the probability that a tip um like this or lower has been given is this probability and the probability that the tip was $6 or more or less is like 97%. The probability that the tip was $10 or less is one. So 100%. Um, and of course this also works with this plot and kind ECDF. Now there's also one additional plot type which"
+    },
+    {
+      "startSeconds": 1101,
+      "text": "doesn't work on its own. You add it to a histogram for example. So we can maybe go up here, copy this and in addition to that we can also now call an additional function called rockplot. So that would be SNS.Ruckplot. You do that in addition to histograms. And then you can say uh tips data x is equal to tip and color could be"
+    },
+    {
+      "startSeconds": 1126,
+      "text": "something like orange for example. And what this is going to do now is it's going to plot and of course this now doesn't work if I'm splitting on a column basis. So let me do it like this. This now plots the individual data points um onto the histogram. So it's not just the density, it also shows you the actual values. So it's not just"
+    },
+    {
+      "startSeconds": 1146,
+      "text": "between two and I don't know what the boundary is here 2.3 or something. It's actually you see the individual data points here. Now then the next figure level function is catplot. So categorical plot for this we can do sns.catplot. We can go again with the tips data. And here now I can do for example tip on the"
+    },
+    {
+      "startSeconds": 1168,
+      "text": "different days. So the y is the day and I can say kind is equal to a strip plot. So that basically shows me the different tip values. It's a little bit like the ruck plot but in a different way visualized in a different way. So we have the different tip values on the different days of the week. Um and then we can also say again"
+    },
+    {
+      "startSeconds": 1192,
+      "text": "hu is based on male female if we want to do that. And I think it goes without saying that this is the exact same thing as just calling strip plot directly. So if I say SNS strip plot, I just have to remove the kind. But besides that, it's going to be the same thing with a double P. Of course, an alternative plot to that would be the"
+    },
+    {
+      "startSeconds": 1215,
+      "text": "swarm plot. It's quite similar, but a little bit different because there we have the values more like vertically lined up. Um but of course that also works with cat plot and then with kind uh swarm. Then one of the plots that probably most of you guys know from school is the box plot. You can either call this using the box plot function or"
+    },
+    {
+      "startSeconds": 1237,
+      "text": "by saying uh cat plot kind box. That's also possible. There we can say just use the tip as the value then you get one box plot. Then you can also say okay use it based on or split it based on the day like this. And basically a box plot shows you the median, the different quantiles and also some outliers, the min and max that are not outliers. Um"
+    },
+    {
+      "startSeconds": 1260,
+      "text": "yeah, if you don't know how to read this, you can Google it. The basic idea is this is the minimum value. This is the maximum value. Then you have some outliers which are not considered to be part of minimum and maximum. Then you have like the first quartile, the second quartile which is the median and then the third quartile. And then you can see"
+    },
+    {
+      "startSeconds": 1278,
+      "text": "the range of the individual um yeah of the individual segments here. And an alternative to this plot type is also the violin plot that shows you the distribution in this curvature. And you can also see here the median. Another one would be the boxen plot which uh shows different size of boxes here. So, as far as I remember it, it's like you"
+    },
+    {
+      "startSeconds": 1300,
+      "text": "start with the median here and then each portion. So, each next line is like half of the remaining data. Not sure if that's um precisely correct, but it's usually something that you use for larger data sets. I'm not really I've never used this for data analysis myself, but doesn't mean that it's useless. It's probably quite useful if"
+    },
+    {
+      "startSeconds": 1318,
+      "text": "you know what you're doing. Then there's also the classic bar plot. So, a bar plot is just bars. You can either have horizontal or vertical bars. But for example, we could do something like X is the day and Y is the tip. That would be now a vertical bar chart. Then you can also say easily that the color is based on the gender."
+    },
+    {
+      "startSeconds": 1344,
+      "text": "And this is the beauty of Seabor. You don't have to take care of the alignment here. You don't have to think about how to structure this. You don't need to invent color codes. You just say I want to have an additional factor here. There you go. You have it. And since we have more than one value here for the tip per"
+    },
+    {
+      "startSeconds": 1360,
+      "text": "day, this is shown as a range. And this is basically always the middle of this range. That's that's how you do a bar plot if you don't have just one value per uh day in this case or per per x value. An alternative to that would be the count plot. With a count plot, we don't get a lot of information. But basically, if I just say x is equal day,"
+    },
+    {
+      "startSeconds": 1378,
+      "text": "we see how many instances we have per day. We can also say for example that the color should again represent something like uh sex for example. And then you can see that this is also split to be counted correctly to split the count up into the different genders. And the last categorical function that I would like to show is the point plot."
+    },
+    {
+      "startSeconds": 1399,
+      "text": "The point plot is also showing a distribution or also showing a range I should say. So we can say x is equal to the tip and y is equal to the day. And then basically we can see on Thursday that is the range of tips. On Friday that's the range of tips. And yeah that that's basically how you can do that. You can also of course"
+    },
+    {
+      "startSeconds": 1423,
+      "text": "again add colors based on the different features and see how they overlap, see how they uh change or how they differ. If I may for a second, I would like to plug myself in as the sponsor of my own video. If you go to my website, neural9.com, you will find a tab services and a tab tutoring. Here you can hire me for all sorts of stuff like"
+    },
+    {
+      "startSeconds": 1442,
+      "text": "data science, machine learning, web development, if you need help with something in a project. Here you can book me for one-on-one tutoring if you want me to teach you personally something that you don't understand, if you like my teaching style. On both pages at the bottom, you can contact me via mail and also via LinkedIn. Just"
+    },
+    {
+      "startSeconds": 1458,
+      "text": "wanted to let you know about this. Now we move on to something more exotic which is a joint plot. So we can say snss.jint plot and what this is going to do is we're going to provide the tips data set again. Uh let's say x is tip and y is total bill. Then we can see first of all we get a scatter plot like in the beginning but"
+    },
+    {
+      "startSeconds": 1479,
+      "text": "now we also get a histogram for the respective feature here. And this is also aligned with the point. So we can see the tip or actually I think maybe we should do it the other way around because that's how we had it in the beginning. Total bill and then y is equal to tip. We can see that here the total bill is spread like this and we"
+    },
+    {
+      "startSeconds": 1497,
+      "text": "have a lot of points here which is also represented in the histogram. Same thing here for the tip. We have a lot of tips down here. So here we get the highest activation in the histogram. That is quite useful for data exploration. Now even more exotic than that is the pair plot. So I can just say SNS pair plot and provide the entire data set tips"
+    },
+    {
+      "startSeconds": 1518,
+      "text": "data. And this is now going to plot all the numerical feature against one another. If they're not pre-processed, they're not going to be used. So if you're not using um if you don't somehow encode day as 1 2 3 4 or if you don't encode smoker as 0 and one, it's not going to be used. But we can see that size, tip, and total bill are used"
+    },
+    {
+      "startSeconds": 1540,
+      "text": "because they're numbers and they're plotted against one another. If it's the feature plotted against itself, we see the histogram. Otherwise, we see a scatter plot. But one of my favorite use cases when it comes to Seabor is the heat map. The heat map can be used for a number of different things. And one of the favorite use cases for me is"
+    },
+    {
+      "startSeconds": 1556,
+      "text": "plotting correlations. So when I do data exploration, often times I want to know how uh certain features correlate, especially if I plan to do machine learning on them. And for this I'm going to use a different data set now to show you how I usually do that. I'm going to use the Titanic data set. Titanic is equal to SNS load data set Titanic"
+    },
+    {
+      "startSeconds": 1577,
+      "text": "and in order to calculate the correlation between the features they need to be numeric like for the pair pair plot they need to be numeric but it's not possible to do the correlation between age and embarked for example if you don't encode embarked or class or um adult male and whatever you want to use here so I'm going to pre-process some of"
+    },
+    {
+      "startSeconds": 1597,
+      "text": "the features here this is now not seabor this is more like pandas pre-processing but it's going to be necessary to calculate the correlation which is what we're going to visualize with a heat map. Now, since this is not a central part of the tutorial, I'm going to copy paste this to not waste too much time here. I'm basically encoding the binary"
+    },
+    {
+      "startSeconds": 1612,
+      "text": "features. So, we have sex is either male or female, so one or zero. A life is either yes or no, so it's going to be one or zero. And alone is going to be either true or false. So, we're mapping a boolean to the integer world. And then we do two more things. We encode the class from first, second, third by using the categorical DT type from pandas."
+    },
+    {
+      "startSeconds": 1633,
+      "text": "We're encoding this to be 1 2 3 essentially or 012 actually. And then we're dropping all the other features by doing that. And of course, I need to call this Titanic data. By doing that and also by importing pandas PD, we get a Titanic data frame that contains only numbers. And what we can do now is we can calculate the"
+    },
+    {
+      "startSeconds": 1657,
+      "text": "correlation. So for this we're just going to say Titanic data.core. So dotcorrelation. And now we can see how the features correlate with one another. We have one always on the diagonal because the feature is exactly the feature itself when it's compared to itself. But other than that we get values between negative 1 and one. Uh I"
+    },
+    {
+      "startSeconds": 1676,
+      "text": "think you know how correlation works. But it's not clear to me. I don't see immediately here um very strong correlations with my eyes unless I really look for them. I can see maybe that this is quite high negative or strong negative correlation but it's difficult to spot the correlation. So what I like to do is I like to use the"
+    },
+    {
+      "startSeconds": 1694,
+      "text": "heat map from Seabor which is SNS heat mapap and then I just pass Titanic data.correlation for example. And by the way this can be used for any uh table data that you have. It doesn't have to be a correlation table, but I can do it like this and it immediately gives me a heat map. Now with this heat map, I have"
+    },
+    {
+      "startSeconds": 1714,
+      "text": "the colors and I can read the colors and easily spot certain values, but I don't know the actual values. So what I can also do here is I can provide annotation is equal to true. So not is equal to true. That is now going to also give me the numbers. And since this is not easily readable, we can also now include"
+    },
+    {
+      "startSeconds": 1734,
+      "text": "math lip here. I can say import mattplot lip.pipplot piplot as plt and I can say plt figure figure size is equal to 128 for example just to make it a little bit larger and now I have this proper heat map now maybe it's confusing to you because you don't like the colors it's not clear to you what is high what is low and you"
+    },
+    {
+      "startSeconds": 1758,
+      "text": "always have to look at this legend it's more intuitive maybe to use a different color map for example we can say cap is equal to and this is something that you can also find in the documentation You can just say cool warm. That would be from red, very strong positive correlation to blue, very strong negative correlation. And in the middle"
+    },
+    {
+      "startSeconds": 1777,
+      "text": "you have like gray which is kind of neutral. So if something is very blue, I can see okay there's a lot of negative correlation. If something is very red I can see a very positive correlation. And by the way by doing this I can see that I made a mistake in the pre-processing because alive and a loan have a correlation of one. This is not"
+    },
+    {
+      "startSeconds": 1793,
+      "text": "possible. they would be the same feature and they are because I didn't um correctly change the code. So let's do all of this again alone and now I should get a different correlation there. There you go. Now there's also another plot type which I think is quite exotic called a cluster map. And for this I want to use a"
+    },
+    {
+      "startSeconds": 1811,
+      "text": "different data set the iris data set. Probably you know it if you have done machine learning before. Basically just a data set with flowers. They have different species and different lengths and widths of certain features. uh sele length, pto length, pedal length, I'm not sure how it's pronounced. Uh but basically we can say sns load data set iris"
+    },
+    {
+      "startSeconds": 1831,
+      "text": "and then we can do a cluster map of the iris data set. So let's take a look at the iris data set. We have these four features, different lengths and widths and then we have the species. What kind of species is this? And what I can do now is I can say SNS cluster map. But of course since I'm clustering I'm not interested in the species because these"
+    },
+    {
+      "startSeconds": 1851,
+      "text": "would already be classes. And clustering is always like unsupervised. Uh so what we're going to do is we're going to actually take Iris and we're going to drop the species. So I'm going to say species drop an axis equals 1. Now this requires scypi to be available. So I think for this one we need to actually install sub"
+    },
+    {
+      "startSeconds": 1873,
+      "text": "scypi. So let's go to the tutorial directory uv scypi like this and then run this again. probably we need to restart the kernel for this. So let's go to the very bottom. Let's import again. Let's go down again and let's run this. And for this of course I need to load Iris again. But there you go. Now we have this fancy cluster map. And in the"
+    },
+    {
+      "startSeconds": 1897,
+      "text": "beginning it might be a little bit difficult to understand what is happening here. So I'm going to try to explain it. On the right you just see ID. So you can for the most part ignore these. These are not very important. What you have here on the x-axis is the four different features and what you have on the y ais is all the different"
+    },
+    {
+      "startSeconds": 1914,
+      "text": "individual rows of that data frame. So everything you see here every line no matter how thin it is is a row which is one specific uh flower or one specific measurement and every column is the feature. So basically in one row you have the four different features and one cell is an activation for that specific feature of that specific row. And here"
+    },
+    {
+      "startSeconds": 1937,
+      "text": "you can see what the activation actually means. But I think this is actually scaled so that the features do not differ too much from one another if I'm not mistaken. But the basic idea is that you have clustering which basically means the things that are closer together are more similar. So in the beginning you have this split here. You"
+    },
+    {
+      "startSeconds": 1956,
+      "text": "have all the data from here to here. That is one group. So from here to here is one group and the other group is from here to here. Then you have a second split here which is into this and into this. And you can go to lowest level to see that this is basically from here to here and then also from here to the very"
+    },
+    {
+      "startSeconds": 1975,
+      "text": "bottom. So the first cluster is actually this one here which is orange, black, uh pink and dark purple I would say. And then the second cluster is like orangeish, dark purple, pink again, and like orange purple mixed. And then within these clusters, you have other separations. And this basically just means that"
+    },
+    {
+      "startSeconds": 1998,
+      "text": "this is what the data looks like if you split it into similar groups. Now, how deep you want to go with the split is up to you, but you can see what the data looks like if you cluster it into similar instances. And for the features, you can also see that basically these two features here are the closest to one another, the most similar in terms of"
+    },
+    {
+      "startSeconds": 2015,
+      "text": "the patterns that appear in the different instances. And um these two like this length and this length are basically the most dissimilar. And now finally the last thing I want to show you about seabor is the two functions lmplot and recck plot. Basically the same functions again one is figure level, one is axis level. But if we do"
+    },
+    {
+      "startSeconds": 2034,
+      "text": "sns.lmmp lm plot and then we provide let's say tips data and I think I need to uh load this again since I restarted the kernel. So let's go and do that. But basically this lm plot uh performs a linear regression. So I can say that I want to look at total bill again and the tip and that is going to now fit automatically a regression line. I can"
+    },
+    {
+      "startSeconds": 2061,
+      "text": "still go and separate the color by gender for example that is possible. Then I get two lines and two two regression fits which we can see the trend is pretty much the same but that is also possible to do linear regression automatically with seabor and we can also do the same thing as I said with the recck plot function. The lm plot is"
+    },
+    {
+      "startSeconds": 2083,
+      "text": "the figure level function. So actually okay actually this is interesting. And I didn't know that the direct plot function doesn't offer the hue argument. So that's also a limitation. But with the lm plot function, we can do hue and we can also do column day for example. That is also possible. And then we have"
+    },
+    {
+      "startSeconds": 2100,
+      "text": "four different regression line uh or two times four different regression lines. So that's it for this video today. I hope you enjoyed it and I hope you learned something. If so, let me know by hitting a like button and leaving a comment in the comment section down below. Also, in case you're interested in any freelancing services or tutoring"
+    },
+    {
+      "startSeconds": 2116,
+      "text": "on my website, you can find a tab for services and for tutoring then you can contact me for projects that you need help with for tutoring if you want to be taught one- on-one. And you can contact me via LinkedIn or email. At the bottom, you will find the two buttons. Besides that, don't forget to subscribe to this"
+    },
+    {
+      "startSeconds": 2132,
+      "text": "channel and hit the notification bell to not miss a single future video for free. Other than that, thank you much for watching. See you in the next video and bye."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:00.631Z"
+}

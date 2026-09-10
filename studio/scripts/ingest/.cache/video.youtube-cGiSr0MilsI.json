@@ -1,0 +1,191 @@
+{
+  "_id": "video.youtube-cGiSr0MilsI",
+  "videoId": "cGiSr0MilsI",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=cGiSr0MilsI",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 70,
+      "label": "LCP"
+    },
+    {
+      "startSeconds": 342,
+      "label": "CLS"
+    },
+    {
+      "startSeconds": 611,
+      "label": "INP"
+    },
+    {
+      "startSeconds": 820,
+      "label": "Recap"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "If you want to improve the performance of a website, the first question is always the same. What exactly should we measure? Core Web Vitals answer that question with three metrics that focus on loading, reusability, and responsiveness. In this video, I will walk through each one and show you what is actually happening inside the browser."
+    },
+    {
+      "startSeconds": 25,
+      "text": "Core Web Vitals focus on three aspects of user experience. The first one is Largest Contentful Paint or LCP, which measures how quickly the main content appears. The second one is Cumulative Layout Shift or CLS, which measures how stable the page layout is. And the third one is Interaction to Next Paint or INP,"
+    },
+    {
+      "startSeconds": 50,
+      "text": "which measures how responsive the page feels when user interactively visit. In this video, I will explain each of them with a short visual animation, and then we will look at the simple before and after code example to see how those issues usually happen in real applications. Let's start with Largest Contentful"
+    },
+    {
+      "startSeconds": 74,
+      "text": "Paint or LCP. LCP measures the time it takes for the largest visible element in the viewport to finish rendering. Usually, this element is something like a hero image, a large heading, or the main content block. So, instead of asking when did the page start loading, LCP asks a more meaningful question. When does the main content actually"
+    },
+    {
+      "startSeconds": 99,
+      "text": "appears for the user? For good user experience, Google recommend keeping LCP under 2.5 seconds. Let's visualize how the browser calculate this. As the page loads, different elements start appear inside the viewport. At first, maybe a small element appears. So, the browser treat that as a current Largest Contentful Paint candidate. Then a"
+    },
+    {
+      "startSeconds": 121,
+      "text": "larger element appears, so the browser update the candidate. Finally, the largest element appears on the screen, and once that element finish rendering, the browser records the LCP time. So, the LCP metric is basically the moment when the largest visible element finish painting in the viewport. Now, let's look at a common issue that slows this"
+    },
+    {
+      "startSeconds": 143,
+      "text": "down. So, in this example, the page include a slow JavaScript file inside the header. It's called source.bundle.js. Because this script is blocking, the browser has to stop parsing the HTML while the script downloads and executes. So, if you look at this bundle.js, it has a full block here that will slow down the JavaScript"
+    },
+    {
+      "startSeconds": 161,
+      "text": "execution. The reason for this behavior is actually quite simple. JavaScript is allowed to modify the DOM. A script could insert element, remove nodes, and change the structure of the page entirely. So, the browser cannot safely continue building the page until the script has finished running. As a result, the browser pause HTML parsing,"
+    },
+    {
+      "startSeconds": 183,
+      "text": "downloading the script, execute it, and only then continue building the rest of the page. And that creates a problem for our LCP element. Because the browser is blocked at the header, it cannot reach to the part of the HTML where the hero image appears, which means the image request only starts after the script"
+    },
+    {
+      "startSeconds": 201,
+      "text": "finishes. So, the most important content on the page start loading later, and the LCP time becomes much worse. So, as you can see in the LCP before HTML, the script is in the header and it's blocking the rest of the page from rendering. And we have a Largest Contentful element here, which is the image. And if we go to the browser and"
+    },
+    {
+      "startSeconds": 222,
+      "text": "open up the LCP before example, you can see the script is loading a bit, and then the hero image shows up, and you can see Largest Contentful Paint LCP has like 5.4 seconds. You can see that in the Chrome DevTools in the Performance tab. And by default, it has three core metric, and you can see the Largest Contentful Paint is really bad at this"
+    },
+    {
+      "startSeconds": 251,
+      "text": "stage. Now, let's compare that with the improved version. Instead of blocking the page, we mark the script with a defer attribute. This tells the browser that the script does not need to run immediately. It won't change the DOM element. The browser can continue parsing the HTML, build the DOM, and download the script in parallel. The"
+    },
+    {
+      "startSeconds": 270,
+      "text": "script will only execute after the HTML parsing is finished, which allows the page structure and important resource to load much earlier. We also preload the hero image, so the browser starts requesting it as early as possible. And also, we give the hero image a high fetch priority, which tells the browser that this resource is especially"
+    },
+    {
+      "startSeconds": 290,
+      "text": "important for the page. If you are curious about how preload works in more details, I actually made another video explaining preload, prefetch, and lazy loading. So, you can check them out after this one. And now, let's go back to the browser and go back to demos. I'm cleaning up the metrics here and then doing the after load. So, you see the"
+    },
+    {
+      "startSeconds": 310,
+      "text": "image immediately because it's preloaded. And then the page is still loading, and then you can see that there's a much better result on the LCP, Largest Contentful Paint, even the JavaScript itself is as slow as before. With this small change, the main content appears much earlier, and the LCP score improves significantly. So, key idea for"
+    },
+    {
+      "startSeconds": 331,
+      "text": "LCP is simple. Try not to block the browser from loading the most important content. Prioritize the main visual element and then delay everything that is not critical. Now, let's talk about Cumulative Layout Shift or CLS. CLS measures how much visible content moves unexpectedly while the page is loading. You might have seen"
+    },
+    {
+      "startSeconds": 355,
+      "text": "this before. You start reading something on the page, and suddenly the text jumps because an image load above it or an advertisement has started appears. That movement creates a layout shift. The CLS adds up all these shift into a score. A good CLS score should stay under .1. Let's visualize how that works. Imagine a simple grid layout with several"
+    },
+    {
+      "startSeconds": 381,
+      "text": "elements. At first, everything looks stable, but then one element suddenly grows because an image loads and its size was not known earlier. When that happens, the surrounding elements have to move to make space for that element. That movement creates a layout shift. Then another element changed shape, maybe from a square to rectangle, and"
+    },
+    {
+      "startSeconds": 402,
+      "text": "once again, the surrounding elements have to move. Each of those movements contribute to a CLS score. Now, let's look at a typical example in code. In the first version of this page, in a CLS before, the image do not specify their width and height. When the page initially runs, the browser doesn't know how much space this image will occupy,"
+    },
+    {
+      "startSeconds": 423,
+      "text": "so it doesn't reserve any space for them. Then when the images finally load, the browser suddenly insert them into the layout. And when that happen, the rest of the page shift downwards. This creates layout jumps and increase the CLS score. So, in here, we add a few delays to the image element. And in the image element, we don't have the source,"
+    },
+    {
+      "startSeconds": 445,
+      "text": "we just have the data source for the actual image, and then we will use the JavaScript to insert this element dynamically. At the run time, the browser wouldn't know how big the size of the image would be. And then if we go to the browser and see the before, you will notice that the image will suddenly change the size here. And"
+    },
+    {
+      "startSeconds": 466,
+      "text": "please note that this shift is happening only inside the viewport, so if we can move this outside as a standalone window, and we can change the size of this a little bit and do another refresh, we probably can see some different scores for the CLS. You can see it has a worse number here because we have changed the"
+    },
+    {
+      "startSeconds": 494,
+      "text": "the viewport size, and that particular proportion of this image to the viewport will be slightly larger than before. Let's compare this with the improved version. Here, we simply add width and height attribute to the image element. With this information, the browser can calculate the correct aspect ratio and reserve the space immediately. So, all"
+    },
+    {
+      "startSeconds": 516,
+      "text": "the images now have the correct width and height. And if we go to the browser again and go to the after example, you can see the Cumulative Layout Shift is zero because there's no shift at all. And let's change the network throttling to fast 4G, and it will slow down the image loading, but even with that, the Cumulative Layout Shift will still be"
+    },
+    {
+      "startSeconds": 539,
+      "text": "zero because even the image is loading, the size has already been calculated correctly because we have this number in the image tag. So, that means that even before the image finish loading, the layout already knows how much space it needs. When the image finally appears, nothing moves, and that means the CLS score stays close to zero. So, the main"
+    },
+    {
+      "startSeconds": 559,
+      "text": "takeaway for CLS is straightforward. Whenever content might load later, such as images or embedded media, make sure the browser already know the size, so it can reserve the space in advance. That way, the layout stays stable and the page doesn't suddenly jump while users are reading. By the way, if you're interested in learning more about topics"
+    },
+    {
+      "startSeconds": 582,
+      "text": "like these, I actually have a course called Front-End System Design Essentials. In the course, I go deeper into concepts that affect front-end performance and architecture, including things like Core Web Vitals, data fetching strategies, caching, and other system design topics that are very common in front-end interviews and"
+    },
+    {
+      "startSeconds": 602,
+      "text": "the real production applications. So, if you want to explore those ideas in a more structured way, you can check out the course using the link in the description. Finally, let's talk about Interaction to Next Paint or INP. This metric measures how quickly the page responds to user input. When the user click a button, presses a key, or"
+    },
+    {
+      "startSeconds": 626,
+      "text": "taps on the screen, the browser should update the interface quickly so the user feels the action was recognized. INP measures the time between the user interaction to the next visual update on the screen. For a good experience, this should ideally stay below 200 ms. Let's see what can go wrong. Imagine a button that"
+    },
+    {
+      "startSeconds": 648,
+      "text": "triggers some heavy processing. When the user clicks the button, a large amount of work uh starts running on the main thread. Because JavaScript is single-threaded in the browser, this heavy work blocks everything else. The browser cannot update the UI and it cannot respond to other interactions. So, the user clicks the button and"
+    },
+    {
+      "startSeconds": 666,
+      "text": "nothing appears to happen until the computation finishes. Only then does the page upload. This creates a slow and unresponsive experience, which leads to a poor INP score. So, in the browser, we have this demo before page. Ideally, when you click this processing button, it will increase the counter. And uh if we click this process data, and as that"
+    },
+    {
+      "startSeconds": 689,
+      "text": "process is blocked the main thread, and during that time, if we click the uh counter, it won't response. So, to make that more obvious, uh let's change the CPU throttling to a slower CPU, let's say 20 times slower. The click is still working, but if we click the process data, and then I'm trying to click the counter, but it's not responding. So,"
+    },
+    {
+      "startSeconds": 715,
+      "text": "you see the Interaction to Next Paint is relatively long. If I do a another refresh, we'll show you again. So, by default, the counter is responsive. And then when I click this one and then click this, I have actually clicked quite a lot, but it's not just responding because the processing data is blocked the main thread. And if we go back to the"
+    },
+    {
+      "startSeconds": 740,
+      "text": "after example here, so the setup is same. We have 20 times slower uh CPU, and the counter works uh just as before, but if we click the process and then click this, it's still responding. Uh and it has a better Interaction to Next Paint score. And the reason of that is instead of doing all the work at once, we break the task into smaller"
+    },
+    {
+      "startSeconds": 763,
+      "text": "chunks. When the button is clicked, we immediately update the UI to show something like a processing, then we process a small portion of the work, and yield control back to the uh browser. This can be done using the technique like set timeout or uh chunk loop. Because we periodically yield control, the browser has opportunity to repaint the UI"
+    },
+    {
+      "startSeconds": 785,
+      "text": "and respond to other interactions. And the user sees immediate feedback, the page remains responsive. So, you can see in the INP after example, we are processing the data uh with chunks, and uh for each chunk, it's only has uh 500 elements, which will be much faster than the 10,000 items long. So, the key idea for INP is to keep the main"
+    },
+    {
+      "startSeconds": 809,
+      "text": "thread free whenever possible. If you have heavy work to do, split it into smaller tasks so the browser can keep updating the interface. Let's quickly recap the three core Web Vitals. Largest Contentful Paint or LCP focuses on loading performance. The key idea is to make sure the most important content uh appears as early as possible."
+    },
+    {
+      "startSeconds": 838,
+      "text": "Cumulative Layout Shift or CLS focuses on visual stability. We want the layout to remain stable while page loads. So, reserving space for images and the dynamic content is very important. And Interaction to Next Paint or INP focuses on responsiveness. If the main thread is blocked by long tasks, the page cannot respond to the user interactions"
+    },
+    {
+      "startSeconds": 862,
+      "text": "quickly. So, in many cases, improving Web Vitals is really about a few simple ideas. Prioritize important resources, keeping the layout predictable, and avoiding long blocking work on the main thread. If you want to try the examples yourself, you can run the demo project locally and compare the before and after versions. Thanks for watching, and I"
+    },
+    {
+      "startSeconds": 884,
+      "text": "will see you in next one."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:11.509Z"
+}

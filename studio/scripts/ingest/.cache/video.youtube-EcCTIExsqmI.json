@@ -1,0 +1,227 @@
+{
+  "_id": "video.youtube-EcCTIExsqmI",
+  "videoId": "EcCTIExsqmI",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=EcCTIExsqmI",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 49,
+      "label": "When To Use Generics"
+    },
+    {
+      "startSeconds": 124,
+      "label": "Generic Function Basics"
+    },
+    {
+      "startSeconds": 400,
+      "label": "Generic Type Basics"
+    },
+    {
+      "startSeconds": 564,
+      "label": "Advanced Generic Features"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "By far the scariest part about learning TypeScript is generics. I mean, there's angle brackets everywhere, there's these T, K, V variables, nothing really makes sense, and it's so much different than everything else up to that point. Well, after this video, you'll no longer have to worry about generics because in this"
+    },
+    {
+      "startSeconds": 16,
+      "text": "video, I'm going to teach you every single thing you are going to ever need to know about generics in a really easy and concise format. So, you're going to be mastering and using them by the end of this video. If you enjoy this video and my simplified approach to learning TypeScript, I really recommend checking out my full TypeScript simplified"
+    },
+    {
+      "startSeconds": 31,
+      "text": "course. It'll be linked in the description below. It's less than 5 hours long and teaches you everything you're ever going to need to know about TypeScript to start writing it in your own applications. Welcome back to Web Dev Simplified. My name's Kyle, and my job is to simplify the web for you so you can start"
+    },
+    {
+      "startSeconds": 47,
+      "text": "building your dream project sooner. And this is probably the first instance where people start to run into the need for generics. As you can see, we have a really simple function that gets the first element of an array. It takes in an array of numbers, and as you can see, it returns the very first element. So,"
+    },
+    {
+      "startSeconds": 61,
+      "text": "if we pass it this array called numbers down to it, you can see that it's properly returning us to a number. This first num variable is typed as a number, and there's no errors at all. Now, let's say that we want to do the exact same thing as we're doing here, but instead of passing along a number, we want to pass along some strings. So, this array"
+    },
+    {
+      "startSeconds": 77,
+      "text": "is going to be some strings. It doesn't really matter what these values are. You can see this is going to be our first string, and we're going to pass along the strings into this get first element. But, of course, we're getting an error, and that's because this is accepting a number array and not a string array. So,"
+    },
+    {
+      "startSeconds": 92,
+      "text": "there's a bit of a problem here. We want this to be able to take in any array and return the first element of it. But, if we type this as an array of any, you're going to notice that the return type we get is of type any. It's not of type number or string. It's just any, which is obviously not very useful. And if we"
+    },
+    {
+      "startSeconds": 107,
+      "text": "tried to type this as like number or string, for example, like this, now you're going to see our return type is either a string or a number, even though we know in this first case it should be a number, and we know in this second case it should be a string. But TypeScript's not smart enough to know that. This is where the idea of a"
+    },
+    {
+      "startSeconds": 124,
+      "text": "generic type comes in. Anytime that you have a function that you know has some type of data inside of it where you want that data to be changing its type based on what you pass in or based on what you return, that is the perfect case for a generic. So here, instead of typing out the type, we're just going to put any"
+    },
+    {
+      "startSeconds": 139,
+      "text": "for now, but we're going to replace this with a generic type, which is based on whatever we pass in. So to define a function as a generic function, you put two sets of angle brackets afterwards, an opening and closing angle bracket. And in here, you just give it the name of what you want this generic type to be. It can be anything. You often see"
+    },
+    {
+      "startSeconds": 155,
+      "text": "this called T, but we can call it like element type or something like that to really describe what this is. And I'd recommend being as descriptive as you can, especially when you're getting started. So now we have a special type. This type can be literally anything, but it's going to be that exact same thing everywhere inside this function. So we"
+    },
+    {
+      "startSeconds": 171,
+      "text": "know this element type is going to be for our array. So our array is of this element type. Now you'll notice just by doing that, we have no more errors in our code, which is great. And when I hover over my first number here, you can see that it actually returns the type of number. And when I hover over my first string here, it returns the type of"
+    },
+    {
+      "startSeconds": 186,
+      "text": "string. And the reason why that works, if we hover over this function, as you can see what happens, is when we call this function, it's replacing that section in the angle brackets with the type of number. So our array is of a number array. Same thing here. Down here, it's replacing that with a string, which means we have a string array"
+    },
+    {
+      "startSeconds": 203,
+      "text": "instead of a number array. So whenever you have a type that needs to conform to the data being passed in or the data being returned or just used in some way in that function, you use a generic type like this. And you can pass along multiple generic types. For example, you could have element type two inside of"
+    },
+    {
+      "startSeconds": 218,
+      "text": "here, and this would be a second generic type that you could use somewhere else, maybe for a second variable. For our case, we just have one single generic type cuz that's the most common and simple use case. And the way that this is working is that TypeScript is smart enough to know, okay, this numbers object is a number array, and we know"
+    },
+    {
+      "startSeconds": 232,
+      "text": "this array is of some type, and it's an array, so TypeScript is smart enough to know that this element type should be a number. If it's not smart enough to know that, you can actually manually pass this in when you call a function. So, if you call a generic function, you can actually pass in what the generic value"
+    },
+    {
+      "startSeconds": 246,
+      "text": "should be to help TypeScript infer those values if it can't, and you just put these angle brackets directly after the function name. This is actually something that you probably even done before if you've ever used something like document.queryselector. For example, if I want to query selector all of my input elements that just have"
+    },
+    {
+      "startSeconds": 263,
+      "text": "a class of input, and I know these are HTML input elements, I could say const input is equal to that. And if I try to get the value from my input, you notice I get an error because input doesn't have a value property on it because by default input is just an element. Well, I know that this is an input element, so"
+    },
+    {
+      "startSeconds": 280,
+      "text": "I can actually use this query selector, which is a generic, as you can see, and I can pass in HTML input element as that generic type, and now you can see my input here isn't HTML input element, which does have that value property, which is why I no longer get any errors. So, generics are all over the place inside of TypeScript, and you've used"
+    },
+    {
+      "startSeconds": 298,
+      "text": "them without even realizing them many times. Again, for example, the array.map function. So, if I just say const a equals, and I have an array with like 1 2 3, for example, and I say a.map, and I just want to map over these, whatever that function is going to do, it really doesn't matter. When I hover over map, you'll notice that this is actually a"
+    },
+    {
+      "startSeconds": 316,
+      "text": "generic function that takes in a value, but TypeScript is smart enough to infer that, so you almost never have to actually pass in what that generic value is going to be. For example, if I just take in, and I return a string from here, and I hover over this map, you can see it properly inferred that this is returning a string as that generic"
+    },
+    {
+      "startSeconds": 333,
+      "text": "value. Another really common place you're going to see generics is inside of like maps and sets. So, I could say const map equals new map, just like this, and this map is actually a generic, so I could pass it in. For example, it's going to be a string number map, and that just means that the very first value for this, if I try to"
+    },
+    {
+      "startSeconds": 348,
+      "text": "like set something inside of here, so I come in here and I say set, I can set and it first needs to take a string and then secondly is going to take a number as the value. That's what this typing right here is doing. But if I pass this a default value, it's smart enough to actually infer, if I pass it a string and a number, that this map is of the"
+    },
+    {
+      "startSeconds": 366,
+      "text": "string number generic type. So again, that inference is really powerful. And this is how you would actually pass among multiple generics as you can see here. I just put a comma between it and everything is working just fine. You can even nest generics inside of each other. For example, let's say I wanted to have"
+    },
+    {
+      "startSeconds": 380,
+      "text": "a map where the string is the value and it actually maps to another map and that map is just a string number map as well. As you can see, I have these two levels of nesting and if I remove this code to get rid of those errors, you can see that this map is just properly being nested inside of each other. So you can"
+    },
+    {
+      "startSeconds": 394,
+      "text": "pass generics to generics as complicated as you want to get it. Now this is going a little bit off the deep end into probably more confusing territory than you need. So let's take a step back and talk about generic types in the form of types. We talked about generic functions, but you can also make a type that is generic as well. This is really"
+    },
+    {
+      "startSeconds": 409,
+      "text": "common with things like an API response. So let's say that we have a type called API response. And here we have this type and it has some data. We don't really know what that data is. For now, I'll just say any. And let's just say that we have like an is error and this is going to be a boolean. So what I can do is I can say"
+    },
+    {
+      "startSeconds": 424,
+      "text": "I can say my response here is equal to and I have data, which is just something, I don't know what it is, and then I have an is error, which is going to be false. There we go. And if I properly type this as an API response, you can see that this is all working fine with no errors. And let's say that this is returning to"
+    },
+    {
+      "startSeconds": 441,
+      "text": "me a user. So we're going to give them a name and we're going to give them an age. Let's just say 28. There we go. So this is returning to me a user. But the problem is my response, this data is just any. No matter what, it's always going to be that any type, which is obviously not ideal. Instead, I want this to be a specific type. So we can"
+    },
+    {
+      "startSeconds": 457,
+      "text": "make this a generic type. Again, you just put the angle brackets after whatever your type is and then you give it whatever you want that generic type to be called. In our case, we'll just call this data. And then what I can do is I can replace that any with data. And now I'm saying that my data is of the type data. And immediately I'm getting"
+    },
+    {
+      "startSeconds": 472,
+      "text": "an error down here because my API response is accepting a type parameter that generic, and I haven't passed in a generic. So, I need to give it a generic cuz it can't infer what the generic is. It's not smart enough to do that. So, what I can do is I can say this generic is going to be a name, which is a string, there we go, and an age, which is a"
+    },
+    {
+      "startSeconds": 492,
+      "text": "number. And now if I close all that off and save, you can see now everything is working. And when I hover over my response, you can see it's an API response where the name is a string and the age is a number. So, it has all the properties for is error, and then this data type is just inferred from this generic that I passed in. And I had to"
+    },
+    {
+      "startSeconds": 508,
+      "text": "manually pass it in cuz it can't do that crazy inference. Now, oftentimes you may want to make this a little bit easier to read, so I can actually take this and turn it into its own type, such as user response. I can say type user response is equal to this type right here, and it's just allowing me to create an alias for that"
+    },
+    {
+      "startSeconds": 524,
+      "text": "type, which makes my code a little bit easier to read. Now, the reason this is so powerful is because if I wanted, I could create a brand new type. For example, if I have a blog that returns some data, I could get a blog response. And if I copy this down and make sure that this blog response, for example, is just a title with a string, you can now"
+    },
+    {
+      "startSeconds": 539,
+      "text": "see that in this response for my blog, if I make this a blog response, my data right here will now give me an error until I give it a title, which is a string, and then my errors go away. This is a really great way for me to expand upon this. I have a generic API response that takes in this data, and then I can"
+    },
+    {
+      "startSeconds": 555,
+      "text": "make specific versions, such as a user response or a blog response, and so on, that really narrow down what the type of that data is going to be. Now, let's just assume a lot of the API endpoints I have don't really have very complicated data, and instead the data is just a status. So, for example, I have a response that looks like this, where I"
+    },
+    {
+      "startSeconds": 572,
+      "text": "have a status, which is just a number, like that. And I have a lot of API responses that look like that, and by default they all look like that unless I specify something specific. What I can do is I can actually give this a default value. So, if I just say equals here, status number, I'm now saying that by default,"
+    },
+    {
+      "startSeconds": 590,
+      "text": "if I don't pass anything inside these angle brackets, my data is going to be of the type an object with the status property that is a value of number. So, now what I can do is I can just clean up my code quite a bit. Let's just get rid of everything except for this one response that we have right here. Instead of making this a specific"
+    },
+    {
+      "startSeconds": 606,
+      "text": "response, I'm going to make it an API response. And this API response expects a status property which is a number to be passed along by default. So, since I didn't pass along a generic, it used this default value right here. But if I want, I could override that by saying, for example, name string. And now I need"
+    },
+    {
+      "startSeconds": 622,
+      "text": "to pass along a name which is a string in order to make TypeScript happy. And of course, clean up my code. There we go. Now, the final kind of major thing you can do with generics is you can actually give them a type that they must adhere to. For example, what I could do is I could say, \"You know what? I want my data to be a string.\" And this is"
+    },
+    {
+      "startSeconds": 637,
+      "text": "going to work just fine. So, for example, I can pass along a string and everything's working just fine. But I know for a fact that my API response data must always be an object. It can't be a string or a number, it must always be an object. Well, to get around that, what I can do here is I can say that this actually extends a specific type."
+    },
+    {
+      "startSeconds": 655,
+      "text": "In my case, object. You could make it more specific, less specific, but I'm saying that this data must always be an object. Now, we get an error here because string does not extend object. This must be an object. For example, a name that has string. And now you can see that if I type in the name that's a string, that is now working just fine. I"
+    },
+    {
+      "startSeconds": 673,
+      "text": "can even combine this together with a default value by just coming in here and putting an equal sign for status, which is a number. And now if I don't pass anything in here at all, it defaults to this status number. So, if I change this to status of 200, you can see I no longer have any errors. Now, these last few"
+    },
+    {
+      "startSeconds": 690,
+      "text": "things that I covered are really some of the more complicated use cases for a generic. In 90% of your cases, you're not going to deal with extending, you're not going to deal with default values. You're just going to have a single generic, maybe two generics, and you're just going to use them in a couple very sparingly places. You may use them in"
+    },
+    {
+      "startSeconds": 705,
+      "text": "types, but most often you're probably going to be using them in functions, in which case you generally don't even have to pass along the actual generic itself because inside of functions it's almost always smart enough to infer what that generic type is based on the inputs and outputs of that function. And I know"
+    },
+    {
+      "startSeconds": 720,
+      "text": "I've covered a ton in a really short time, so if you need to rewatch this video, I 100% recommend it. But the key to take away with generics is when you want to create a function or a type where some piece of data inside of it could be multiple different types, but during the entire iteration of that type or function you want it to be the same"
+    },
+    {
+      "startSeconds": 736,
+      "text": "thing. But for example, it could be a number one time or a string the next time depending on what array you pass it like in our first example, that is the perfect use case for a generic. And if you enjoyed this video and you'd like this short, simple, concise, to the point explanation of everything important about generics, you're going"
+    },
+    {
+      "startSeconds": 751,
+      "text": "to love my TypeScript Simplified course cuz I do this exact same thing for every single TypeScript concept out there, giving you everything you need to know about TypeScript in less than 5 hours. So, if you want to check that out, it's going to be linked down in the description below. And if you take that course, you're going to be able to use"
+    },
+    {
+      "startSeconds": 765,
+      "text": "TypeScript by the end of today, which is just absolutely amazing. So, with that said, thank you very much for watching and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:51.180Z"
+}

@@ -1,0 +1,90 @@
+{
+  "_id": "video.youtube-G8wDjV0N9tk",
+  "videoId": "G8wDjV0N9tk",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=G8wDjV0N9tk",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 16,
+      "text": "Hey! In this video, I'll explain what transaction isolation levels exist and what you should be aware of as a developer We will consider only PostgreSQL (version 13) as an example database, so some information may be wrong if you would like to use another database"
+    },
+    {
+      "startSeconds": 35,
+      "text": "For examples in this video, we will use pgcli utility. This is a nice analog for standard Postgres command-line interface that provides syntax highlighting and substitution. It can be easily installed e.g. via the brew package manager So, there is a well-known database abbreviation ACID. This stands for Atomicity, Consistency"
+    },
+    {
+      "startSeconds": 56,
+      "text": "Isolation, and Durability The term isolation relates to how concurrent transactions affect each other So if you develop backend software that operates data in a complex way inside database transactions you must be aware of how transactions affect each other to prevent your code from business-logic mistakes"
+    },
+    {
+      "startSeconds": 78,
+      "text": "In classic SQL theory isolation levels is defined in terms of what must not happen or phenomena dirty read lost update non-repeatable read phantoms serialization anomaly so let's define each of them separately Dirty read - means read uncommitted changes of other transactions. In PostgreSQL, it doesn't happen on any isolation level"
+    },
+    {
+      "startSeconds": 105,
+      "text": "For example, the first transaction updates some record, after that the second transaction reads the same record and gets updated value even if the first transaction rollbacks later A lost update is when the first transaction reads data into its local memory, and then"
+    },
+    {
+      "startSeconds": 125,
+      "text": "the second transaction changes this data and commits its change. After this, the first transaction updates the same data based on what it read into memory before the second transaction was executed. In this case, the update performed by the second transaction can be considered a lost update"
+    },
+    {
+      "startSeconds": 146,
+      "text": "For live examples, we will use PostgreSQL running via docker-compose, consisting of one table named 'orders' that is populated with several seed records For example, the first transaction read order with id equals 1 and the second does the same After that, each of them updates the total field value, and after committing both transactions"
+    },
+    {
+      "startSeconds": 175,
+      "text": "only the last one will have a real effect Non-repeatable read means that one of the rows you've queried at different stages of transaction may be updated by other transactions For example, one transaction reads orders. After that, another transaction modifies the"
+    },
+    {
+      "startSeconds": 201,
+      "text": "total field value for one of them with id equals 1 and commits. If the first transaction reads orders one more time it sees the updated record Phantoms - means that some new rows are added or removed by another transaction to the set of records being read For example, one transaction reads orders. After that, another transaction creates one"
+    },
+    {
+      "startSeconds": 233,
+      "text": "of them and commits. If the first transaction reads orders one more time it sees the new order record that can't be seen at first read. This record is called a phantom Serialization anomaly - means that the result of successfully committing a group of transactions"
+    },
+    {
+      "startSeconds": 260,
+      "text": "is inconsistent with all possible orderings of running those transactions one at a time For example, one transaction reads the sum of the total field for the orders with status 'NEW' and the other does the same but for status 'FAILED'. After that, each transaction"
+    },
+    {
+      "startSeconds": 281,
+      "text": "creates a new record with the opposite status, but with the total field equals the sum read After committing both of them there is no possible sequential order of these transactions that leads to the committed result because transactions are cyclic dependent on each other result"
+    },
+    {
+      "startSeconds": 304,
+      "text": "In classic theory, there are 4 levels of transaction isolation and exact behavior for some of them depends on the database In the case of PostgreSQL version 13 they are defined the following way read uncommitted (which behaves the same as read committed) read committed (which is the default) repeatable read"
+    },
+    {
+      "startSeconds": 328,
+      "text": "and serializable One can see plus sign if the isolation level is free of phenomena Repeatable read in PostgreSQL extends default Read committed level with guarantees of no non-repeatable read no lost updates and no phantoms repeatable read recording Let's repeat what we've done in several of our previous examples. The first transaction"
+    },
+    {
+      "startSeconds": 354,
+      "text": "reads orders. The second transaction updates one of them, creates one more order and commits Now if the first transaction rereads orders it doesn't see any updates at all And if it tries to update already updated by another transaction record it gets an error that prevents lost updates"
+    },
+    {
+      "startSeconds": 379,
+      "text": "Serializable in PostgreSQL extends Repeatable Read level with guarantees of no serialization anomaly Let's do the same stuff we did in the serialization anomaly example. After committing the first transaction, the second one gets an error when it tries to commit. This error prevents serialization anomaly"
+    },
+    {
+      "startSeconds": 410,
+      "text": "So as you can see one should also be aware of special errors for repeatable read and serializable isolation levels that the database return in case of impossibility to commit transaction with the chosen isolation level. In this case, it's up to your code to retry the transaction later"
+    },
+    {
+      "startSeconds": 430,
+      "text": "Now you are aware of different isolation levels in PostgreSQL and can carefully use one of them when it's necessary or may decide to use explicit locks instead You should also keep in mind that the higher the isolation level the slower concurrency performance will be, so it's always a trade-off"
+    },
+    {
+      "startSeconds": 454,
+      "text": "It's not an end-to-end guide about all isolation behavior so for specific details please consult documentation - I'll give a link in the description If you or your company are interested in consulting and training on various development and infrastructure topics, you can contact us via the email address provided in the description"
+    },
+    {
+      "startSeconds": 477,
+      "text": "Don't forget to subscribe to our channel and press the like button Thanks for watching!"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:37.993Z"
+}

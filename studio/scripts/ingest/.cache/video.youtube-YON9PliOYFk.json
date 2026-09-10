@@ -1,0 +1,151 @@
+{
+  "_id": "video.youtube-YON9PliOYFk",
+  "videoId": "YON9PliOYFk",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=YON9PliOYFk",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 19,
+      "label": "Prepared Statements"
+    },
+    {
+      "startSeconds": 71,
+      "label": "Benchmark"
+    },
+    {
+      "startSeconds": 103,
+      "label": "Indexing"
+    },
+    {
+      "startSeconds": 217,
+      "label": "Partitioning"
+    },
+    {
+      "startSeconds": 294,
+      "label": "Benchmarks"
+    },
+    {
+      "startSeconds": 402,
+      "label": "Separation of Concerns"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "postgres sometimes referred to as the Toyota Camry of databases is one of the most popular SQL databases used by Developers but it's slow isn't it shouldn't we use something fancy like mongodb for Speed wrong after learning these five approaches you'll be able to make postgres Zoom like a Bugatti when you're working with long-running"
+    },
+    {
+      "startSeconds": 21,
+      "text": "services that talk to postgres such as a rest API then you're likely making the same queries over and over again in this case you can increase the performance of postgres by using prepared statements which allows you to generate queries once and reuse them with different inputs by doing this it reduces the need for"
+    },
+    {
+      "startSeconds": 37,
+      "text": "postgres to parse and plan your queries every time as it reuses the initial generated statement creating a prepared statement is as simple as using the prepare command in SQL followed by the name of the statement and the query we Define any input parameters we expect by using the dollar prefix on a numbered index starting from one"
+    },
+    {
+      "startSeconds": 55,
+      "text": "with our prepared query created we can then use the execute command to go ahead and run it passing in any parameters we're expecting let's go ahead and Benchmark this shall we here you can see the difference between using the prepared statements versus not using them whilst prepared statements provide an easy performance boost there are a"
+    },
+    {
+      "startSeconds": 75,
+      "text": "couple of caveats to be aware of the first is that a prepared statement only lasts for the duration of the current database session which means they'll need to be recreated if the session is terminated the second is that a single prepared statement is only scoped to that session that means that multiple connections"
+    },
+    {
+      "startSeconds": 90,
+      "text": "cannot use the same statement instead each client must create its own statements fortunately the popular postgres clients for most languages will manage prepared statements under the hood as long as you're using the correct query syntax this means you don't have to create them manually or worry about the connection"
+    },
+    {
+      "startSeconds": 105,
+      "text": "logic prepared statements offer the most performance Improvement when it comes to long-running sessions performing the same queries over and over again however if you have a large amount of data in your table then prepared statements aren't going to help as much instead you're going to want to use indexing by default whenever you run a query"
+    },
+    {
+      "startSeconds": 123,
+      "text": "against a table postgres will look at each row to see if it matches your where Clause this is known as a sequential scan whilst sequential scans are fine for smaller tables as the number of rows increases the query becomes slower and slower the solution to this is to use indexing which enables queries to perform well even as the table size"
+    },
+    {
+      "startSeconds": 141,
+      "text": "grows the basic idea between indexing is similar to that of a directory or a lookup table it works by storing the associated columns in a data structure with a reference to the applicable row IDs in the associated table when a query is made that can be served by the index either completely or partially then the index is used to find rows that match"
+    },
+    {
+      "startSeconds": 159,
+      "text": "that condition to see this in action I've loaded a table with about 20 million users each that has an age value Associated if we search for all users that fall within the range of 21 to 35 you can see that it takes a long time to run in fact we can measure the time taken by using the explain analyze command before our query which also"
+    },
+    {
+      "startSeconds": 177,
+      "text": "tells us what it's doing under the hood notice the sex scan which stands for sequential scan let's optimize this by creating an index for our age field we first use the create index command followed by the index name and the table we wish to create it on we then specify the columns we want to use for our index"
+    },
+    {
+      "startSeconds": 194,
+      "text": "in this case we're just going to use the age column creating an index can take a while depending on the index complexity and the amount of data in our table once our index is created we can go ahead and run the same command again here it's in a fraction of the time if we run explain analyze again you can see it's using the"
+    },
+    {
+      "startSeconds": 209,
+      "text": "index for the lookup instead of sequential scanning now there are a number of caveats with indexing as well which I'll cover in other videos however the major one to note is that indexing increases the time to write to a table as any new rows also have to be added to the index and then balanced fortunately there are a couple of ways to improve"
+    },
+    {
+      "startSeconds": 227,
+      "text": "right performance when you have a large database table operations performed against it will have to run against more rows which obviously impacts performance if the data is able to be segmented then a viable approach to improved performance is to use table partitioning what partitioning does is breaks up the larger table into smaller tables based"
+    },
+    {
+      "startSeconds": 247,
+      "text": "on a column segmentation these smaller tables are logically grouped which allows them to operate as one single table when it comes to queries you can partition a table based on any column that it has for example on the range of a timestamp or on the hash of some bytes to creative table partition is as easy as calling our"
+    },
+    {
+      "startSeconds": 266,
+      "text": "create table statement and adding the Partition by keyword at the end with the type of partition to use and the column to partition on in our example we're going to use a range partition on the event timestamp once the partition has been created we then create the individual partition tables using the partition of command"
+    },
+    {
+      "startSeconds": 284,
+      "text": "followed by the range we wish to Partition by in our case we're going to do it by day we can now perform operations on our table as we would do normally for reference here's a couple of benchmarks for the performance Improvement or partitioning in this case when sequentially reading data from the table that only hits a single partition"
+    },
+    {
+      "startSeconds": 302,
+      "text": "and in this case adding data to the table when it has a number of indexes you can also run these benchmarks Yourself by downloading the source code of course as with anything related to database optimization there are some caveats with partitioning as well the first is that it can make queries slower if they have to scan a large number of"
+    },
+    {
+      "startSeconds": 319,
+      "text": "multiple partitions instead of scanning a single partition and the second you'll need to manage the creation of new partitions typically with a Cron job there are some postgres extensions which can help with this such as PG partman and PG cron overall partitions can be very useful technique for improving database performance"
+    },
+    {
+      "startSeconds": 336,
+      "text": "however if you have a large amount of data to insert in bulk there is another way to improve right performance if you have a large amount of data to write to a table using individual inserts can take a long time instead it's possible to use the copy command which allows you to insert a large amount of data from a file or the standard input"
+    },
+    {
+      "startSeconds": 354,
+      "text": "postgres supports either a CSV text or binary format for the copy command as structured data CSV tends to be preferable in my experience as it balances speed and compatibility by using copy we can increase the speed of writing data to our table by orders of magnitude to show the speed Improvement we get with copy here we're"
+    },
+    {
+      "startSeconds": 374,
+      "text": "using it to add 100 000 rows to our events table on the left with the copy command and on the right with a batched insert you know the drill now but there's a couple of caveats when using copy the first is that if the data is malformed at any point during the copy then the entire operation will fail and the second is you can only really"
+    },
+    {
+      "startSeconds": 395,
+      "text": "copy from the client side via sddn otherwise the data file has to live on the server most postgres drivers provide for this however whilst copy is good for large batches of data there is another way to increase both read and write performance which is to actually separate the two tasks in the majority of cases the number of"
+    },
+    {
+      "startSeconds": 413,
+      "text": "reads to a table typically outweighs the number of writes because of this performance can be improved by a concept called separation of concerns where you have multiple instances of your database each dedicated to a different task reading or writing with postgres separation of concerns can be achieved by using read replicas this is where you"
+    },
+    {
+      "startSeconds": 431,
+      "text": "have a primary database which enables rights and replica databases which are read-only the primary database will sync its data with the read replicas this enables multiple instances to be read from which can horizontally scale your performance creating a read replica is too much for this video but fortunately a lot of cloud providers do allow read"
+    },
+    {
+      "startSeconds": 451,
+      "text": "replication there's also a Docker compose in the source code which can help get you started with it the main caveat when using read replicas is that it does introduce additional complexity to your system and requires careful setup and monitoring to ensure that the rib replicas are working correctly there are a couple of tools such as PG bouncer"
+    },
+    {
+      "startSeconds": 467,
+      "text": "or PG pool 2 to help abstract some of this complexity away with these five approaches you can turn postgres not only into a Bugatti but also a Lambo or a Ferrari we only touched on the surface of what can be achieved with these approaches and I'll be doing more in-depth videos in the future until then however you can"
+    },
+    {
+      "startSeconds": 486,
+      "text": "lower the roof and feel the wind in your hair"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:33.636Z"
+}

@@ -1,0 +1,207 @@
+{
+  "_id": "video.youtube-pIGRwMjhMaQ",
+  "videoId": "pIGRwMjhMaQ",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=pIGRwMjhMaQ",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction to Chunking Strategies in RAG"
+    },
+    {
+      "startSeconds": 112,
+      "label": "Detailed Tutorial on Various Chunking Methods"
+    },
+    {
+      "startSeconds": 145,
+      "label": "Setup Instructions for Chunking Environment"
+    },
+    {
+      "startSeconds": 181,
+      "label": "Code Walkthrough for Character Text Splitting"
+    },
+    {
+      "startSeconds": 361,
+      "label": "Implementing Recursive Character Text Splitting"
+    },
+    {
+      "startSeconds": 420,
+      "label": "Exploring Document Text Splitting Techniques"
+    },
+    {
+      "startSeconds": 506,
+      "label": "Introduction to Semantic Chunking with Embeddings"
+    },
+    {
+      "startSeconds": 585,
+      "label": "Advanced Agentic Chunking for Optimised Grouping"
+    },
+    {
+      "startSeconds": 830,
+      "label": "Conclusion"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "this is amazing now we are going to see about chunking strategies in a rag application from beginner to advanced level and how to optimize this so what is chunking so this is a basic rag application so the first step is that the data is getting divided into chunks then it's converted to embeddings and then gets stored in the database that is"
+    },
+    {
+      "startSeconds": 24,
+      "text": "Vector database the second step is that the user is going to ask a question and any relevant chunks are searched in the vector database and that information is fed to the Lost language model as context to give a final accurate answer so why chunking is very important if the text got split with less relevance then"
+    },
+    {
+      "startSeconds": 48,
+      "text": "that is going to produce a inaccurate answer high quality chunks produces high quality answer for example if you have a text like this and you divide this text into small chunks by having a fixed size chunking like after 50 characters that is going to break so you can see the word is not full it's supposed to be"
+    },
+    {
+      "startSeconds": 70,
+      "text": "mountains but it says m o similarly here it should be fascinating but it says Fascinate so if we divide the text with fixed size chunking then our lar language model is going to produce irrelevant results similarly when we divide the text based Bas on commas or full stop even those chunks are not going to give us a clear answer if we"
+    },
+    {
+      "startSeconds": 95,
+      "text": "divide based on full stops or paragraphs we might miss the subsequent paragraph if it is related so how can we fix this that's exactly what we're going to see today let's get [Music] started hi everyone I'm really excited to show you about chunking strategies a special thanks to Greg who came up with the different levels of chunking"
+    },
+    {
+      "startSeconds": 118,
+      "text": "strategy in this video we we're going to quickly look at that and integrate that with the rag application I'm going to take you through step by step on character splitting recursive character splitting document based chunking sematic chunking and finally agenting chunking but before that I regularly created videos in regards to Artificial"
+    },
+    {
+      "startSeconds": 136,
+      "text": "Intelligence on my YouTube channel so do subscribe and click the Bell icon to stay tuned make sure you click the like button so this video can be helpful for many others like you so the first step contact create hyphen and chunking Python 3.11 and then click enter next cond activate chunking and then click enter next pip install chroma DB Lang"
+    },
+    {
+      "startSeconds": 154,
+      "text": "chain llama index Lang chain experimental and Lang chain open Ai and then click enter also pip install L chain Hub and Rich and click enter now export your open AI API key like this and then click enter we are going to download AMA P nomic embed text and ol P mistro so nomic embed text is for embedding mistal is for local Lodge"
+    },
+    {
+      "startSeconds": 176,
+      "text": "language model make sure you've downloaded olama before doing this now let's create a file called app.py and let's open it first from Rich import print then importing document chat olama chroma embeddings runnable pass through string output parser and chat prom template then we are defining our local Lodge language model mral using chat ol"
+    },
+    {
+      "startSeconds": 198,
+      "text": "next we going to set up rag so Define a rag function so same like as we've seen in the image first step we are loading all the data that means those chunks in a database called DB then when the user ask a question it is going to check the database using the retriever function then it goes to the L language model and"
+    },
+    {
+      "startSeconds": 219,
+      "text": "finally we get the output that's exactly what we see here first we are loading the data and saving that in the vector database that is chroma second when the user ask a question we are using the retriever to retrieve the data and then passing that to the lunch language model so the first step is the character text"
+    },
+    {
+      "startSeconds": 236,
+      "text": "splitting so we going to define the number of character size and then divide accordingly printing that for reference and defining a text and first we are going to do manual splitting so defining chunks defining the chunk size next going through the chunks and dividing accordingly next converting those to documents we are converting those to"
+    },
+    {
+      "startSeconds": 256,
+      "text": "documents because document is the format accepted by L chain to store the embeddings in chrom RB next we are printing it that's it so we are dividing the text based on the number of characters now I'm going to run this code python AB by and click enter and you can see the text got split and it's not even correct so instead of critical"
+    },
+    {
+      "startSeconds": 276,
+      "text": "it says CR and I is in a separate line so even in smaller small uh it's completely separate line so if we divide things like this based on the number of characters this is not going to give us an accurate answer in this code we manually split into chunks but we can also do it automatically using Lang chains character text split so doing the"
+    },
+    {
+      "startSeconds": 300,
+      "text": "same thing but with character text spitter function converting those documents and printing those documents now if you run you'll get the same response but automatically it's divided one thing for you to notice that using character splitter when you split like this this how it's going to get divided but when you give overlap for example"
+    },
+    {
+      "startSeconds": 319,
+      "text": "four then you can see the text getting overlapped so the more the overlap then the large language model can identified okay this chunk and this chunk are related to each other so that's when overlap comes you can modify the overlap here so this is not a correct choice because we are not going to get a proper result next is a recursive character"
+    },
+    {
+      "startSeconds": 340,
+      "text": "text splitting in this we provide characters such as a new line then the new line will automatically used as a splitter so we just printing for a reference and importing recursive character text splitter as before we are defining that next converting that to documents and finally printing the documents that's it now I'm going to run"
+    },
+    {
+      "startSeconds": 361,
+      "text": "this code Python app.py and you can see the text got split but I want to provide more content so I'm going to add a file which is content. txt so this is content. txt and it contains more information about Lang chain text splitting chat jpt and more now going to run this code again and see the difference and now you saw large amount"
+    },
+    {
+      "startSeconds": 384,
+      "text": "of data being split but still I can see it is getting terminated halfway through that's because we are defining the chunk size 65 I'm going to increase that to 450 450 and going to run it and you can see now it's much better than before and when the chunk size is more automatically terminates and goes to a new paragraph or chunk so comparatively"
+    },
+    {
+      "startSeconds": 408,
+      "text": "is better but still not yet optimized so next we are going to see is document text splitter so number three document text splitting and printing for our reference so first first we are going to see mckown Splitter from Lang chain. text splitter import mckown text splitter now initializing the text splitter now going to provide some"
+    },
+    {
+      "startSeconds": 429,
+      "text": "markdown data for it to split now converting that to document and printing it after splitting similarly we have document splitter for python so going to import that python text splitter going to provide some python text initializing the python code text splitter and finally you're going to print after splitting it so now we're going to see"
+    },
+    {
+      "startSeconds": 450,
+      "text": "document splitting for JavaScript same as before importing recursive character text splitter and language language is where we are going to define the JavaScript language next we providing some JavaScript text to split now we are going to initialize jsor splitter recursive character text Splitter from language here we are providing"
+    },
+    {
+      "startSeconds": 469,
+      "text": "JavaScript language next I'm going to print that print Jitter doc create documents closing the bracket that's it simple approach we are going to split based on document now I'm going to run this code python app.py seems like there's an error it is python code text splitter that's it so going to run again and you can see it got divided based on"
+    },
+    {
+      "startSeconds": 490,
+      "text": "document so here is markdown Python and then JavaScript so I've given only chunk size of 65 but you can increase that based on your requirement now to improve this further we going to use semantic chunking before semantic chunking and printing for our reference in this video we going to use embeddings so embeddings"
+    },
+    {
+      "startSeconds": 512,
+      "text": "are nothing but numbers so when a text is converted to number that means a meaning is given so to identify if two sentence are related to each other when we convert those chunks to embeddings and when we see the distance between those embeddings then you can identify whether it is related or not in that way you can group or split accordingly"
+    },
+    {
+      "startSeconds": 533,
+      "text": "that's exactly what we're going to do from longchain semantic chunka it's from L chain experimental next open AI embeddings text splitter equals semantic chunka and then providing the open AI embeddings model and mentioning percentile so that means all difference between sentence are calculator you have other things like"
+    },
+    {
+      "startSeconds": 554,
+      "text": "standard deviation and Inter quartile So based on this also you can split the text next Define the documents that is converting those split text documents and then printing it that's it so in simple terms we are using embeddings to split now I'm going to run this code Python app.py and here you can see the chunks when you have more amount of"
+    },
+    {
+      "startSeconds": 576,
+      "text": "content than you can see the power behind this we can even improve further from here so how can we optimize further that's when we have agentic chunking the fifth level is Agent chunking sprinting for our reference and there are two types of agent chunking we can say as two levels in agentic chunking the first"
+    },
+    {
+      "startSeconds": 595,
+      "text": "one is proportion based chunking so what is proportion based chunking it is based on This research I'm going to open it so this is that research and if you come down there you have the information so if you provide a chunk that will be automatically split but each of this line or chunk can stand in its own and can provide a complete"
+    },
+    {
+      "startSeconds": 617,
+      "text": "meaning so to do that we are going to use a large language model so previously we used embeddings for semantic chunking but for agenting chunking we are going to use large language model to do that first I'm going to import all these modules next Define the prom template so this promp template is able to handle the proportion base chunking so the"
+    },
+    {
+      "startSeconds": 637,
+      "text": "prompt contains those information and we are importing that from Lang chain Hub that's why we use hub. pull now next we are using a lost language model that's GPT 3.5 turbo next runable equals prompt template and that prompt template will be sent to the lar language model now going to use pantic and Define the sentences and extracting the senten"
+    },
+    {
+      "startSeconds": 659,
+      "text": "using Create extraction chain pantic function next defining a function called get proposition next we are splitting based on paragraph that is two new lines next we are going through the split paragraphs and going to extend that for example if the next chunk is related to the previous chunk then that will be considered to create a meaning for the"
+    },
+    {
+      "startSeconds": 681,
+      "text": "sentence or to create a meaning for the chunk so that the chunk can stand on its own finally we are printing out so in simple terms we dividing the text into smaller chunks and then passing that to the large language model and making that chunk stand on its own from its context now I'm going to run this code python"
+    },
+    {
+      "startSeconds": 699,
+      "text": "app. pi and here is the response text splitting in Lang chain is a critical feature chat GPT was developed by open AI chat GPT allows for dynamic interaction so you can see each of this line can stand on its own and it contains a meaning now we're going to take this further by grouping these chunks together if we could group these"
+    },
+    {
+      "startSeconds": 720,
+      "text": "chunks together this will provide more meaning and less likely to lose its context so to group that together grouping Chunk from agentic chunker import agentic chunker next initializing the agentic chunker now adding those text propositions which we created before in the previous step and passing that to this agentic chunker now we"
+    },
+    {
+      "startSeconds": 743,
+      "text": "printing it for our reference converting those to documents and finally passing that to our rag application which we created earlier in simple terms we are just grouping those meaningful chunks together now I'm going to run this code one thing to note the agentic chunka is a file and this is the contents of the"
+    },
+    {
+      "startSeconds": 762,
+      "text": "file that's where you define your large language model you have your prompt this prompt automatically categorize and group accordingly this is also developed by GRE now going to run this code Python app.py and here you can see it's automatically grouping those chunks so first it automatically created a category called Lang chain features and"
+    },
+    {
+      "startSeconds": 786,
+      "text": "then assigning this chunk and even on the next chunk it's assigning back to the same category then after that it creates chat GPD development and features and assigning relevant chunk and here everything got grouped together so there's a summary and all the related chunks are in that group similarly we have another chunk and have a quick"
+    },
+    {
+      "startSeconds": 809,
+      "text": "summary and all relevant chunks are in that group this is exciting now when we pass this information to the launch language model you are more likely to get a better answer this is a more optimized version and finally you get a response from the rag application based on the question we asked I just thought this will be really useful for everyone"
+    },
+    {
+      "startSeconds": 830,
+      "text": "to know so I made it short for you to understand this is going to be amazing I'm going to create more videos similar to this so stay tuned I hope if you like this video do like share and subscribe and thanks for watching"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:38.599Z"
+}

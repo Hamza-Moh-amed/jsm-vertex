@@ -1,0 +1,114 @@
+{
+  "_id": "video.youtube-0fONene3OIA",
+  "videoId": "0fONene3OIA",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=0fONene3OIA",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "if I don't capture your attention in the next five seconds you're not going to watch this video humans today have extremely short attention spans thanks to the nearly unlimited number of ways to get instant gratification and pleasure and because of that web developers need to be obsessed with initial page load performance if your"
+    },
+    {
+      "startSeconds": 13,
+      "text": "website is slow it will lose money because people won't get their instant gratification and then bounce but achieving Optimal Performance is complex like do you really understand things like largest contentful paint first input delay and cumulative layout shift by the end of today's video you'll understand what these are but more"
+    },
+    {
+      "startSeconds": 28,
+      "text": "importantly how to measure and optimize them in your own project and I'm not just talking about Lighthouse here but I'll show you how to use some tools you've never heard of like unlike house and the new web vitals Chrome extension and we'll use them to analyze popular websites in the real world like Amazon Google and of course in order to use"
+    },
+    {
+      "startSeconds": 44,
+      "text": "these tools effectively though we first need to understand core web vitals let's start with the largest contentful paint simply put this metric is most important for measuring loading performance when a website loads it needs to fetch a bunch of assets from the internet somewhere like your CSS HTML JavaScript images is"
+    },
+    {
+      "startSeconds": 60,
+      "text": "and videos initially you'll get the first contentful paint then gradually the web page will load all the images and videos which will be your largest contentful paint to achieve good performance Google says you need to get to LCP within 2.5 seconds anything beyond 4 seconds is bad and will likely have an impact on things like search"
+    },
+    {
+      "startSeconds": 76,
+      "text": "engine optimization the most basic way to analyze it is to open up the network tab in your browser and examine the network waterfall this will show you how each asset is loaded and you can identify bottlenecks because they'll have a really Wide Bar in the chart so once you've identified an issue how do you actually optimize for largest"
+    },
+    {
+      "startSeconds": 91,
+      "text": "contentful pain well there's quite a few things we can do the first and most obvious thing is to reduce the resource load time if you have massive images and assets they're going to take longer to load make sure your images are compressed and you likely want to use modern formats like webp same thing goes for fonts and you should only use the"
+    },
+    {
+      "startSeconds": 106,
+      "text": "bare minimum number of fonts that you need to render the page that's step one but in production you'll also want to make sure you're serving your assets from a Content delivery network if you deploy to a place like Firebase or versel it'll handle all the CDN magic for you automatically the other big potential issue is render blocking"
+    },
+    {
+      "startSeconds": 121,
+      "text": "JavaScript for example maybe you need to run some JavaScript before you display the actual image in the page which will delay LCP you should try to avoid this at all cost and it's one of the reasons that server-side Frameworks like nexjs have taken favor over single page applications like plain react because on initial page load single page"
+    },
+    {
+      "startSeconds": 138,
+      "text": "applications need to run a bunch of JavaScript before they can render the main content that's good to know but there's at least one more cool optimization we can make in modern browsers you can optimize resource priority by using preload links to make sure that important assets are discovered first in addition you can"
+    },
+    {
+      "startSeconds": 152,
+      "text": "change the fetch priority on images to either high or low so that low priority image is at the bottom of the page won't get loaded before the more important ones unfortunately though largest contentful paint isn't the only thing we need to worry about we also have first input delay which measures interactivity a website needs to have a first input"
+    },
+    {
+      "startSeconds": 167,
+      "text": "delay of 100 milliseconds or less and at 300 milliseconds becomes bad what it's measuring is the amount of time it takes from the moment a user interacts with the page like when they click on a button to the time it takes the browser to process event handler is for that interaction basically you don't want a website to render if the actual things"
+    },
+    {
+      "startSeconds": 183,
+      "text": "on it don't work measuring it is a little more tricky but I'll show you how to do it in just a minute with the new web vitals plugin and basically the only way to optimize it is to reduce your JavaScript execution time but One does not simply just get rid of their JavaScript you can use tools like web workers and Party Town to move some of"
+    },
+    {
+      "startSeconds": 198,
+      "text": "your JavaScript into a worker or most JavaScript Frameworks have the option for lazy loading like react lazy for example or there are Frameworks like quick that are optimized for instant interactivity by using highly aggressive lazy loading but that brings us to our final metric cumulative layout shift it measures visual stability or in other"
+    },
+    {
+      "startSeconds": 214,
+      "text": "words elements on the page shouldn't be jumping around in unexpected ways you can measure it by generating a lighthouse reporting Chrome Dev tools or with the web vitals extension as we'll see in a minute one of the easiest ways to get bad CLS is to use images without Dimensions when using images they should always have a width and height or"
+    },
+    {
+      "startSeconds": 230,
+      "text": "alternatively use the CSS aspect ratio property that's usually an easy fix unless you have responsive images that need to change their aspect ratio based on the viewport in that case you'll likely want to use Source set to use different images under different conditions in addition you might get bad CLS as a result of advertisements being"
+    },
+    {
+      "startSeconds": 247,
+      "text": "injected into the website or from poorly designed animations that try to do too much we could talk all day about performance but I think these three metrics are the most important to understand now that you know how they work let's do some real world analysis the Chrome team at Google just released a new web vitals extension and go ahead"
+    },
+    {
+      "startSeconds": 262,
+      "text": "and install it and then also go to the settings and enable console login after that go to your favorite webpage like fireship.io and open up the console you'll notice that we now get console logs for CLS and LCP when it comes to largest contentful paint it will tell us exactly which element is affecting that metric which is extremely important"
+    },
+    {
+      "startSeconds": 280,
+      "text": "because that's the thing you want to optimize in addition it will break down the time for its subparts like time to First byte and element render delay then when it comes to layout shift it will give us the elements in the Dom that are affecting that metric so we might want to investigate those and see if we can"
+    },
+    {
+      "startSeconds": 294,
+      "text": "do anything to optimize them if we then click on something we'll also get a log for first input delay and we'll also get measurement chance for any interactions thereafter and this will allow you to pinpoint any bottlenecks with interactivity I've only been using this extension for a couple days now but it's been a game changer for analyzing"
+    },
+    {
+      "startSeconds": 309,
+      "text": "performance on my own website primarily because it's so good at pinpointing the exact things that need to be fixed but when you have a website that has hundreds or thousands of different pages it's impossible to go through and analyze performance on every single page and that's why you should know about this other tool called unlite house it's"
+    },
+    {
+      "startSeconds": 323,
+      "text": "an open source tool that runs a Google Lighthouse report on every single page in your website and it does everything in parallel so it only takes a couple of minutes to analyze hundreds of pages to run it simply create a new directory and then run npx on Lighthouse with your website address it'll bring up a UI to show you how bad your website"
+    },
+    {
+      "startSeconds": 340,
+      "text": "performance is in real time and while I was happy to find that most pages had great performance there were some unexpected pages that had very poor performance and I never would have known that otherwise I thought that was pretty interesting so I went ahead and ran on lighthouse on a variety of popular websites first I tried amazon.com I"
+    },
+    {
+      "startSeconds": 356,
+      "text": "expected it to have relatively poor performance just because it's relatively complex with tons of images but it actually did quite well although when using the web vitals plugin I noticed a lot of cumulative layout shift issues on Amazon Google as expected performed very well because they're the ones that create all these performance rules in"
+    },
+    {
+      "startSeconds": 371,
+      "text": "the first place and almost every major website I analyzed including Reddit and hub all performed extremely well with an average performance of around 90. the one website that really crushed it in performance though is astro.build the homepage for the Astro framework it almost got perfect 100s across the board so it really does live up to its claims"
+    },
+    {
+      "startSeconds": 387,
+      "text": "for awesome performance what's cool about unlite house though is that it also has an SDK so you can integrate it into your continuous integration pipeline as well if you want to learn more about stuff like this become a pro member at fireship i o for even more content thanks for watching and I will see you in the next one"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:42:15.962Z"
+}

@@ -1,0 +1,135 @@
+{
+  "_id": "video.youtube--BBulGM6xF0",
+  "videoId": "-BBulGM6xF0",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=-BBulGM6xF0",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 37,
+      "label": "Greedy Decoding"
+    },
+    {
+      "startSeconds": 65,
+      "label": "Random Sampling"
+    },
+    {
+      "startSeconds": 110,
+      "label": "Temperature"
+    },
+    {
+      "startSeconds": 235,
+      "label": "Top-k Sampling"
+    },
+    {
+      "startSeconds": 267,
+      "label": "Top-p Sampling"
+    },
+    {
+      "startSeconds": 310,
+      "label": "Pros and Cons"
+    },
+    {
+      "startSeconds": 450,
+      "label": "Outro"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hi there today we are going to learn about random sampling which is a key algorithm for large language models together with three important techniques that Aid Us in doing that temperature top K and top P sampling to start with let's recap how large language models generate text simply put they generate text in an autor regressive way meaning"
+    },
+    {
+      "startSeconds": 22,
+      "text": "that in order to generate a token at a certain Step in Time it uses the information from the previous tokens within a certain window and creates a distribution of probabilities for each word to select the best candidate for the current step now we could simply select the word with the highest probability a technique known as grey"
+    },
+    {
+      "startSeconds": 42,
+      "text": "decoding which for the sentence displayed here to dat the weather is would result in selecting the word Sunny however this often leads to overly deterministic and repetitive outputs which may be useful in certain situations where this is desired like decoding the speech embeddings for a speech recognition system ensuring"
+    },
+    {
+      "startSeconds": 62,
+      "text": "Precision in transcriptions still in the realm of large language models our objective is often to provide outputs that are somehow creative these models are designed to capture and reproduce the intricacies of human language where diversity and originality are valued by incorporating Randomness through techniques like temperature topk and"
+    },
+    {
+      "startSeconds": 84,
+      "text": "topy sampling we introduce an element of variability that goes beyond rigid determination IC choices this diversity not only yields more interesting and very text but also allows the model to Showcase its capacity to generate contextually relevant and imaginative content making it well suited for applications like natural language"
+    },
+    {
+      "startSeconds": 105,
+      "text": "generation dialogue systems and creative writing support the first technique usually employed in random sampling that will explore in this video is the temperature parameter the temperature controls the randomness of the sampling process by influencing the soft Max function output which takes a vector of arbitrary real value scores and converts"
+    },
+    {
+      "startSeconds": 126,
+      "text": "them into probabilities the sum to one more concretely what the temperature is doing is to divide by a parameter Theta in the exponent that is specify before the Tex generation starts thus the temperature parameter scales the loges before applying the softmax affecting the steepness of the resulting probability distribution a higher"
+    },
+    {
+      "startSeconds": 148,
+      "text": "temperature which translates to a division by a higher number in the exponent and the lower end result for each probability increases the randomness by flattening the distribution making it more likely to choose less probable words on the other hand a lower temperature which translates to dividing by a lower number"
+    },
+    {
+      "startSeconds": 169,
+      "text": "in the exponent and the higher end result for each probability sharpeners the distribution favoring more probable words and producing more focused and deterministic outputs taking the previous sentence today the weather is let's see what may happen when we try to predict the next word of this sentence if we leave the softmax function as it"
+    },
+    {
+      "startSeconds": 190,
+      "text": "was by setting the temperature equal to one we would simply sample the next word from the same probability distribution on the other hand if we increase the temperature by setting the Theta equal to 2 we would decrease each probability in the distribution because the exponential function takes Le extreme value if the input has a lower value"
+    },
+    {
+      "startSeconds": 212,
+      "text": "making it more likely to select words with a lower probability like rainy or the finally if we decrease the temperature by setting the Theta parameter to 0.5 we increase each vector's probability because the exponential function takes more extreme values if the input has a higher value making it more likely to select the most"
+    },
+    {
+      "startSeconds": 233,
+      "text": "probable word which is sunny moving on to top case sampling this method involves selecting the top K most probable words at each step and sampling from this redu set by employing another hyperparameter K which determines the size of the set this approach ensures diversity in the generated text while still maintaining some control over the"
+    },
+    {
+      "startSeconds": 256,
+      "text": "likelihood of chosen words and it prevents the model from picking extreme rare or nonsensical tokens striking a balance between Randomness and coherence lastly the top piece sampling technique also known as nucleus sampling involves selecting from the smallest set of words whose cumulative probability exceeds a predefined threshold often"
+    },
+    {
+      "startSeconds": 279,
+      "text": "denoted as p and by dynamically adjusting the set size based on probabilities topy sampling allows for more adaptive control over the randomness of the generated text allowing either more words or less words to be considered depending on the sharpness of the distribution simply put the topic sampl technique kept fees a"
+    },
+    {
+      "startSeconds": 300,
+      "text": "balance between exploration and exploitation ensuring diversity while maintaining a higher coherence in the generated text compared to topk sampling to summarize random sampling with temperature topk and top techniques provides a spectrum of options tailor the output of large language models and I would like to dedicate the last part"
+    },
+    {
+      "startSeconds": 322,
+      "text": "of this video to talk a little bit about the pros and cons of each technique so we get a better understanding of when to use each method and what are some possible limitations so for the temperature some of the pros include that it enhances the creativity of the model meaning that the higher temperature introduce more Randomness"
+    },
+    {
+      "startSeconds": 344,
+      "text": "faster in creativity and generating diverse outputs and also that it prevents the model from becoming to deterministic leading to more varied and interesting text however on the con side we have that the excessive temperature can lead to less coherent outputs as the model becomes more likely to choose less probable words but also that the"
+    },
+    {
+      "startSeconds": 366,
+      "text": "increased Randomness may result in the generation of text that lacks context or meaning for the topk sampling on the pro side we have that it enabl Us control over the diversity of generated text by selecting from the top key most probable words and that it limits the choices to a set of high probable words reducing"
+    },
+    {
+      "startSeconds": 388,
+      "text": "the likelihood of generating nonsensical text on the other hand if the set of top k word is limited the model might produce repetitive outputs as it aders closely to highly probable tokens and also that the choice of the key parameter requires careful consideration to strike a balance between diversity and coherence finally the pro of"
+    },
+    {
+      "startSeconds": 413,
+      "text": "enabling topy sampling is firstly that it dynamically adjusts the set size based on probability abilities providing a balance between exploration and exploitation and secondly that it allows for a control level of Randomness while ensuring a diverse set of chosen words however some of the cons include that setting the appropriate P value can be"
+    },
+    {
+      "startSeconds": 436,
+      "text": "challenging and requires experimentation to achieve the desired level of diversity but also that in some cases adjusting the set dynamically may lead to a slight loss of coherence in the generated text in summary these methods allow practitioners to strike a balance between Randomness and determinism generating diverse and creative text"
+    },
+    {
+      "startSeconds": 459,
+      "text": "while ensuring that the result remains contextually relevant and coherent and the choice of which method to employ depends on the specific requirements of the task at hand and the desired characteristics of the generated text and that's basically it folks thanks for watching and hit the like button if you enjoy this explanation"
+    },
+    {
+      "startSeconds": 479,
+      "text": "also don't forget to share your thoughts in the comments below and subscribe if you want to stay up to dat with the content I create on this channel see you next time bye-bye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:39:03.386Z"
+}

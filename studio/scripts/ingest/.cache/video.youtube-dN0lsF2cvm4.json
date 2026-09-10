@@ -1,0 +1,83 @@
+{
+  "_id": "video.youtube-dN0lsF2cvm4",
+  "videoId": "dN0lsF2cvm4",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=dN0lsF2cvm4",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Intro"
+    },
+    {
+      "startSeconds": 44,
+      "label": "Why do we need vector databases"
+    },
+    {
+      "startSeconds": 89,
+      "label": "Vector embeddings and indexes"
+    },
+    {
+      "startSeconds": 178,
+      "label": "Use cases"
+    },
+    {
+      "startSeconds": 225,
+      "label": "Different vector databases"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "recently Vector databases got a lot of Fame with companies raising hundreds of millions of dollars to build them and people calling it a new kind of database for the AI era on the other hand for many projects it might be an Overkill solution and using a traditional database or even just a numpy ND array might work just fine but there is no"
+    },
+    {
+      "startSeconds": 22,
+      "text": "doubt the vector databases are extremely fascinating and allow many great applications especially when you want to give large language models like gpt4 long-term memory so in this video I will explain in a very beginner friendly way what Vector databases are and how they work we will go over some use cases for them and then I will briefly show you"
+    },
+    {
+      "startSeconds": 41,
+      "text": "some options you can use so let's get started so let's start with the why over 80 percent of the data out there is unstructured such as social media posts images videos or audio data you cannot easily fit them into a relational database let's take an image as an example if you want want to put this into a relational database in order to"
+    },
+    {
+      "startSeconds": 63,
+      "text": "search for similar images what ends up happening is that often we manually assign keywords or tags to it because from the pixel values alone we cannot really search for similar images and the same holds true for unstructured text blobs or audio and video data so we either have to assign tags or attributes to it often manually or we can find a"
+    },
+    {
+      "startSeconds": 84,
+      "text": "different representation to store the data and this brings us to vector embeddings and Vector databases in short a vector database indexes and stores Vector embeddings for fast retrieval and similarity search so let's take a step back and look at those two important components first it uses clever algorithms to calculate the so-called"
+    },
+    {
+      "startSeconds": 105,
+      "text": "Vector embeddings this is done by Machine learning models a vector embedding is just a list of numbers that represents the data in a different way for example you can calculate an embedding for a single word a whole sentence or an image and now we have numerical data that the computer can understand one easy possibility we get"
+    },
+    {
+      "startSeconds": 124,
+      "text": "with vectors is to find similar vectors by calculating the distances and doing a nearest neighbor search so we can easily find similar items for Simplicity I display a 2d case here but in reality of course those vectors can have hundreds of Dimensions but just storing the data as embeddings is not enough performing a"
+    },
+    {
+      "startSeconds": 143,
+      "text": "query across thousands of vectors based on its distance metric would be extremely slow and this is why those vectors also need to be indexed so the indexing process is the second key element of a vector database an index is a data structure that facilitates the search process so the indexing step Maps the vectors to a new data structure that"
+    },
+    {
+      "startSeconds": 165,
+      "text": "will enable faster searching this is a whole research field on its own and different ways to calculate indexes exist so I won't go into details here just know that indexes are needed for efficient search so let's go over some use cases I already mentioned that we can use Vector databases to equip large language models with long-term memory"
+    },
+    {
+      "startSeconds": 186,
+      "text": "this is for example what you can easily Implement with Lang chain we can use it for semantic search when we need to search not for exact string matches but rather based on the meaning or context of our question we can also use it for similarity search for images audio or video data so we can say hey find me a similar image to this one and we don't"
+    },
+    {
+      "startSeconds": 206,
+      "text": "need to use some keywords or text to describe the image and we can use a vector database as a ranking and recommendation engine for example for online retailers it can be used to suggest items similar to past purchases of a customer since we can simply identify the nearest neighbors of an item in our database so now that you"
+    },
+    {
+      "startSeconds": 225,
+      "text": "know some use cases let's go over some options you can use as a vector database there are a number of vector databases available for example we have Pinecone vv8 chroma redis also has a virtual database cool trans milvis or Vespa AI so I won't go into details here but if you want to see a separate video with an"
+    },
+    {
+      "startSeconds": 246,
+      "text": "in-depth comparison then let me know in the comments below alright I hope you now have a good understanding of what Vector databases are and what you can do with them if you want to see more explainer videos and AI tutorials then make sure to subscribe to our Channel and then I hope to see you in the next video bye"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:43:00.030Z"
+}

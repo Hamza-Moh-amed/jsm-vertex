@@ -1,0 +1,142 @@
+{
+  "_id": "video.youtube-zfQgsGXTpOg",
+  "videoId": "zfQgsGXTpOg",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=zfQgsGXTpOg",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "hi welcome back to coding shorts my name is sean wildermuth today we're going to talk about typescript and how it uses structural typing and i'm starting to think that this coding shorts video series is really about showing you how i was wrong in a bunch of different cases and this is going to be another one of them i brought a lot of expectations"
+    },
+    {
+      "startSeconds": 20,
+      "text": "into what typescript would do because of the other languages i had started with and the hope here is to show you how the type system is different than type systems in other languages notably c sharp java c plus plus etc so that you can understand the differences so when you come to typescript you can make better sense of the important ideas behind"
+    },
+    {
+      "startSeconds": 41,
+      "text": "inheritance behind classes interfaces and in no small measure types let's get started let's start with some code that could be typescript could be javascript no real type information in here right we've got this little fake console section that's just to build the right thing to the screen for me you can ignore that"
+    },
+    {
+      "startSeconds": 72,
+      "text": "piece we're really talking about just this default function that's being run for us on the page creating a structure just with an object and then we're doing some just writing out to that fake console there's our magic fake console it's writing out the payment we're all good probably right as this project gets bigger we're going"
+    },
+    {
+      "startSeconds": 93,
+      "text": "to want to think about types and so i want to talk about the type system in typescript because if you come from a typed language something like c sharp or java you might be assuming that this type system even though it's checked at compile time only is the same sort of type system than you're used to sure you can't check for"
+    },
+    {
+      "startSeconds": 112,
+      "text": "things at runtime as easily but you still want to have some notion of that and so we have this structure here that we might want to type check right and so one of the things we can do if you come from that world is you might create an interface that matches that right and i'll call this our payment interface you can use an i before"
+    },
+    {
+      "startSeconds": 132,
+      "text": "payment or not i'm sort of stuck in the typescript world where they don't bother with that i from c sharp i don't think it matters that much and i'm just gonna do a little copy paste here to create our types here right but of course this is going to be a string because this is an interface this is going to be a number"
+    },
+    {
+      "startSeconds": 150,
+      "text": "this will conveniently be a date and this will conveniently be a boolean right so we have this interface and if we just come over to our type here and say payment right we're saying hey make this payment interface match this and this is what they mean by structural we're not saying create some object that implements interface we're saying that this"
+    },
+    {
+      "startSeconds": 173,
+      "text": "structure we created this anonymous object really if you want to think about it in that sense matches this interface and that's really what the structural type information is for is to make sure that it looks like it it's not going to guarantee that it is that type it's going to guarantee that it looks and implements all the pieces of that type so"
+    },
+    {
+      "startSeconds": 194,
+      "text": "if we were to make a mistake later in code and put our amount in a string of course it's going to complain even though this is just an anonymous object as for as far as it's concerned right but the compiler is complaining saying amount you've told me has to be a number and this clearly isn't a number right and so what's interesting to me is that"
+    },
+    {
+      "startSeconds": 217,
+      "text": "there's two other pieces of type information that i care about one is a class and class is going to be similar to what you're used to and in fact i think for c-sharp and java programmers we end up creating more classes in typescript than we probably need remember this is about compile-time checking and so we'll get to a class in a minute but"
+    },
+    {
+      "startSeconds": 236,
+      "text": "there's also another one that a lot of people end up especially when coming from type safe languages don't use that much and that's something called a type and this is basically something that the compiler is going to do to guarantee that something matches it and so in fact this could be just a type right the syntax is a little different that we"
+    },
+    {
+      "startSeconds": 254,
+      "text": "need to assign that type information but we have the same structure here and we have the same testing this is a type instead of an interface but we do get that same type safety that we saw a minute ago right so why use an interface at all types and interfaces are actually pretty closely the same set of information the"
+    },
+    {
+      "startSeconds": 275,
+      "text": "difference really comes down to that types can also dictate rules on non-object types whereas interfaces are always going to be against object types right and so let's make payment type credit card or cash right we're saying that if we use this type information and let's change this type here from payment type to uppercase payment type to this type"
+    },
+    {
+      "startSeconds": 301,
+      "text": "we have here and we can see it's checking this and what happens if i just misname that it doesn't follow this type information and so it's not assignable to it and what i find interesting here is this is where i would normally drop down into an enumeration in c sharp or java but i don't need to because some of these are just about checking"
+    },
+    {
+      "startSeconds": 320,
+      "text": "simple types in fact this type information could have just done this here as well right the type here is going to give us that same information right because we're defining an expression that describes what payment type really is and we're saying hey this is a string but it has to be following the rules here and that is credit card"
+    },
+    {
+      "startSeconds": 341,
+      "text": "i'd like being able to reuse these and so i'll go ahead and switch back to payment type but again it's really the same thing so why would you create interfaces at all and you can use types to worry about the implementation of a class but it's also a little bit more descriptive if you're really defining an interface so let's come back here"
+    },
+    {
+      "startSeconds": 359,
+      "text": "and make this an interface because that's really what we're talking about here right and we just need to change the syntax get rid of that little equals and notice that this continues to work because the interface is doing exactly what we want we can use types inside those interfaces as well but we'll get back to the final one that"
+    },
+    {
+      "startSeconds": 377,
+      "text": "happens a lot and that is the class now why do we bother with a class the difference between types and interfaces is i can't say new i can't think about construction i can only think about matching the structural shapes to those types to the type or the interface class really comes in when i want to be able to control the construction of the"
+    },
+    {
+      "startSeconds": 398,
+      "text": "objects and by using a class we can introduce the idea of a constructor right so with a constructor we may want some of that same information in fact we often will say implements payment right that we're going to have that same shape and of course it's going to complain until we have these so i'm going to copy this yet again"
+    },
+    {
+      "startSeconds": 418,
+      "text": "and i could create members for this but i find a little easier sometimes because i want the same structure to just make these public members of the constructor because i still need all of these in here and there are different ways we could do this i could accept a object that has the interface of the payment and then do copy of one over the other"
+    },
+    {
+      "startSeconds": 440,
+      "text": "but i just find this a little easier again i'm using public here really to define that i'm going to have properties of them right and of course the interface is going to say fine doesn't give us that underscore anymore because we've implemented by having each of these types that match the underlying types and so that means if we want this to be"
+    },
+    {
+      "startSeconds": 459,
+      "text": "a payment entry right we don't need the type there anymore because what we're going to do is actually assign a new payment entry we're allowing ourselves to have control over the construction as well as have default implementations right let's come down here and let's just clean this up a little we don't need the names in here"
+    },
+    {
+      "startSeconds": 478,
+      "text": "anymore we just need the values to get rid of that and in fact let's move this to a method so let's say log payment tell it that we don't want to an end and we'll just use fake console to do that again and of course it's going to be this dot amount here because we're part of this class we would be part of this class if i"
+    },
+    {
+      "startSeconds": 502,
+      "text": "didn't have too many of these there we go because we're now part of this class and of course then down here we could just replace that with payment.log payment and be done with it we still get the same functionality but we've sort of wrapped it in here and so this idea of construction and behavior is one where using classes makes a lot"
+    },
+    {
+      "startSeconds": 524,
+      "text": "of sense but using classes just because you're dealing with let's say data from a web service or something where you're just getting structural data i think class is often overused in order to implement that interfaces and types are more than fine the last thing that you may need though i have to tell you i really rarely use it inside of typescript"
+    },
+    {
+      "startSeconds": 545,
+      "text": "is inheritance so being able to say class billing payment entry extends payment to entry right we have that ability to have a class that extends another one and let's copy this constructor real quick but we're going to change it in some small subtle ways because we actually want a public date due in here as well that has to be"
+    },
+    {
+      "startSeconds": 570,
+      "text": "a date right that's giving us all these complaints because we actually don't want these to create these as public because of course the base class has implemented all but one of those and in order to make this work we're gonna have to call super payment type amount approved i think i missed one payment date in order to pass those down into the"
+    },
+    {
+      "startSeconds": 592,
+      "text": "other constructor right now this still creates a public member and so when we look at the payment entry we change this to new billing payment entry right it's gonna expect us to have what new date as our due date right obviously having the approval date and the date due on the same day doesn't make a lot of sense but it gives us that ability and"
+    },
+    {
+      "startSeconds": 614,
+      "text": "log payment still exists because it's within the derivation of that particular class even though we're using this other class we could even take this and go you know what we want our own implementation here and let's go ahead and say do this dot due date right of course that works here wouldn't work here because"
+    },
+    {
+      "startSeconds": 636,
+      "text": "we've extended that to support that and log payment here notice it's going to be calling the billing log entry payment not just the log entry payment because one exists at that level and so i wanted to cover this to really understand that typescript has this thing called structural typing so that you know that you don't always need to fall back"
+    },
+    {
+      "startSeconds": 657,
+      "text": "into your type safety language habits that this is a very different sort of language we're dealing with but that we still want to have those types whether they're interface classes or actual just type definitions they can help us build and extend our type checking so as we build these larger projects we're going to get the benefit out of"
+    },
+    {
+      "startSeconds": 678,
+      "text": "type safety and that by making everything absolutely everything a class i think we're working harder than we need to we're thinking about it as the traditional sort of class instead of functional language that javascript ultimately is this has been sean wildermuth again on coding shorts thanks for joining me you"
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:44:00.149Z"
+}

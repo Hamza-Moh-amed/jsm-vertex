@@ -1,0 +1,42 @@
+{
+  "_id": "video.youtube-FzVCGou8SMA",
+  "videoId": "FzVCGou8SMA",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=FzVCGou8SMA",
+  "chapters": [],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "Hello and welcome to the DB Schema channel. In this tutorial, we'll go over some simple but powerful rules that help you design better, cleaner databases. Normalization means organizing your data in a way that removes duplication and keeps it clean. It helps break down big, messy tables into smaller ones where each table focuses on just one thing."
+    },
+    {
+      "startSeconds": 24,
+      "text": "This makes the database easier to update and helps avoid mistakes like storing the same info in multiple places. There are five normal forms in database normalization, but in this video, I'm going to focus on the first three, the ones that are most commonly used and essential for a solid database design. Let's talk about first normal form, the"
+    },
+    {
+      "startSeconds": 49,
+      "text": "first rule of clean databases. The goal, make sure each column contains only one indivisible value. Here's a problem. In this table, fields like product contain multiple values. This breaks atomicity and makes searching or updating much harder. The solution, split those values into separate rows. Now, each value is atomic and your data"
+    },
+    {
+      "startSeconds": 76,
+      "text": "is in first normal form, clean, searchable, and ready for the next steps in normalization. Let's break down second normal form. The goal, remove partial dependencies, which means every non-key column must depend on the entire primary key, not just part of it. Example, if your table uses a composite key like order ID plus product, but fields like"
+    },
+    {
+      "startSeconds": 106,
+      "text": "customer name and phone number depend only on order ID, you have a problem. That causes repeated customer data, violating second normal form. The solution, split it into two tables. The orders table holds customer name and phone number identified by order ID. The order details table contains product information linked using a composite key"
+    },
+    {
+      "startSeconds": 135,
+      "text": "of order ID and product. Now, each column depends fully on its table's key. This removes redundancy and sets you up for third normal form. Let's simplify third normal form. The goal, remove transitive dependencies. Non-key columns should depend only on the primary key. In this table, order ID is the key, but customer name and phone number"
+    },
+    {
+      "startSeconds": 166,
+      "text": "depend on customer ID, not directly on order ID. That's a transitive dependency and it breaks third normal form. The solution, split the data. One table for orders with order ID and customer ID. Another table for customer info linked by customer ID. Now, each column depends directly on its table's key. It keeps your data clean, avoids"
+    },
+    {
+      "startSeconds": 196,
+      "text": "duplication, and makes updates much easier. Thank you for watching. Be sure to explore our other tutorials to get the most out of your DB schema experience."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:31.416Z"
+}

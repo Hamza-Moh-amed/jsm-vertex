@@ -1,0 +1,287 @@
+{
+  "_id": "video.youtube-rGPpQdbDbwo",
+  "videoId": "rGPpQdbDbwo",
+  "provider": "youtube",
+  "url": "https://www.youtube.com/watch?v=rGPpQdbDbwo",
+  "chapters": [
+    {
+      "startSeconds": 0,
+      "label": "Introduction"
+    },
+    {
+      "startSeconds": 45,
+      "label": "Basic Differences"
+    },
+    {
+      "startSeconds": 203,
+      "label": "Server Component Benefit #1"
+    },
+    {
+      "startSeconds": 322,
+      "label": "Server Component Benefit #2"
+    },
+    {
+      "startSeconds": 392,
+      "label": "Server Component Benefit #3"
+    },
+    {
+      "startSeconds": 478,
+      "label": "Server Component Benefit #4"
+    },
+    {
+      "startSeconds": 505,
+      "label": "Server Component Benefit #5"
+    },
+    {
+      "startSeconds": 538,
+      "label": "Server Component Downside #1"
+    },
+    {
+      "startSeconds": 625,
+      "label": "Server Component Downside #2"
+    },
+    {
+      "startSeconds": 645,
+      "label": "How To Nest Server And Client Components"
+    }
+  ],
+  "chunks": [
+    {
+      "startSeconds": 0,
+      "text": "If you've ever written any react code, you know the pain that is this left side pain with all of these long use effects with fetch requests and state management other complicated stuff just to be able to fetch data to render your actual page. Now, this is luckily going to be a thing of the past with the new ideology"
+    },
+    {
+      "startSeconds": 15,
+      "text": "of server components which react is really pushing which allows you to write this really simple file you see on the right hand side here which uses modern JavaScript concepts and completely replaces everything you see on the left in a much simpler way. So, in this video I'm going to explain exactly what server components are and compare them to"
+    },
+    {
+      "startSeconds": 30,
+      "text": "client components inside of react. Welcome back to WebDevSimplified. My name is Kyle and my job is to simplify the web for you so you can start building your dream project sooner and today I really want to talk all about client versus server components. Now, if you've heard about client and server components before, you may think that"
+    },
+    {
+      "startSeconds": 48,
+      "text": "they are a Next.js feature, but actually client and server components specifically are actually a react feature and Next.js just happens to implement them in their own Next.js specific way. Now, in this video I'm going to be using server components in the ideology of Next.js and within a Next.js project as you can see over here"
+    },
+    {
+      "startSeconds": 67,
+      "text": "on the left side side of my screen, but in the future this is something that you can use in many different front end frameworks, but right now Next.js has the most robust support for server components. Also, if you prefer a written tutorial, I have a full blog article on this exact same topic. I'll link in the description below for you."
+    },
+    {
+      "startSeconds": 83,
+      "text": "There's over 100 articles on that blog, so I'd highly recommend checking it out. Now, the entire idea behind a server components is that generally with client components you need to run all of your code on the client. It all renders on the client which means you need to do these really long and convoluted use effects in order to get all of the data"
+    },
+    {
+      "startSeconds": 98,
+      "text": "you want from some other API. So, now you need to develop an API and a front end and it gets rather complicated. The idea behind server components is we can just run our code on the server which means we can directly do fetch request inline and then just return the data that we want instead of doing this thing where we send down HTML and JavaScript"
+    },
+    {
+      "startSeconds": 115,
+      "text": "and then do another request to the API and then get that data, where we have this like two-step process. Server components does this all in one step. And the way that this works is that server components run only on the server. They never run on the client at all. This is really easy to see if we just come in here and we put a simple"
+    },
+    {
+      "startSeconds": 129,
+      "text": "console log that says server, and then up here we're going to put a simple console log that says client. And we can see exactly where we see these different console logs. So, I'm going to refresh my page over here, and this is on the client page, and if I inspect my page, and I go over to the console, you can see that it's printing out client a"
+    },
+    {
+      "startSeconds": 146,
+      "text": "bunch of times inside of my log. You can see right here. Now, if I go over to my server page, and I just refresh this a bunch of times, you'll notice nothing is being printed out inside of the console right here. But, if I open up the console for my actual project, you'll notice that if I refresh this page every"
+    },
+    {
+      "startSeconds": 159,
+      "text": "single time, you can see it's printing out server. And that means that this server component is running only on the server. And again, if I inspect the page and look at it on the client, you'll notice no matter how many times I refresh, nothing shows up in that console. The one interesting thing you'll notice though is when I navigate"
+    },
+    {
+      "startSeconds": 173,
+      "text": "to my client page, nothing actually re-renders. But, when I do a hard refresh on this page, it does actually render my client component on the server. This is something specific to how Next.js implements client components, and that the first time that you hard navigate to one, for example, you load up a page that's a client"
+    },
+    {
+      "startSeconds": 188,
+      "text": "component, it's going to run that on the server for SEO specific purposes. But again, this is a Next.js specific feature, and not something related to React. So, this is the big difference between these two components. By guaranteeing that our server component never actually runs on the client, we can do a few really interesting things."
+    },
+    {
+      "startSeconds": 204,
+      "text": "The very first thing is that we can actually make this an async component. As you can see here, I've made this an async function, which means I can just directly await my fetch request, or database request, or anything else that is time consuming inside of here, and I can just make sure I render out my code afterwards. So, I don't have to worry"
+    },
+    {
+      "startSeconds": 218,
+      "text": "about loading states, error states, doing my use effects for my fetches, state management. All of that is handled by just a simple async await, just like you would do in any normal JavaScript code. And this makes it much more aligned with normal JavaScript, and it makes the actual process of understanding the code and reading it"
+    },
+    {
+      "startSeconds": 233,
+      "text": "much easier. Now, you can still handle loading and error states doing that in Next.js, you just need to create essentially a loading file inside of here, or you would create an error file. And if you want to learn more about the Next.js specific ways of handling those things, I have a full crash course video on Next.js. I'll link in the cards and"
+    },
+    {
+      "startSeconds": 249,
+      "text": "description for you. But, for the purposes of this video, that doesn't really matter because we're really focusing on server components themselves. So, the benefits of doing all this just on the server means that you have extra levels of security. And that's because none of the code inside my server component that relies on"
+    },
+    {
+      "startSeconds": 264,
+      "text": "things like database calls or certain API credentials will actually be passed down to the client. For example, if inside of this fetch request, I needed to pass along some really sensitive API information, I could come in here and let's just say that I have something that I pass along in like the body, and that body is just going to be like"
+    },
+    {
+      "startSeconds": 280,
+      "text": "secret data, and I pass it along whatever my secret data is. Now, this secret data is not ever going to be seen on the client of my page. And that's because all of this code runs in the server, and the only thing that actually gets sent down to the client is whatever I return inside of here. So, it just sends down raw HTML, and it doesn't"
+    },
+    {
+      "startSeconds": 299,
+      "text": "actually send down the code to actually do those fetch request. That means if I wanted to replace this with, for example, like db.to do's.get or some other way to actually get my to do's from a database, I could do this instead as well, and all of my database credentials and everything like that stays on the server, and the client only"
+    },
+    {
+      "startSeconds": 317,
+      "text": "gets the actual information that's returned from it, so whatever these to do's are and whatever this HTML down here is. The next massive benefit to server components is going to be performance-based, and there's actually three different ways that it improves the performance of your application. We'll just bring this back to where we"
+    },
+    {
+      "startSeconds": 332,
+      "text": "had our fetching before. We'll get rid of all this secret data stuff just so we have code that's actually working. And one giant thing that we can do, which is really nice, is we can do some caching. Next.js has a bunch of caching by default, but even without Next.js, you can do caching on your own. And since this cache lives on your server, that"
+    },
+    {
+      "startSeconds": 347,
+      "text": "means it's available to every single user that accesses your website. So that means that you can directly cache whatever HTML this page needs based on my to-do's, and every single user that accesses my page will be able to access that same cache, which means it's going to be incredibly quick for all of them. If you're using a client component and"
+    },
+    {
+      "startSeconds": 364,
+      "text": "you wanted to cache something on the client, it would only be cached for that one individual user. So instead, you would need to do your caching at the API level, so making your cache wherever your fetch request is requested from. And then you essentially send down some blank HTML. They then need to make a request to that cache and get the"
+    },
+    {
+      "startSeconds": 379,
+      "text": "information. While in the case of here where we have a server component, we're doing everything inside of one single step, which means instead of sending down raw blank information and then doing a fetch request, all we're doing is we're just sending down the HTML. It's just one single process. Now the next great thing is going to be that"
+    },
+    {
+      "startSeconds": 394,
+      "text": "with server components, if you have code that is running on your server and imported from like libraries for example that are really massive, that code is only going to live on your server, which means the bundle size of your Java script that gets sent to the client is much smaller. Let's for example take a look at this library. Let's say we have"
+    },
+    {
+      "startSeconds": 409,
+      "text": "a really big file in here. Obviously, it's not very big, but imagine this is a massive library that's like 3 or 4 megabytes of code. It's huge. And we want to use that inside of our server and client component. So I'm going to come in here and I'm going to import that function. I just called it big funk. There we go. So we're importing that"
+    },
+    {
+      "startSeconds": 425,
+      "text": "into here. And we're going to do the exact same thing inside of our client just like that. Now if I were to go to my client page and I actually inspect what this looks like, make sure I refresh what this page is, and you'll notice that if I go over to my source code and I look through my source code for example, I just do a control shift F"
+    },
+    {
+      "startSeconds": 439,
+      "text": "to actually search for that big funk, and I search, you'll notice all over in my code I find this big funk because that is inside of the code that's being outputted for my client component. Now if I go ahead and I go to my server page instead, and I do a quick hard refresh, and I do that exact same search, so I go"
+    },
+    {
+      "startSeconds": 455,
+      "text": "to the source, I search for big funk, and I click search, no matches found. And that's because this code is being only run on the server, which means all of this import for this giant file never actually makes it to the client, which drastically reduces the amount of code I send to the client. While when I'm using"
+    },
+    {
+      "startSeconds": 471,
+      "text": "a client component, the normal React way of doing things, everything I import inside of here actually needs to get sent to the client. And then the last performance gain is probably the most obvious, and that is just generally your page is going to load faster. And that's because instead of sending down my client component, and then making a"
+    },
+    {
+      "startSeconds": 486,
+      "text": "fetch request, and then processing all that information on the client, I'm doing all of that in one step on the server. The client makes a request, the server makes that fetch, and it sends down one set of HTML, which has all of my data. So, you never have to worry about having incomplete data on the client and different things like that."
+    },
+    {
+      "startSeconds": 501,
+      "text": "You just have everything sent down immediately, which is really nice, and it's generally going to be quicker. Now, the final big benefit to server components over client components is that server components are generally going to be better at SEO. The reason for that is because it's going to be sending down actual HTML that is fully"
+    },
+    {
+      "startSeconds": 516,
+      "text": "populated with all of your information, while a client component on the other hand is going to be sending down partially implemented HTML, and then it needs to use things like a use effect to actually fill in the rest of that information. Now, obviously, search engines have gotten better at dealing with this, and you can do certain server"
+    },
+    {
+      "startSeconds": 532,
+      "text": "rendering tools inside of React. But, with server components, all of this is super easy and automatically baked in for you. Now, with all these amazing benefits, you may just think, \"Why not make everything a server component?\" And the reason you can't do that is because since your code never runs on the client, you have no way to add"
+    },
+    {
+      "startSeconds": 547,
+      "text": "interactivity to the page. For example, let's just say I wanted to add an on click event listener onto here. I could say on click console.log Hi. There we go. And immediately, I'm getting a bunch of different errors. And that's because I can't do interactivity. I can't have on click event listeners or any other style of event listener. I"
+    },
+    {
+      "startSeconds": 567,
+      "text": "can't use, for example, a use effect hook. So, here we go. If I add in the use effect hook There we go. And I just try to make this run immediately. If I try to import that effect from React, and I give that a save. I'm again going to get an error cuz I can't use use effect. I can't use like use state. You pretty much can't use any"
+    },
+    {
+      "startSeconds": 591,
+      "text": "hook at all inside of a server component. And that's again because you cannot do interactivity. So, it's really important that if you have any type of interactivity on your page, that must go inside of a client component. But because of the amazing benefits you get with server components, generally what I try to do is make as many of my"
+    },
+    {
+      "startSeconds": 608,
+      "text": "components as possible server components, and then only the few places where I actually need interactivity do I use client components. And I just make sure all the data I need, for example, any to-dos I need to fetch, for example, come from a server component and get passed into that client component as like a prop like this."
+    },
+    {
+      "startSeconds": 625,
+      "text": "The other big downside, since your server component never actually renders on the client, you can't use things like local storage or anything else that is inside the window object because this just obviously does not exist in the server environment, and it never runs on the client. So, things like local storage, the navigator, or any other"
+    },
+    {
+      "startSeconds": 641,
+      "text": "browser-based API you cannot use inside of a server component. Those are pretty much all of the downsides of server components, though. The only other thing that's important to talk about is how do you nest server components and client components? Because right now, if I wanted to inside my server component, I"
+    },
+    {
+      "startSeconds": 656,
+      "text": "could come down here, and I could render out some type of client component. It doesn't matter what it is, and it's going to work just fine. All of this code is going to be rendered on the server, and then this specific component that is a client component will be rendered on the client. Now, the way that you specify a component is a client"
+    },
+    {
+      "startSeconds": 672,
+      "text": "component in Next.js, at least, is you just add this string use client at the very top of the file. And that's the Next.js way of saying that this is going to be a client component. So, I can put client components inside server components with no problem at all. But as soon as I have a client component, for example, I have a client component"
+    },
+    {
+      "startSeconds": 689,
+      "text": "like this, all of the children of this component are also going to be client components no matter what, even if I didn't mark them as a client component, they will be rendered only on the client and not on the server. So, you essentially get one chance to go from server to client and you can never go back after that. For example, in this"
+    },
+    {
+      "startSeconds": 706,
+      "text": "client component, I could never render a server component and that's because I've already jumped over to the client, so I no longer am able to go back to the server. It's essentially a one-way pass. But, there is one way that you can get around this. To show you what I'm talking about, I'm just going to create a brand new file. So, we'll put it in"
+    },
+    {
+      "startSeconds": 721,
+      "text": "this components folder. We'll create this file and we'll call it client.tsx. Export function client. Just like that. And this is going to return an H1 that says client, so we know that this renders on the client. And inside of here, I'm just going to drastically simplify this by rendering out that client component. And the"
+    },
+    {
+      "startSeconds": 738,
+      "text": "important thing inside of here is I'm going to make sure that this runs on the client by putting use client at the very top. So, now this code is rendering on the client and this code is rendering on the server, which means if I put a console log in here that says client, you'll notice when we inspect and we go over to our console,"
+    },
+    {
+      "startSeconds": 754,
+      "text": "you can see it's printing out client right there. So, from this point onward, everything inside of here is going to be a client component and even if I render another component, this component is also going to be rendered on the client. But, what happens if I want to render something inside of the server and I"
+    },
+    {
+      "startSeconds": 768,
+      "text": "want to render it inside this component? Well, what I would need to do is actually pass it in as a prop from a server component. So, let me create another component inside of here. I'll call this one server.tsx. So, we're going to export function server. And this is pretty much going to look exactly the same. I'll just copy this"
+    },
+    {
+      "startSeconds": 785,
+      "text": "code, paste it inside of there, and I'll change this to say server instead of client. So, you will notice immediately if I refresh my page and I actually render this component inside of here. There we go. Make sure I import that component. Give it a quick save. You can see we have our client and server being rendered. And"
+    },
+    {
+      "startSeconds": 805,
+      "text": "crucially, since this client component is being rendered on the client, everything inside of it, including this component we called server, is also rendered on the client, which means you can see inside of my console log, it's rendering out server on the client. Now, what happens though if this server component was doing some type of data"
+    },
+    {
+      "startSeconds": 820,
+      "text": "fetching? For example, it was getting all of these different to-dos inside of here, and I wanted to render this as like an async component like that, and I wanted this to occur on the actual server. Well, to do that and to get around that, I need to pass this component into my client component as a prop. So, inside of here, I could pass"
+    },
+    {
+      "startSeconds": 837,
+      "text": "along a child, however I want. I could pass it along as a child like this, or I could just say that I render out that server, and I could import that just like that. So, this is going to be passing it along as a prop. So, inside of here, I can get those children just like that, and I can render out those children. And you can"
+    },
+    {
+      "startSeconds": 855,
+      "text": "just ignore the errors. This is just because I'm using TypeScript. So, we'll type this as any. There we go. And now if I give everything a quick save, and I just do a refresh of my page over here, you'll notice no longer in the console is it printing out server, and that's because now this file is being rendered on the server. And that's because"
+    },
+    {
+      "startSeconds": 872,
+      "text": "wherever you import the file is where it runs. So, in our case, we're importing this file in the server component here, so it's running on the server. While in the other case, we were importing it here inside the client file, which is why it was running on the client. So, since we're importing it inside here, it actually runs this entire server"
+    },
+    {
+      "startSeconds": 889,
+      "text": "component, and then passes down the results to this client component here. So, if you want to be able to go from server to client and then back to server, this is the only way that you can do it. But honestly, there's not too many times where you want to do that, and when you do, this is not a huge inconvenience. The one thing to watch"
+    },
+    {
+      "startSeconds": 905,
+      "text": "out for though is that other frameworks may do this slightly differently. This is the Next.js way of doing things, and a lot of this is overlapping with the React way of doing things, but at this current time, it's very blurred the lines between Next.js and React, so it's a little bit difficult to say if every"
+    },
+    {
+      "startSeconds": 918,
+      "text": "framework will do it this way or or they have their own ways of doing this, but this is more so specifically for Next.js. Now, I know this was a lot to cover. So, if you're interested in taking this to the next level and actually learning Next.js, which is built on top of this, I have a full crash course I'll link on"
+    },
+    {
+      "startSeconds": 933,
+      "text": "the screen right over here. And also, you can check out my complete Next.js course. It's going to be linked down in the description. It covers literally everything you need to know about Next.js to be an expert-level Next.js developer. With that said, thank you very much for watching and have a good day."
+    }
+  ],
+  "ingestedAt": "2026-09-09T21:40:07.418Z"
+}
